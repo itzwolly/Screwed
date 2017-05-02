@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour {
                     else
                     {
                         godController.AddRooms(exit);
+                        _currentRoom.GetComponent<ExitList>().RemoveFirstExits(2);
                         Debug.Log("Im loading next room");
                     }
                 }

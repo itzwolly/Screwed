@@ -19,7 +19,11 @@ public class ExitList : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	public void RemoveFirstExits(int nr)
+    {
+        for(int i =0; i<nr;i++)
+        {
+            Exits.RemoveAt(0);
+        }
+    }
 }

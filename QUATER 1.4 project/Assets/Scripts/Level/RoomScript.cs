@@ -35,6 +35,7 @@ public class RoomScript : MonoBehaviour {
         }
         if (collision.transform.tag == "Enemy")
         {
+            collision.transform.GetComponent<EnemyScript>().GiveRoom(gameObject);
             _enemies.Add(collision.gameObject);
         }
     }
