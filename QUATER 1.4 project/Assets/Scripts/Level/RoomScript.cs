@@ -30,7 +30,9 @@ public class RoomScript : MonoBehaviour {
         if(collision.transform.tag=="Player")
         {
             //maybe remove if not necessary next line
-            collision.gameObject.GetComponent<PlayerScript>().CurrentRoom = gameObject;
+            if (collision.gameObject.GetComponent<PlayerScript>() != null) {
+                collision.gameObject.GetComponent<PlayerScript>().CurrentRoom = gameObject;
+            }
             _player = collision.gameObject;
         }
         if (collision.transform.tag == "Enemy")

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
-
     public GameObject CurrentRoom;
+
 	// Use this for initialization
 	void Start () {
 		
