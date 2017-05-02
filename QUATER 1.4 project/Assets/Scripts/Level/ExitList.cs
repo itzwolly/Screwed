@@ -7,7 +7,7 @@ public class ExitList : MonoBehaviour {
     [Header("These lists do not need to be filled in unity")]
     public List<Transform> Exits;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         Exits = new List<Transform>();
         foreach(Transform obj in gameObject.transform)
         {
@@ -19,7 +19,11 @@ public class ExitList : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	public void RemoveFirstExits(int nr)
+    {
+        for(int i =0; i<nr;i++)
+        {
+            Exits.RemoveAt(0);
+        }
+    }
 }
