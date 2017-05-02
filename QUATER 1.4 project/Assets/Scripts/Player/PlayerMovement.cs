@@ -50,8 +50,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce(_velocity);
+        if(gameObject.GetComponent<Rigidbody>().velocity.magnitude<Speed)
+            gameObject.GetComponent<Rigidbody>().AddRelativeForce(_velocity);
         _velocity = Vector3.zero;
         gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
