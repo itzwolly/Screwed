@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour {
+[RequireComponent(typeof (PlayerScript))]
+
+public class PlayerMovement : MonoBehaviour {
     public float Speed;
     [Range(0,1)] 
     public float Sensitivity;
@@ -21,6 +23,18 @@ public class Movement : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.A)) _velocity.x=-Speed;
         else if (Input.GetKey(KeyCode.D)) _velocity.x=Speed;
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            GameObject _currentRoom = gameObject.GetComponent<PlayerScript>().CurrentRoom;
+            foreach (Transform exit in _currentRoom.GetComponent<ExitList>().Exits)
+            {
+                if((gameObject.transform.position-exit.position).magnitude<=3)
+                {
+                    Debug.Log("Im loading next room");
+                }
+            }
+        }
 
     }
 

@@ -68,7 +68,6 @@ public class RoomScript : MonoBehaviour {
 
     private void CreateWalls()
     {
-        Debug.Log(_wait);
         _startedTimer = false;
         _wait = 0;
         foreach(GameObject obj in _walls)

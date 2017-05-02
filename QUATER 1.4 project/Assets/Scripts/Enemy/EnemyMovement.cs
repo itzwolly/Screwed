@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    enum State
+    {
+        Walk,
+        Attack
+    };
+    UnityEngine.AI.NavMeshAgent navigator;
+    // Use this for initialization
+    void Start ()
+    {
+        navigator = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
