@@ -7,7 +7,7 @@ public class ExitList : MonoBehaviour {
     [Header("These lists do not need to be filled in unity")]
     public List<Transform> Exits;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         Exits = new List<Transform>();
         foreach(Transform obj in gameObject.transform)
         {

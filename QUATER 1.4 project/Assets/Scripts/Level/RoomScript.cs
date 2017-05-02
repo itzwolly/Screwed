@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomScript : MonoBehaviour {
     public int WaitTime;
+    public SectionPlacement godController;
     private List<GameObject> _walls;
     private GameObject _player;
     private List<GameObject> _enemies;
@@ -68,6 +69,7 @@ public class RoomScript : MonoBehaviour {
 
     private void CreateWalls()
     {
+        godController.RemovePreviousRoom();
         _startedTimer = false;
         _wait = 0;
         foreach(GameObject obj in _walls)
@@ -89,5 +91,10 @@ public class RoomScript : MonoBehaviour {
     public void RemoveEnemy(GameObject enemy)
     {
         _enemies.Remove(enemy);
+    }
+
+    public bool HasEnemies()
+    {
+        return _enemies.Count > 0;
     }
 }

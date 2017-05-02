@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     [Range(0,1)] 
     public float Sensitivity;
     private Vector3 _velocity;
+    public SectionPlacement godController;
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +32,15 @@ public class PlayerMovement : MonoBehaviour {
             {
                 if((gameObject.transform.position-exit.position).magnitude<=3)
                 {
-                    Debug.Log("Im loading next room");
+                    if(_currentRoom.GetComponent<RoomScript>().HasEnemies())
+                    {
+                        Debug.Log("Room is not cleared");
+                    }
+                    else
+                    {
+                        godController.AddRooms(exit);
+                        Debug.Log("Im loading next room");
+                    }
                 }
             }
         }
