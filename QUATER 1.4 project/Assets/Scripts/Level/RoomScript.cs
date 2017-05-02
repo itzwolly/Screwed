@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomScript : MonoBehaviour {
-    public GameObject WallBrush;
+    public int WaitTime;
     private List<GameObject> _walls;
     private GameObject _player;
     private List<GameObject> _enemies;
     private bool _hasWalls;
+    private bool _startedTimer;
+    private int _wait;
 	// Use this for initialization
 	void Start () {
+        _walls = new List<GameObject>();
+        foreach (Transform obj in gameObject.transform)
+        {
+            if (obj.tag == "Wall")
+            {
+                _walls.Add(obj.gameObject);
+                obj.gameObject.SetActive(false);
+            }
+        }
         _enemies = new List<GameObject>();
 	}
 
@@ -32,6 +43,8 @@ public class RoomScript : MonoBehaviour {
         if (collision.transform.tag == "Player")
         {
             _player = null;
+            _wait = 0;
+            _startedTimer = false;
         }
     }
 
@@ -39,21 +52,38 @@ public class RoomScript : MonoBehaviour {
     void FixedUpdate () {
         if(_player!=null && _enemies.Count>0)
         {
-            CreateWalls();
+            _startedTimer = true;
         }
         else if(_enemies.Count==0 && _hasWalls)
         {
+            _startedTimer = false;
             RemoveWalls();
         }
+        if (_startedTimer)
+            _wait++;
+
+        if (_wait == WaitTime)
+            CreateWalls();
 	}
 
     private void CreateWalls()
     {
+        Debug.Log(_wait);
+        _startedTimer = false;
+        _wait = 0;
+        foreach(GameObject obj in _walls)
+        {
+            obj.SetActive(true);
+        }
         _hasWalls = true;
     }
 
     private void RemoveWalls()
     {
+        foreach (GameObject obj in _walls)
+        {
+            obj.SetActive(false);
+        }
         _hasWalls = false;
     }
 

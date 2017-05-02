@@ -14,4 +14,5 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
         //Debug.Log("The current room is " + CurrentRoom);
 	}
+    
 }
