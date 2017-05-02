@@ -21,9 +21,10 @@ public class PlayerMovement : MonoBehaviour {
         transform.Rotate(0, Input.GetAxis("Mouse X")*(1+Sensitivity), 0);
         if (Input.GetKey(KeyCode.W)) _velocity.z=Speed;
         else if (Input.GetKey(KeyCode.S)) _velocity.z=-Speed;
-
         if (Input.GetKey(KeyCode.A)) _velocity.x=-Speed;
         else if (Input.GetKey(KeyCode.D)) _velocity.x=Speed;
+
+        _velocity = transform.rotation * _velocity;
 
         if(Input.GetKeyDown(KeyCode.E))
         {
@@ -50,8 +51,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if(gameObject.GetComponent<Rigidbody>().velocity.magnitude<Speed)
-            gameObject.GetComponent<Rigidbody>().AddRelativeForce(_velocity);
+        
+        gameObject.GetComponent<Rigidbody>().velocity = (_velocity);
         _velocity = Vector3.zero;
         gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
