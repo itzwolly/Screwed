@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
 
         //Debug.Log(transform.GetComponent<Rigidbody>().velocity.magnitude);
-        if (Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             GameObject _currentRoom = null;
             _currentRoom = gameObject.GetComponent<PlayerScript>().CurrentRoom;
