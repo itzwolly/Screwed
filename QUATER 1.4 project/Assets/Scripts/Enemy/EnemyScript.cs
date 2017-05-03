@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour {
 
     private GameObject CurrentRoom;
-    public GameObject Target;
     // Use this for initialization
     void Start () {
 		
