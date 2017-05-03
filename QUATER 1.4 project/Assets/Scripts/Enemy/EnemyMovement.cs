@@ -10,19 +10,23 @@ public class EnemyMovement : MonoBehaviour {
         Attack
     };
     // change below to public if not NavMesh
-    private GameObject target;
-    UnityEngine.AI.NavMeshAgent navigator;
+    public GameObject target;
+    public float Speed;
+    //UnityEngine.AI.NavMeshAgent navigator;
     public int Wait;
     public float MeleeDistance;
     public float RangeDistance;
     private int _wait=0;
     private float _distanceToTarget;
 
+    Vector3 _speed;
     Vector3 rayDirection;
+    Vector3 moveDirection;
     // Use this for initialization
     void Start ()
     {
-        navigator = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        _speed = new Vector3(Speed*3, Speed*3, Speed*3);
+        //navigator = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 	
 	// Update is called once per frame
@@ -46,24 +50,42 @@ public class EnemyMovement : MonoBehaviour {
                     {
                         if(Physics.Linecast(transform.position,target.transform.position,out hit))
                         {
-                            Debug.Log("no vision");
+                            if(hit.transform.tag=="Player")
+                            {
+                                Utils.ChangeGameObjectColor(gameObject, Color.red);
+                                Debug.Log("about to shoot");
+                            }
+                            else
+                                Debug.Log("no vision");
                         }
                         else
                         {
-                            Utils.ChangeGameObjectColor(gameObject,Color.red);
-                            Debug.Log("about to shoot");
+                            Debug.Log("no line hit");
                         }
                     }
                     _wait = Wait;
                 }
                 _wait--;
+                MoveTowardTarget();
             }
             else
             {
-                navigator.SetDestination(target.transform.position);
+                MoveTowardTarget();
+                //navigator.SetDestination(target.transform.position);
             }
         }
 	}
+
+    private void MoveTowardTarget()
+    {
+        if (gameObject.GetComponent<Rigidbody>().velocity.magnitude < Speed)
+        {
+            moveDirection = target.transform.position - transform.position;
+            moveDirection = moveDirection.normalized;
+            moveDirection.Scale(_speed);
+            GetComponent<Rigidbody>().AddForce(moveDirection);
+        }
+    }
 
     public void GiveTarget(GameObject ptarget)
     {
