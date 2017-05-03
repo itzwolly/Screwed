@@ -79,6 +79,10 @@ public class RoomScript : MonoBehaviour {
         {
             obj.SetActive(true);
         }
+        foreach(GameObject enem in _enemies)
+        {
+            enem.GetComponent<EnemyMovement>().GiveTarget(_player);
+        }
         _hasWalls = true;
     }
 

@@ -9,16 +9,25 @@ public class EnemyMovement : MonoBehaviour {
         Walk,
         Attack
     };
+    private GameObject target;
     UnityEngine.AI.NavMeshAgent navigator;
     // Use this for initialization
     void Start ()
     {
         navigator = GetComponent<UnityEngine.AI.NavMeshAgent>();
-
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (target != null)
+        {
+            Debug.Log("Setting Target");
+            navigator.SetDestination(target.transform.position);
+        }
 	}
+
+    public void GiveTarget(GameObject ptarget)
+    {
+        target = ptarget;
+    }
 }
