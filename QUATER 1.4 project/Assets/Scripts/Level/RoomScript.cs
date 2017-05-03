@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RoomScript : MonoBehaviour {
     public int WaitTime;
@@ -11,6 +12,7 @@ public class RoomScript : MonoBehaviour {
     private bool _hasWalls;
     private bool _startedTimer;
     private int _wait;
+
 	// Use this for initialization
 	void Start () {
         _walls = new List<GameObject>();
@@ -23,7 +25,7 @@ public class RoomScript : MonoBehaviour {
             }
         }
         _enemies = new List<GameObject>();
-	}
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
