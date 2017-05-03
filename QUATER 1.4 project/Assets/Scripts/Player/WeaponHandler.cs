@@ -18,8 +18,7 @@ public enum WeaponAOEType {
 public class WeaponHandler : MonoBehaviour {
     private WeaponType _weaponType;
     private WeaponAOEType _weaponAOEType;
-    //private Weapon _currentWeapon;
-    //private string 
+    [SerializeField] private GameObject[] _weapons;
 
     public WeaponType CurrentWeaponType {
         get { return _weaponType; }
@@ -33,15 +32,21 @@ public class WeaponHandler : MonoBehaviour {
         _weaponType = WeaponType.Melee;
         _weaponAOEType = WeaponAOEType.Single;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		if (Input.GetKeyUp("1")) {
             _weaponType = WeaponType.Ranged;
-            Debug.Log(_weaponType);
+            if (!_weapons[1].activeInHierarchy) {
+                _weapons[0].SetActive(false);
+                _weapons[1].SetActive(true);
+            }
         } else if (Input.GetKeyUp("2")) {
             _weaponType = WeaponType.Melee;
-            Debug.Log(_weaponType);
+            if (!_weapons[0].activeInHierarchy) {
+                _weapons[0].SetActive(true);
+                _weapons[1].SetActive(false);
+            }
         }
         
         if (Input.GetKeyUp(KeyCode.F)) {

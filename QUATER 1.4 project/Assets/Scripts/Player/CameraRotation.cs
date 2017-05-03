@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraRotation : MonoBehaviour {
-
     private float _sensitivity;
+
 	// Use this for initialization
 	void Start () {
         _sensitivity = transform.parent.GetComponent<PlayerMovement>().Sensitivity;
