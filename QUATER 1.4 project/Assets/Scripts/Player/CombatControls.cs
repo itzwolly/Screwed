@@ -51,7 +51,7 @@ public class CombatControls : MonoBehaviour {
     }
 
     private void TakeDamage(Transform pTarget) {
-        Utils.ChangeGameObjectColorTo(pTarget.gameObject, pTarget.GetComponent<Renderer>().material.color, Color.red);
+        Utils.ChangeGameObjectColor(pTarget.gameObject, pTarget.GetComponent<Renderer>().material.color, Color.red);
         Destroy(pTarget.gameObject);
         _startTimer = true;
     }
