@@ -22,11 +22,7 @@ public class EnemyScript : MonoBehaviour {
 
     private void OnDestroy()
     {
-<<<<<<< HEAD
-        if(CurrentRoom!=null)
-=======
         if (CurrentRoom != null)
->>>>>>> 1a8b02e528df65581c316ebf3fd19639ae799d0e
         CurrentRoom.GetComponent<RoomScript>().RemoveEnemy(gameObject);
     }
 }
