@@ -5,32 +5,40 @@ using UnityEngine;
 [RequireComponent(typeof (PlayerScript))]
 
 public class PlayerMovement : MonoBehaviour {
-    public float Speed;
+    public float _speedUnit;
     private Vector3 _speed;
     [Range(0,1)] 
     public float Sensitivity;
     private Vector3 _velocity;
     public SectionPlacement godController;
+    public float _gravity;
+
+    private Vector3 _moveDirection = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
-        _speed = new Vector3(Speed, Speed, Speed);
+        _speed = new Vector3(_speedUnit, _speedUnit, _speedUnit);
     }
 	
 	// Update is called once per frame
 	private void Update () {
-        transform.Rotate(0, Input.GetAxis("Mouse X")*(1+Sensitivity), 0);
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller.isGrounded) {
+            _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            _moveDirection = transform.TransformDirection(_moveDirection);
+            _moveDirection *= _speedUnit;
 
-        if (Input.GetKey(KeyCode.W)) _velocity.z=Speed;
-        else if (Input.GetKey(KeyCode.S)) _velocity.z=-Speed;
-        if (Input.GetKey(KeyCode.A)) _velocity.x=-Speed;
-        else if (Input.GetKey(KeyCode.D)) _velocity.x=Speed;
-
-        if(transform.GetComponent<Rigidbody>().velocity.magnitude>0.1f)
-            _velocity = transform.rotation * _velocity;
+        }
+        _moveDirection.y -= _gravity * Time.deltaTime;
+        controller.Move(_moveDirection * Time.deltaTime);
+        transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
 
         //Debug.Log(transform.GetComponent<Rigidbody>().velocity.magnitude);
+<<<<<<< HEAD
         if(Input.GetKeyDown(KeyCode.E))
+=======
+        if (Input.GetKeyDown(KeyCode.E))
+>>>>>>> acc7518beec987515db7774a6bd3c743f2bb26cd
         {
             GameObject _currentRoom = null;
             _currentRoom = gameObject.GetComponent<PlayerScript>().CurrentRoom;
@@ -60,7 +68,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         
         gameObject.GetComponent<Rigidbody>().velocity = (_velocity);
-        if (_velocity.magnitude > Speed)
+        if (_velocity.magnitude > _speedUnit)
             _velocity.normalized.Scale(_speed);
         _velocity = Vector3.zero;
         gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
