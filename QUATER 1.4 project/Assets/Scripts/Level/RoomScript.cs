@@ -29,7 +29,7 @@ public class RoomScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.transform.tag);
+        //Debug.Log(collision.transform.tag);
         if (collision.transform.tag=="Player")
         {
             //maybe remove if not necessary next line

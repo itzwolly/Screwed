@@ -22,19 +22,33 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
+        /**/
+        transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
+
+        if (Input.GetKey(KeyCode.W)) _velocity.z = _speedUnit;
+        else if (Input.GetKey(KeyCode.S)) _velocity.z = -_speedUnit;
+        if (Input.GetKey(KeyCode.A)) _velocity.x = -_speedUnit;
+        else if (Input.GetKey(KeyCode.D)) _velocity.x = _speedUnit;
+
+        if (transform.GetComponent<Rigidbody>().velocity.magnitude > 0.1f)
+            _velocity = transform.rotation * _velocity;
+        /**/
+        
+        /**
         CharacterController controller = GetComponent<CharacterController>();
-        if (controller.isGrounded) {
+        if (controller.isGrounded)
+        {
             _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             _moveDirection = transform.TransformDirection(_moveDirection);
             _moveDirection *= _speedUnit;
 
         }
+
         _moveDirection.y -= _gravity * Time.deltaTime;
         controller.Move(_moveDirection * Time.deltaTime);
         transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
-
-        //Debug.Log(transform.GetComponent<Rigidbody>().velocity.magnitude);
-        if(Input.GetKeyDown(KeyCode.E))
+        /**/
+        if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject _currentRoom = null;
             _currentRoom = gameObject.GetComponent<PlayerScript>().CurrentRoom;

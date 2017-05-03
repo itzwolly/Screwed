@@ -60,7 +60,13 @@ public class EnemyMovement : MonoBehaviour {
                         }
                         else
                         {
-                            Debug.Log("no line hit");
+                            //if (hit.transform.tag == "Player")
+                            //{
+                                Utils.ChangeGameObjectColor(gameObject, Color.red);
+                                Debug.Log("about to shoot");
+                            //}
+                            //else
+                            //    Debug.Log("no vision");
                         }
                     }
                     _wait = Wait;

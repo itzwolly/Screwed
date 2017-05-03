@@ -40,6 +40,8 @@ public class SectionPlacement : MonoBehaviour {
         for(int i=0;i<_enemyNumber;i++)
         {
             Vector3 circlePosition = Random.insideUnitCircle * 3.5f;
+            circlePosition.z = circlePosition.y;
+            circlePosition.y = 0;
             _enemy = GameObject.Instantiate(EnemyBrush);
             _enemy.transform.position = _room.transform.position + circlePosition;
             _enemy.transform.Translate(0,4,0);
