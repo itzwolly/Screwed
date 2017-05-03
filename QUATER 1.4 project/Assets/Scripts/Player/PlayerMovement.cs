@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
-        /**/
+        /**
         transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
 
         if (Input.GetKey(KeyCode.W)) _velocity.z = _speedUnit;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour {
             _velocity = transform.rotation * _velocity;
         /**/
         
-        /**
+        /**/
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {
