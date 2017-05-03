@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
         if(transform.GetComponent<Rigidbody>().velocity.magnitude>0.1f)
             _velocity = transform.rotation * _velocity;
 
-        Debug.Log(transform.GetComponent<Rigidbody>().velocity.magnitude);
+        //Debug.Log(transform.GetComponent<Rigidbody>().velocity.magnitude);
         if(Input.GetKeyDown(KeyCode.E))
         {
             GameObject _currentRoom = null;
