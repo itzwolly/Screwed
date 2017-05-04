@@ -52,21 +52,17 @@ public class PlayerMovement : MonoBehaviour {
         {
             GameObject _currentRoom = null;
             _currentRoom = gameObject.GetComponent<PlayerScript>().CurrentRoom;
-            if (_currentRoom.GetComponent<ExitList>() != null)
-            for(int i=0;i< _currentRoom.GetComponent<ExitList>().Exits.Count;i++)
-            {
-                Transform exit = _currentRoom.GetComponent<ExitList>().Exits[i];
-                if ((gameObject.transform.position-exit.position).magnitude<=3)
-                {
-                    if(_currentRoom.GetComponent<RoomScript>().HasEnemies())
-                    {
-                        Debug.Log("Room is not cleared");
-                    }
-                    else
-                    {
-                        godController.AddRooms(exit);
-                        _currentRoom.GetComponent<ExitList>().RemoveFirstExits(2);
-                        Debug.Log("Im loading next room");
+            if (_currentRoom.GetComponent<ExitList>() != null) {
+                for (int i = 0; i < _currentRoom.GetComponent<ExitList>().Exits.Count; i++) {
+                    Transform exit = _currentRoom.GetComponent<ExitList>().Exits[i];
+                    if ((gameObject.transform.position - exit.position).magnitude <= 3) {
+                        if (_currentRoom.GetComponent<RoomScript>().HasEnemies()) {
+                            Debug.Log("Room is not cleared");
+                        } else {
+                            godController.AddRooms(exit);
+                            _currentRoom.GetComponent<ExitList>().RemoveFirstExits(2);
+                            Debug.Log("Im loading next room");
+                        }
                     }
                 }
             }
