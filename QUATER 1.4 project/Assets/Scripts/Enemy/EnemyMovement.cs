@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
-
+    public bool IsRanged;
     enum State
     {
         none,
@@ -25,9 +25,12 @@ public class EnemyMovement : MonoBehaviour {
     private float _distanceToTarget;
     private bool _inVision;
 
+    public List<GameObject> Waypoints;
+
     Vector3 _speed;
-    Vector3 rayDirection;
-    Vector3 moveDirection;
+    Vector3 _rayDirection;
+    Vector3 _moveDirection;
+    Vector3 _lastKnownTargetPosition;
     // Use this for initialization
     void Start ()
     {
@@ -59,6 +62,7 @@ public class EnemyMovement : MonoBehaviour {
                 Patrol();
             }
         }
+        Debug.Log(_state);
 	}
 
     
@@ -66,15 +70,14 @@ public class EnemyMovement : MonoBehaviour {
     private void Patrol()
     {
         _state = State.walk;
-        Debug.Log("Patrolling");
+        //Debug.Log("Patrolling");
     }
 
-    private void SetTragetDestinationTpPlayer()
+    private void SetTragetDestinationToPPosition(Vector3 pos)
     {
-        Debug.Log("setting target location to go to is = "+ target.transform.position);
-
-        _state = State.walk;
-        navigator.SetDestination(target.transform.position);
+        //Debug.Log("setting target location to go to is = "+ pos);
+        
+        navigator.SetDestination(pos);
         /**
         if (gameObject.GetComponent<Rigidbody>().velocity.magnitude < Speed)
         {
@@ -89,60 +92,69 @@ public class EnemyMovement : MonoBehaviour {
     private void CheckVision()
     {
         _inVision = true;
+        
         if (_distanceToTarget < MeleeDistance)
         {
-            Utils.ChangeGameObjectColor(gameObject, Color.blue);
             StopMovement();
             //Debug.Log("In melee range");
             _state = State.knife;
             //Debug.Log("About to attack (Melee)");
             return;
         }
+        
         RaycastHit hit = new RaycastHit();
         if (Physics.Linecast(transform.position, target.transform.position, out hit))
         {
             if (hit.transform.tag == "Player")
             {
-                Utils.ChangeGameObjectColor(gameObject, Color.red);
+                _lastKnownTargetPosition = hit.transform.position;
                 _state = State.shoot;
             }
             else
             {
+
                 _inVision = false;
+
                 _state = State.none;
-                Debug.Log("no vision");
+                //Debug.Log("no vision");
             }
         }
         else
         {
             //if (hit.transform.tag == "Player")
             //{
-            Utils.ChangeGameObjectColor(gameObject, Color.red);
+            _lastKnownTargetPosition = hit.transform.position;
             _state = State.shoot;
             //}
             //else
             //    Debug.Log("no vision");
         }
+        
     }
 
     private void StopMovement()
     {
         _state = State.none;
-        navigator.SetDestination(transform.position);
+        _lastKnownTargetPosition = transform.position;
+        //navigator.SetDestination(transform.position);
     }
 
     private void EnemyAttack()
     {
+        SetTragetDestinationToPPosition(_lastKnownTargetPosition);
+
         if (_wait <= 0)
         {
+            
             if (_state == State.shoot)
             {
+                Utils.ChangeGameObjectColor(gameObject, Color.red);
                 Debug.Log("shoot shoot");
-                SetTragetDestinationTpPlayer();
             }
 
             if (_state == State.knife)
             {
+                Utils.ChangeGameObjectColor(gameObject, Color.blue);
                 Debug.Log("Knify knify");
                 StopMovement();
             }
