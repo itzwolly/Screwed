@@ -68,7 +68,7 @@ public class EnemyMovement : MonoBehaviour {
                 }
             }
         }
-        Debug.Log(_state + " is the state, with the player in vision: " +_inVision);
+        //Debug.Log(_state + " is the state, with the player in vision: " +_inVision);
 	}
 
     
@@ -129,6 +129,7 @@ public class EnemyMovement : MonoBehaviour {
         {
             //if (hit.transform.tag == "Player")
             //{
+            if(hit.transform != null)
             _lastKnownTargetPosition = hit.transform.position;
             _state = State.shoot;
             //}
@@ -152,13 +153,13 @@ public class EnemyMovement : MonoBehaviour {
         if (_wait <= 0)
         {
             
-            if (_state == State.shoot)
+            if (_state == State.shoot && IsRanged)
             {
                 Utils.ChangeGameObjectColor(gameObject, Color.red);
                 Debug.Log("shoot shoot");
             }
 
-            if (_state == State.knife)
+            if (_state == State.knife && !IsRanged)
             {
                 Utils.ChangeGameObjectColor(gameObject, Color.blue);
                 Debug.Log("Knify knify");
