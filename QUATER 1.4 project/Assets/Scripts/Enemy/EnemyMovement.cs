@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour {
     enum State
     {
         none,
+        patroling,
         walk,
         stop,
         shoot,
@@ -59,17 +60,22 @@ public class EnemyMovement : MonoBehaviour {
             }
             else
             {
-                Patrol();
+                if((transform.position - _lastKnownTargetPosition).magnitude<0.1f)
+                    Patrol();
+                else
+                {
+                    _state = State.walk;
+                }
             }
         }
-        Debug.Log(_state);
+        Debug.Log(_state + " is the state, with the player in vision: " +_inVision);
 	}
 
     
 
     private void Patrol()
     {
-        _state = State.walk;
+        _state = State.patroling;
         //Debug.Log("Patrolling");
     }
 
@@ -134,7 +140,7 @@ public class EnemyMovement : MonoBehaviour {
 
     private void StopMovement()
     {
-        _state = State.none;
+        _state = State.stop;
         _lastKnownTargetPosition = transform.position;
         //navigator.SetDestination(transform.position);
     }
