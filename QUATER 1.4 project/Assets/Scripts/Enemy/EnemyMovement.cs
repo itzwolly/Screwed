@@ -21,12 +21,12 @@ public class EnemyMovement : MonoBehaviour {
     public int Wait;
     public float MeleeDistance;
     public float RangeDistance;
-    public float NoticeDistance;
+    private GameObject _waypoint;
     private int _wait=0;
     private float _distanceToTarget;
     private bool _inVision;
 
-    public List<GameObject> Waypoints;
+    private List<GameObject> Waypoints;
 
     Vector3 _speed;
     Vector3 _rayDirection;
@@ -35,8 +35,11 @@ public class EnemyMovement : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        _speed = new Vector3(Speed*3, Speed*3, Speed*3);
+        Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
         navigator = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        _speed = new Vector3(Speed*3, Speed*3, Speed*3);
+        _waypoint = Waypoints[0];
+        Patrol();
     }
 	
 	// Update is called once per frame
@@ -60,8 +63,11 @@ public class EnemyMovement : MonoBehaviour {
             }
             else
             {
-                if((transform.position - _lastKnownTargetPosition).magnitude<0.1f)
+                if ((transform.position - _lastKnownTargetPosition).magnitude < 0.1f)
+                {
+                    Debug.Log("Patrolling");
                     Patrol();
+                }
                 else
                 {
                     _state = State.walk;
@@ -71,18 +77,31 @@ public class EnemyMovement : MonoBehaviour {
         //Debug.Log(_state + " is the state, with the player in vision: " +_inVision);
 	}
 
+    public void SetWaypoint(GameObject waypoint)
+    {
+        if (navigator == null)
+            Debug.Log("NAVIGATOR IS NULL");
+        else
+        {
+            Debug.Log("Set Waypoint");
+            _waypoint = waypoint;
+            navigator.SetDestination(waypoint.transform.position);
+        }
+    }
     
 
     private void Patrol()
     {
+        Debug.Log("Patrolling");
+        //Debug.Log(navigator==null);
+        navigator.SetDestination(_waypoint.transform.position);
         _state = State.patroling;
-        //Debug.Log("Patrolling");
     }
 
     private void SetTragetDestinationToPPosition(Vector3 pos)
     {
-        //Debug.Log("setting target location to go to is = "+ pos);
-        
+        //Debug.Log("setting target location to go to is = " + pos);
+
         navigator.SetDestination(pos);
         /**
         if (gameObject.GetComponent<Rigidbody>().velocity.magnitude < Speed)
@@ -172,6 +191,7 @@ public class EnemyMovement : MonoBehaviour {
 
     public void GiveTarget(GameObject ptarget)
     {
+        Debug.Log("Giving Target");
         target = ptarget;
     }
 }
