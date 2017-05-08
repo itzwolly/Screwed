@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour {
         _moveDirection.y -= _gravity * Time.deltaTime;
         controller.Move(_moveDirection * Time.deltaTime);
         transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
+
         /**/
         if (Input.GetKeyDown(KeyCode.E))
         {

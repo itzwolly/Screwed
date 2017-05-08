@@ -7,23 +7,26 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private float _distance;
     [SerializeField] private float _angle;
 
+    [SerializeField] private Camera _camera;
+
     private float _timer;
     private bool _startTimer;
     private Color _originalColor;
+    
 
     // Use this for initialization
     void Start () {
-        
+
     }
 
     // Update is called once per frame
     void Update () {
         if (Input.GetButtonDown("Fire1")) {
             RaycastHit hit = new RaycastHit();
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 ray = _camera.ScreenToWorldPoint(Input.mousePosition);
 
             if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
-                RangedDamage(ray, hit, "Enemy");
+                RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
                 MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
             }
@@ -43,10 +46,23 @@ public class CombatControls : MonoBehaviour {
 
     private void RangedDamage(Ray pOther, RaycastHit pHit, string pTarget) {
         if (Physics.Raycast(pOther, out pHit)) {
+            Debug.Log(pOther + " || " + pHit.transform.name + " || " + pHit.transform.tag);
             if (pHit.transform.tag == pTarget) {
-                Debug.Log(pTarget + " has been hit using a ranged weapon");
+                Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
                 TakeDamage(pHit.transform);
             }
+        }
+    }
+
+    private void RangedDamage(Vector3 pFrom, Vector3 pTo, RaycastHit pHit, string pTarget) {
+        if (Physics.Raycast(pFrom, pTo , out pHit)) {
+            Debug.Log(pHit.transform.name + " was hit" + " with tag " + pHit.transform.tag);
+            if (pHit.transform.tag == pTarget) {
+                Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
+                TakeDamage(pHit.transform);
+            }
+        } else {
+            Debug.Log("Nothing is being hit!");
         }
     }
 

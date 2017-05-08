@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class EnemyMovement : MonoBehaviour {
     // change below to public if not NavMesh
     public GameObject target;
     public float Speed;
-    //UnityEngine.AI.NavMeshAgent navigator;
+    private NavMeshAgent navigator;
     public int Wait;
     public float MeleeDistance;
     public float RangeDistance;
@@ -26,7 +27,7 @@ public class EnemyMovement : MonoBehaviour {
     void Start ()
     {
         _speed = new Vector3(Speed*3, Speed*3, Speed*3);
-        //navigator = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        navigator = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 	
 	// Update is called once per frame
@@ -77,20 +78,21 @@ public class EnemyMovement : MonoBehaviour {
             else
             {
                 MoveTowardTarget();
-                //navigator.SetDestination(target.transform.position);
+                
             }
         }
 	}
 
     private void MoveTowardTarget()
     {
-        if (gameObject.GetComponent<Rigidbody>().velocity.magnitude < Speed)
-        {
-            moveDirection = target.transform.position - transform.position;
-            moveDirection = moveDirection.normalized;
-            moveDirection.Scale(_speed);
-            GetComponent<Rigidbody>().AddForce(moveDirection);
-        }
+        //if (gameObject.GetComponent<Rigidbody>().velocity.magnitude < Speed)
+        //{
+        //    moveDirection = target.transform.position - transform.position;
+        //    moveDirection = moveDirection.normalized;
+        //    moveDirection.Scale(_speed);
+        //    GetComponent<Rigidbody>().AddForce(moveDirection);
+        //}
+        navigator.SetDestination(target.transform.position);
     }
 
     public void GiveTarget(GameObject ptarget)
