@@ -38,6 +38,8 @@ public class EnemyMovement : MonoBehaviour {
     RigidbodyConstraints _normalConstraints;
     RigidbodyConstraints _stoppedConstraints;
     [SerializeField] private GameObject[] _weapons;
+    [SerializeField] private int _rangedDamage;
+    [SerializeField] private int _meleeDamage;
 
     // Use this for initialization
     void Start ()
@@ -223,15 +225,21 @@ public class EnemyMovement : MonoBehaviour {
             
             if (_state == State.shoot && IsRanged)
             {
-                Utils.ChangeGameObjectColor(gameObject, Color.red);
-                Debug.Log("shoot shoot");
+                if (target.GetComponent<CombatControls>().Health > 0) {
+                    Utils.ChangeGameObjectColor(gameObject, Color.red);
+                    target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
+                    Debug.Log("shoot shoot");
+                }
             }
 
             if (_state == State.knife && !IsRanged)
             {
-                Utils.ChangeGameObjectColor(gameObject, Color.blue);
-                Debug.Log("Knify knify");
-                StopMovement();
+                if (target.GetComponent<CombatControls>().Health > 0) {
+                    Utils.ChangeGameObjectColor(gameObject, Color.blue);
+                    target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
+                    Debug.Log("Knify knify");
+                    StopMovement();
+                }
             }
             _wait = Wait;
         }

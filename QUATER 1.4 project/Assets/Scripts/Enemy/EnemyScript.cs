@@ -10,7 +10,6 @@ public class EnemyScript : MonoBehaviour {
     public float AlertDistance;
     public float WaitTimeAtWaypoint;
     public GameObject Handler;
-    private GameObject _currentRoom;
     private GameObject _currentWaypoint;
     private float _distanceToWaypoint;
     private int _disturbWait;
@@ -31,11 +30,6 @@ public class EnemyScript : MonoBehaviour {
         {
             Handler.GetComponent<EnemyHandler>().AddToHandler(gameObject);
         }
-    }
-
-    public void GiveRoom(GameObject room)
-    {
-        _currentRoom = room;
     }
 
     public void OnCheckpoint(GameObject checkpoint,bool forPlayerSight)
@@ -91,8 +85,6 @@ public class EnemyScript : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if (_currentRoom != null)
-        _currentRoom.GetComponent<RoomScript>().RemoveEnemy(gameObject);
         if(Handler != null) {
             Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
         }
