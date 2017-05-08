@@ -14,6 +14,8 @@ public class EnemyScript : MonoBehaviour {
     private GameObject _currentWaypoint;
     private float _distanceToWaypoint;
     private int _disturbWait;
+
+    public GameObject DisturbWaypoint;
     // Use this for initialization
     void Start () {
         Debug.Log("first waypoint = "+Waypoints[0]);
@@ -71,9 +73,8 @@ public class EnemyScript : MonoBehaviour {
 
     public void SetDisturbedLocation(Vector3 pos)
     {
-        GameObject temp = new GameObject();
-        temp.transform.position = pos;
-        _currentWaypoint = temp;
+        DisturbWaypoint.transform.position = pos;
+        _currentWaypoint = DisturbWaypoint;
     }
 
     private void OnDestroy()
