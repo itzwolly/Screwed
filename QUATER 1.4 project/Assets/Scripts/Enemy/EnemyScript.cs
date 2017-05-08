@@ -42,12 +42,12 @@ public class EnemyScript : MonoBehaviour {
         {
             if (random)
             {
-                Debug.Log("On checkpoint random");
+                Debug.Log("Next checkpoint random");
                 _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
             }
             else
             {
-                Debug.Log("On checkpoint");
+                Debug.Log("Next checkpoint");
                 _currentWaypoint = Waypoints[(Waypoints.IndexOf(checkpoint) + 1) % Waypoints.Count];
             }
             gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
@@ -63,9 +63,9 @@ public class EnemyScript : MonoBehaviour {
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
         //Debug.Log(_distanceToWaypoint);
-        if (_distanceToWaypoint < MinDistanceToWaypoint)
+        if (_distanceToWaypoint <= MinDistanceToWaypoint+1)
         {
-            
+            Debug.Log("on Checkpoint");
             OnCheckpoint(_currentWaypoint,ChooseRandomWaypoint);
             
         }
