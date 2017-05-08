@@ -415,6 +415,10 @@ MonoBehaviour:
   _angle: 25
   _camera: {fileID: 20179079148697356}
   _ammoCount: 30
+  _maxShieldAmount: 500
+  _minShieldAmount: 100
+  _increaseAmount: 5
+  _decreaseAmount: 10
 --- !u!114 &114590581682340326
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -10,6 +10,13 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private Camera _camera;
     [SerializeField] private int _ammoCount;
 
+    [SerializeField] private int _maxShieldAmount;
+    [SerializeField] private int _minShieldAmount;
+    [SerializeField] private int _increaseAmount;
+    [SerializeField] private int _decreaseAmount;
+    private int _currentShieldAmmount;
+    private bool _blocking;
+
     private float _timer;
     private bool _startTimer;
     private Color _originalColor;
@@ -33,6 +40,19 @@ public class CombatControls : MonoBehaviour {
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
                 MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
             }
+        }
+        Debug.Log(_blocking);
+        if(Input.GetMouseButton(1) && _currentShieldAmmount>_minShieldAmount)
+        {
+            ///health stays the same here
+            //Debug.Log("blocking");
+            _blocking = true;
+            _currentShieldAmmount -= _decreaseAmount;
+        }
+        else if(_currentShieldAmmount<_maxShieldAmount)
+        {
+            _blocking = false;
+            _currentShieldAmmount += _increaseAmount;
         }
     }
 
