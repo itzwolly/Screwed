@@ -79,7 +79,7 @@ public class EnemyMovement : MonoBehaviour {
                 navigator.isStopped = false;
                 //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
             }
-            else
+            else if(IsRanged)
             {
                 SetWaypoint(target);
                 navigator.isStopped = true;
