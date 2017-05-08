@@ -455,12 +455,12 @@ Prefab:
         type: 2}
       propertyPath: Waypoints.Array.data[2]
       value: 
-      objectReference: {fileID: 192802861}
+      objectReference: {fileID: 1055262915}
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: Waypoints.Array.data[3]
       value: 
-      objectReference: {fileID: 1557709804}
+      objectReference: {fileID: 192802861}
     - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: target
@@ -885,7 +885,7 @@ Prefab:
         type: 2}
       propertyPath: Waypoints.Array.data[3]
       value: 
-      objectReference: {fileID: 864947895}
+      objectReference: {fileID: 192802861}
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: Handler
@@ -903,7 +903,7 @@ Prefab:
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: AlertDistance
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}

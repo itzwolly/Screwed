@@ -80,8 +80,8 @@ public class EnemyScript : MonoBehaviour {
     {
         if (_currentRoom != null)
         _currentRoom.GetComponent<RoomScript>().RemoveEnemy(gameObject);
-
-        if (Handler != null)
-        Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject,AlertDistance);
+        if(Handler != null) {
+            Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+        }
     }
 }
