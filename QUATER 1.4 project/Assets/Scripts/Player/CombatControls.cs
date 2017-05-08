@@ -13,7 +13,14 @@ public class CombatControls : MonoBehaviour {
     private float _timer;
     private bool _startTimer;
     private Color _originalColor;
-    
+
+    public int AmmoCount {
+        get { return _ammoCount; }
+    }
+
+    public WeaponHandler WeaponHandler {
+        get { return _weaponHandler; }
+    }
 
     // Use this for initialization
     void Start () {
