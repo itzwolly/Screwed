@@ -113,7 +113,6 @@ GameObject:
   - component: {fileID: 114102360266768328}
   - component: {fileID: 114211386112779860}
   - component: {fileID: 114319267502297498}
-  - component: {fileID: 114590581682340326}
   - component: {fileID: 143760032261407982}
   m_Layer: 0
   m_Name: Player
@@ -508,22 +507,11 @@ MonoBehaviour:
   _angle: 25
   _camera: {fileID: 20179079148697356}
   _ammoCount: 30
+  _health: 100
   _maxShieldAmount: 500
   _minShieldAmount: 100
   _increaseAmount: 5
   _decreaseAmount: 10
---- !u!114 &114590581682340326
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904222018087564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53692dad9bbdc7840a01b17318ece1a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentRoom: {fileID: 0}
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1
