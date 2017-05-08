@@ -18,7 +18,7 @@ public class EnemyScript : MonoBehaviour {
     public GameObject DisturbWaypoint;
     // Use this for initialization
     void Start () {
-        Debug.Log("first waypoint = "+Waypoints[0]);
+        //Debug.Log("first waypoint = "+Waypoints[0]);
         _currentWaypoint = Waypoints[0];
         gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
         if (Handler == null)
@@ -81,7 +81,8 @@ public class EnemyScript : MonoBehaviour {
     {
         if (_currentRoom != null)
         _currentRoom.GetComponent<RoomScript>().RemoveEnemy(gameObject);
-        if(Handler!=null)
-        Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject,AlertDistance);
+        if(Handler != null) {
+            Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+        }
     }
 }
