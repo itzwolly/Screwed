@@ -7,7 +7,6 @@ TagManager:
   - RoomExit
   - Enemy
   - Wall
-  - Floor
   layers:
   - Default
   - TransparentFX

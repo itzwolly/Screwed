@@ -23,7 +23,20 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
-        /**/
+        /*
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller.isGrounded)
+        {
+            _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            _moveDirection = transform.TransformDirection(_moveDirection);
+            _moveDirection *= _speedUnit;
+
+        }
+        
+        _moveDirection.y -= _gravity * Time.deltaTime;
+        controller.Move(_moveDirection * Time.deltaTime);
+        transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
+        */
         if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject _currentRoom = null;
@@ -49,8 +62,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
-
-
         /**
         transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
 

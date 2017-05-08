@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour {
     public bool IsRanged;
@@ -17,7 +18,7 @@ public class EnemyMovement : MonoBehaviour {
     // change below to public if not NavMesh
     public GameObject target;
     public float Speed;
-    UnityEngine.AI.NavMeshAgent navigator;
+    private NavMeshAgent navigator;
     public int Wait;
     public float MeleeDistance;
     public float RangeDistance;
@@ -36,7 +37,7 @@ public class EnemyMovement : MonoBehaviour {
     void Start ()
     {
         Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
-        navigator = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        navigator = GetComponent<NavMeshAgent>();
         _speed = new Vector3(Speed*3, Speed*3, Speed*3);
         _waypoint = Waypoints[0];
         Patrol();
