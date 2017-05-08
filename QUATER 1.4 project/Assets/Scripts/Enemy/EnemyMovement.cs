@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour {
     private GameObject _waypoint;
     private int _wait=0;
     private float _distanceToTarget;
-    private bool _inVision;
+    public bool _inVision;
 
     private List<GameObject> Waypoints;
 
@@ -35,12 +35,15 @@ public class EnemyMovement : MonoBehaviour {
     Vector3 _rayDirection;
     Vector3 _moveDirection;
     Vector3 _lastKnownTargetPosition;
-
+    RigidbodyConstraints _normalConstraints;
+    RigidbodyConstraints _stoppedConstraints;
     [SerializeField] private GameObject[] _weapons;
 
     // Use this for initialization
     void Start ()
     {
+        _stoppedConstraints = RigidbodyConstraints.FreezePosition;
+        _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
         Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
         navigator = GetComponent<NavMeshAgent>();
         _speed = new Vector3(Speed*3, Speed*3, Speed*3);
@@ -71,7 +74,18 @@ public class EnemyMovement : MonoBehaviour {
                 _inVision = false;
             }
 
-            if(_inVision)
+            if (_state != State.shoot)
+            {
+                navigator.isStopped = false;
+                //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
+            }
+            else
+            {
+                SetWaypoint(target);
+                navigator.isStopped = true;
+            }
+
+            if (_inVision)
             {
                 EnemyAttack();
             }
@@ -88,8 +102,8 @@ public class EnemyMovement : MonoBehaviour {
                 }
             }
         }
-        //Debug.Log(_state + " is the state, with the player in vision: " +_inVision);
-	}
+        Debug.Log(_state + " is the state, with the player in vision: " + _inVision +" also with the enemy being stopped: "+navigator.isStopped);
+    }
 
     public void SetWaypoint(GameObject waypoint)
     {
@@ -99,6 +113,7 @@ public class EnemyMovement : MonoBehaviour {
         {
             Debug.Log("Set Waypoint");
             _waypoint = waypoint;
+            _state = State.patroling;
             navigator.SetDestination(waypoint.transform.position);
         }
     }
@@ -106,10 +121,11 @@ public class EnemyMovement : MonoBehaviour {
 
     private void Patrol()
     {
-        Debug.Log("Patrolling");
+        //Debug.Log("Set patrol");
         //Debug.Log(navigator==null);
-        navigator.SetDestination(_waypoint.transform.position);
-        _state = State.patroling;
+        //navigator.SetDestination(_waypoint.transform.position);
+        gameObject.GetComponent<EnemyScript>().OnCheckpoint(_waypoint,false);
+        //_state = State.patroling;
     }
 
     private void SetTragetDestinationToPPosition(Vector3 pos)
@@ -148,10 +164,12 @@ public class EnemyMovement : MonoBehaviour {
             {
                 _lastKnownTargetPosition = hit.transform.position;
                 _state = State.shoot;
+                //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
+                //navigator.SetDestination(transform.position);
+                //StopMovement();
             }
             else
-            {
-
+            {               
                 _inVision = false;
 
                 _state = State.none;
@@ -165,6 +183,9 @@ public class EnemyMovement : MonoBehaviour {
             if(hit.transform != null)
             _lastKnownTargetPosition = hit.transform.position;
             _state = State.shoot;
+            //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
+            //navigator.SetDestination(transform.position);
+            //StopMovement();
             //}
             //else
             //    Debug.Log("no vision");
@@ -174,15 +195,29 @@ public class EnemyMovement : MonoBehaviour {
 
     private void StopMovement()
     {
-        _state = State.stop;
+        //_state = State.knife;
+        Debug.Log("stopping");
         _lastKnownTargetPosition = transform.position;
         //navigator.SetDestination(transform.position);
     }
 
     private void EnemyAttack()
     {
-        SetTragetDestinationToPPosition(_lastKnownTargetPosition);
-
+        //edit here 
+        if (IsRanged || !_inVision)
+        {
+            Debug.Log("should stop");
+            //gameObject.GetComponent<Rigidbody>().constraints = _stoppedConstraints;
+            //SetTragetDestinationToPPosition(transform.position);
+            //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject,true);
+        }
+        else
+        {
+            Debug.Log("should move");
+            //gameObject.isStatic = false;
+            //gameObject.GetComponent<Rigidbody>().constraints = _normalConstraints;
+            SetTragetDestinationToPPosition(_lastKnownTargetPosition);
+        }
         if (_wait <= 0)
         {
             

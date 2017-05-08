@@ -210,7 +210,7 @@ Prefab:
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: ChooseRandomWaypoint
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
@@ -247,6 +247,16 @@ Prefab:
       propertyPath: Handler
       value: 
       objectReference: {fileID: 1342599888}
+    - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
+        type: 2}
+      propertyPath: Wait
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
+        type: 2}
+      propertyPath: IsRanged
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a61583c25bf86d42a91e1038ed85a93, type: 2}
   m_IsPrefabParent: 0
@@ -486,6 +496,26 @@ Prefab:
         type: 2}
       propertyPath: AlertDistance
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
+        type: 2}
+      propertyPath: Wait
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
+        type: 2}
+      propertyPath: IsRanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a61583c25bf86d42a91e1038ed85a93, type: 2}
