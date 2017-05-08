@@ -14,12 +14,14 @@ public class EnemyScript : MonoBehaviour {
     private GameObject _currentWaypoint;
     private float _distanceToWaypoint;
     private int _disturbWait;
+    private int _waypointIndex;
 
     public GameObject DisturbWaypoint;
     // Use this for initialization
     void Start () {
         //Debug.Log("first waypoint = "+Waypoints[0]);
         _currentWaypoint = Waypoints[0];
+        _waypointIndex = 0;
         gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
         if (Handler == null)
         {
@@ -36,24 +38,28 @@ public class EnemyScript : MonoBehaviour {
         _currentRoom = room;
     }
 
-    private void OnCheckpoint(GameObject checkpoint, bool random)
+    public void OnCheckpoint(GameObject checkpoint,bool forPlayerSight)
     {
         if (_disturbWait>=WaitTimeAtWaypoint)
         {
-            if (random)
+            if (!forPlayerSight)
             {
-                Debug.Log("On checkpoint random");
-                _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
-            }
-            else
-            {
-                Debug.Log("On checkpoint");
-                _currentWaypoint = Waypoints[(Waypoints.IndexOf(checkpoint) + 1) % Waypoints.Count];
+                if (ChooseRandomWaypoint)
+                {
+                    Debug.Log("Next checkpoint random");
+                    _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
+                }
+                else
+                {
+                    Debug.Log("Next checkpoint");
+                    _currentWaypoint = Waypoints[(++_waypointIndex) % Waypoints.Count];
+                }
             }
             gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
             _disturbWait = 0;
         }
-        _disturbWait++;
+        if(gameObject.GetComponent<Rigidbody>().velocity.magnitude<=1)
+         _disturbWait++;
     }
     
 
@@ -63,10 +69,10 @@ public class EnemyScript : MonoBehaviour {
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
         //Debug.Log(_distanceToWaypoint);
-        if (_distanceToWaypoint < MinDistanceToWaypoint)
+        if (_distanceToWaypoint <= MinDistanceToWaypoint+1)
         {
-            
-            OnCheckpoint(_currentWaypoint,ChooseRandomWaypoint);
+            //Debug.Log("on Checkpoint");
+            OnCheckpoint(_currentWaypoint,false);
             
         }
 	}
@@ -75,6 +81,12 @@ public class EnemyScript : MonoBehaviour {
     {
         DisturbWaypoint.transform.position = pos;
         _currentWaypoint = DisturbWaypoint;
+        _waypointIndex--;
+    }
+
+    public void ResetDisturbWait()
+    {
+        _disturbWait = 0;
     }
 
     private void OnDestroy()
