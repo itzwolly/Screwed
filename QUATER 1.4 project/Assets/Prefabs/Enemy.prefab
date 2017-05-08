@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2215f433bb6eabd4fbbabf603f49910e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsRanged: 0
   target: {fileID: 0}
   Speed: 2
   Wait: 200
@@ -142,6 +143,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188c46c7cf3a61e4196e52a54508b610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Waypoints: []
+  MinDistanceToWaypoint: 0
+  ChooseRandomWaypoint: 0
+  AlertDistance: 0
+  WaitTimeAtWaypoint: 0
+  Handler: {fileID: 0}
+  DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
+    type: 2}
 --- !u!143 &143425805729776544
 CharacterController:
   m_ObjectHideFlags: 1

@@ -375,12 +375,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0466b2879bdf10746bb78c9fd52fb561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speedUnit: 5
+  JumpVector: 0
   Sensitivity: 0.52
   godController: {fileID: 0}
   _gravity: 20
