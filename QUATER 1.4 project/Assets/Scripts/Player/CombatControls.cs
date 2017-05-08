@@ -32,6 +32,10 @@ public class CombatControls : MonoBehaviour {
         get { return _health; }
     }
 
+    public bool IsDead {
+        get { return _health == 0; }
+    }
+
     // Use this for initialization
     void Start () {
 
@@ -63,6 +67,10 @@ public class CombatControls : MonoBehaviour {
         {
             _blocking = false;
             _currentShieldAmmount += _increaseAmount;
+        }
+
+        if (IsDead) {
+            gameObject.SetActive(false);
         }
     }
 
