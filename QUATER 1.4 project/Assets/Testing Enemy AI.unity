@@ -530,12 +530,12 @@ Prefab:
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a61583c25bf86d42a91e1038ed85a93, type: 2}
@@ -617,8 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e585385c37dcc344ada3846fd93917f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinAlertDistance: 0
-  _enemies: []
 --- !u!1001 &1630247785
 Prefab:
   m_ObjectHideFlags: 0

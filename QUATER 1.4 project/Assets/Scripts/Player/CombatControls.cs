@@ -38,7 +38,8 @@ public class CombatControls : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
         if (Input.GetButtonDown("Fire1")) {
             RaycastHit hit = new RaycastHit();
             Vector3 ray = _camera.ScreenToWorldPoint(Input.mousePosition);
@@ -51,18 +52,21 @@ public class CombatControls : MonoBehaviour {
                 MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
             }
         }
-        Debug.Log(_blocking);
-        if(Input.GetMouseButton(1) && _currentShieldAmmount>_minShieldAmount)
+        Debug.Log(_blocking + " with health = " + _health);
+        if (Input.GetMouseButton(1) && _currentShieldAmmount > _minShieldAmount)
         {
             ///health stays the same here
             //Debug.Log("blocking");
             _blocking = true;
             _currentShieldAmmount -= _decreaseAmount;
         }
-        else if(_currentShieldAmmount<_maxShieldAmount)
+        else
         {
             _blocking = false;
-            _currentShieldAmmount += _increaseAmount;
+            if (_currentShieldAmmount < _maxShieldAmount)
+            {
+                _currentShieldAmmount += _increaseAmount;
+            }
         }
     }
 
@@ -149,7 +153,7 @@ public class CombatControls : MonoBehaviour {
     }
 
     public void DecreaseHealth(int pAmount) {
-        if (_health > 0) {
+        if (_health > 0 && !_blocking) {
             _health -= pAmount;
             if (_health < 0) {
                 _health = 0;

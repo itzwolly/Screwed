@@ -197,7 +197,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.014914668, y: 0.66, z: -0.24931964}
+  m_LocalPosition: {x: 360.73193, y: 212.35973, z: 37.822033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4779334595069844}
@@ -508,8 +508,9 @@ MonoBehaviour:
   _angle: 25
   _camera: {fileID: 20179079148697356}
   _ammoCount: 30
+  _health: 50
   _maxShieldAmount: 500
-  _minShieldAmount: 100
+  _minShieldAmount: 50
   _increaseAmount: 5
   _decreaseAmount: 10
 --- !u!114 &114590581682340326
@@ -523,7 +524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53692dad9bbdc7840a01b17318ece1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentRoom: {fileID: 0}
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1

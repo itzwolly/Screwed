@@ -104,18 +104,20 @@ public class EnemyMovement : MonoBehaviour {
                 }
             }
         }
-        Debug.Log(_state + " is the state, with the player in vision: " + _inVision +" also with the enemy being stopped: "+navigator.isStopped);
+        Debug.Log(_state + " is the state, with the player in vision: " + _inVision + " also with the enemy being stopped: " + navigator.isStopped);
     }
 
     public void SetWaypoint(GameObject waypoint)
     {
         if (navigator == null)
+        {
             Debug.Log("NAVIGATOR IS NULL");
+        }
         else
         {
-            Debug.Log("Set Waypoint");
+            //Debug.Log("Set Waypoint");
             _waypoint = waypoint;
-            _state = State.patroling;
+            //_state = State.patroling;
             navigator.SetDestination(waypoint.transform.position);
         }
     }
@@ -125,7 +127,7 @@ public class EnemyMovement : MonoBehaviour {
     {
         //Debug.Log("Set patrol");
         //Debug.Log(navigator==null);
-        //navigator.SetDestination(_waypoint.transform.position);
+        navigator.SetDestination(_waypoint.transform.position);
         gameObject.GetComponent<EnemyScript>().OnCheckpoint(_waypoint,false);
         //_state = State.patroling;
     }
@@ -198,7 +200,7 @@ public class EnemyMovement : MonoBehaviour {
     private void StopMovement()
     {
         //_state = State.knife;
-        Debug.Log("stopping");
+        //Debug.Log("stopping");
         _lastKnownTargetPosition = transform.position;
         //navigator.SetDestination(transform.position);
     }
@@ -208,14 +210,14 @@ public class EnemyMovement : MonoBehaviour {
         //edit here 
         if (IsRanged || !_inVision)
         {
-            Debug.Log("should stop");
+            //Debug.Log("should stop");
             //gameObject.GetComponent<Rigidbody>().constraints = _stoppedConstraints;
             //SetTragetDestinationToPPosition(transform.position);
             //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject,true);
         }
         else
         {
-            Debug.Log("should move");
+            //Debug.Log("should move");
             //gameObject.isStatic = false;
             //gameObject.GetComponent<Rigidbody>().constraints = _normalConstraints;
             SetTragetDestinationToPPosition(_lastKnownTargetPosition);
@@ -230,6 +232,10 @@ public class EnemyMovement : MonoBehaviour {
                     target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
                     Debug.Log("shoot shoot");
                 }
+                else
+                {
+                    Debug.Log("not shot");
+                }
             }
 
             if (_state == State.knife && !IsRanged)
@@ -239,6 +245,10 @@ public class EnemyMovement : MonoBehaviour {
                     target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
                     Debug.Log("Knify knify");
                     StopMovement();
+                }
+                else
+                {
+                    Debug.Log("not knife");
                 }
             }
             _wait = Wait;
