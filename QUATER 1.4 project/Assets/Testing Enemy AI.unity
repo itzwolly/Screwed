@@ -1117,7 +1117,7 @@ Prefab:
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: AlertDistance
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114190216235291574, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
