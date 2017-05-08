@@ -8,6 +8,7 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private float _angle;
 
     [SerializeField] private Camera _camera;
+    [SerializeField] private int _ammoCount;
 
     private float _timer;
     private bool _startTimer;
@@ -26,7 +27,9 @@ public class CombatControls : MonoBehaviour {
             Vector3 ray = _camera.ScreenToWorldPoint(Input.mousePosition);
 
             if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
-                RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
+                if (_ammoCount > 0) {
+                    RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
+                }
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
                 MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
             }
@@ -55,15 +58,18 @@ public class CombatControls : MonoBehaviour {
     }
 
     private void RangedDamage(Vector3 pFrom, Vector3 pTo, RaycastHit pHit, string pTarget) {
+        DecreaseBulletCount();
         if (Physics.Raycast(pFrom, pTo , out pHit)) {
             Debug.Log(pHit.transform.name + " was hit" + " with tag " + pHit.transform.tag);
             if (pHit.transform.tag == pTarget) {
                 Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
                 TakeDamage(pHit.transform);
             }
-        } else {
-            Debug.Log("Nothing is being hit!");
         }
+    }
+
+    private void DecreaseBulletCount() {
+        _ammoCount--;
     }
 
     private void TakeDamage(Transform pTarget) {

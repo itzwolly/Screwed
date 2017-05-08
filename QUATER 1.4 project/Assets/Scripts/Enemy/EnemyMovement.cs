@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour {
     public bool IsRanged;
+
     enum State
     {
         none,
@@ -14,6 +15,7 @@ public class EnemyMovement : MonoBehaviour {
         shoot,
         knife
     };
+
     private State _state;
     // change below to public if not NavMesh
     public GameObject target;
@@ -33,6 +35,9 @@ public class EnemyMovement : MonoBehaviour {
     Vector3 _rayDirection;
     Vector3 _moveDirection;
     Vector3 _lastKnownTargetPosition;
+
+    [SerializeField] private GameObject[] _weapons;
+
     // Use this for initialization
     void Start ()
     {
@@ -42,9 +47,17 @@ public class EnemyMovement : MonoBehaviour {
         _waypoint = Waypoints[0];
         Patrol();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Awake() {
+        if (!IsRanged) {
+            _weapons[0].SetActive(true);
+        } else {
+            _weapons[1].SetActive(true);
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (target != null)
         {
             _distanceToTarget = (target.transform.position - gameObject.transform.position).magnitude;
