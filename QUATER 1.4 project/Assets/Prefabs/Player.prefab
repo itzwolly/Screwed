@@ -508,11 +508,7 @@ MonoBehaviour:
   _angle: 25
   _camera: {fileID: 20179079148697356}
   _ammoCount: 30
-<<<<<<< HEAD
-  _health: 50
-=======
   _health: 100
->>>>>>> 9e1f91aca66b473f1efe10a029c9a2def0ffd4d5
   _maxShieldAmount: 500
   _minShieldAmount: 50
   _increaseAmount: 5
@@ -533,14 +529,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e3df6d89e5bc4458111c5151a45acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-=======
   _mainCamera: {fileID: 20179079148697356}
   _hud: {fileID: 0}
   _resolutionMessage: {fileID: 0}
   _deathMessage: U ded!
   _winMessage: Noice u won!
->>>>>>> 9e1f91aca66b473f1efe10a029c9a2def0ffd4d5
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1
