@@ -15,6 +15,10 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private int _minShieldAmount;
     [SerializeField] private int _increaseAmount;
     [SerializeField] private int _decreaseAmount;
+
+    [SerializeField] private MonoBehaviour[] _disableAfterDeath;
+    [SerializeField] private ResolutionBehaviour _afterDeathBehaviour;
+
     private int _currentShieldAmmount;
     private bool _blocking;
 
@@ -30,6 +34,10 @@ public class CombatControls : MonoBehaviour {
     }
     public int Health {
         get { return _health; }
+    }
+
+    public bool IsDead {
+        get { return _health == 0; }
     }
 
     // Use this for initialization
@@ -67,6 +75,13 @@ public class CombatControls : MonoBehaviour {
             {
                 _currentShieldAmmount += _increaseAmount;
             }
+        }
+
+        if (IsDead) {
+            //gameObject.SetActive(false);
+            _afterDeathBehaviour.DisableAfterDeath();
+        } else if (HasWon()) {
+            _afterDeathBehaviour.DisableAfterWin();
         }
     }
 
@@ -159,6 +174,17 @@ public class CombatControls : MonoBehaviour {
                 _health = 0;
             }
         }
-        Debug.Log(_health);
+    }
+
+    private bool HasWon() {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0) {
+            return false;
+        } else {
+            if (Input.GetKeyUp(KeyCode.E)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }

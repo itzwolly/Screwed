@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 114102360266768328}
   - component: {fileID: 114211386112779860}
   - component: {fileID: 114319267502297498}
-  - component: {fileID: 114590581682340326}
+  - component: {fileID: 114677579122440034}
   - component: {fileID: 143760032261407982}
   m_Layer: 0
   m_Name: Player
@@ -508,12 +508,21 @@ MonoBehaviour:
   _angle: 25
   _camera: {fileID: 20179079148697356}
   _ammoCount: 30
+<<<<<<< HEAD
   _health: 50
+=======
+  _health: 100
+>>>>>>> 9e1f91aca66b473f1efe10a029c9a2def0ffd4d5
   _maxShieldAmount: 500
   _minShieldAmount: 50
   _increaseAmount: 5
   _decreaseAmount: 10
---- !u!114 &114590581682340326
+  _disableAfterDeath:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _afterDeathBehaviour: {fileID: 114677579122440034}
+--- !u!114 &114677579122440034
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -521,9 +530,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1904222018087564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53692dad9bbdc7840a01b17318ece1a8, type: 3}
+  m_Script: {fileID: 11500000, guid: a5e3df6d89e5bc4458111c5151a45acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+  _mainCamera: {fileID: 20179079148697356}
+  _hud: {fileID: 0}
+  _resolutionMessage: {fileID: 0}
+  _deathMessage: U ded!
+  _winMessage: Noice u won!
+>>>>>>> 9e1f91aca66b473f1efe10a029c9a2def0ffd4d5
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1
