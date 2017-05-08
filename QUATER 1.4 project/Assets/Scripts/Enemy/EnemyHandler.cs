@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHandler : MonoBehaviour {
-    private List<GameObject> Enemies;
+    private List<GameObject> Enemies = new List<GameObject>();
     // Use this for initialization
-    private void Start()
-    {
-        Enemies = new List<GameObject>();
-    }
+    
 
 
 
