@@ -301,9 +301,12 @@ MonoBehaviour:
   Wait: 200
   MeleeDistance: 2
   RangeDistance: 9
+  _inVision: 0
   _weapons:
   - {fileID: 1732247692061734}
   - {fileID: 1954200109474848}
+  _rangedDamage: 10
+  _meleeDamage: 8
 --- !u!114 &114190216235291574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -321,7 +324,8 @@ MonoBehaviour:
   AlertDistance: 0
   WaitTimeAtWaypoint: 0
   Handler: {fileID: 0}
-  DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f, type: 2}
+  DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
+    type: 2}
 --- !u!143 &143425805729776544
 CharacterController:
   m_ObjectHideFlags: 1

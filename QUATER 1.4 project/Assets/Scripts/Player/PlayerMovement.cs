@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof (PlayerScript))]
-
 public class PlayerMovement : MonoBehaviour {
     public float _speedUnit;
     private Vector3 _speed;
@@ -37,27 +35,26 @@ public class PlayerMovement : MonoBehaviour {
         controller.Move(_moveDirection * Time.deltaTime);
         transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
         */
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            GameObject _currentRoom = null;
-            _currentRoom = gameObject.GetComponent<PlayerScript>().CurrentRoom;
-            if (_currentRoom.GetComponent<ExitList>() != null) {
-                for (int i = 0; i < _currentRoom.GetComponent<ExitList>().Exits.Count; i++) {
-                    Transform exit = _currentRoom.GetComponent<ExitList>().Exits[i];
-                    if ((gameObject.transform.position - exit.position).magnitude <= 3) {
-                        if (_currentRoom.GetComponent<RoomScript>().HasEnemies()) {
-                            Debug.Log("Room is not cleared");
-                        } else {
-                            godController.AddRooms(exit);
-                            _currentRoom.GetComponent<ExitList>().RemoveFirstExits(2);
-                            Debug.Log("Im loading next room");
-                        }
-                    }
-                }
-            }
-        }
 
-
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    GameObject _currentRoom = null;
+        //    _currentRoom = gameObject.GetComponent<PlayerScript>().CurrentRoom;
+        //    if (_currentRoom.GetComponent<ExitList>() != null) {
+        //        for (int i = 0; i < _currentRoom.GetComponent<ExitList>().Exits.Count; i++) {
+        //            Transform exit = _currentRoom.GetComponent<ExitList>().Exits[i];
+        //            if ((gameObject.transform.position - exit.position).magnitude <= 3) {
+        //                if (_currentRoom.GetComponent<RoomScript>().HasEnemies()) {
+        //                    Debug.Log("Room is not cleared");
+        //                } else {
+        //                    godController.AddRooms(exit);
+        //                    _currentRoom.GetComponent<ExitList>().RemoveFirstExits(2);
+        //                    Debug.Log("Im loading next room");
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     private void FixedUpdate()

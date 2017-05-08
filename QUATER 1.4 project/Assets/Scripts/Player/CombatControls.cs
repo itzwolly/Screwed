@@ -9,6 +9,7 @@ public class CombatControls : MonoBehaviour {
 
     [SerializeField] private Camera _camera;
     [SerializeField] private int _ammoCount;
+    [SerializeField] private int _health;
 
     [SerializeField] private int _maxShieldAmount;
     [SerializeField] private int _minShieldAmount;
@@ -24,9 +25,11 @@ public class CombatControls : MonoBehaviour {
     public int AmmoCount {
         get { return _ammoCount; }
     }
-
     public WeaponHandler WeaponHandler {
         get { return _weaponHandler; }
+    }
+    public int Health {
+        get { return _health; }
     }
 
     // Use this for initialization
@@ -145,4 +148,13 @@ public class CombatControls : MonoBehaviour {
         return enemy;
     }
 
+    public void DecreaseHealth(int pAmount) {
+        if (_health > 0) {
+            _health -= pAmount;
+            if (_health < 0) {
+                _health = 0;
+            }
+        }
+        Debug.Log(_health);
+    }
 }

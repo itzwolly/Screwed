@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
-    public GameObject CurrentRoom;
+    [SerializeField]
 
 	// Use this for initialization
 	void Start () {
