@@ -22,10 +22,11 @@ public class EnemyMovement : MonoBehaviour {
     public float Speed;
     private NavMeshAgent navigator;
     public int Wait;
+    public int InitialDelay;
     public float MeleeDistance;
     public float RangeDistance;
     private GameObject _waypoint;
-    private int _wait=0;
+    private int _wait;
     private float _distanceToTarget;
     public bool _inVision;
 
@@ -44,6 +45,7 @@ public class EnemyMovement : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
         Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
@@ -79,6 +81,8 @@ public class EnemyMovement : MonoBehaviour {
             if (_state != State.shoot)
             {
                 navigator.isStopped = false;
+                if (IsRanged)
+                    _wait = InitialDelay;
                 //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
             }
             else if(IsRanged)
@@ -184,9 +188,11 @@ public class EnemyMovement : MonoBehaviour {
         {
             //if (hit.transform.tag == "Player")
             //{
-            if(hit.transform != null)
-            _lastKnownTargetPosition = hit.transform.position;
-            _state = State.shoot;
+            if (hit.transform != null)
+            {
+                _lastKnownTargetPosition = hit.transform.position;
+                _state = State.shoot;
+            }
             //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
             //navigator.SetDestination(transform.position);
             //StopMovement();

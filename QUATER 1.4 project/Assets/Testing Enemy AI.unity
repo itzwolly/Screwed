@@ -277,6 +277,11 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
+        type: 2}
+      propertyPath: InitialDelay
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a61583c25bf86d42a91e1038ed85a93, type: 2}
   m_IsPrefabParent: 0
