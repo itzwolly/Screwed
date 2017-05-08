@@ -15,7 +15,7 @@ public class SectionPlacement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _room=GameObject.Instantiate(RoomBrushes[_roomNumber]);
-        _room.GetComponent<RoomScript>().godController = this;
+        //_room.GetComponent<RoomScript>().godController = this;
         _room.transform.Translate(0,100,0);
         _player= GameObject.Instantiate(PlayerBrush);
         _player.GetComponent<PlayerMovement>().godController = this;
@@ -36,10 +36,12 @@ public class SectionPlacement : MonoBehaviour {
         Vector3 futurePosition = exitPositionInWorld - _room.GetComponent<ExitList>().Exits[connectingExit].transform.localPosition;
         //Debug.Log(futurePosition);
         _room.transform.position = futurePosition;
-        _room.GetComponent<RoomScript>().godController = this;
+        //_room.GetComponent<RoomScript>().godController = this;
         for(int i=0;i<_enemyNumber;i++)
         {
             Vector3 circlePosition = Random.insideUnitCircle * 3.5f;
+            circlePosition.z = circlePosition.y;
+            circlePosition.y = 0;
             _enemy = GameObject.Instantiate(EnemyBrush);
             _enemy.transform.position = _room.transform.position + circlePosition;
             _enemy.transform.Translate(0,4,0);

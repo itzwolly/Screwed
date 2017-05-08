@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class RoomScript : MonoBehaviour {
-    public int WaitTime;
-    public SectionPlacement godController;
+    //public int WaitTime;
+    //public SectionPlacement godController;
+    public float MinAlertDistance;
     private List<GameObject> _walls;
     private GameObject _player;
-    private List<GameObject> _enemies;
+    public List<GameObject> _enemies;//change to private
     private bool _hasWalls;
     private bool _startedTimer;
     private int _wait;
@@ -29,7 +30,8 @@ public class RoomScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.tag=="Player")
+        //Debug.Log(collision.transform.tag);
+        if (collision.transform.tag=="Player")
         {
             //maybe remove if not necessary next line
             if (collision.gameObject.GetComponent<PlayerScript>() != null) {
@@ -53,14 +55,15 @@ public class RoomScript : MonoBehaviour {
             _startedTimer = false;
         }
     }
-
+    /**
     // Update is called once per frame
-    void FixedUpdate () {
-        if(_player!=null && _enemies.Count>0)
+    void FixedUpdate()
+    {
+        if (_player != null && _enemies.Count > 0)
         {
             _startedTimer = true;
         }
-        else if(_enemies.Count==0 && _hasWalls)
+        else if (_enemies.Count == 0 && _hasWalls)
         {
             _startedTimer = false;
             RemoveWalls();
@@ -70,7 +73,7 @@ public class RoomScript : MonoBehaviour {
 
         if (_wait == WaitTime)
             CreateWalls();
-	}
+    }
 
     private void CreateWalls()
     {
@@ -96,9 +99,16 @@ public class RoomScript : MonoBehaviour {
         }
         _hasWalls = false;
     }
-
+    /**/
     public void RemoveEnemy(GameObject enemy)
     {
+        foreach(GameObject enem in _enemies)
+        {
+            if((enem.transform.position-enem.transform.position).magnitude<MinAlertDistance)
+            {
+
+            }
+        }
         _enemies.Remove(enemy);
     }
 
@@ -106,4 +116,5 @@ public class RoomScript : MonoBehaviour {
     {
         return _enemies.Count > 0;
     }
+    /**/
 }
