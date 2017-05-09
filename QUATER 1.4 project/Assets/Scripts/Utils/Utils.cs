@@ -53,17 +53,18 @@ public class Utils {
             }
         }
         /**/
+        reader.Close();
+
 
         for (int i = 0; i < lenght; i++)
         {
-            //Debug.Log(file[i]);
+            //Debug.Log(toWrite[i] + "|" + stringToReplace+"|");
             if (String.Compare(toWrite[i], stringToReplace) == 0)
             {
                 //Debug.Log("replacing");
-                file[i] = words;
+                toWrite[i] = words;
             }
         }
-        reader.Close();
         File.WriteAllText(path, String.Empty);
 
 
@@ -96,26 +97,6 @@ public class Utils {
         return latestNumber;
     }
 
-    public static int GetNumberAfterLastString(string path)
-    {
-        string text = ReadFromFile(path);
-
-        StreamReader reader = new StreamReader(path);
-        string[] file = reader.ReadToEnd().Split('\n', '\r', ' ');
-        int latestNumber = 0;
-        for (int i = 0; i < file.Length; i++)
-        {
-            //Debug.Log(file[i]);
-            if (IsNumeric(file[i]))
-            {
-                latestNumber = Convert.ToInt32(file[i]);
-            }
-        }
-        reader.Close();
-
-        return latestNumber;
-    }
-
     public static bool IsNumeric(string text)
     {
         float value;
@@ -129,22 +110,73 @@ public class Utils {
         read.Close();
         return file;
     }
+
     public static int LatestLevel()
     {
-        return Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt");
+        return Utils.GetValueAfterString("Assets\\SaveInfo.txt","onlevel:");
     }
 
     public static void ResetLastLevel()
     {
-        ReplaceLineFromFile("Assets\\SaveInfo.txt","on level: "+1,"on level: "+GetLastNumberFromFile("Assets\\SaveInfo.txt"));
+        Debug.Log("resetting level");
+        ReplaceLineFromFile("Assets\\SaveInfo.txt", "onlevel: " + 1, "onlevel: " + LatestLevel());
     }
 
-    public static void GetVolume()
+    public static void NextLevel()
     {
-
+        int _level = LatestLevel();
+        Utils.ReplaceLineFromFile("Assets\\SaveInfo.txt", "onlevel: " + (_level + 1), "onlevel: " + _level);
     }
-    public static void SetVolume()
-    {
 
+    public static int EffectVolume()
+    {
+        return Utils.GetValueAfterString("Assets\\SaveInfo.txt", "effectaudio:");
+    }
+
+    public static void ChangeEffectVolume(int value)
+    {
+        Utils.SetValueAfterString("Assets\\SaveInfo.txt","effectaudio:",value);
+    }
+
+    public static int MusicVolume()
+    {
+        return Utils.GetValueAfterString("Assets\\SaveInfo.txt", "musicaudio:");
+    }
+
+    public static void ChangeMusicVolume(int value)
+    {
+        Utils.SetValueAfterString("Assets\\SaveInfo.txt", "musicaudio:", value);
+    }
+
+    public static int GetValueAfterString(string path, string pString)
+    {
+        string text = ReadFromFile(path);
+
+        StreamReader reader = new StreamReader(path);
+        string[] file = reader.ReadToEnd().Split('\n', '\r', ' ');
+        int latestNumber = 0;
+        for (int i = 0; i < file.Length; i++)
+        {
+            if (string.Compare(file[i], pString) == 0)
+            {
+                if (IsNumeric(file[i+1]))
+                {
+                    latestNumber = Convert.ToInt32(file[i+1]);
+                    i++;
+                }
+            }
+        }
+        reader.Close();
+
+        return latestNumber;
+    }
+
+    public static void SetValueAfterString(string path, string pString, int nextValue)
+    {
+        int lastValue = GetValueAfterString(path, pString);
+        string before = pString + " " + lastValue;
+        string after = pString + " " + nextValue;
+        //Debug.Log("|" + before +"|"+ after + "|");
+        ReplaceLineFromFile(path,after,before);
     }
 }

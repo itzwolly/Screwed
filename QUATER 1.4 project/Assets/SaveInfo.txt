@@ -1,1 +1,3 @@
-on level: 5
+musicaudio: 50
+effectaudio: 100
+onlevel: 8

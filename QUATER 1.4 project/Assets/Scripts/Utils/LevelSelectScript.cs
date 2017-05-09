@@ -35,11 +35,11 @@ public class LevelSelectScript : MonoBehaviour {
 
     private void MakeMenu()
     {
-        Debug.Log("Making menu! With highest unlock = " + _level);
-        Debug.Log("Menu has " + Buttons.Count + " buttons");
+        //Debug.Log("Making menu! With highest unlock = " + _level);
+        //Debug.Log("Menu has " + Buttons.Count + " buttons");
         for (int i = 0; i < Buttons.Count; i++)
         {
-            Debug.Log(Buttons[i].name);
+            //Debug.Log(Buttons[i].name);
             if (i < _level)
             {
                 //Debug.Log("unlocking");

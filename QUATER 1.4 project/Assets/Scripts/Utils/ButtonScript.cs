@@ -21,7 +21,7 @@ public class ButtonScript : MonoBehaviour {
 	
 	public void Lock()
     {
-        Debug.Log(gameObject.name + " is locked");
+        //Debug.Log(gameObject.name + " is locked");
         Destroy(_unlocked);
         _locked = GameObject.Instantiate(LockedBrush);
         _locked.transform.position = transform.position;
@@ -29,7 +29,7 @@ public class ButtonScript : MonoBehaviour {
 
     public void Unlock()
     {
-        Debug.Log(gameObject.name + " is unlocked");
+        //Debug.Log(gameObject.name + " is unlocked");
         Destroy(_locked);
         _unlocked = GameObject.Instantiate(UnlockedBrush);
         _unlocked.transform.position = transform.position;

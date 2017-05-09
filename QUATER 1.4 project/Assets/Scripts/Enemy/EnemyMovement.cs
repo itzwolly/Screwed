@@ -47,7 +47,8 @@ public class EnemyMovement : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        _volume = 1;//edit to read from save file
+        _volume = Utils.EffectVolume();
+        Debug.Log("effect volume = "+_volume);
         _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
