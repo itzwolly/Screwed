@@ -23,6 +23,7 @@ public class CombatControls : MonoBehaviour {
     
     private int _currentShieldAmmount;
     private bool _blocking;
+    private int _level;
 
     private float _timer;
     private bool _startTimer;
@@ -43,13 +44,21 @@ public class CombatControls : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-
+    void Start ()
+    {
+        _level = Utils.LatestLevel();
+        Debug.Log("Level is "+_level);
     }
 
     // Update is called once per frame
     void Update ()
     {
+        if(Input.GetKeyDown(KeyCode.Slash))
+        {
+            Utils.ResetLastLevel();
+            Debug.Log(Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt"));
+        }
+
         if (Input.GetButtonDown("Fire1")) {
             RaycastHit hit = new RaycastHit();
             Vector3 ray = _camera.ScreenToWorldPoint(Input.mousePosition);
@@ -62,7 +71,7 @@ public class CombatControls : MonoBehaviour {
                 MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
             }
         }
-        Debug.Log(_blocking + " with health = " + _health);
+        //Debug.Log(_blocking + " with health = " + _health);
         if (Input.GetMouseButton(1) && _currentShieldAmmount > _minShieldAmount)
         {
             ///health stays the same here
@@ -192,10 +201,12 @@ public class CombatControls : MonoBehaviour {
             return false;
         } else {
             if (Input.GetKeyUp(KeyCode.E)) {
+                Utils.ReplaceLineFromFile("Assets\\SaveInfo.txt", "on level: "+(_level+1), "on level: " + _level);
                 return true;
             } else {
                 return false;
             }
         }
     }
+
 }
