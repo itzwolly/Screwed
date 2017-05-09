@@ -87,6 +87,7 @@ public class EnemyMovement : MonoBehaviour {
             }
             else if(IsRanged)
             {
+                transform.LookAt(target.transform);
                 SetWaypoint(target);
                 navigator.isStopped = true;
             }
@@ -108,7 +109,7 @@ public class EnemyMovement : MonoBehaviour {
                 }
             }
         }
-        Debug.Log(_state + " is the state, with the player in vision: " + _inVision + " also with the enemy being stopped: " + navigator.isStopped);
+        //Debug.Log(_state + " is the state, with the player in vision: " + _inVision + " also with the enemy being stopped: " + navigator.isStopped);
     }
 
     public void SetWaypoint(GameObject waypoint)

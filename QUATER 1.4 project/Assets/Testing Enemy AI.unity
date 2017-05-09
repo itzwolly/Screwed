@@ -250,7 +250,7 @@ Prefab:
     - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: Wait
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
@@ -280,7 +280,7 @@ Prefab:
     - target: {fileID: 114130849454351668, guid: 3a61583c25bf86d42a91e1038ed85a93,
         type: 2}
       propertyPath: InitialDelay
-      value: 300
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a61583c25bf86d42a91e1038ed85a93, type: 2}
