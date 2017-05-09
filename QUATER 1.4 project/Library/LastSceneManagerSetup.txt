@@ -1,4 +1,12 @@
 sceneSetups:
+<<<<<<< HEAD
+- path: Assets/Scenes/level02.unity
+=======
+<<<<<<< HEAD
 - path: Assets/Testing Enemy AI.unity
+=======
+- path: Assets/Scenes/steal_that_menu.unity
+>>>>>>> feature/mainMenu
+>>>>>>> fb0988792f168a86372b50489ada858a872ca018
   isLoaded: 1
   isActive: 1
