@@ -15,7 +15,9 @@ public class EnemyMovement : MonoBehaviour {
         shoot,
         knife
     };
-
+    public AudioClip ShootSound;
+    public AudioClip KnifeSound;
+    private float _volume;
     private State _state;
     // change below to public if not NavMesh
     public GameObject target;
@@ -45,6 +47,7 @@ public class EnemyMovement : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        _volume = 1;//edit to read from save file
         _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
@@ -237,6 +240,7 @@ public class EnemyMovement : MonoBehaviour {
                 if (target.GetComponent<CombatControls>().Health > 0) {
                     Utils.ChangeGameObjectColor(gameObject, Color.red);
                     target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(ShootSound,_volume);
                     Debug.Log("shoot shoot");
                 }
                 else
@@ -250,6 +254,7 @@ public class EnemyMovement : MonoBehaviour {
                 if (target.GetComponent<CombatControls>().Health > 0) {
                     Utils.ChangeGameObjectColor(gameObject, Color.blue);
                     target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(KnifeSound,_volume);
                     Debug.Log("Knify knify");
                     StopMovement();
                 }

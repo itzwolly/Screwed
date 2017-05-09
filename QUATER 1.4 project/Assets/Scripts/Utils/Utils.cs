@@ -40,12 +40,24 @@ public class Utils {
         StreamReader reader = new StreamReader(path);
 
         //int lineNumber=0;
-        string[] file = reader.ReadToEnd().Split('\n','\r');
-        
-        for (int i=0;i<file.Length; i++)
+        string[] file = File.ReadAllText(path).Split('\n', '\r');
+        string[] toWrite = new string[file.Length];
+        int lenght = 0;
+        /**/
+        foreach (string s in file)
+        {
+            if (s != "")
+            {
+                toWrite[lenght] = s;
+                lenght++;
+            }
+        }
+        /**/
+
+        for (int i = 0; i < lenght; i++)
         {
             //Debug.Log(file[i]);
-            if(String.Compare(file[i],stringToReplace)==0)
+            if (String.Compare(toWrite[i], stringToReplace) == 0)
             {
                 //Debug.Log("replacing");
                 file[i] = words;
@@ -53,12 +65,12 @@ public class Utils {
         }
         reader.Close();
         File.WriteAllText(path, String.Empty);
-        
+
 
         StreamWriter writer = new StreamWriter(path);
-        foreach(string tempLine in file)
+        for (int i=0;i< lenght;i++)
         {
-            writer.WriteLine(tempLine);
+            writer.WriteLine(toWrite[i]);
         }
         writer.Close();
     }
@@ -75,6 +87,26 @@ public class Utils {
         {
             //Debug.Log(file[i]);
             if(IsNumeric(file[i]))
+            {
+                latestNumber = Convert.ToInt32(file[i]);
+            }
+        }
+        reader.Close();
+
+        return latestNumber;
+    }
+
+    public static int GetNumberAfterLastString(string path)
+    {
+        string text = ReadFromFile(path);
+
+        StreamReader reader = new StreamReader(path);
+        string[] file = reader.ReadToEnd().Split('\n', '\r', ' ');
+        int latestNumber = 0;
+        for (int i = 0; i < file.Length; i++)
+        {
+            //Debug.Log(file[i]);
+            if (IsNumeric(file[i]))
             {
                 latestNumber = Convert.ToInt32(file[i]);
             }
@@ -105,5 +137,14 @@ public class Utils {
     public static void ResetLastLevel()
     {
         ReplaceLineFromFile("Assets\\SaveInfo.txt","on level: "+1,"on level: "+GetLastNumberFromFile("Assets\\SaveInfo.txt"));
+    }
+
+    public static void GetVolume()
+    {
+
+    }
+    public static void SetVolume()
+    {
+
     }
 }
