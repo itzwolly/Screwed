@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Testing Enemy AI.unity
+=======
+- path: Assets/Scenes/steal_that_menu.unity
+>>>>>>> feature/mainMenu
   isLoaded: 1
   isActive: 1
