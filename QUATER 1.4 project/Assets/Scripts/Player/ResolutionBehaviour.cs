@@ -6,7 +6,7 @@ public class ResolutionBehaviour : MonoBehaviour {
 
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _hud;
-    [SerializeField] private GameObject _resolutionMessage;
+    [SerializeField] private GameObject _resolutionDisplay;
 
     [SerializeField] private string _deathMessage;
     [SerializeField] private string _winMessage;
@@ -45,8 +45,8 @@ public class ResolutionBehaviour : MonoBehaviour {
     }
 
     private void SetResolutionText(string pText) {
-        _resolutionMessage.GetComponentInChildren<UnityEngine.UI.Text>().text = pText;
-        _resolutionMessage.SetActive(true);
+        _resolutionDisplay.GetComponentInChildren<UnityEngine.UI.Text>().text = pText;
+        _resolutionDisplay.SetActive(true);
     }
 
     private void DisablePlayerScripts() {

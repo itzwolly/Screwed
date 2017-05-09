@@ -19,6 +19,8 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private MonoBehaviour[] _disableAfterDeath;
     [SerializeField] private ResolutionBehaviour _afterDeathBehaviour;
 
+    [SerializeField] private GameObject[] _cracks;
+    
     private int _currentShieldAmmount;
     private bool _blocking;
 
@@ -170,6 +172,15 @@ public class CombatControls : MonoBehaviour {
     public void DecreaseHealth(int pAmount) {
         if (_health > 0 && !_blocking) {
             _health -= pAmount;
+            if (_health == 3) {
+                _cracks[0].SetActive(true);
+            }
+            if (_health == 2) {
+                _cracks[1].SetActive(true);
+            }
+            if (_health == 1) {
+                _cracks[2].SetActive(true);
+            }
             if (_health < 0) {
                 _health = 0;
             }

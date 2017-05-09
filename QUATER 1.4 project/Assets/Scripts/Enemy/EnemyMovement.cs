@@ -38,7 +38,7 @@ public class EnemyMovement : MonoBehaviour {
     Vector3 _lastKnownTargetPosition;
     RigidbodyConstraints _normalConstraints;
     RigidbodyConstraints _stoppedConstraints;
-    [SerializeField] private GameObject[] _weapons;
+    //[SerializeField] private GameObject[] _weapons;
     [SerializeField] private int _rangedDamage;
     [SerializeField] private int _meleeDamage;
 
@@ -55,13 +55,13 @@ public class EnemyMovement : MonoBehaviour {
         Patrol();
     }
 
-    private void Awake() {
-        if (!IsRanged) {
-            _weapons[0].SetActive(true);
-        } else {
-            _weapons[1].SetActive(true);
-        }
-    }
+    //private void Awake() {
+    //    if (!IsRanged) {
+    //        _weapons[0].SetActive(true);
+    //    } else {
+    //        _weapons[1].SetActive(true);
+    //    }
+    //}
 
     // Update is called once per frame
     void Update () {
