@@ -93,10 +93,17 @@ public class Utils {
     public static string ReadFromFile(string path)
     {
         StreamReader read = new StreamReader(path);
-        return read.ReadToEnd();
+        string file = read.ReadToEnd();
+        read.Close();
+        return file;
     }
     public static int LatestLevel()
     {
         return Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt");
+    }
+
+    public static void ResetLastLevel()
+    {
+        ReplaceLineFromFile("Assets\\SaveInfo.txt","on level: "+1,"on level: "+GetLastNumberFromFile("Assets\\SaveInfo.txt"));
     }
 }

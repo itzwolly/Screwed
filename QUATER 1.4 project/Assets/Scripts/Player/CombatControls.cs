@@ -51,6 +51,12 @@ public class CombatControls : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        if(Input.GetKeyDown(KeyCode.Slash))
+        {
+            Utils.ResetLastLevel();
+            Debug.Log(Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt"));
+        }
+
         if (Input.GetButtonDown("Fire1")) {
             RaycastHit hit = new RaycastHit();
             Vector3 ray = _camera.ScreenToWorldPoint(Input.mousePosition);
