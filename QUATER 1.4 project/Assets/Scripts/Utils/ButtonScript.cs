@@ -9,29 +9,29 @@ public class ButtonScript : MonoBehaviour {
     public GameObject UnlockedBrush;
     public GameObject LockedBrush;
 
-    private GameObject _unlocked;
-    private GameObject _locked;
+  
 
 	void Start () {
         //Debug.Log();
         //LevelSelect.GetComponent<LevelSelectScript>().AddButton(gameObject);
-        Destroy(gameObject.GetComponent<MeshFilter>());
+        //Destroy(gameObject.GetComponent<MeshFilter>());
+        //Destroy(gameObject.GetComponent<UnityEngine.UI.Image>());
         //Destroy(gameObject.GetComponent<BoxCollider>());
     }
 	
 	public void Lock()
     {
         Debug.Log(gameObject.name + " is locked");
-        Destroy(_unlocked);
-        _locked = GameObject.Instantiate(LockedBrush);
-        _locked.transform.position = transform.position;
+        // Destroy(_unlocked);
+        UnlockedBrush.SetActive(false);
+        LockedBrush.SetActive(!false);
     }
 
     public void Unlock()
     {
         Debug.Log(gameObject.name + " is unlocked");
-        Destroy(_locked);
-        _unlocked = GameObject.Instantiate(UnlockedBrush);
-        _unlocked.transform.position = transform.position;
+        //Destroy(_locked);
+        UnlockedBrush.SetActive(!false);
+        LockedBrush.SetActive(false);
     }
 }
