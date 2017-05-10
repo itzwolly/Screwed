@@ -51,7 +51,7 @@ public class EnemyMovement : MonoBehaviour {
     void Start ()
     {
         _volume = Utils.EffectVolume();
-        Debug.Log("effect volume = "+_volume);
+        //Debug.Log("effect volume = "+_volume);
         _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
@@ -125,7 +125,7 @@ public class EnemyMovement : MonoBehaviour {
     {
         if (navigator == null)
         {
-            Debug.Log("NAVIGATOR IS NULL");
+            //Debug.Log("NAVIGATOR IS NULL");
         }
         else
         {
@@ -247,11 +247,11 @@ public class EnemyMovement : MonoBehaviour {
                     Utils.ChangeGameObjectColor(gameObject, Color.red);
                     target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
                     gameObject.GetComponent<AudioSource>().PlayOneShot(ShootSound,_volume);
-                    Debug.Log("shoot shoot");
+                    //Debug.Log("shoot shoot");
                 }
                 else
                 {
-                    Debug.Log("not shot");
+                    //Debug.Log("not shot");
                 }
             }
 
@@ -261,12 +261,12 @@ public class EnemyMovement : MonoBehaviour {
                     Utils.ChangeGameObjectColor(gameObject, Color.blue);
                     target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
                     gameObject.GetComponent<AudioSource>().PlayOneShot(KnifeSound,_volume);
-                    Debug.Log("Knify knify");
+                    //Debug.Log("Knify knify");
                     StopMovement();
                 }
                 else
                 {
-                    Debug.Log("not knife");
+                    //Debug.Log("not knife");
                 }
             }
             _wait = Wait;
@@ -276,7 +276,7 @@ public class EnemyMovement : MonoBehaviour {
 
     public void GiveTarget(GameObject ptarget)
     {
-        Debug.Log("Giving Target");
+        //Debug.Log("Giving Target");
         target = ptarget;
     }
 }

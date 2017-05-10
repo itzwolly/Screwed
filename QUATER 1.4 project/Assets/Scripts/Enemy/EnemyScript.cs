@@ -26,7 +26,7 @@ public class EnemyScript : MonoBehaviour {
             gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
         if (Handler == null)
         {
-            Debug.Log("ERROR NO HANDLER");
+            //Debug.Log("ERROR NO HANDLER");
         }
         else
         {
@@ -67,7 +67,8 @@ public class EnemyScript : MonoBehaviour {
         //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
         if (_distanceToWaypoint <= MinDistanceToWaypoint+0.5f)
         {
-           
+            Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint));
+
             //Debug.Log("on Checkpoint");
             OnCheckpoint(_currentWaypoint,false);
             
