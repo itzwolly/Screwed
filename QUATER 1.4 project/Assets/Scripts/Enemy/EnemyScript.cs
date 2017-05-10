@@ -6,6 +6,7 @@ public class EnemyScript : MonoBehaviour {
 
     public List<GameObject> Waypoints;
     public float MinDistanceToWaypoint;
+    public bool StartOffset;
     public bool ChooseRandomWaypoint;
     public float AlertDistance;
     public float WaitTimeAtWaypoint;
@@ -21,10 +22,11 @@ public class EnemyScript : MonoBehaviour {
         //Debug.Log("first waypoint = "+Waypoints[0]);
         _currentWaypoint = Waypoints[0];
         _waypointIndex = 0;
-        gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
+        if(!StartOffset)
+            gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
         if (Handler == null)
         {
-            Debug.Log("ERROR NO HANDLER");
+            //Debug.Log("ERROR NO HANDLER");
         }
         else
         {
@@ -40,12 +42,12 @@ public class EnemyScript : MonoBehaviour {
             {
                 if (ChooseRandomWaypoint)
                 {
-                    Debug.Log("Next checkpoint random");
+                    //Debug.Log("Next checkpoint random");
                     _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
                 }
                 else
                 {
-                    Debug.Log("Next checkpoint");
+                    //Debug.Log("Next checkpoint");
                     _currentWaypoint = Waypoints[(++_waypointIndex) % Waypoints.Count];
                 }
             }
@@ -53,7 +55,7 @@ public class EnemyScript : MonoBehaviour {
             _disturbWait = 0;
         }
         if(gameObject.GetComponent<Rigidbody>().velocity.magnitude<=1)
-         _disturbWait++;
+         _disturbWait++;    
     }
     
 
@@ -62,9 +64,11 @@ public class EnemyScript : MonoBehaviour {
     {
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
-        //Debug.Log(_distanceToWaypoint);
-        if (_distanceToWaypoint <= MinDistanceToWaypoint+1)
+        //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
+        if (_distanceToWaypoint <= MinDistanceToWaypoint+0.5f && !StartOffset)
         {
+            Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
+
             //Debug.Log("on Checkpoint");
             OnCheckpoint(_currentWaypoint,false);
             

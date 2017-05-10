@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CombatControls : MonoBehaviour {
     [SerializeField] private WeaponHandler _weaponHandler;
@@ -19,6 +20,11 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private MonoBehaviour[] _disableAfterDeath;
     [SerializeField] private ResolutionBehaviour _afterDeathBehaviour;
 
+    [SerializeField] private GameObject[] _cracks;
+
+    //[SerializeField] private string[] _levelNames;
+
+    private Animation _anim;
     private int _currentShieldAmmount;
     private bool _blocking;
     private int _level;
@@ -44,8 +50,9 @@ public class CombatControls : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
-        Debug.Log("Level is "+_level);
+        //Debug.Log("Level is "+_level);
     }
 
     // Update is called once per frame
@@ -54,7 +61,7 @@ public class CombatControls : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Slash))
         {
             Utils.ResetLastLevel();
-            Debug.Log(Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt"));
+            //Debug.Log(Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt"));
         }
 
         if (Input.GetButtonDown("Fire1")) {
@@ -66,7 +73,10 @@ public class CombatControls : MonoBehaviour {
                     RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
                 }
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
-                MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
+                if (!_anim.isPlaying) {
+                    _anim.Play("AttackEditable");
+                    MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
+                }
             }
         }
         //Debug.Log(_blocking + " with health = " + _health);
@@ -90,7 +100,12 @@ public class CombatControls : MonoBehaviour {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
         } else if (HasWon()) {
-            _afterDeathBehaviour.DisableAfterWin();
+            //_afterDeathBehaviour.DisableAfterWin();
+            Debug.Log(Utils.LatestLevel());
+            if (Utils.LatestLevel() == 2) {
+                //Application.LoadLevel("level02");
+                SceneManager.LoadScene("level02");
+            }
         }
     }
 
@@ -107,9 +122,9 @@ public class CombatControls : MonoBehaviour {
 
     private void RangedDamage(Ray pOther, RaycastHit pHit, string pTarget) {
         if (Physics.Raycast(pOther, out pHit)) {
-            Debug.Log(pOther + " || " + pHit.transform.name + " || " + pHit.transform.tag);
+            //Debug.Log(pOther + " || " + pHit.transform.name + " || " + pHit.transform.tag);
             if (pHit.transform.tag == pTarget) {
-                Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
+                //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
                 TakeDamage(pHit.transform);
             }
         }
@@ -118,9 +133,9 @@ public class CombatControls : MonoBehaviour {
     private void RangedDamage(Vector3 pFrom, Vector3 pTo, RaycastHit pHit, string pTarget) {
         DecreaseBulletCount();
         if (Physics.Raycast(pFrom, pTo , out pHit)) {
-            Debug.Log(pHit.transform.name + " was hit" + " with tag " + pHit.transform.tag);
+            //Debug.Log(pHit.transform.name + " was hit" + " with tag " + pHit.transform.tag);
             if (pHit.transform.tag == pTarget) {
-                Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
+                //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
                 TakeDamage(pHit.transform);
             }
         }
@@ -141,15 +156,18 @@ public class CombatControls : MonoBehaviour {
         Collider[] hitColliders = Physics.OverlapSphere(pCenter, pRadius);
 
         while (i < hitColliders.Length) {
+            
             if (hitColliders[i].transform.tag == pTarget) {
+                //Debug.Log(hitColliders[i].name + " is in range of attacks.");
                 if (pAoeType == WeaponAOEType.Single) {
+                    //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
                     if (GetClosestEnemy(hitColliders, pRadius) != null) {
-                        Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
+                        //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
                         TakeDamage(GetClosestEnemy(hitColliders, pRadius));
                         break;
                     }
                 } else if (pAoeType == WeaponAOEType.Multi) {
-                    Debug.Log(hitColliders[i].name + " has been hit.");
+                    //Debug.Log(hitColliders[i].name + " has been hit.");
                     TakeDamage(hitColliders[i].transform);
                 }
             }
@@ -167,6 +185,8 @@ public class CombatControls : MonoBehaviour {
                 Vector3 targetDir = collider.transform.position - transform.position;
                 float angle = Vector3.Angle(targetDir, transform.forward);
 
+                //Debug.Log("dist: " + dist + " | " + "pMinDist: " + pMinDist + " | " + "angle: " + angle + " | " + "_angle: " + _angle);
+
                 if (dist < pMinDist && angle < _angle) {
                     enemy = collider.transform;
                     pMinDist = dist;
@@ -179,6 +199,15 @@ public class CombatControls : MonoBehaviour {
     public void DecreaseHealth(int pAmount) {
         if (_health > 0 && !_blocking) {
             _health -= pAmount;
+            if (_health == 3) {
+                _cracks[0].SetActive(true);
+            }
+            if (_health == 2) {
+                _cracks[1].SetActive(true);
+            }
+            if (_health == 1) {
+                _cracks[2].SetActive(true);
+            }
             if (_health < 0) {
                 _health = 0;
             }
@@ -190,7 +219,7 @@ public class CombatControls : MonoBehaviour {
             return false;
         } else {
             if (Input.GetKeyUp(KeyCode.E)) {
-                Utils.ReplaceLineFromFile("Assets\\SaveInfo.txt", "on level: "+(_level+1), "on level: " + _level);
+                Utils.NextLevel();
                 return true;
             } else {
                 return false;

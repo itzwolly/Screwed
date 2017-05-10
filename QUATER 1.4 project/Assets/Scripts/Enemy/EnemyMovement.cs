@@ -13,20 +13,25 @@ public class EnemyMovement : MonoBehaviour {
         walk,
         stop,
         shoot,
+        look,
         knife
     };
-
+    public AudioClip ShootSound;
+    public AudioClip KnifeSound;
+    private float _volume;
     private State _state;
     // change below to public if not NavMesh
     public GameObject target;
     public float Speed;
     private NavMeshAgent navigator;
     public int Wait;
+    public int LookWait;
     public int InitialDelay;
     public float MeleeDistance;
     public float RangeDistance;
     private GameObject _waypoint;
     private int _wait;
+    private int _lookWait;
     private float _distanceToTarget;
     public bool _inVision;
 
@@ -38,13 +43,15 @@ public class EnemyMovement : MonoBehaviour {
     Vector3 _lastKnownTargetPosition;
     RigidbodyConstraints _normalConstraints;
     RigidbodyConstraints _stoppedConstraints;
-    [SerializeField] private GameObject[] _weapons;
+    //[SerializeField] private GameObject[] _weapons;
     [SerializeField] private int _rangedDamage;
     [SerializeField] private int _meleeDamage;
 
     // Use this for initialization
     void Start ()
     {
+        _volume = Utils.EffectVolume();
+        //Debug.Log("effect volume = "+_volume);
         _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
@@ -52,16 +59,17 @@ public class EnemyMovement : MonoBehaviour {
         navigator = GetComponent<NavMeshAgent>();
         _speed = new Vector3(Speed*3, Speed*3, Speed*3);
         _waypoint = Waypoints[0];
-        Patrol();
+        if(!gameObject.GetComponent<EnemyScript>().StartOffset)
+            Patrol();
     }
 
-    private void Awake() {
-        if (!IsRanged) {
-            _weapons[0].SetActive(true);
-        } else {
-            _weapons[1].SetActive(true);
-        }
-    }
+    //private void Awake() {
+    //    if (!IsRanged) {
+    //        _weapons[0].SetActive(true);
+    //    } else {
+    //        _weapons[1].SetActive(true);
+    //    }
+    //}
 
     // Update is called once per frame
     void Update () {
@@ -94,13 +102,19 @@ public class EnemyMovement : MonoBehaviour {
 
             if (_inVision)
             {
+                //Debug.Log("looking");
+                //if(_lookWait>=LookWait)
+                //{
+
+                //}
+                //_lookWait++;
                 EnemyAttack();
             }
             else
             {
                 if ((transform.position - _lastKnownTargetPosition).magnitude < 0.1f)
                 {
-                    Debug.Log("Patrolling");
+                    //Debug.Log("Patrolling");
                     Patrol();
                 }
                 else
@@ -116,7 +130,7 @@ public class EnemyMovement : MonoBehaviour {
     {
         if (navigator == null)
         {
-            Debug.Log("NAVIGATOR IS NULL");
+            //Debug.Log("NAVIGATOR IS NULL");
         }
         else
         {
@@ -237,11 +251,12 @@ public class EnemyMovement : MonoBehaviour {
                 if (target.GetComponent<CombatControls>().Health > 0) {
                     Utils.ChangeGameObjectColor(gameObject, Color.red);
                     target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
-                    Debug.Log("shoot shoot");
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(ShootSound,_volume);
+                    //Debug.Log("shoot shoot");
                 }
                 else
                 {
-                    Debug.Log("not shot");
+                    //Debug.Log("not shot");
                 }
             }
 
@@ -250,12 +265,13 @@ public class EnemyMovement : MonoBehaviour {
                 if (target.GetComponent<CombatControls>().Health > 0) {
                     Utils.ChangeGameObjectColor(gameObject, Color.blue);
                     target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
-                    Debug.Log("Knify knify");
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(KnifeSound,_volume);
+                    //Debug.Log("Knify knify");
                     StopMovement();
                 }
                 else
                 {
-                    Debug.Log("not knife");
+                    //Debug.Log("not knife");
                 }
             }
             _wait = Wait;
@@ -265,7 +281,7 @@ public class EnemyMovement : MonoBehaviour {
 
     public void GiveTarget(GameObject ptarget)
     {
-        Debug.Log("Giving Target");
+        //Debug.Log("Giving Target");
         target = ptarget;
     }
 }

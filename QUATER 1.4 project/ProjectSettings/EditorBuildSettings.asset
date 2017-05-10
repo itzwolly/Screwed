@@ -4,7 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/steal_that_menu.unity
-    guid: 3b7057ca54c1ae84f9df25fdee6c50c8
+  m_Scenes: []

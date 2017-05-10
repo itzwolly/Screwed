@@ -1,7 +1,3 @@
-on level: 1
-
-
-
-
-
-
+musicaudio: 100
+effectaudio: 100
+onlevel: 2
