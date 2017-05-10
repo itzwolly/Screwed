@@ -27,7 +27,11 @@ GameObject:
   - component: {fileID: 114130849454351668}
   - component: {fileID: 114190216235291574}
   - component: {fileID: 143425805729776544}
+<<<<<<< HEAD:QUATER 1.4 project/Assets/Prefabs/Enemy.prefab
+  - component: {fileID: 82138164411404260}
+=======
   - component: {fileID: 95775996277962362}
+>>>>>>> 235b5b36edd4b84c2b5481b60bf3d35b30c4aef1:QUATER 1.4 project/Assets/Prefabs/Enemy Melee.prefab
   m_Layer: 0
   m_Name: Enemy Melee
   m_TagString: Enemy
@@ -71,8 +75,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD:QUATER 1.4 project/Assets/Prefabs/Enemy.prefab
+  m_LocalPosition: {x: 361.39105, y: 212.84554, z: 48.20709}
+  m_LocalScale: {x: 0.5, y: 1.971615, z: 0.5}
+=======
   m_LocalPosition: {x: -11.55, y: 0.05, z: 9.0102625}
   m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> 235b5b36edd4b84c2b5481b60bf3d35b30c4aef1:QUATER 1.4 project/Assets/Prefabs/Enemy Melee.prefab
   m_Children:
   - {fileID: 4404857394220228}
   m_Father: {fileID: 0}
@@ -145,14 +154,96 @@ MeshCollider:
   m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
+<<<<<<< HEAD:QUATER 1.4 project/Assets/Prefabs/Enemy.prefab
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &82138164411404260
+AudioSource:
+=======
   m_Mesh: {fileID: 4300000, guid: 7a6af43e2b0861945946cd7ccf1ce5a6, type: 3}
 --- !u!95 &95775996277962362
 Animator:
   serializedVersion: 3
+>>>>>>> 235b5b36edd4b84c2b5481b60bf3d35b30c4aef1:QUATER 1.4 project/Assets/Prefabs/Enemy Melee.prefab
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
+<<<<<<< HEAD:QUATER 1.4 project/Assets/Prefabs/Enemy.prefab
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+=======
   m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 0}
@@ -163,6 +254,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+>>>>>>> 235b5b36edd4b84c2b5481b60bf3d35b30c4aef1:QUATER 1.4 project/Assets/Prefabs/Enemy Melee.prefab
 --- !u!114 &114130849454351668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,10 +267,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsRanged: 0
+  ShootSound: {fileID: 8300000, guid: 1706d14a0cf8d6a4aafcad51e22336b7, type: 3}
+  KnifeSound: {fileID: 8300000, guid: 1706d14a0cf8d6a4aafcad51e22336b7, type: 3}
   target: {fileID: 0}
   Speed: 2
+<<<<<<< HEAD:QUATER 1.4 project/Assets/Prefabs/Enemy.prefab
+  Wait: 10
+  InitialDelay: 50
+=======
   Wait: 50
   InitialDelay: 0
+>>>>>>> 235b5b36edd4b84c2b5481b60bf3d35b30c4aef1:QUATER 1.4 project/Assets/Prefabs/Enemy Melee.prefab
   MeleeDistance: 2
   RangeDistance: 9
   _inVision: 0
@@ -197,10 +296,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waypoints:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   MinDistanceToWaypoint: 0
   ChooseRandomWaypoint: 0
   AlertDistance: 100
+<<<<<<< HEAD:QUATER 1.4 project/Assets/Prefabs/Enemy.prefab
+  WaitTimeAtWaypoint: 100
+=======
   WaitTimeAtWaypoint: 0
+>>>>>>> 235b5b36edd4b84c2b5481b60bf3d35b30c4aef1:QUATER 1.4 project/Assets/Prefabs/Enemy Melee.prefab
   Handler: {fileID: 0}
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}

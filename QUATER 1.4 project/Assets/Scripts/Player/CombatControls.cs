@@ -209,7 +209,7 @@ public class CombatControls : MonoBehaviour {
             return false;
         } else {
             if (Input.GetKeyUp(KeyCode.E)) {
-                Utils.ReplaceLineFromFile("Assets\\SaveInfo.txt", "on level: "+(_level+1), "on level: " + _level);
+                Utils.NextLevel();
                 return true;
             } else {
                 return false;
