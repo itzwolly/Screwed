@@ -6,7 +6,7 @@ public class EnemyScript : MonoBehaviour {
 
     public List<GameObject> Waypoints;
     public float MinDistanceToWaypoint;
-    public float StartOffset    ;
+    public bool StartOffset;
     public bool ChooseRandomWaypoint;
     public float AlertDistance;
     public float WaitTimeAtWaypoint;
@@ -22,7 +22,7 @@ public class EnemyScript : MonoBehaviour {
         //Debug.Log("first waypoint = "+Waypoints[0]);
         _currentWaypoint = Waypoints[0];
         _waypointIndex = 0;
-        if((transform.position-_currentWaypoint.transform.position).magnitude>StartOffset)
+        if(!StartOffset)
             gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
         if (Handler == null)
         {
@@ -65,9 +65,9 @@ public class EnemyScript : MonoBehaviour {
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
         //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
-        if (_distanceToWaypoint <= MinDistanceToWaypoint+0.5f)
+        if (_distanceToWaypoint <= MinDistanceToWaypoint+0.5f && !StartOffset)
         {
-            Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint));
+            Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
 
             //Debug.Log("on Checkpoint");
             OnCheckpoint(_currentWaypoint,false);
