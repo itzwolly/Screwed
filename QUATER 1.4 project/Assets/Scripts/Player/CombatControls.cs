@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CombatControls : MonoBehaviour {
     [SerializeField] private WeaponHandler _weaponHandler;
@@ -21,7 +22,7 @@ public class CombatControls : MonoBehaviour {
 
     [SerializeField] private GameObject[] _cracks;
 
-
+    //[SerializeField] private string[] _levelNames;
 
     private Animation _anim;
     private int _currentShieldAmmount;
@@ -99,7 +100,12 @@ public class CombatControls : MonoBehaviour {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
         } else if (HasWon()) {
-            _afterDeathBehaviour.DisableAfterWin();
+            //_afterDeathBehaviour.DisableAfterWin();
+            Debug.Log(Utils.LatestLevel());
+            if (Utils.LatestLevel() == 2) {
+                //Application.LoadLevel("level02");
+                SceneManager.LoadScene("level02");
+            }
         }
     }
 
