@@ -56,6 +56,7 @@ public class EnemyMovement : MonoBehaviour {
         navigator = GetComponent<NavMeshAgent>();
         _speed = new Vector3(Speed*3, Speed*3, Speed*3);
         _waypoint = Waypoints[0];
+        if((transform.position-_waypoint.transform.position).magnitude>1.5f)
         Patrol();
     }
 
@@ -124,7 +125,7 @@ public class EnemyMovement : MonoBehaviour {
         }
         else
         {
-            //Debug.Log("Set Waypoint");
+            Debug.Log("Set Waypoint");
             _waypoint = waypoint;
             //_state = State.patroling;
             navigator.SetDestination(waypoint.transform.position);
