@@ -64,11 +64,7 @@ public class EnemyScript : MonoBehaviour {
     {
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
-<<<<<<< HEAD
         //Debug.Log(_distanceToWaypoint);
-=======
-        Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
->>>>>>> 99180ff9937a9de20fae3bd438521d41fa912846
         if (_distanceToWaypoint <= MinDistanceToWaypoint)
         {
            
