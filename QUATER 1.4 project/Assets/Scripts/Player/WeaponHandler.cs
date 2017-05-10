@@ -33,6 +33,10 @@ public class WeaponHandler : MonoBehaviour {
         _weaponAOEType = WeaponAOEType.Single;
     }
 
+    public GameObject[] Weapons {
+        get { return _weapons; }
+    }
+
     // Update is called once per frame
     void Update () {
 		if (Input.GetKeyUp("1")) {
