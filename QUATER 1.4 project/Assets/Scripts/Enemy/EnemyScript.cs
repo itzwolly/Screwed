@@ -24,7 +24,7 @@ public class EnemyScript : MonoBehaviour {
         gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
         if (Handler == null)
         {
-            Debug.Log("ERROR NO HANDLER");
+            //Debug.Log("ERROR NO HANDLER");
         }
         else
         {
@@ -40,12 +40,12 @@ public class EnemyScript : MonoBehaviour {
             {
                 if (ChooseRandomWaypoint)
                 {
-                    Debug.Log("Next checkpoint random");
+                    //Debug.Log("Next checkpoint random");
                     _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
                 }
                 else
                 {
-                    Debug.Log("Next checkpoint");
+                    //Debug.Log("Next checkpoint");
                     _currentWaypoint = Waypoints[(++_waypointIndex) % Waypoints.Count];
                 }
             }
@@ -63,7 +63,7 @@ public class EnemyScript : MonoBehaviour {
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
         //Debug.Log(_distanceToWaypoint);
-        if (_distanceToWaypoint <= MinDistanceToWaypoint+1)
+        if (_distanceToWaypoint <= MinDistanceToWaypoint)
         {
             //Debug.Log("on Checkpoint");
             OnCheckpoint(_currentWaypoint,false);
