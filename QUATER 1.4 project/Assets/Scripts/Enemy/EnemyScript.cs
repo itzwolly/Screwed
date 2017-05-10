@@ -15,8 +15,17 @@ public class EnemyScript : MonoBehaviour {
     private float _distanceToWaypoint;
     private int _disturbWait;
     private int _waypointIndex;
-
     public GameObject DisturbWaypoint;
+
+    [SerializeField] private int _health;
+
+    public int Health {
+        get { return _health; }
+    }
+    public bool IsDead {
+        get { return _health == 0; }
+    }
+
     // Use this for initialization
     void Start () {
         //Debug.Log("first waypoint = "+Waypoints[0]);
@@ -93,6 +102,15 @@ public class EnemyScript : MonoBehaviour {
     {
         if(Handler != null) {
             Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+        }
+    }
+
+    public void DecreaseHealth(int pAmount) {
+        if (_health > 0) {
+            _health -= pAmount;
+            if (_health < 0) {
+                _health = 0;
+            }
         }
     }
 }
