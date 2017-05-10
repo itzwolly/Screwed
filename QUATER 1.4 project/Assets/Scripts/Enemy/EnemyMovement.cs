@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour {
         walk,
         stop,
         shoot,
+        look,
         knife
     };
     public AudioClip ShootSound;
@@ -24,11 +25,13 @@ public class EnemyMovement : MonoBehaviour {
     public float Speed;
     private NavMeshAgent navigator;
     public int Wait;
+    public int LookWait;
     public int InitialDelay;
     public float MeleeDistance;
     public float RangeDistance;
     private GameObject _waypoint;
     private int _wait;
+    private int _lookWait;
     private float _distanceToTarget;
     public bool _inVision;
 
@@ -99,6 +102,7 @@ public class EnemyMovement : MonoBehaviour {
 
             if (_inVision)
             {
+                Debug.Log("looking");
                 EnemyAttack();
             }
             else
@@ -125,7 +129,7 @@ public class EnemyMovement : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Set Waypoint");
+            //Debug.Log("Set Waypoint");
             _waypoint = waypoint;
             //_state = State.patroling;
             navigator.SetDestination(waypoint.transform.position);

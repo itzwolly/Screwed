@@ -7,7 +7,7 @@ public class MenuMusic : MonoBehaviour {
     private float _volume;
 	// Use this for initialization
 	void Start () {
-        Utils.ChangeMusicVolume(50);
+        Utils.ChangeMusicVolume(100);
         _volume = Utils.MusicVolume();
         Debug.Log("music volume = "+_volume);
         gameObject.GetComponent<AudioSource>().clip = Music;
