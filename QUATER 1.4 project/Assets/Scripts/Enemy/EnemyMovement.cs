@@ -59,8 +59,8 @@ public class EnemyMovement : MonoBehaviour {
         navigator = GetComponent<NavMeshAgent>();
         _speed = new Vector3(Speed*3, Speed*3, Speed*3);
         _waypoint = Waypoints[0];
-        if((transform.position-_waypoint.transform.position).magnitude>1.5f)
-        Patrol();
+        if(!gameObject.GetComponent<EnemyScript>().StartOffset)
+            Patrol();
     }
 
     //private void Awake() {
@@ -102,7 +102,12 @@ public class EnemyMovement : MonoBehaviour {
 
             if (_inVision)
             {
-                Debug.Log("looking");
+                //Debug.Log("looking");
+                //if(_lookWait>=LookWait)
+                //{
+
+                //}
+                //_lookWait++;
                 EnemyAttack();
             }
             else
