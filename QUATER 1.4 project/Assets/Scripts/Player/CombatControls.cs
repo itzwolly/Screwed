@@ -22,6 +22,8 @@ public class CombatControls : MonoBehaviour {
 
     [SerializeField] private GameObject[] _cracks;
 
+    [SerializeField] private int[] _weaponDamage;
+
     //[SerializeField] private string[] _levelNames;
 
     private Animation _anim;
@@ -100,11 +102,11 @@ public class CombatControls : MonoBehaviour {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
         } else if (HasWon()) {
-            //_afterDeathBehaviour.DisableAfterWin();
             Debug.Log(Utils.LatestLevel());
             if (Utils.LatestLevel() == 2) {
-                //Application.LoadLevel("level02");
                 SceneManager.LoadScene("level02");
+            } else {
+                _afterDeathBehaviour.DisableAfterWin();
             }
         }
     }
@@ -147,7 +149,14 @@ public class CombatControls : MonoBehaviour {
 
     private void TakeDamage(Transform pTarget) {
         Utils.ChangeGameObjectColorTo(pTarget.gameObject, pTarget.GetComponent<Renderer>().material.color, Color.red);
-        Destroy(pTarget.gameObject);
+        if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
+            pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
+        } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
+            pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[1]);
+        }
+        if (pTarget.GetComponent<EnemyScript>().IsDead) {
+            Destroy(pTarget.gameObject);
+        }
         _startTimer = true;
     }
 

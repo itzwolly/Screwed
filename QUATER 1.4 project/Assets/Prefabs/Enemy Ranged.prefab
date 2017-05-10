@@ -71,14 +71,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 351.8437, y: 212.14, z: 55.689148}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -3.25, y: 0.9858075, z: 19.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4404857394220228}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!23 &23693687309765878
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -261,6 +261,7 @@ MonoBehaviour:
   target: {fileID: 0}
   Speed: 2
   Wait: 50
+  LookWait: 0
   InitialDelay: 0
   MeleeDistance: 2
   RangeDistance: 9
@@ -280,14 +281,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waypoints:
   - {fileID: 0}
-  - {fileID: 0}
   MinDistanceToWaypoint: 0
+  StartOffset: 1
   ChooseRandomWaypoint: 0
   AlertDistance: 100
   WaitTimeAtWaypoint: 0
   Handler: {fileID: 0}
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}
+  _health: 2
 --- !u!143 &143425805729776544
 CharacterController:
   m_ObjectHideFlags: 1
