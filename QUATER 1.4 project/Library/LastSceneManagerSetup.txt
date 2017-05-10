@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
+- path: Assets/Scenes/level01.unity
+=======
 - path: Assets/Testing Enemy AI.unity
+>>>>>>> d4144e2b1dcaa098a814ac454180251a24c0dac0
   isLoaded: 1
   isActive: 1

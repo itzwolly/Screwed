@@ -20,7 +20,10 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private ResolutionBehaviour _afterDeathBehaviour;
 
     [SerializeField] private GameObject[] _cracks;
-    
+
+
+
+    private Animation _anim;
     private int _currentShieldAmmount;
     private bool _blocking;
     private int _level;
@@ -46,8 +49,10 @@ public class CombatControls : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
         Debug.Log("Level is "+_level);
+        Debug.Log(_anim);
     }
 
     // Update is called once per frame
@@ -68,7 +73,10 @@ public class CombatControls : MonoBehaviour {
                     RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
                 }
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
-                MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
+                if (!_anim.isPlaying) {
+                    _anim.Play("AttackEditable");
+                    MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
+                }
             }
         }
         //Debug.Log(_blocking + " with health = " + _health);
