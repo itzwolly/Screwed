@@ -124,6 +124,7 @@ public class Utils {
 
     public static void NextLevel()
     {
+        Debug.Log("On to next level");
         int _level = LatestLevel();
         Utils.ReplaceLineFromFile("Assets\\SaveInfo.txt", "onlevel: " + (_level + 1), "onlevel: " + _level);
     }
