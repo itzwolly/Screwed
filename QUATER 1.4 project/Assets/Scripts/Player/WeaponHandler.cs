@@ -26,15 +26,15 @@ public class WeaponHandler : MonoBehaviour {
     public WeaponAOEType CurrentWeaponAOEType {
         get { return _weaponAOEType; }
     }
+    public GameObject[] Weapons
+    {
+        get { return _weapons; }
+    }
 
     // Use this for initialization
     void Start () {
         _weaponType = WeaponType.Melee;
         _weaponAOEType = WeaponAOEType.Single;
-    }
-
-    public GameObject[] Weapons {
-        get { return _weapons; }
     }
 
     // Update is called once per frame
@@ -52,6 +52,22 @@ public class WeaponHandler : MonoBehaviour {
                 _weapons[1].SetActive(false);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            if (_weaponType == WeaponType.Melee) {
+                _weaponType = WeaponType.Ranged;
+                if (!_weapons[1].activeInHierarchy) {
+                    _weapons[0].SetActive(false);
+                    _weapons[1].SetActive(true);
+                }
+            } else {
+                _weaponType = WeaponType.Melee;
+                if (!_weapons[0].activeInHierarchy) {
+                    _weapons[0].SetActive(true);
+                    _weapons[1].SetActive(false);
+                }
+            }
+        }
         
         if (Input.GetKeyUp(KeyCode.F)) {
             if (_weaponType == WeaponType.Melee) {
@@ -60,7 +76,6 @@ public class WeaponHandler : MonoBehaviour {
                 } else if (_weaponAOEType == WeaponAOEType.Multi) {
                     _weaponAOEType = WeaponAOEType.Single;
                 }
-                Debug.Log(_weaponAOEType);
             }
         }
 	}

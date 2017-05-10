@@ -51,8 +51,7 @@ public class CombatControls : MonoBehaviour {
     {
         _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
-        Debug.Log("Level is "+_level);
-        Debug.Log(_anim);
+        //Debug.Log("Level is "+_level);
     }
 
     // Update is called once per frame
@@ -61,7 +60,7 @@ public class CombatControls : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Slash))
         {
             Utils.ResetLastLevel();
-            Debug.Log(Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt"));
+            //Debug.Log(Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt"));
         }
 
         if (Input.GetButtonDown("Fire1")) {
@@ -117,9 +116,9 @@ public class CombatControls : MonoBehaviour {
 
     private void RangedDamage(Ray pOther, RaycastHit pHit, string pTarget) {
         if (Physics.Raycast(pOther, out pHit)) {
-            Debug.Log(pOther + " || " + pHit.transform.name + " || " + pHit.transform.tag);
+            //Debug.Log(pOther + " || " + pHit.transform.name + " || " + pHit.transform.tag);
             if (pHit.transform.tag == pTarget) {
-                Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
+                //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
                 TakeDamage(pHit.transform);
             }
         }
@@ -128,9 +127,9 @@ public class CombatControls : MonoBehaviour {
     private void RangedDamage(Vector3 pFrom, Vector3 pTo, RaycastHit pHit, string pTarget) {
         DecreaseBulletCount();
         if (Physics.Raycast(pFrom, pTo , out pHit)) {
-            Debug.Log(pHit.transform.name + " was hit" + " with tag " + pHit.transform.tag);
+            //Debug.Log(pHit.transform.name + " was hit" + " with tag " + pHit.transform.tag);
             if (pHit.transform.tag == pTarget) {
-                Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
+                //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
                 TakeDamage(pHit.transform);
             }
         }
@@ -151,15 +150,18 @@ public class CombatControls : MonoBehaviour {
         Collider[] hitColliders = Physics.OverlapSphere(pCenter, pRadius);
 
         while (i < hitColliders.Length) {
+            
             if (hitColliders[i].transform.tag == pTarget) {
+                //Debug.Log(hitColliders[i].name + " is in range of attacks.");
                 if (pAoeType == WeaponAOEType.Single) {
+                    //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
                     if (GetClosestEnemy(hitColliders, pRadius) != null) {
-                        Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
+                        //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
                         TakeDamage(GetClosestEnemy(hitColliders, pRadius));
                         break;
                     }
                 } else if (pAoeType == WeaponAOEType.Multi) {
-                    Debug.Log(hitColliders[i].name + " has been hit.");
+                    //Debug.Log(hitColliders[i].name + " has been hit.");
                     TakeDamage(hitColliders[i].transform);
                 }
             }
@@ -176,6 +178,8 @@ public class CombatControls : MonoBehaviour {
 
                 Vector3 targetDir = collider.transform.position - transform.position;
                 float angle = Vector3.Angle(targetDir, transform.forward);
+
+                //Debug.Log("dist: " + dist + " | " + "pMinDist: " + pMinDist + " | " + "angle: " + angle + " | " + "_angle: " + _angle);
 
                 if (dist < pMinDist && angle < _angle) {
                     enemy = collider.transform;
