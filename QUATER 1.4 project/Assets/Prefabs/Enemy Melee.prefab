@@ -147,11 +147,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 7a6af43e2b0861945946cd7ccf1ce5a6, type: 3}
-<<<<<<< HEAD
---- !u!82 &82295329590272510
-AudioSource:
-=======
---- !u!82 &82284376417524180
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -234,7 +229,6 @@ AudioSource:
 --- !u!95 &95775996277962362
 Animator:
   serializedVersion: 3
->>>>>>> 99180ff9937a9de20fae3bd438521d41fa912846
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
