@@ -411,6 +411,13 @@ public class MenuManager : MonoBehaviour {
         newConfirmPanel.SetActive(!false);
     }
 
+
+    public void NewGame()
+    {
+        Utils.ResetLastLevel();
+        Default();
+    }
+
     IEnumerator LoadNewScene()
     {
 
