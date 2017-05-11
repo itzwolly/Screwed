@@ -90,20 +90,7 @@ public class EnemyMovement : MonoBehaviour {
                 _inVision = false;
             }
 
-            if (_state != State.shoot)
-            {
-                navigator.isStopped = false;
-                if (IsRanged)
-                    _wait = InitialDelay;
-                //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
-            }
-            else if(IsRanged)
-            {
-                //Debug.Log("Is looking");
-                transform.LookAt(target.transform);
-                SetWaypoint(target);
-                navigator.isStopped = true;
-            }
+            
 
             if (_inVision)
             {
@@ -142,6 +129,21 @@ public class EnemyMovement : MonoBehaviour {
                     _wait = Wait;
                     _state = State.walk;
                 }
+            }
+
+            if (_state != State.shoot)
+            {
+                navigator.isStopped = false;
+                if (IsRanged)
+                    _wait = InitialDelay;
+                //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
+            }
+            else if (IsRanged)
+            {
+                //Debug.Log("Is looking");
+                transform.LookAt(target.transform);
+                SetWaypoint(target);
+                navigator.isStopped = true;
             }
         }
         //Debug.Log(_state + " is the state, with the player in vision: " + _inVision + " also with the enemy being stopped: " + navigator.isStopped);

@@ -40,6 +40,20 @@ public class CombatControls : MonoBehaviour {
     private int _comboCount;
     private int _comboWait;
 
+    private float _timeInLevel=0;
+    private int _successfullHeadshots = 0;
+    private int _totalHeadshotKills=0;
+    private int _successfullShots = 0;
+    private int _totalShots=0;
+    private int _totalRangedKills=0;
+    private int _totalKnives = 0;
+    private int _successfullKnives=0;
+    private int _knifeKillNumber=0;
+    private bool _completedLevelWithoutDmg=true;
+    private int _secretsGathered=0;
+    private int _blockedShots=0;
+    private int _totalKills = 0;
+
     public int AmmoCount {
         get { return _ammoCount; }
     }
@@ -65,7 +79,13 @@ public class CombatControls : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if(Input.GetKeyDown(KeyCode.Slash))
+        Debug.Log(SceneManager.GetActiveScene().name +" Timeinlevel: "+(int)_timeInLevel + " Completedlevelwithoutdmg: "+_completedLevelWithoutDmg);
+        Debug.Log(" Totalshots: "+_totalShots+" Successfullshots: "+_successfullShots+" Successfullheadshots: "+_successfullHeadshots+" Headshotkills: "+_totalHeadshotKills);
+        Debug.Log(" Totalknives: "+_totalKnives+" Successfullknives: "+_successfullKnives+" Knifekills: "+_knifeKillNumber);
+        Debug.Log(" Blockedshots: "+_blockedShots+" Totalkills: "+_totalKills);
+        Debug.Log(" Secretsgathered: "+_secretsGathered);
+       
+        if (Input.GetKeyDown(KeyCode.Slash))
         {
             Utils.ResetLastLevel();
             //Debug.Log(Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt"));
@@ -117,8 +137,9 @@ public class CombatControls : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        //Debug.Log(_comboCount);
-        if(_comboCount>0)
+        //Debug.Log(_comboCount); 
+        _timeInLevel+=Time.fixedDeltaTime;
+        if (_comboCount>0)
         {
             if(_comboWait>=_comboResetTime)
             {
@@ -141,15 +162,18 @@ public class CombatControls : MonoBehaviour {
     private void RangedDamage(Ray pOther, RaycastHit pHit, string pTarget) {
         if (Physics.Raycast(pOther, out pHit)) {
             //Debug.Log(pHit.collider.transform.name + " was hit" + " with tag " + pHit.transform.tag);
-
-            if(pHit.collider.transform.name=="Enemy Head")
+            _totalShots++;
+            if (pHit.collider.transform.name=="Enemy Head")
             {
-                Debug.Log("You headshot you filthy animal");
+                //Debug.Log("You headshot you filthy animal");
+                _successfullShots++;
+                _successfullHeadshots++;
                 _comboCount++;
                 _comboWait = 0;
                 TakeDamage(pHit.transform, true);
             }
             else if (pHit.transform.tag == pTarget) {
+                _successfullShots++;
                 _comboCount++;
                 _comboWait = 0;
                 //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
@@ -161,16 +185,20 @@ public class CombatControls : MonoBehaviour {
     private void RangedDamage(Vector3 pFrom, Vector3 pTo, RaycastHit pHit, string pTarget) {
         DecreaseBulletCount();
         if (Physics.Raycast(pFrom, pTo , out pHit)) {
-            Debug.Log(pHit.collider.transform.name + " was hit" + " with tag " + pHit.transform.tag);
+            _totalShots++;
+            //Debug.Log(pHit.collider.transform.name + " was hit" + " with tag " + pHit.transform.tag);
             if (pHit.collider.transform.name == "Enemy Head")
             {
-                Debug.Log("You headshot you filthy animal");
+                //Debug.Log("You headshot you filthy animal");
+                _successfullShots++;
+                _successfullHeadshots++;
                 _comboCount++;
                 _comboWait = 0;
                 TakeDamage(pHit.transform, true);
             }
             else if (pHit.transform.tag == pTarget)
             {
+                _successfullShots++;
                 _comboCount++;
                 _comboWait = 0;
                 //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
@@ -194,10 +222,20 @@ public class CombatControls : MonoBehaviour {
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[1]);
         }
         if (pTarget.GetComponent<EnemyScript>().IsDead) {
-            if(headshot)
+            if (_weaponHandler.CurrentWeaponType == WeaponType.Melee)
             {
-                Debug.Log("Got Killed By headshot");
+                _knifeKillNumber++;
             }
+            else
+            {
+                _totalRangedKills++;
+            }
+            if (headshot)
+            {
+                _totalHeadshotKills++;
+                //Debug.Log("Got Killed By headshot");
+            }
+            _totalKills++;
             Destroy(pTarget.gameObject);
         }
         _startTimer = true;
@@ -206,10 +244,11 @@ public class CombatControls : MonoBehaviour {
     private void MeleeDamage(Vector3 pCenter, float pRadius, string pTarget, WeaponAOEType pAoeType) {
         int i = 0;
         Collider[] hitColliders = Physics.OverlapSphere(pCenter, pRadius);
-
+        _totalKnives++;
         while (i < hitColliders.Length) {
             
             if (hitColliders[i].transform.tag == pTarget) {
+                _successfullKnives++;
                 //Debug.Log(hitColliders[i].name + " is in range of attacks.");
                 if (pAoeType == WeaponAOEType.Single) {
                     //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
@@ -253,7 +292,12 @@ public class CombatControls : MonoBehaviour {
     }
 
     public void DecreaseHealth(int pAmount) {
-        if (_health > 0 && !_blocking) {
+        if(_blocking)
+        {
+            _blockedShots++;
+        }
+        else if (_health > 0) {
+            _completedLevelWithoutDmg = false;
             _comboCount = 0;
             _comboWait = 0;
 
