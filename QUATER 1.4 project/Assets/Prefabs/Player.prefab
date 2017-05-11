@@ -333,7 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247707367141396}
   - component: {fileID: 212742291583907824}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -933,7 +933,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619068457850646}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.04, y: 0.33, z: 0.8}
+  m_LocalPosition: {x: 0.04, y: 0.33, z: 0.047}
   m_LocalScale: {x: 1, y: 0.5071984, z: 1}
   m_Children:
   - {fileID: 4699659088741882}
@@ -1001,7 +1001,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.4, y: 1.5, z: -11.2}
+  m_LocalPosition: {x: -11.4, y: 3.59, z: -19.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4779334595069844}
@@ -1388,7 +1388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedUnit: 5
-  JumpVector: 10
+  JumpVector: 6
   Sensitivity: 0.52
   godController: {fileID: 0}
   _gravity: 20
@@ -1440,7 +1440,7 @@ MonoBehaviour:
   _distance: 3
   _angle: 35
   _camera: {fileID: 20179079148697356}
-  _ammoCount: 3
+  _ammoCount: 999
   _health: 4
   _maxShieldAmount: 100
   _minShieldAmount: 0
@@ -1481,8 +1481,8 @@ MonoBehaviour:
   _mainCamera: {fileID: 20179079148697356}
   _hud: {fileID: 0}
   _resolutionDisplay: {fileID: 0}
-  _deathMessage: U ded!
-  _winMessage: Noice u won!
+  _deathMessage: You are SCREWED
+  _winMessage: You have SCREWED them
 --- !u!114 &114751767615438948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1644,7 +1644,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1
-  m_Radius: 1
+  m_Radius: 0.67
   m_SlopeLimit: 90
   m_StepOffset: 0.0000001
   m_SkinWidth: 0.08
