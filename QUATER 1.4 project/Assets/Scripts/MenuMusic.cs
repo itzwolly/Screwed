@@ -9,7 +9,7 @@ public class MenuMusic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Utils.ChangeMusicVolume(_volume);
-        Debug.Log("music volume = " + _volume);
+        //Debug.Log("music volume = " + _volume);
         gameObject.GetComponent<AudioSource>().clip = Music;
         gameObject.GetComponent<AudioSource>().loop = true;
         gameObject.GetComponent<AudioSource>().volume = _volume/100f;

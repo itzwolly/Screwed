@@ -85,11 +85,11 @@ public class CombatControls : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        Debug.Log(SceneManager.GetActiveScene().name +" Timeinlevel: "+(int)_timeInLevel + " Completedlevelwithoutdmg: "+_completedLevelWithoutDmg);
-        Debug.Log(" Totalshots: "+_totalShots+" Successfullshots: "+_successfullShots+" Successfullheadshots: "+_successfullHeadshots+" Headshotkills: "+_totalHeadshotKills);
-        Debug.Log(" Totalknives: "+_totalKnives+" Successfullknives: "+_successfullKnives+" Knifekills: "+_knifeKillNumber);
-        Debug.Log(" Blockedshots: "+_blockedShots+" Totalkills: "+_totalKills);
-        Debug.Log(" Secretsgathered: "+_secretsGathered);
+        //Debug.Log(SceneManager.GetActiveScene().name +" Timeinlevel: "+(int)_timeInLevel + " Completedlevelwithoutdmg: "+_completedLevelWithoutDmg);
+        //Debug.Log(" Totalshots: "+_totalShots+" Successfullshots: "+_successfullShots+" Successfullheadshots: "+_successfullHeadshots+" Headshotkills: "+_totalHeadshotKills);
+        //Debug.Log(" Totalknives: "+_totalKnives+" Successfullknives: "+_successfullKnives+" Knifekills: "+_knifeKillNumber);
+        //Debug.Log(" Blockedshots: "+_blockedShots+" Totalkills: "+_totalKills);
+        //Debug.Log(" Secretsgathered: "+_secretsGathered);
        
         if (Input.GetKeyDown(KeyCode.Slash))
         {
@@ -113,7 +113,7 @@ public class CombatControls : MonoBehaviour {
             }
         }
         //Debug.Log(_blocking + " with health = " + _health);
-        if (Input.GetMouseButtonDown(1) && _currentShieldAmmount > _minShieldAmount)
+        if (Input.GetMouseButton(1) && _currentShieldAmmount > _minShieldAmount)
         {
             ///health stays the same here
             //Debug.Log("blocking");

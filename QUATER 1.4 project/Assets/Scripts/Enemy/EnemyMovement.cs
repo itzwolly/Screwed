@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+
 public class EnemyMovement : MonoBehaviour {
     public bool IsRanged;
 
-    enum State
-    {
+    public enum State {
         none,
         patroling,
         walk,
@@ -16,6 +17,7 @@ public class EnemyMovement : MonoBehaviour {
         look,
         knife
     };
+
     public AudioClip ShootSound;
     public AudioClip KnifeSound;
     private float _volume;
@@ -46,6 +48,10 @@ public class EnemyMovement : MonoBehaviour {
     //[SerializeField] private GameObject[] _weapons;
     [SerializeField] private int _rangedDamage;
     [SerializeField] private int _meleeDamage;
+
+    public State CurrentState {
+        get { return _state; }
+    }
 
     // Use this for initialization
     void Start ()
