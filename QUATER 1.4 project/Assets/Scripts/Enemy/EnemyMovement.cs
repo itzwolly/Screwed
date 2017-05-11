@@ -58,6 +58,8 @@ public class EnemyMovement : MonoBehaviour {
         Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
         navigator = GetComponent<NavMeshAgent>();
         _speed = new Vector3(Speed*3, Speed*3, Speed*3);
+        if (Waypoints.Count <= 1)
+            gameObject.GetComponent<EnemyScript>().StartOffset = true;
         _waypoint = Waypoints[0];
         if(!gameObject.GetComponent<EnemyScript>().StartOffset)
             Patrol();
@@ -73,8 +75,10 @@ public class EnemyMovement : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        //Debug.Log(navigator.isStopped);
         if (target != null)
         {
+            //Debug.Log(_state +" with target in vision: "+_inVision);
             _distanceToTarget = (target.transform.position - gameObject.transform.position).magnitude;
             if (_distanceToTarget<RangeDistance)
             {
@@ -86,6 +90,47 @@ public class EnemyMovement : MonoBehaviour {
                 _inVision = false;
             }
 
+            
+
+            if (_inVision)
+            {
+                //Debug.Log("looking");
+                EnemyAttack();
+                if (_lookWait >= LookWait)
+                {
+                    navigator.isStopped = false;
+                    //Debug.Log("stopped looking");
+                }
+                else
+                {
+                    navigator.isStopped = true;
+                    transform.LookAt(target.transform);
+                    _lastKnownTargetPosition = target.transform.position;
+                    _lookWait++;
+                }
+
+            }
+            else
+            {
+                //Debug.Log(_waypoint.transform.position + " si the waypoint with the last position = " + _lastKnownTargetPosition + " | obj pos = " +transform.position);
+                //Debug.Log((transform.position - _lastKnownTargetPosition).magnitude);
+                if ((transform.position - _lastKnownTargetPosition).magnitude < 1.3f)
+                {
+                    if (_wait <= 0)
+                    {
+
+                        Debug.Log("Patrolling");
+                        Patrol();
+                    }
+                    _wait--;
+                }
+                else
+                {
+                    _wait = Wait;
+                    _state = State.walk;
+                }
+            }
+
             if (_state != State.shoot)
             {
                 navigator.isStopped = false;
@@ -93,34 +138,12 @@ public class EnemyMovement : MonoBehaviour {
                     _wait = InitialDelay;
                 //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
             }
-            else if(IsRanged)
+            else if (IsRanged)
             {
+                //Debug.Log("Is looking");
                 transform.LookAt(target.transform);
                 SetWaypoint(target);
                 navigator.isStopped = true;
-            }
-
-            if (_inVision)
-            {
-                //Debug.Log("looking");
-                //if(_lookWait>=LookWait)
-                //{
-
-                //}
-                //_lookWait++;
-                EnemyAttack();
-            }
-            else
-            {
-                if ((transform.position - _lastKnownTargetPosition).magnitude < 0.1f)
-                {
-                    //Debug.Log("Patrolling");
-                    Patrol();
-                }
-                else
-                {
-                    _state = State.walk;
-                }
             }
         }
         //Debug.Log(_state + " is the state, with the player in vision: " + _inVision + " also with the enemy being stopped: " + navigator.isStopped);
@@ -194,7 +217,9 @@ public class EnemyMovement : MonoBehaviour {
             else
             {               
                 _inVision = false;
+                _lookWait = 0;
 
+                navigator.isStopped = false;
                 _state = State.none;
                 //Debug.Log("no vision");
             }

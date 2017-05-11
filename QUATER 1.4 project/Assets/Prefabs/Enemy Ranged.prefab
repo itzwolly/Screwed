@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1682495703895688}
   m_IsPrefabParent: 1
+--- !u!1 &1352347518451840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4549929132302676}
+  - component: {fileID: 135676248895954568}
+  m_Layer: 0
+  m_Name: Enemy Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1682495703895688
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,20 +81,34 @@ Transform:
   m_Father: {fileID: 4888667735520532}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -180.00002}
+--- !u!4 &4549929132302676
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1352347518451840}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.002, y: 1.4149933, z: 0.544}
+  m_LocalScale: {x: 0.7114302, y: 0.71142995, z: 0.7114302}
+  m_Children: []
+  m_Father: {fileID: 4888667735520532}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4888667735520532
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -3.25, y: 0.9858075, z: 19.42}
+  m_LocalRotation: {x: -0, y: 0.9851532, z: -0, w: 0.17167778}
+  m_LocalPosition: {x: 351.88406, y: 212.14, z: 55.34096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4404857394220228}
+  - {fileID: 4549929132302676}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 160.229, z: 0}
 --- !u!23 &23693687309765878
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -250,7 +280,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2215f433bb6eabd4fbbabf603f49910e, type: 3}
   m_Name: 
@@ -260,9 +290,9 @@ MonoBehaviour:
   KnifeSound: {fileID: 8300000, guid: 1706d14a0cf8d6a4aafcad51e22336b7, type: 3}
   target: {fileID: 0}
   Speed: 2
-  Wait: 50
-  LookWait: 0
-  InitialDelay: 0
+  Wait: 100
+  LookWait: 100
+  InitialDelay: 50
   MeleeDistance: 2
   RangeDistance: 9
   _inVision: 0
@@ -274,7 +304,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 188c46c7cf3a61e4196e52a54508b610, type: 3}
   m_Name: 
@@ -285,11 +315,23 @@ MonoBehaviour:
   StartOffset: 1
   ChooseRandomWaypoint: 0
   AlertDistance: 100
-  WaitTimeAtWaypoint: 0
+  WaitTimeAtWaypoint: 100
   Handler: {fileID: 0}
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}
-  _health: 2
+  _health: 3
+--- !u!135 &135676248895954568
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1352347518451840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &143425805729776544
 CharacterController:
   m_ObjectHideFlags: 1

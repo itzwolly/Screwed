@@ -29,6 +29,8 @@ public class EnemyScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //Debug.Log("first waypoint = "+Waypoints[0]);
+        if (Waypoints.Count <= 1)
+            StartOffset = true;
         _currentWaypoint = Waypoints[0];
         _waypointIndex = 0;
         if(!StartOffset)
@@ -76,7 +78,7 @@ public class EnemyScript : MonoBehaviour {
         //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
         if (_distanceToWaypoint <= MinDistanceToWaypoint+0.5f && !StartOffset)
         {
-            Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
+            //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
 
             //Debug.Log("on Checkpoint");
             OnCheckpoint(_currentWaypoint,false);
