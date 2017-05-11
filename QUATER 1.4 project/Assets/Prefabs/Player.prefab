@@ -1063,7 +1063,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
   m_LocalRotation: {x: -0, y: 0.45926726, z: -0, w: -0.88829815}
-  m_LocalPosition: {x: 367.5972, y: 213.27, z: 37.685753}
+  m_LocalPosition: {x: 368.84, y: 213.71, z: 39.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4779334595069844}
@@ -1575,16 +1575,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f496c5899dc754ea18a1e545e2bba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StatManagerBrush: {fileID: 0}
   _weaponHandler: {fileID: 114211386112779860}
   _distance: 3
   _angle: 35
   _camera: {fileID: 20179079148697356}
   _ammoCount: 3
   _health: 4
-  _maxShieldAmount: 500
+  _maxShieldAmount: 100
   _minShieldAmount: 50
-  _increaseAmount: 5
-  _decreaseAmount: 10
+  _increaseAmount: 2
+  _decreaseAmount: 4
   _comboResetTime: 100
   _disableAfterDeath: []
   _afterDeathBehaviour: {fileID: 114677579122440034}
@@ -1605,6 +1606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Music: {fileID: 8300000, guid: aba78b7d23c2c1b4d80e8e9fcce7495b, type: 3}
+  _volume: 0
 --- !u!114 &114677579122440034
 MonoBehaviour:
   m_ObjectHideFlags: 1

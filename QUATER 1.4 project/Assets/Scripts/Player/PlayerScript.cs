@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         //Debug.Log("The current room is " + CurrentRoom);
 	}
     

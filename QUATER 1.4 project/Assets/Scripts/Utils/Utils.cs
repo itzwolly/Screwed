@@ -19,6 +19,7 @@ public class Utils {
             }
         }
     }
+
     public static void ChangeGameObjectColor(GameObject pGameObject, Color pTo)
     {
        
@@ -122,14 +123,115 @@ public class Utils {
         ReplaceLineFromFile("Assets\\SaveInfo.txt", "onlevel: " + 1, "onlevel: " + LatestLevel());
     }
 
-    public static void SaveStats()
+    public static void SaveStats(string path, string info)
     {
+        if (ReadFromFile(path).Length > 1)
+        {
+            File.WriteAllText(path, String.Empty);
+        }
 
+        WriteToFile(path, info);
     }
 
-    public static void NextLevel()
+    public static void GetStats(string path, out int timeinlevel,out bool completedwithoutdmg, out int totalshots, out int successfullheadshots, out int headshotkills, out int totalrangedkills, out int totalknives, out int successfullknives, out int knifekills, out int blockedshots, out int totalkills, out int secretsgathered)
     {
-        SaveStats();
+        timeinlevel = GetValueAfterString(path,"Timeinlevel:");
+        if(GetValueAfterString(path, "Completedwithoutdmg:")==1)
+        {
+            completedwithoutdmg = true;
+        }
+        else
+        {
+            completedwithoutdmg = false;
+        }
+        totalshots = GetValueAfterString(path, "Totalshots:");
+        successfullheadshots = GetValueAfterString(path, "Successfullheadshots:");
+        headshotkills = GetValueAfterString(path, "Headshotkills:");
+        totalrangedkills = GetValueAfterString(path, "Totalrangedkills:");
+        totalknives = GetValueAfterString(path, "Totalknives:");
+        successfullknives = GetValueAfterString(path, "Successfullknives:");
+        knifekills = GetValueAfterString(path, "Knifekills:");
+        blockedshots = GetValueAfterString(path, "Blockedshots:");
+        totalkills = GetValueAfterString(path, "Totalkills:");
+        secretsgathered = GetValueAfterString(path, "Secretsgathered:");
+    }
+
+    public static int GetSuccessfullShots(string path)
+    {
+        return GetValueAfterString(path, "Successfullshots:");
+    }
+
+    public static int GetSecretsGathered(string path)
+    {
+        return GetValueAfterString(path, "Secretsgathered:");
+    }
+
+    public static int GetTotalKills(string path)
+    {
+        return GetValueAfterString(path, "Totalkills:");
+    }
+
+    public static int GetBlockedShots(string path)
+    {
+        return GetValueAfterString(path, "Blockedshots:");
+    }
+
+
+    public static int GetKnifeKills(string path)
+    {
+        return GetValueAfterString(path, "Knifekills:");
+    }
+
+    public static int GetSuccessfullKnives(string path)
+    {
+        return GetValueAfterString(path, "Successfullknives:");
+    }
+
+    public static int GetTotalKnives(string path)
+    {
+        return GetValueAfterString(path, "Totalknives:");
+    }
+
+    public static int GetTotalRangedKills(string path)
+    {
+        return GetValueAfterString(path, "Totalrangedkills:");
+    }
+
+    public static int GetHeadshotKills(string path)
+    {
+        return GetValueAfterString(path, "Headshotkills:");
+    }
+
+    public static int GetSuccessfullHeadshots(string path)
+    {
+        return GetValueAfterString(path, "Successfullheadshots:");
+    }
+
+    public static int GetTotalShots(string path)
+    {
+        return GetValueAfterString(path, "Totalshots:");
+    }
+
+    public static bool GetCompletedWithoutDmg(string path)
+    {
+        if (GetValueAfterString(path, "Completedlevelwithoutdmg:") == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static int GetTimeInLevel(string path)
+    {
+        return GetValueAfterString(path, "Timeinlevel:");
+    }
+
+    public static void NextLevel(string statsPath,string info)
+    {
+        SaveStats(statsPath,info);
         Debug.Log("On to next level");
         int _level = LatestLevel();
         Utils.ReplaceLineFromFile("Assets\\SaveInfo.txt", "onlevel: " + (_level + 1), "onlevel: " + _level);

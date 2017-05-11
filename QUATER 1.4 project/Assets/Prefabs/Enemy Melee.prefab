@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
   m_LocalRotation: {x: -0, y: -0.8619564, z: -0, w: -0.5069825}
-  m_LocalPosition: {x: 358.54865, y: 211.86229, z: 42.889126}
+  m_LocalPosition: {x: 360.52, y: 211.86229, z: 46.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4404857394220228}
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2215f433bb6eabd4fbbabf603f49910e, type: 3}
   m_Name: 
@@ -292,7 +292,7 @@ MonoBehaviour:
   Wait: 100
   LookWait: 50
   InitialDelay: 0
-  MeleeDistance: 2
+  MeleeDistance: 3
   RangeDistance: 9
   _inVision: 0
   _rangedDamage: 1
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 188c46c7cf3a61e4196e52a54508b610, type: 3}
   m_Name: 
