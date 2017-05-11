@@ -1575,6 +1575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f496c5899dc754ea18a1e545e2bba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StatManagerBrush: {fileID: 0}
   _weaponHandler: {fileID: 114211386112779860}
   _distance: 3
   _angle: 35

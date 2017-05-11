@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Testingenemyai.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Testing Enemy AI.unity
-=======
-- path: Assets/Scenes/level05.unity
->>>>>>> feature/morelevelDesign
->>>>>>> 9bf36407c76648c94843d60be64d803134dc14d3
   isLoaded: 1
   isActive: 1

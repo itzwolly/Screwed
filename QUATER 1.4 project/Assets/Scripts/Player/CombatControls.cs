@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CombatControls : MonoBehaviour {
+    [SerializeField] private GameObject _statManager;
+
     [SerializeField] private WeaponHandler _weaponHandler;
     [SerializeField] private float _distance;
     [SerializeField] private float _angle;
@@ -79,7 +81,7 @@ public class CombatControls : MonoBehaviour {
     {
         _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
-
+        /**
         string allInfo = "";
         allInfo = " Timeinlevel: " + Utils.GetTimeInLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Completedlevelwithoutdmg: " + Utils.GetCompletedWithoutDmg("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
             " Totalshots: " + Utils.GetTotalShots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Successfullshots: " + Utils.GetSuccessfullShots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Successfullheadshots: " + Utils.GetSuccessfullHeadshots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Headshotkills: " + Utils.GetHeadshotKills("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Totalrangedkills: " + Utils.GetTotalRangedKills("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
@@ -87,6 +89,7 @@ public class CombatControls : MonoBehaviour {
             " Blockedshots: " + Utils.GetBlockedShots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Totalkills: " + Utils.GetTotalKills("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
             " Secretsgathered: " + Utils.GetSecretsGathered("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt");
         Debug.Log(allInfo);
+        /**/
     }
 
     // Update is called once per frame
@@ -99,6 +102,23 @@ public class CombatControls : MonoBehaviour {
         Debug.Log(" Blockedshots: "+_blockedShots+" Totalkills: "+_totalKills);
         Debug.Log(" Secretsgathered: "+_secretsGathered);
         /**/
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            //here it goes to in game menu
+            int _bool = 0;
+            if (_completedLevelWithoutDmg)
+                _bool = 1;
+            string allInfo = "";
+            allInfo = " Timeinlevel: " + (int)_timeInLevel + " Completedlevelwithoutdmg: " + _bool + "\n" +
+                " Totalshots: " + _totalShots + " Successfullshots: " + _successfullShots + " Successfullheadshots: " + _successfullHeadshots + " Headshotkills: " + _totalHeadshotKills + " Totalrangedkills: " + _totalRangedKills + "\n" +
+                " Totalknives: " + _totalKnives + " Successfullknives: " + _successfullKnives + " Knifekills: " + _knifeKillNumber + "\n" +
+                " Blockedshots: " + _blockedShots + " Totalkills: " + _totalKills + "\n" +
+                " Secretsgathered: " + _secretsGathered;
+            //Debug.Log(allInfo);
+            Utils.SaveStats("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt", allInfo);
+            _statManager.GetComponent<StatUpdater>().UpdateStats();
+        }
+
         if (Input.GetKeyDown(KeyCode.Slash))
         {
             Utils.ResetLastLevel();
