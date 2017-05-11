@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-Base path: D:/School/Unity/Editor/Data
-=======
 Base path: D:/Unity/Editor/Data
->>>>>>> feature/levelEditing
 Cmd: initializeCompiler
 Cmd: preprocess
   insize=808 outsize=362 ok=1
