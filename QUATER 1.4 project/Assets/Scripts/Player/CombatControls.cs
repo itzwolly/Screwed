@@ -44,10 +44,16 @@ public class CombatControls : MonoBehaviour {
     public int Health {
         get { return _health; }
     }
-
     public bool IsDead {
         get { return _health == 0; }
     }
+    public int ShieldAmount {
+        get { return _currentShieldAmmount; }
+    }
+    public int MaxShieldAmount {
+        get { return _maxShieldAmount; }
+    }
+
 
     // Use this for initialization
     void Start ()

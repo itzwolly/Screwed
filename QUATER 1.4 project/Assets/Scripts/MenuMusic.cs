@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MenuMusic : MonoBehaviour {
     public AudioClip Music;
-    private float _volume;
+    [SerializeField] private int _volume;
+
 	// Use this for initialization
 	void Start () {
-        Utils.ChangeMusicVolume(100);
-        _volume = Utils.MusicVolume();
-        Debug.Log("music volume = "+_volume);
+        Utils.ChangeMusicVolume(_volume);
+        Debug.Log("music volume = " + _volume);
         gameObject.GetComponent<AudioSource>().clip = Music;
         gameObject.GetComponent<AudioSource>().loop = true;
         gameObject.GetComponent<AudioSource>().volume = _volume/100f;

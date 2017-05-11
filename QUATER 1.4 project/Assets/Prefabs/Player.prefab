@@ -88,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1155274662240212
 GameObject:
   m_ObjectHideFlags: 1
@@ -195,7 +195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1436785156947874
 GameObject:
   m_ObjectHideFlags: 1
@@ -1581,8 +1581,8 @@ MonoBehaviour:
   _camera: {fileID: 20179079148697356}
   _ammoCount: 2
   _health: 4
-  _maxShieldAmount: 500
-  _minShieldAmount: 50
+  _maxShieldAmount: 100
+  _minShieldAmount: 0
   _increaseAmount: 5
   _decreaseAmount: 10
   _disableAfterDeath: []
@@ -1591,6 +1591,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _weaponDamage: 0100000002000000
 --- !u!114 &114366688855442248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1603,6 +1604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Music: {fileID: 8300000, guid: aba78b7d23c2c1b4d80e8e9fcce7495b, type: 3}
+  _volume: 50
 --- !u!114 &114677579122440034
 MonoBehaviour:
   m_ObjectHideFlags: 1
