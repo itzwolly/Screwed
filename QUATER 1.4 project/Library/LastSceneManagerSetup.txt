@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Testing Enemy AI.unity
+=======
+- path: Assets/Scenes/level05.unity
+>>>>>>> feature/morelevelDesign
   isLoaded: 1
   isActive: 1
