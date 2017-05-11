@@ -182,10 +182,11 @@ public class EnemyMovement : MonoBehaviour {
         if (navigator != null && navigator.isActiveAndEnabled)
         {
             Debug.Log("SHIT WENT DOWN");
-            navigator.SetDestination(_waypoint.transform.position);
+            if (_waypoint != null) {
+                navigator.SetDestination(_waypoint.transform.position);
+            }
         }
-            
-        gameObject.GetComponent<EnemyScript>().OnCheckpoint(_waypoint,false);
+        gameObject.GetComponent<EnemyScript>().OnCheckpoint(_waypoint, false);
         //_state = State.patroling;
     }
 
