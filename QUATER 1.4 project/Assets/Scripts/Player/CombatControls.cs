@@ -107,7 +107,7 @@ public class CombatControls : MonoBehaviour {
             }
         }
         //Debug.Log(_blocking + " with health = " + _health);
-        if (Input.GetMouseButton(1) && _currentShieldAmmount > _minShieldAmount)
+        if (Input.GetMouseButtonDown(1) && _currentShieldAmmount > _minShieldAmount)
         {
             ///health stays the same here
             //Debug.Log("blocking");

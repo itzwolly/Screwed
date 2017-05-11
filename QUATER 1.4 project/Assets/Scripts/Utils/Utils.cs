@@ -122,8 +122,14 @@ public class Utils {
         ReplaceLineFromFile("Assets\\SaveInfo.txt", "onlevel: " + 1, "onlevel: " + LatestLevel());
     }
 
+    public static void SaveStats()
+    {
+
+    }
+
     public static void NextLevel()
     {
+        SaveStats();
         Debug.Log("On to next level");
         int _level = LatestLevel();
         Utils.ReplaceLineFromFile("Assets\\SaveInfo.txt", "onlevel: " + (_level + 1), "onlevel: " + _level);
