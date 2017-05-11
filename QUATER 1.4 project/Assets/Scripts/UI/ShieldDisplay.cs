@@ -21,8 +21,8 @@ public class ShieldDisplay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        _image.fillAmount = _combatControls.ShieldAmount / _combatControls.MaxShieldAmount;
-
+        _image.fillAmount = _combatControls.ShieldAmount / (float)_combatControls.MaxShieldAmount;
+        Debug.Log(_image.fillAmount);
         if (_image.fillAmount < _threshold) {
             _image.color = _lowShieldColor;
         } else {
