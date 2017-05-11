@@ -54,12 +54,12 @@ public class WeaponHandler : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
-            ToggleCurrentWeapon();
+            SwitchToNextWeapon();
         }
 
         float scrollValue = Input.GetAxis("Mouse ScrollWheel");
         if (scrollValue == 0.1f || scrollValue == -0.1f) {
-            ToggleCurrentWeapon();
+            SwitchToNextWeapon();
         }
 
         if (Input.GetKeyUp(KeyCode.F)) {
@@ -73,7 +73,7 @@ public class WeaponHandler : MonoBehaviour {
         }
 	}
 
-    private void ToggleCurrentWeapon() {
+    private void SwitchToNextWeapon() {
         if (_weaponType == WeaponType.Melee) {
             _weaponType = WeaponType.Ranged;
             if (!_weapons[1].activeInHierarchy) {
