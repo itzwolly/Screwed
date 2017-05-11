@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/level01.unity
-=======
-- path: Assets/Testingenemyai.unity
->>>>>>> 82e5534e904df42f58cb66fb047d4499292dfb59
+- path: Assets/Scenes/steal_that_menu.unity
   isLoaded: 1
   isActive: 1

@@ -29,7 +29,7 @@ public class Utils {
 
     public static void WriteToFile(string path,string words)
     {
-        Debug.Log("Written to file");
+        //Debug.Log("Written to file");
         StreamWriter write = new StreamWriter(path,true);
         write.WriteLine(words);
         write.Close();
