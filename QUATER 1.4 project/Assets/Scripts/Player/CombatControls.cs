@@ -16,6 +16,8 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private int _minShieldAmount;
     [SerializeField] private int _increaseAmount;
     [SerializeField] private int _decreaseAmount;
+    
+    [SerializeField] private int _comboResetTime;
 
     [SerializeField] private MonoBehaviour[] _disableAfterDeath;
     [SerializeField] private ResolutionBehaviour _afterDeathBehaviour;
@@ -34,6 +36,9 @@ public class CombatControls : MonoBehaviour {
     private float _timer;
     private bool _startTimer;
     private Color _originalColor;
+
+    private int _comboCount;
+    private int _comboWait;
 
     public int AmmoCount {
         get { return _ammoCount; }
@@ -102,7 +107,7 @@ public class CombatControls : MonoBehaviour {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
         } else if (HasWon()) {
-            Debug.Log(Utils.LatestLevel());
+            //Debug.Log(Utils.LatestLevel());
             if (Utils.LatestLevel() == 2) {
                 SceneManager.LoadScene("level02");
             } else {
@@ -112,6 +117,17 @@ public class CombatControls : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        //Debug.Log(_comboCount);
+        if(_comboCount>0)
+        {
+            if(_comboWait>=_comboResetTime)
+            {
+                _comboCount = 0;
+                _comboWait = 0;
+            }
+            _comboWait++;
+        }
+
         if (_startTimer == true) {
             _timer += Time.deltaTime;
             if (_timer > 0.5) {
@@ -124,10 +140,20 @@ public class CombatControls : MonoBehaviour {
 
     private void RangedDamage(Ray pOther, RaycastHit pHit, string pTarget) {
         if (Physics.Raycast(pOther, out pHit)) {
-            //Debug.Log(pOther + " || " + pHit.transform.name + " || " + pHit.transform.tag);
-            if (pHit.transform.tag == pTarget) {
+            //Debug.Log(pHit.collider.transform.name + " was hit" + " with tag " + pHit.transform.tag);
+
+            if(pHit.collider.transform.name=="Enemy Head")
+            {
+                Debug.Log("You headshot you filthy animal");
+                _comboCount++;
+                _comboWait = 0;
+                TakeDamage(pHit.transform, true);
+            }
+            else if (pHit.transform.tag == pTarget) {
+                _comboCount++;
+                _comboWait = 0;
                 //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
-                TakeDamage(pHit.transform);
+                TakeDamage(pHit.transform,false);
             }
         }
     }
@@ -135,10 +161,20 @@ public class CombatControls : MonoBehaviour {
     private void RangedDamage(Vector3 pFrom, Vector3 pTo, RaycastHit pHit, string pTarget) {
         DecreaseBulletCount();
         if (Physics.Raycast(pFrom, pTo , out pHit)) {
-            //Debug.Log(pHit.transform.name + " was hit" + " with tag " + pHit.transform.tag);
-            if (pHit.transform.tag == pTarget) {
+            Debug.Log(pHit.collider.transform.name + " was hit" + " with tag " + pHit.transform.tag);
+            if (pHit.collider.transform.name == "Enemy Head")
+            {
+                Debug.Log("You headshot you filthy animal");
+                _comboCount++;
+                _comboWait = 0;
+                TakeDamage(pHit.transform, true);
+            }
+            else if (pHit.transform.tag == pTarget)
+            {
+                _comboCount++;
+                _comboWait = 0;
                 //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
-                TakeDamage(pHit.transform);
+                TakeDamage(pHit.transform,false);
             }
         }
     }
@@ -147,14 +183,21 @@ public class CombatControls : MonoBehaviour {
         _ammoCount--;
     }
 
-    private void TakeDamage(Transform pTarget) {
+    private void TakeDamage(Transform pTarget, bool headshot) {
         Utils.ChangeGameObjectColorTo(pTarget.gameObject, pTarget.GetComponent<Renderer>().material.color, Color.red);
         if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
             pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
         } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
-            pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[1]);
+            if(headshot)
+                pTarget.GetComponent<EnemyScript>().DecreaseHealth(2*_weaponDamage[1]);
+            else
+                pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[1]);
         }
         if (pTarget.GetComponent<EnemyScript>().IsDead) {
+            if(headshot)
+            {
+                Debug.Log("Got Killed By headshot");
+            }
             Destroy(pTarget.gameObject);
         }
         _startTimer = true;
@@ -172,12 +215,16 @@ public class CombatControls : MonoBehaviour {
                     //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
                     if (GetClosestEnemy(hitColliders, pRadius) != null) {
                         //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
-                        TakeDamage(GetClosestEnemy(hitColliders, pRadius));
+                        _comboCount++;
+                        _comboWait = 0;
+                        TakeDamage(GetClosestEnemy(hitColliders, pRadius),false);
                         break;
                     }
                 } else if (pAoeType == WeaponAOEType.Multi) {
+                    _comboCount++;
+                    _comboWait = 0;
                     //Debug.Log(hitColliders[i].name + " has been hit.");
-                    TakeDamage(hitColliders[i].transform);
+                    TakeDamage(hitColliders[i].transform,false);
                 }
             }
             i++;
@@ -207,6 +254,9 @@ public class CombatControls : MonoBehaviour {
 
     public void DecreaseHealth(int pAmount) {
         if (_health > 0 && !_blocking) {
+            _comboCount = 0;
+            _comboWait = 0;
+
             _health -= pAmount;
             if (_health == 3) {
                 _cracks[0].SetActive(true);
