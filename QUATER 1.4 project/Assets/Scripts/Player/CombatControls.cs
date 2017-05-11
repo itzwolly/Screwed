@@ -79,7 +79,14 @@ public class CombatControls : MonoBehaviour {
     {
         _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
-        //Debug.Log("Level is "+_level);
+
+        string allInfo = "";
+        allInfo = " Timeinlevel: " + Utils.GetTimeInLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Completedlevelwithoutdmg: " + Utils.GetCompletedWithoutDmg("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
+            " Totalshots: " + Utils.GetTotalShots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Successfullshots: " + Utils.GetSuccessfullShots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Successfullheadshots: " + Utils.GetSuccessfullHeadshots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Headshotkills: " + Utils.GetHeadshotKills("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Totalrangedkills: " + Utils.GetTotalRangedKills("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
+            " Totalknives: " + Utils.GetTotalKnives("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Successfullknives: " + Utils.GetSuccessfullKnives("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Knifekills: " + Utils.GetKnifeKills("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
+            " Blockedshots: " + Utils.GetBlockedShots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Totalkills: " + Utils.GetTotalKills("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
+            " Secretsgathered: " + Utils.GetSecretsGathered("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt");
+        Debug.Log(allInfo);
     }
 
     // Update is called once per frame
@@ -340,7 +347,17 @@ public class CombatControls : MonoBehaviour {
             return false;
         } else {
             if (Input.GetKeyUp(KeyCode.E)) {
-                Utils.NextLevel();
+                int _bool=0;
+                if (_completedLevelWithoutDmg)
+                    _bool = 1;
+                string allInfo="";
+                allInfo = " Timeinlevel: " + (int)_timeInLevel + " Completedlevelwithoutdmg: " + _bool + "\n" + 
+                    " Totalshots: " + _totalShots + " Successfullshots: " + _successfullShots + " Successfullheadshots: " + _successfullHeadshots + " Headshotkills: " + _totalHeadshotKills + " Totalrangedkills: " + _totalRangedKills + "\n" +
+                    " Totalknives: " + _totalKnives + " Successfullknives: " + _successfullKnives + " Knifekills: " + _knifeKillNumber + "\n" +
+                    " Blockedshots: " + _blockedShots + " Totalkills: " + _totalKills+ "\n" +
+                    " Secretsgathered: " + _secretsGathered;
+                //Debug.Log(allInfo);
+                Utils.NextLevel("Assets\\Statistics\\"+SceneManager.GetActiveScene().name+".txt", allInfo);
                 return true;
             } else {
                 return false;

@@ -391,8 +391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _image: {fileID: 114581177142344282}
-  _lowShieldColor: {r: 1, g: 0, b: 0, a: 0}
-  _threshold: 0.25
+  _lowShieldColor: {r: 1, g: 0.03676468, b: 0.03676468, a: 0}
+  _threshold: 0.2
 --- !u!114 &114142954551435576
 MonoBehaviour:
   m_ObjectHideFlags: 1
