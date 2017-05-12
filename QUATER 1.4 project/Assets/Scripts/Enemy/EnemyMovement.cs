@@ -181,7 +181,7 @@ public class EnemyMovement : MonoBehaviour {
         //Debug.Log(navigator==null);
         if (navigator != null && navigator.isActiveAndEnabled)
         {
-            Debug.Log("SHIT WENT DOWN");
+            //Debug.Log("SHIT WENT DOWN");
             if (_waypoint != null) {
                 navigator.SetDestination(_waypoint.transform.position);
             }

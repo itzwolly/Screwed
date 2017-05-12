@@ -170,11 +170,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
-        type: 2}
-      propertyPath: Waypoints.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4888667735520532, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 351.98
@@ -207,6 +202,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 429008960fb0d8a44a678f303987bfa5,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1152891866}
     - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
         type: 2}
       propertyPath: Waypoints.Array.data[0]
@@ -214,49 +214,17 @@ Prefab:
       objectReference: {fileID: 864947895}
     - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
         type: 2}
-      propertyPath: Handler
-      value: 
-      objectReference: {fileID: 1342599888}
-    - target: {fileID: 114130849454351668, guid: 429008960fb0d8a44a678f303987bfa5,
-        type: 2}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1152891866}
-    - target: {fileID: 1682495703895688, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
-      propertyPath: m_Name
-      value: Enemy Ranged (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4549929132302676, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.2939943
-      objectReference: {fileID: 0}
-    - target: {fileID: 4549929132302676, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.2939937
-      objectReference: {fileID: 0}
-    - target: {fileID: 4549929132302676, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.2939942
-      objectReference: {fileID: 0}
-    - target: {fileID: 114130849454351668, guid: 429008960fb0d8a44a678f303987bfa5,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
-        type: 2}
       propertyPath: Waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 418549930}
     - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
         type: 2}
-      propertyPath: StartOffset
-      value: 0
+      propertyPath: Handler
+      value: 
+      objectReference: {fileID: 1342599888}
+    - target: {fileID: 1682495703895688, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
+      propertyPath: m_Name
+      value: Enemy Ranged (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
