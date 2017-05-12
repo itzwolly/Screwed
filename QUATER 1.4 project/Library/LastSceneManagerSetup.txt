@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/level01.unity
+=======
+- path: Assets/Scenes/menu.unity
+>>>>>>> origin/onlyDidiThisToPush
   isLoaded: 1
   isActive: 1

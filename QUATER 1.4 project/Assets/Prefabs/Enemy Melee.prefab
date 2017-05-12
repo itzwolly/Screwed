@@ -289,7 +289,7 @@ MonoBehaviour:
   KnifeSound: {fileID: 8300000, guid: 1706d14a0cf8d6a4aafcad51e22336b7, type: 3}
   target: {fileID: 0}
   Speed: 2
-  Wait: 100
+  Wait: 50
   LookWait: 50
   InitialDelay: 0
   MeleeDistance: 3
@@ -308,11 +308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188c46c7cf3a61e4196e52a54508b610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyKilledText: {fileID: 0}
   Waypoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  MinDistanceToWaypoint: 0
+  MinDistanceToWaypoint: 3
   StartOffset: 0
   ChooseRandomWaypoint: 0
   AlertDistance: 20
@@ -358,7 +359,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1682495703895688}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 0.91
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -367,7 +368,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
+  m_Height: 1.94
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

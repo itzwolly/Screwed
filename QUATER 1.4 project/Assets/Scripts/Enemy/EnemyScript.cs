@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour {
+
+    Animator enemyKilledTextAnimator;
+    public Text enemyKilledText;
 
     public List<GameObject> Waypoints;
     public float MinDistanceToWaypoint;
@@ -28,6 +32,9 @@ public class EnemyScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        enemyKilledTextAnimator = enemyKilledText.GetComponent<Animator>();
+
         //Debug.Log("first waypoint = "+Waypoints[0]);
         if (Waypoints.Count <= 1)
             StartOffset = true;
@@ -100,7 +107,9 @@ public class EnemyScript : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if(Handler != null) {
+        if(enemyKilledTextAnimator!=null)
+        enemyKilledTextAnimator.SetTrigger("EnemyKilled");
+        if (Handler != null) {
             Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
         }
     }
