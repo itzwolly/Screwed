@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33815339249702234}
   - component: {fileID: 23872392854099232}
   - component: {fileID: 64001753626233076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4177629478259974
 Transform:
@@ -55,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9fd1b6fca8404f54f8c0fd3824203bea, type: 2}
+  - {fileID: 2100000, guid: ad53b8e4a32923c41897aea3f8d6e93e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
