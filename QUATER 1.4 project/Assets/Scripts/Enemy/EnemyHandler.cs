@@ -21,7 +21,7 @@ public class EnemyHandler : MonoBehaviour {
             if((enem.transform.position - obj.transform.position).magnitude<alertDistance)
             {
                 //Debug.Log(obj.name + "has been alerted");
-                obj.GetComponent<EnemyMovement>().SetWaypoint(enem);
+                obj.GetComponent<EnemyMovement>().SetWaypoint(enem,true);
                 obj.GetComponent<EnemyScript>().SetDisturbedLocation(enem.transform.position);
             }
         }

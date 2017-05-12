@@ -257,6 +257,7 @@ public class CombatControls : MonoBehaviour {
 
     private void TakeDamage(Transform pTarget, bool headshot) {
         Utils.ChangeGameObjectColorTo(pTarget.gameObject, pTarget.GetComponent<Renderer>().material.color, Color.red);
+        pTarget.LookAt(gameObject.transform.position);
         if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
             pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
         } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {

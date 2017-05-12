@@ -148,14 +148,14 @@ public class EnemyMovement : MonoBehaviour {
             {
                 //Debug.Log("Is looking");
                 transform.LookAt(target.transform);
-                SetWaypoint(target);
+                SetWaypoint(target,false);
                 navigator.isStopped = true;
             }
         }
         //Debug.Log(_state + " is the state, with the player in vision: " + _inVision + " also with the enemy being stopped: " + navigator.isStopped);
     }
 
-    public void SetWaypoint(GameObject waypoint)
+    public void SetWaypoint(GameObject waypoint, bool disturbance)
     {
         if (navigator == null)
         {
@@ -205,56 +205,80 @@ public class EnemyMovement : MonoBehaviour {
         }
         /**/
     }
-
+    
     private void CheckVision()
     {
-        _inVision = true;
-        
-        if (_distanceToTarget < MeleeDistance)
+
+        //Vector3 reltivePoint = transform.InverseTransformPoint(target.transform.position);
+        Vector3 directionToTarget = transform.position - target.transform.position;
+        float angle = Vector3.Angle(transform.forward, directionToTarget);
+        if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
         {
-            StopMovement();
-            //Debug.Log("In melee range");
-            _state = State.knife;
-            //Debug.Log("About to attack (Melee)");
-            return;
-        }
-        
-        RaycastHit hit = new RaycastHit();
-        if (Physics.Linecast(transform.position, target.transform.position, out hit))
-        {
-            if (hit.transform.tag == "Player")
+            //Debug.Log("target is in front of me with angle = " + angle);
+            //return;
+            _inVision = true;
+
+            //Debug.Log(reltivePoint);
+            if (_distanceToTarget < MeleeDistance)//&& reltivePoint.z > -_vision && reltivePoint.z < _vision)
             {
-                _lastKnownTargetPosition = hit.transform.position;
-                _state = State.shoot;
+                StopMovement();
+                //Debug.Log("In melee range");
+                _state = State.knife;
+                //Debug.Log("About to attack (Melee)");
+                return;
+            }
+
+            RaycastHit hit = new RaycastHit();
+            if (Physics.Linecast(transform.position, target.transform.position, out hit))
+            {
+                //if (reltivePoint.z>-_vision && reltivePoint.z < _vision)
+                {
+                    if (hit.transform.tag == "Player")
+                    {
+                        _lastKnownTargetPosition = hit.transform.position;
+                        _state = State.shoot;
+                        //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
+                        //navigator.SetDestination(transform.position);
+                        //StopMovement();
+                    }
+                    else
+                    {
+                        _inVision = false;
+                        _lookWait = 0;
+
+                        navigator.isStopped = false;
+                        if (_state == State.shoot)
+                        {
+                            gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position);
+                        }
+                        else
+                        {
+                            Debug.Log("after agro");
+                            //navigator.isStopped = true;
+                            gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, false);
+                            //gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position);
+                        }
+                        //Debug.Log("no vision");
+                    }
+                }
+            }
+            else
+            {
+                //if (hit.transform.tag == "Player")
+                //{
+                if (hit.transform != null)//&& reltivePoint.z > -_vision && reltivePoint.z < _vision)
+                {
+                    Debug.Log("not sure");
+                    _lastKnownTargetPosition = hit.transform.position;
+                    _state = State.shoot;
+                }
                 //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
                 //navigator.SetDestination(transform.position);
                 //StopMovement();
+                //}
+                //else
+                //    Debug.Log("no vision");
             }
-            else
-            {               
-                _inVision = false;
-                _lookWait = 0;
-
-                navigator.isStopped = false;
-                _state = State.none;
-                //Debug.Log("no vision");
-            }
-        }
-        else
-        {
-            //if (hit.transform.tag == "Player")
-            //{
-            if (hit.transform != null)
-            {
-                _lastKnownTargetPosition = hit.transform.position;
-                _state = State.shoot;
-            }
-            //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
-            //navigator.SetDestination(transform.position);
-            //StopMovement();
-            //}
-            //else
-            //    Debug.Log("no vision");
         }
         
     }
@@ -282,8 +306,11 @@ public class EnemyMovement : MonoBehaviour {
             //Debug.Log("should move");
             //gameObject.isStatic = false;
             //gameObject.GetComponent<Rigidbody>().constraints = _normalConstraints;
+
+            //Debug.Log("in vision: " + _inVision);
             SetTragetDestinationToPPosition(_lastKnownTargetPosition);
-        }
+            
+        }   
         if (_wait <= 0)
         {
             
