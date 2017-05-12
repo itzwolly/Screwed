@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waypoints:
   - {fileID: 0}
-  MinDistanceToWaypoint: 0
+  MinDistanceToWaypoint: 3
   StartOffset: 1
   ChooseRandomWaypoint: 0
   AlertDistance: 100

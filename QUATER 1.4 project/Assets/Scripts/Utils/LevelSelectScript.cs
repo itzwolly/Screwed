@@ -42,7 +42,8 @@ public class LevelSelectScript : MonoBehaviour {
             //Debug.Log(Buttons[i].name);
             if (i < _level)
             {
-                //Debug.Log("unlocking");
+
+                Debug.Log("unlocking");
                 Buttons[i].GetComponent<ButtonScript>().Unlock();
             }
             else
