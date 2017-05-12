@@ -1,5 +1,12 @@
+<<<<<<< HEAD
  Timeinlevel: 9 Completedlevelwithoutdmg: 1
  Totalshots: 3 Successfullshots: 3 Successfullheadshots: 0 Headshotkills: 0 Totalrangedkills: 1
  Totalknives: 0 Successfullknives: 0 Knifekills: 0
  Blockedshots: 0 Totalkills: 1
+=======
+ Timeinlevel: 66 Completedlevelwithoutdmg: 0
+ Totalshots: 8 Successfullshots: 8 Successfullheadshots: 0 Headshotkills: 0 Totalrangedkills: 2
+ Totalknives: 20 Successfullknives: 19 Knifekills: 6
+ Blockedshots: 3 Totalkills: 8
+>>>>>>> feature/LevelDesignHomeResearch
  Secretsgathered: 0
