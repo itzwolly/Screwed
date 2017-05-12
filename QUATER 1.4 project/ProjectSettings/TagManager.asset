@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Floor
   - HUD
+  - Pickup
   layers:
   - Default
   - TransparentFX

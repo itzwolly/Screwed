@@ -17,9 +17,9 @@ public class Pickup : MonoBehaviour {
 	}
 
     private void OnTriggerEnter(Collider other) {
-        if (other == _gunPickup.GetComponentInChildren<Collider>()) {
+        if (other.tag == "Pickup") {
             GetComponent<WeaponHandler>().HasGun = true;
-            Destroy(_gunPickup);
+            Destroy(other.transform.parent.gameObject);
         }
     }
 }
