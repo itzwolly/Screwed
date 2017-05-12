@@ -3,8 +3,9 @@
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
-/Assets/AssetStoreTools*
-/Assets/PostProcessing/
+/[Aa]ssets/AssetStoreTools*
+/[Aa]ssets/PostProcessing/
+/[Aa]ssets/Materials/
 
 # Visual Studio 2015 cache directory
 /.vs/
@@ -34,9 +35,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 QUATER 1.4 project/Temp/UnityLockfile
-<<<<<<< HEAD
 QUATER 1.4 project/Temp
-=======
-QUATER 1.4 project/Temp/UnityTempFile-bde6e8ae8c12a544db613607b93b9f7d
-QUATER 1.4 project/Temp/UnityTempFile-2a36ac01d2de220458cfa5eaebe2948e
->>>>>>> 422356871b6d04874c25fcdeeed2ef5fa9268e98
