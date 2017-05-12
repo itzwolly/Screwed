@@ -99,15 +99,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_LocalRotation: {x: -0, y: -0.8619564, z: -0, w: -0.5069825}
-  m_LocalPosition: {x: 360.52, y: 211.86229, z: 46.43}
+  m_LocalRotation: {x: -0, y: -0.9999674, z: -0, w: -0.008082494}
+  m_LocalPosition: {x: 3.2708483, y: 11.753053, z: -21.52319}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4404857394220228}
   - {fileID: 4563429536617910}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 479.074, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 539.074, z: 0}
 --- !u!23 &23693687309765878
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -311,6 +311,7 @@ MonoBehaviour:
   Waypoints:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   MinDistanceToWaypoint: 0
   StartOffset: 0
   ChooseRandomWaypoint: 0
@@ -319,7 +320,7 @@ MonoBehaviour:
   Handler: {fileID: 0}
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}
-  _health: 3
+  _health: 5
 --- !u!135 &135923999584545616
 SphereCollider:
   m_ObjectHideFlags: 1
