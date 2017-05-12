@@ -61,23 +61,14 @@ public class WeaponHandler : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
-            if (_weaponType == WeaponType.Melee) {
-                if (_hasGun) {
-                    _weaponType = WeaponType.Ranged;
-                    if (!_weapons[1].activeInHierarchy) {
-                        _weapons[0].SetActive(false);
-                        _weapons[1].SetActive(true);
-                    }
-                }
-            } else {
-                _weaponType = WeaponType.Melee;
-                if (!_weapons[0].activeInHierarchy) {
-                    _weapons[0].SetActive(true);
-                    _weapons[1].SetActive(false);
-                }
-            }
+            SwitchToNextWeapon();
         }
-        
+
+        float scrollValue = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollValue == 0.1f || scrollValue == -0.1f) {
+            SwitchToNextWeapon();
+        }
+
         if (Input.GetKeyUp(KeyCode.F)) {
             if (_weaponType == WeaponType.Melee) {
                 if (_weaponAOEType == WeaponAOEType.Single) {
@@ -88,6 +79,24 @@ public class WeaponHandler : MonoBehaviour {
             }
         }
 	}
+
+    private void SwitchToNextWeapon() {
+        if (_weaponType == WeaponType.Melee) {
+			if (_hasGun) {
+			    _weaponType = WeaponType.Ranged;
+				if (!_weapons[1].activeInHierarchy) {
+					_weapons[0].SetActive(false);
+					_weapons[1].SetActive(true);
+				}
+			}
+        } else {
+            _weaponType = WeaponType.Melee;
+            if (!_weapons[0].activeInHierarchy) {
+                _weapons[0].SetActive(true);
+                _weapons[1].SetActive(false);
+            }
+        }
+    }
 
     private void OnGUI() {
         GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Current WeaponType: " + _weaponType + Environment.NewLine + "Current AOEType: " + _weaponAOEType);
