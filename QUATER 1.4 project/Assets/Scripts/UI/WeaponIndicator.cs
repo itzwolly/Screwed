@@ -21,8 +21,13 @@ public class WeaponIndicator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (_combatControls.WeaponHandler.CurrentWeaponType == WeaponType.Melee) {
-            _weapons[0].SetActive(false);
-            _weapons[1].SetActive(true);
+            if (_player.GetComponent<WeaponHandler>().HasGun) {
+                _weapons[0].SetActive(false);
+                _weapons[1].SetActive(true);
+            } else {
+                _weapons[1].SetActive(false);
+                _weapons[0].SetActive(false);
+            }
         } else if (_combatControls.WeaponHandler.CurrentWeaponType == WeaponType.Ranged) {
             _weapons[0].SetActive(true);
             _weapons[1].SetActive(false);

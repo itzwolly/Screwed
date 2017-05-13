@@ -168,7 +168,9 @@ public class EnemyMovement : MonoBehaviour {
             //_state = State.patroling;
             if (navigator != null && navigator.isActiveAndEnabled)
             {
-                navigator.SetDestination(waypoint.transform.position);
+                if (waypoint != null) {
+                    navigator.SetDestination(waypoint.transform.position);
+                }
             }
             
         }

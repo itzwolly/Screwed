@@ -44,10 +44,7 @@ public class MenuManager : MonoBehaviour {
     public GameObject newText;
     public GameObject exitText;
 
-    public GameObject gfxText;
-    public GameObject ctrlText;
-    public GameObject displayText;
-    public GameObject audioText;
+   
 
     Animator playMenuAnimator;
     Animator missionListAnimator;
@@ -85,10 +82,7 @@ public class MenuManager : MonoBehaviour {
         selectText.SetActive(!true);
         newText.SetActive(!true);
 
-        gfxText.SetActive(!true);
-        ctrlText.SetActive(!true);
-        displayText.SetActive(!true);
-        audioText.SetActive(!true);
+       
     }
 	
 	// Update is called once per frame
@@ -179,19 +173,19 @@ public class MenuManager : MonoBehaviour {
     }
     public void OptionsGFX()
     {
-        gfxText.SetActive(true);
+        
     }
     public void OptionsCTRL()
     {
-        ctrlText.SetActive(true);
+        
     }
     public void OptionsDISPLAY()
     {
-        displayText.SetActive(true);
+        
     }
     public void OptionsAUDIO()
     {
-        audioText.SetActive(true);
+        
     }
     public void BGDefault()
     {
@@ -204,10 +198,7 @@ public class MenuManager : MonoBehaviour {
         selectText.SetActive(!true);
         newText.SetActive(!true);
 
-        gfxText.SetActive(!true);
-        ctrlText.SetActive(!true);
-        displayText.SetActive(!true);
-        audioText.SetActive(!true);
+       
     }
     //
 
@@ -236,6 +227,7 @@ public class MenuManager : MonoBehaviour {
 
     public void Launch1()
     {
+        Debug.Log("WTF");
         loadingAnimator.SetBool("Launch", true);
         playMenuAnimator.SetBool("Disappear", true);
         menu.SetActive(false);
@@ -251,7 +243,7 @@ public class MenuManager : MonoBehaviour {
         menu.SetActive(false);
         titleText.SetActive(!true);
         clicked = true;
-        scene = 2;
+        scene = 1;
     }
     public void Launch3()
     {
@@ -260,7 +252,7 @@ public class MenuManager : MonoBehaviour {
         menu.SetActive(false);
         titleText.SetActive(!true);
         clicked = true;
-        scene = 3;
+        scene = 1;
     }
     public void Launch4()
     {
@@ -269,7 +261,7 @@ public class MenuManager : MonoBehaviour {
         menu.SetActive(false);
         titleText.SetActive(!true);
         clicked = true;
-        scene = 4;
+        scene = 1;
     }
     public void Launch5()
     {
@@ -278,7 +270,7 @@ public class MenuManager : MonoBehaviour {
         menu.SetActive(false);
         titleText.SetActive(!true);
         clicked = true;
-        scene = 5;
+        scene = 1;
     }
 
     public void Options()

@@ -19,6 +19,7 @@ public class WeaponHandler : MonoBehaviour {
     private WeaponType _weaponType;
     private WeaponAOEType _weaponAOEType;
     [SerializeField] private GameObject[] _weapons;
+    [SerializeField] private bool _hasGun;
 
     public WeaponType CurrentWeaponType {
         get { return _weaponType; }
@@ -26,10 +27,14 @@ public class WeaponHandler : MonoBehaviour {
     public WeaponAOEType CurrentWeaponAOEType {
         get { return _weaponAOEType; }
     }
-    public GameObject[] Weapons
-    {
+    public GameObject[] Weapons {
         get { return _weapons; }
     }
+    public bool HasGun {
+        get { return _hasGun; }
+        set { _hasGun = value; }
+    }
+
 
     // Use this for initialization
     void Start () {
@@ -40,10 +45,12 @@ public class WeaponHandler : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 		if (Input.GetKeyUp("1")) {
-            _weaponType = WeaponType.Ranged;
-            if (!_weapons[1].activeInHierarchy) {
-                _weapons[0].SetActive(false);
-                _weapons[1].SetActive(true);
+            if (_hasGun) {
+                _weaponType = WeaponType.Ranged;
+                if (!_weapons[1].activeInHierarchy) {
+                    _weapons[0].SetActive(false);
+                    _weapons[1].SetActive(true);
+                }
             }
         } else if (Input.GetKeyUp("2")) {
             _weaponType = WeaponType.Melee;
@@ -75,11 +82,13 @@ public class WeaponHandler : MonoBehaviour {
 
     private void SwitchToNextWeapon() {
         if (_weaponType == WeaponType.Melee) {
-            _weaponType = WeaponType.Ranged;
-            if (!_weapons[1].activeInHierarchy) {
-                _weapons[0].SetActive(false);
-                _weapons[1].SetActive(true);
-            }
+			if (_hasGun) {
+			    _weaponType = WeaponType.Ranged;
+				if (!_weapons[1].activeInHierarchy) {
+					_weapons[0].SetActive(false);
+					_weapons[1].SetActive(true);
+				}
+			}
         } else {
             _weaponType = WeaponType.Melee;
             if (!_weapons[0].activeInHierarchy) {
