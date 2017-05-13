@@ -81,6 +81,8 @@ public class EnemyMovement : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        //if (_waypoint != null)
+        //    Debug.Log("WAYPOINT POS = " + _waypoint.transform.position + "CURRENTPOS = " + gameObject.transform.position + " LAST KNOWN POS = " + _lastKnownTargetPosition);
         //Debug.Log(navigator.isStopped);
         if (target != null)
         {
@@ -115,13 +117,29 @@ public class EnemyMovement : MonoBehaviour {
                     _lookWait++;
                 }
 
+                if (_state != State.shoot)
+                {
+                    navigator.isStopped = false;
+                    if (IsRanged)
+                        _wait = InitialDelay;
+                    //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
+                }
+                else if (IsRanged)
+                {
+                    //Debug.Log("Is looking");
+                    transform.LookAt(target.transform);
+                    SetWaypoint(target, false);
+                    navigator.isStopped = true;
+                }
+
             }
             else
             {
                 //Debug.Log(_waypoint.transform.position + " si the waypoint with the last position = " + _lastKnownTargetPosition + " | obj pos = " +transform.position);
-                //Debug.Log((transform.position - _lastKnownTargetPosition).magnitude);
+                //Debug.Log((target.transform.position - _lastKnownTargetPosition).magnitude + " is the diference in update when not in vision" );
                 if ((transform.position - _lastKnownTargetPosition).magnitude < 1.3f)
                 {
+                    //Debug.Log("on last position with wait = "+_wait);
                     if (_wait <= 0)
                     {
 
@@ -132,25 +150,12 @@ public class EnemyMovement : MonoBehaviour {
                 }
                 else
                 {
+                    //Debug.Log("walking to last position");
                     _wait = Wait;
                     _state = State.walk;
                 }
             }
 
-            if (_state != State.shoot)
-            {
-                navigator.isStopped = false;
-                if (IsRanged)
-                    _wait = InitialDelay;
-                //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
-            }
-            else if (IsRanged)
-            {
-                //Debug.Log("Is looking");
-                transform.LookAt(target.transform);
-                SetWaypoint(target,false);
-                navigator.isStopped = true;
-            }
         }
         //Debug.Log(_state + " is the state, with the player in vision: " + _inVision + " also with the enemy being stopped: " + navigator.isStopped);
     }
@@ -168,6 +173,7 @@ public class EnemyMovement : MonoBehaviour {
             //_state = State.patroling;
             if (navigator != null && navigator.isActiveAndEnabled)
             {
+                Debug.Log("in set waypoint");
                 navigator.SetDestination(waypoint.transform.position);
             }
             
@@ -178,15 +184,16 @@ public class EnemyMovement : MonoBehaviour {
     private void Patrol()
     {
         //Debug.Log("Set patrol");
+        gameObject.GetComponent<EnemyScript>().OnCheckpoint(_waypoint, false);
         //Debug.Log(navigator==null);
         if (navigator != null && navigator.isActiveAndEnabled)
         {
             //Debug.Log("SHIT WENT DOWN");
             if (_waypoint != null) {
+                Debug.Log("in patrol");
                 navigator.SetDestination(_waypoint.transform.position);
             }
         }
-        gameObject.GetComponent<EnemyScript>().OnCheckpoint(_waypoint, false);
         //_state = State.patroling;
     }
 
@@ -236,6 +243,7 @@ public class EnemyMovement : MonoBehaviour {
                     if (hit.transform.tag == "Player")
                     {
                         _lastKnownTargetPosition = hit.transform.position;
+                        //_wait = 0;
                         _state = State.shoot;
                         //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
                         //navigator.SetDestination(transform.position);
@@ -271,6 +279,7 @@ public class EnemyMovement : MonoBehaviour {
                 {
                     Debug.Log("not sure");
                     _lastKnownTargetPosition = hit.transform.position;
+                    //_wait = 0;
                     _state = State.shoot;
                 }
                 //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
@@ -289,6 +298,7 @@ public class EnemyMovement : MonoBehaviour {
         //_state = State.knife;
         //Debug.Log("stopping");
         _lastKnownTargetPosition = transform.position;
+        //_wait = 0;
         //navigator.SetDestination(transform.position);
     }
 
@@ -309,6 +319,7 @@ public class EnemyMovement : MonoBehaviour {
             //gameObject.GetComponent<Rigidbody>().constraints = _normalConstraints;
 
             //Debug.Log("in vision: " + _inVision);
+            //Debug.Log((target.transform.position - _lastKnownTargetPosition).magnitude+" is the distance from last pos to target");
             SetTragetDestinationToPPosition(_lastKnownTargetPosition);
             
         }   

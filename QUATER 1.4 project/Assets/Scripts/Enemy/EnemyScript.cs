@@ -56,8 +56,9 @@ public class EnemyScript : MonoBehaviour {
 
     public void OnCheckpoint(GameObject checkpoint,bool forPlayerSight)
     {
-        Debug.Log("on checkpoint " + forPlayerSight);
+        //Debug.Log("on checkpoint ");
         _atDisturbance = false;
+        //_currentWaypoint= checkpoint;
         if (_waypointWait>=WaitTimeAtWaypoint)
         {
             if (!forPlayerSight)
@@ -85,14 +86,22 @@ public class EnemyScript : MonoBehaviour {
             gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint,false);
             _waypointWait = 0;
         }
-        if(gameObject.GetComponent<Rigidbody>().velocity.magnitude<=1)
-         _waypointWait++;    
+        if (gameObject.GetComponent<Rigidbody>().velocity.magnitude <= 1)
+        {
+            //Debug.Log(_waypointWait);
+            _waypointWait++;
+        }
     }
     
 
     // Update is called once per frame
     void Update ()
     {
+        //if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
+        //    Debug.Log("paused");
+        //if (_currentWaypoint != null)
+        //    Debug.Log("waypoint pos = " + _currentWaypoint.transform.position + "current pos = " + gameObject.transform.position);
+        //Debug.Log("Current pos = "+gameObject.transform.position +" Waypoint pos = "+_currentWaypoint.transform.position);
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
         //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
@@ -119,9 +128,9 @@ public class EnemyScript : MonoBehaviour {
     public void OnDisturbance()
     {
         //Debug.Log("on disturbance");
-        
+
         //_atDisturbance = false;
-        if(_notSetLooks)
+        if (_notSetLooks)
         {
             _notSetLooks = false;
             _lookedLeft = false;
