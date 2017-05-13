@@ -247,17 +247,18 @@ public class EnemyMovement : MonoBehaviour {
                         _lookWait = 0;
 
                         navigator.isStopped = false;
-                        if (_state == State.shoot)
-                        {
-                            gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position);
-                        }
-                        else
-                        {
-                            Debug.Log("after agro");
-                            //navigator.isStopped = true;
-                            gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, false);
-                            //gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position);
-                        }
+                        _state = State.none;
+                        //if (_state == State.shoot)
+                        //{
+                        //    gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position);
+                        //}
+                        //else
+                        //{
+                        //    Debug.Log("after agro");
+                        //    //navigator.isStopped = true;
+                        //    gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, false);
+                        //    //gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position);
+                        //}
                         //Debug.Log("no vision");
                     }
                 }
