@@ -19,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
         look,
         knife
     };
-
+    private Vector3 _targetPosSameY;
     public AudioClip ShootSound;
     public AudioClip KnifeSound;
     private float _volume;
@@ -120,19 +120,19 @@ public class EnemyMovement : MonoBehaviour
                 else
                 {
                     navigator.isStopped = true;
-                    transform.LookAt(target.transform);
+                    //transform.LookAt(target.transform);
                     SetLastPositionToTarget();
                     _lookWait++;
-                }
-                if (IsRanged)
-                {
-                    _wait = InitialDelay;
                 }
             }
             else
             {
                 //Debug.Log(_waypoint.transform.position + " si the waypoint with the last position = " + _lastKnownTargetPosition + " | obj pos = " +transform.position);
 
+                if (IsRanged)
+                {
+                    _wait = InitialDelay;
+                }
                 if (_waypoint == null)
                 {
                     Debug.Log(gameObject.name + " has null waypoint");
@@ -166,7 +166,7 @@ public class EnemyMovement : MonoBehaviour
             else if (IsRanged)
             {
                 //Debug.Log("setting waypoiny to: " + target.transform.position);
-                transform.LookAt(target.transform);
+                //transform.LookAt(target.transform);
                 SetWaypoint(target);
                 navigator.isStopped = true;
             }
@@ -239,11 +239,12 @@ public class EnemyMovement : MonoBehaviour
         if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
         {
             _inVision = true;
-
+            _targetPosSameY = target.transform.position;
+            _targetPosSameY.y = transform.position.y;
+            transform.LookAt(_targetPosSameY);
             if (_distanceToTarget < MeleeDistance)
             {
                 StopMovement();
-                transform.LookAt(target.transform);
                 //Debug.Log("In melee range");
                 _state = State.knife;
                 //Debug.Log("About to attack (Melee)");
@@ -320,7 +321,7 @@ public class EnemyMovement : MonoBehaviour
         }
         if (_wait <= 0)
         {
-
+            Debug.Log("attacking");
             if (_state == State.shoot && IsRanged)
             {
                 if (target.GetComponent<CombatControls>().Health > 0)
@@ -353,6 +354,7 @@ public class EnemyMovement : MonoBehaviour
             }
             _wait = Wait;
         }
+        Debug.Log("wait=" + _wait);
         _wait--;
     }
 
