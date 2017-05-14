@@ -6,7 +6,7 @@ using System.IO;
 
 public class Utils {
 
-    public static void ChangeGameObjectColorTo(GameObject pGameObject, Color pFrom, Color pTo) {
+    public static void ChangeGameObjectColor(GameObject pGameObject, Color pFrom, Color pTo) {
         if (pGameObject.transform.GetComponent<Renderer>().material.color == pFrom) {
             pGameObject.transform.GetComponent<Renderer>().material.color = pTo;
         }
@@ -20,7 +20,7 @@ public class Utils {
         }
     }
 
-    public static void ChangeGameObjectColor(GameObject pGameObject, Color pTo)
+    public static void ChangeGameObjectColorTo(GameObject pGameObject, Color pTo)
     {
        
        pGameObject.transform.GetComponent<Renderer>().material.color = pTo;

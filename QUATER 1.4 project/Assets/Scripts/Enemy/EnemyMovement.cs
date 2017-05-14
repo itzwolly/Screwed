@@ -98,7 +98,7 @@ public class EnemyMovement : MonoBehaviour
             _distanceToTarget = (target.transform.position - gameObject.transform.position).magnitude;
             if (_distanceToTarget < RangeDistance)
             {
-                Utils.ChangeGameObjectColor(gameObject, Color.white);
+                Utils.ChangeGameObjectColorTo(gameObject, Color.white);
                 CheckVision();
             }
             else
@@ -325,7 +325,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (target.GetComponent<CombatControls>().Health > 0)
                 {
-                    Utils.ChangeGameObjectColor(gameObject, Color.red);
+                    Utils.ChangeGameObjectColorTo(gameObject, Color.red);
                     target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
                     gameObject.GetComponent<AudioSource>().PlayOneShot(ShootSound, _volume);
                     //Debug.Log("shoot shoot");
@@ -340,7 +340,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (target.GetComponent<CombatControls>().Health > 0)
                 {
-                    Utils.ChangeGameObjectColor(gameObject, Color.blue);
+                    Utils.ChangeGameObjectColorTo(gameObject, Color.blue);
                     target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
                     gameObject.GetComponent<AudioSource>().PlayOneShot(KnifeSound, _volume);
                     //Debug.Log("Knify knify");
