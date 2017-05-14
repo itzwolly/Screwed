@@ -89,7 +89,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            Debug.Log("My position is: " + gameObject.transform.position + " and I am heading to: " + _waypoint.transform.position + " with the last known target position at: " + _lastKnownTargetPosition);
+            Debug.Log(gameObject.name+" - My position is: " + gameObject.transform.position + " and I am heading to: " + _waypoint.transform.position + " with the last known target position at: " + _lastKnownTargetPosition);
         }
         //Debug.Log(navigator.isStopped);
         if (target != null)
@@ -135,12 +135,12 @@ public class EnemyMovement : MonoBehaviour
                 }
                 if (_waypoint == null)
                 {
-                    Debug.Log(gameObject.name + " has null waypoint");
+                    //Debug.Log(gameObject.name + " has null waypoint");
                 }
                 else
                 if ((transform.position - _lastKnownTargetPosition).magnitude < 0.5f)
                 {
-                    Debug.Log("at last known position");
+                    //Debug.Log("at last known position");
                     //Debug.Log(_wait);
                     if (_wait <= 0)
                     {
@@ -183,6 +183,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
+            //if(waypoint)
             //Debug.Log("Set Waypoint to: " + waypoint.transform.position);
             _waypoint = waypoint;
             //_state = State.patroling;
@@ -215,9 +216,9 @@ public class EnemyMovement : MonoBehaviour
     private void SetTragetDestinationToPPosition(Vector3 pos)
     {
         //Debug.Log("setting target location to go to is = " + pos);
-
+        _tempWaypoint.transform.position = pos;
         navigator.SetDestination(pos);
-        _waypoint.transform.position = pos;
+        _waypoint=_tempWaypoint;
         _lastKnownTargetPosition = pos;
         gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position, false);
         /**
@@ -241,10 +242,10 @@ public class EnemyMovement : MonoBehaviour
             _inVision = true;
             _targetPosSameY = target.transform.position;
             _targetPosSameY.y = transform.position.y;
-            transform.LookAt(_targetPosSameY);
             if (_distanceToTarget < MeleeDistance)
             {
                 StopMovement();
+                transform.LookAt(_targetPosSameY);
                 //Debug.Log("In melee range");
                 _state = State.knife;
                 //Debug.Log("About to attack (Melee)");
@@ -258,6 +259,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     SetLastPositionToTarget();
                     _state = State.shoot;
+                    transform.LookAt(_targetPosSameY);
                     gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position,true);
                     //navigator.SetDestination(transform.position);
                     //StopMovement();
@@ -281,6 +283,8 @@ public class EnemyMovement : MonoBehaviour
                     Debug.Log("not sure");
                     SetLastPositionToTarget();
                     _state = State.shoot;
+                    transform.LookAt(_targetPosSameY);
+                    gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position, true);
                 }
                 //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
                 //navigator.SetDestination(transform.position);
@@ -321,7 +325,7 @@ public class EnemyMovement : MonoBehaviour
         }
         if (_wait <= 0)
         {
-            Debug.Log("attacking");
+            //Debug.Log("attacking");
             if (_state == State.shoot && IsRanged)
             {
                 if (target.GetComponent<CombatControls>().Health > 0)
@@ -354,7 +358,7 @@ public class EnemyMovement : MonoBehaviour
             }
             _wait = Wait;
         }
-        Debug.Log("wait=" + _wait);
+        //Debug.Log("wait=" + _wait);
         _wait--;
     }
 

@@ -59,9 +59,12 @@ public class EnemyScript : MonoBehaviour
     {
         if(_onDisturbance)
         {
-            //Debug.Log("on disturbance");
+            Debug.Log("on disturbance");
             if (Look())
+            {
+                Debug.Log("done looking "+gameObject.name);
                 _onDisturbance = false;
+            }
         }
         else
         {
@@ -138,7 +141,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            Debug.Log("My position is: " + gameObject.transform.position + " and I am heading to: " + _currentWaypoint.transform.position);
+            Debug.Log(gameObject.name + " My position is: " + gameObject.transform.position + " and I am heading to: " + _currentWaypoint.transform.position);
         }
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
