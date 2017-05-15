@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33916648924366194}
   - component: {fileID: 23145857426608214}
   - component: {fileID: 64494206559918404}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: House_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4362498434662530
 Transform:
@@ -41,7 +41,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -269.999, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23145857426608214
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -55,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c9b4f7d6c715a2048988bae663bbea5a, type: 2}
+  - {fileID: 2100000, guid: 528f69ea9002fb744b5ae8ec4ca8a351, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

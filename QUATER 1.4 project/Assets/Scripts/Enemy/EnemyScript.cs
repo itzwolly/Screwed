@@ -7,6 +7,8 @@ public class EnemyScript : MonoBehaviour {
 
     Animator enemyKilledTextAnimator;
     public Text enemyKilledText;
+   
+
 
     public List<GameObject> Waypoints;
     public float MinDistanceToWaypoint;
@@ -109,6 +111,7 @@ public class EnemyScript : MonoBehaviour {
     {
         if(enemyKilledTextAnimator!=null)
         enemyKilledTextAnimator.SetTrigger("EnemyKilled");
+        
         if (Handler != null) {
             Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
         }
