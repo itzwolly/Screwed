@@ -147,7 +147,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_Mesh: {fileID: 4300000, guid: ac8789c6d8682e547ae27677a22f8c13, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 0df93057ded94a44fbf8fdf85ca0a354, type: 3}
 --- !u!54 &54208953471468948
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -176,7 +176,7 @@ MeshCollider:
   m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: ac8789c6d8682e547ae27677a22f8c13, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 0df93057ded94a44fbf8fdf85ca0a354, type: 3}
 --- !u!82 &82921559443734526
 AudioSource:
   m_ObjectHideFlags: 1
@@ -312,6 +312,7 @@ MonoBehaviour:
   LookAngle: 93
   enemyKilledText: {fileID: 0}
   Waypoints:
+  - {fileID: 0}
   - {fileID: 0}
   MinDistanceToWaypoint: 3
   StartOffset: 0
