@@ -27,5 +27,10 @@ public class EnemyHandler : MonoBehaviour
             }
         }
     }
+
+    public int EnemiesLeft()
+    {
+        return Enemies.Count;
+    }
 }
 

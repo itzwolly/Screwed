@@ -314,7 +314,7 @@ MonoBehaviour:
   Waypoints:
   - {fileID: 0}
   - {fileID: 0}
-  MinDistanceToWaypoint: 3
+  MinDistanceToWaypoint: 1
   StartOffset: 0
   ChooseRandomWaypoint: 0
   AlertDistance: 100
