@@ -1,5 +1,5 @@
- Timeinlevel: 30 Completedlevelwithoutdmg: 0
+ Timeinlevel: 12 Completedlevelwithoutdmg: 0
  Totalshots: 0 Successfullshots: 0 Successfullheadshots: 0 Headshotkills: 0 Totalrangedkills: 0
- Totalknives: 3 Successfullknives: 3 Knifekills: 1
- Blockedshots: 0 Totalkills: 1
+ Totalknives: 5 Successfullknives: 5 Knifekills: 2
+ Blockedshots: 0 Totalkills: 2
  Secretsgathered: 0

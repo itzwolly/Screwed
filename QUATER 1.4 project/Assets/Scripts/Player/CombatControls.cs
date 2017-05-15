@@ -258,8 +258,10 @@ public class CombatControls : MonoBehaviour {
     private void TakeDamage(Transform pTarget, bool headshot) {
         Utils.ChangeGameObjectColorTo(pTarget.gameObject, Color.red);
         pTarget.LookAt(gameObject.transform.position);
-        if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
+        if (_weaponHandler.CurrentWeaponType == WeaponType.Melee)
+        {
             pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
+           
         } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
             if(headshot)
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(2*_weaponDamage[1]);
@@ -290,26 +292,47 @@ public class CombatControls : MonoBehaviour {
         int i = 0;
         Collider[] hitColliders = Physics.OverlapSphere(pCenter, pRadius);
         _totalKnives++;
+
         while (i < hitColliders.Length) {
             
             if (hitColliders[i].transform.tag == pTarget) {
-                _successfullKnives++;
-                //Debug.Log(hitColliders[i].name + " is in range of attacks.");
-                if (pAoeType == WeaponAOEType.Single) {
-                    //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
-                    if (GetClosestEnemy(hitColliders, pRadius) != null) {
-                        //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
-                        _comboCount++;
-                        _comboWait = 0;
-                        TakeDamage(GetClosestEnemy(hitColliders, pRadius),false);
-                        break;
-                    }
-                } else if (pAoeType == WeaponAOEType.Multi) {
-                    _comboCount++;
-                    _comboWait = 0;
-                    //Debug.Log(hitColliders[i].name + " has been hit.");
-                    TakeDamage(hitColliders[i].transform,false);
+                //RaycastHit hit = new RaycastHit();
+                ////Debug.Log("before linecast "+pTarget + " | " + hitColliders[i].transform.name);
+                //if (Physics.Linecast(gameObject.transform.position, hitColliders[i].transform.position, out hit))
+                //{
+                //Debug.Log(pTarget + " | " + hit.transform.name);
+                //if (hit.transform.tag == pTarget)
+                //{
+                bool behind = false;
+                Vector3 directionToTarget =transform.position - hitColliders[i].transform.position;
+                float angle = Vector3.Angle(hitColliders[i].transform.forward, directionToTarget);
+                if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
+                {
+                    Debug.Log("backstab");
+                    behind = true;
                 }
+
+                    _successfullKnives++;
+                        if (pAoeType == WeaponAOEType.Single)
+                        {
+                            //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
+                            if (GetClosestEnemy(hitColliders, pRadius) != null)
+                            {
+                                //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
+                                _comboCount++;
+                                _comboWait = 0;
+                                TakeDamage(GetClosestEnemy(hitColliders, pRadius), behind);
+                                break;
+                            }
+                        }
+                        else if (pAoeType == WeaponAOEType.Multi)
+                        {
+                            _comboCount++;
+                            _comboWait = 0;
+                            //Debug.Log(hitColliders[i].name + " has been hit.");
+                            TakeDamage(hitColliders[i].transform, behind);
+                        }
+                
             }
             i++;
         }
