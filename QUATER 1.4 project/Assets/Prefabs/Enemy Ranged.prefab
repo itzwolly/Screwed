@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188c46c7cf3a61e4196e52a54508b610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LookAngle: 93
   enemyKilledText: {fileID: 0}
   Waypoints:
   - {fileID: 0}

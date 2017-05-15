@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/steal_that_menu.unity
     guid: 3b7057ca54c1ae84f9df25fdee6c50c8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/menu.unity
     guid: 4d2a4d73507eeb344b8d5ad3ca9326b2
   - enabled: 1
