@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
   m_LocalRotation: {x: -0, y: -0.9999674, z: -0, w: -0.008082494}
-  m_LocalPosition: {x: 3.2708483, y: 11.753053, z: -21.52319}
+  m_LocalPosition: {x: -12.043223, y: 0, z: -1.3875084}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4404857394220228}
@@ -121,7 +121,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c6f505fd36ffb0e4f939498bd1b5df6d, type: 2}
+  - {fileID: 2100000, guid: 7e5f4febaa5645e4c9d16ad2452b62cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,7 +146,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_Mesh: {fileID: 4300000, guid: 7a6af43e2b0861945946cd7ccf1ce5a6, type: 3}
+  m_Mesh: {fileID: 4300002, guid: f4c1aa03e85cf4841ad35e086fd24240, type: 3}
 --- !u!54 &54208953471468948
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -175,7 +175,7 @@ MeshCollider:
   m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 7a6af43e2b0861945946cd7ccf1ce5a6, type: 3}
+  m_Mesh: {fileID: 4300002, guid: f4c1aa03e85cf4841ad35e086fd24240, type: 3}
 --- !u!82 &82284376417524180
 AudioSource:
   m_ObjectHideFlags: 1
@@ -321,7 +321,7 @@ MonoBehaviour:
   Handler: {fileID: 0}
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}
-  _health: 5
+  _health: 4
 --- !u!135 &135923999584545616
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -359,7 +359,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1682495703895688}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.91
+  m_Radius: 1.5
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
