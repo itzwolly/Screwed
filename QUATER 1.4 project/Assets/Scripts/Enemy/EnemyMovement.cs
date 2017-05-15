@@ -111,6 +111,7 @@ public class EnemyMovement : MonoBehaviour
             if (_inVision)
             {
                 //Debug.Log("looking");
+                print("YO, looking");
                 EnemyAttack();
                 if (_lookWait >= LookWait)
                 {
