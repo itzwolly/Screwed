@@ -51,7 +51,7 @@ public class EnemyScript : MonoBehaviour {
             gameObject.GetComponent<EnemyMovement>().SetWaypoint(_currentWaypoint);
         if (Handler == null)
         {
-            //Debug.Log("ERROR NO HANDLER");
+            //Debug.Log("ERROR NO HANDLER");k
         }
         else
         {
