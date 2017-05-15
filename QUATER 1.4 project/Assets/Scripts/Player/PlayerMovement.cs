@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);
         */
 
+//<<<<<<< HEAD
         //if (Input.GetKeyDown(KeyCode.E))
         //{
         //    GameObject _currentRoom = null;
@@ -54,7 +55,34 @@ public class PlayerMovement : MonoBehaviour {
         //            }
         //        }
         //    }
-        //}
+//        //}
+//=======
+//        //Debug.Log(transform.GetComponent<Rigidbody>().velocity.magnitude);
+//        if (Input.GetKeyDown(KeyCode.E))
+//        {
+//            GameObject _currentRoom = null;
+//            _currentRoom = gameObject.GetComponent<PlayerScript>().CurrentRoom;
+//            if (_currentRoom.GetComponent<ExitList>() != null)
+//            for(int i=0;i< _currentRoom.GetComponent<ExitList>().Exits.Count;i++)
+//            {
+//                Transform exit = _currentRoom.GetComponent<ExitList>().Exits[i];
+//                if ((gameObject.transform.position-exit.position).magnitude<=3)
+//                {
+//                    if(_currentRoom.GetComponent<RoomScript>().HasEnemies())
+//                    {
+//                        Debug.Log("Room is not cleared");
+//                    }
+//                    else
+//                    {
+//                        godController.AddRooms(exit);
+//                        _currentRoom.GetComponent<ExitList>().RemoveFirstExits(2);
+//                        Debug.Log("Im loading next room");
+//                    }
+//                }
+//            }
+//        }
+
+//>>>>>>> c80f05ee8bc3bfa9b15bf5c84b7f295e4a2f4063
     }
 
     private void FixedUpdate()

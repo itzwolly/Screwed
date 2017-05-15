@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHandler : MonoBehaviour {
+public class EnemyHandler : MonoBehaviour
+{
     private List<GameObject> Enemies = new List<GameObject>();
     // Use this for initialization
 
@@ -16,14 +17,15 @@ public class EnemyHandler : MonoBehaviour {
     {
         //Debug.Log("Allerting others of disturbance at: "+ enem.transform.position);
         Enemies.Remove(enem);
-        foreach(GameObject obj in Enemies)
+        foreach (GameObject obj in Enemies)
         {
-            if((enem.transform.position - obj.transform.position).magnitude<alertDistance)
+            if ((enem.transform.position - obj.transform.position).magnitude < alertDistance)
             {
                 //Debug.Log(obj.name + "has been alerted");
-                obj.GetComponent<EnemyMovement>().SetWaypoint(enem,true);
-                obj.GetComponent<EnemyScript>().SetDisturbedLocation(enem.transform.position);
+                obj.GetComponent<EnemyMovement>().SetWaypoint(enem);
+                obj.GetComponent<EnemyScript>().SetDisturbedLocation(enem.transform.position,true);
             }
         }
     }
 }
+

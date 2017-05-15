@@ -5,10 +5,12 @@ using UnityEngine.AI;
 
 
 
-public class EnemyMovement : MonoBehaviour {
+public class EnemyMovement : MonoBehaviour
+{
     public bool IsRanged;
 
-    public enum State {
+    public enum State
+    {
         none,
         patroling,
         walk,
@@ -17,7 +19,7 @@ public class EnemyMovement : MonoBehaviour {
         look,
         knife
     };
-
+    private Vector3 _targetPosSameY;
     public AudioClip ShootSound;
     public AudioClip KnifeSound;
     private float _volume;
@@ -32,6 +34,7 @@ public class EnemyMovement : MonoBehaviour {
     public float MeleeDistance;
     public float RangeDistance;
     private GameObject _waypoint;
+    private GameObject _tempWaypoint;
     private int _wait;
     private int _lookWait;
     private float _distanceToTarget;
@@ -49,13 +52,15 @@ public class EnemyMovement : MonoBehaviour {
     [SerializeField] private int _rangedDamage;
     [SerializeField] private int _meleeDamage;
 
-    public State CurrentState {
+    public State CurrentState
+    {
         get { return _state; }
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
+        _tempWaypoint = new GameObject();
         _volume = Utils.EffectVolume();
         //Debug.Log("effect volume = "+_volume);
         _wait = InitialDelay;
@@ -63,11 +68,11 @@ public class EnemyMovement : MonoBehaviour {
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
         Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
         navigator = GetComponent<NavMeshAgent>();
-        _speed = new Vector3(Speed*3, Speed*3, Speed*3);
+        _speed = new Vector3(Speed * 3, Speed * 3, Speed * 3);
         if (Waypoints.Count <= 1)
             gameObject.GetComponent<EnemyScript>().StartOffset = true;
         _waypoint = Waypoints[0];
-        if(!gameObject.GetComponent<EnemyScript>().StartOffset)
+        if (!gameObject.GetComponent<EnemyScript>().StartOffset)
             Patrol();
     }
 
@@ -80,15 +85,20 @@ public class EnemyMovement : MonoBehaviour {
     //}
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            Debug.Log(gameObject.name+" - My position is: " + gameObject.transform.position + " and I am heading to: " + _waypoint.transform.position + " with the last known target position at: " + _lastKnownTargetPosition);
+        }
         //Debug.Log(navigator.isStopped);
         if (target != null)
         {
             //Debug.Log(_state +" with target in vision: "+_inVision);
             _distanceToTarget = (target.transform.position - gameObject.transform.position).magnitude;
-            if (_distanceToTarget<RangeDistance)
+            if (_distanceToTarget < RangeDistance)
             {
-                Utils.ChangeGameObjectColor(gameObject, Color.white);
+                Utils.ChangeGameObjectColorTo(gameObject, Color.white);
                 CheckVision();
             }
             else
@@ -96,7 +106,7 @@ public class EnemyMovement : MonoBehaviour {
                 _inVision = false;
             }
 
-            
+
 
             if (_inVision)
             {
@@ -110,52 +120,62 @@ public class EnemyMovement : MonoBehaviour {
                 else
                 {
                     navigator.isStopped = true;
-                    transform.LookAt(target.transform);
-                    _lastKnownTargetPosition = target.transform.position;
+                    //transform.LookAt(target.transform);
+                    SetLastPositionToTarget();
                     _lookWait++;
                 }
-
             }
             else
             {
                 //Debug.Log(_waypoint.transform.position + " si the waypoint with the last position = " + _lastKnownTargetPosition + " | obj pos = " +transform.position);
-                //Debug.Log((transform.position - _lastKnownTargetPosition).magnitude);
-                if ((transform.position - _lastKnownTargetPosition).magnitude < 1.3f)
+
+                if (IsRanged)
                 {
+                    _wait = InitialDelay;
+                }
+                if (_waypoint == null)
+                {
+                    //Debug.Log(gameObject.name + " has null waypoint");
+                }
+                else
+                if ((transform.position - _lastKnownTargetPosition).magnitude < 0.5f)
+                {
+                    //Debug.Log("at last known position");
+                    //Debug.Log(_wait);
                     if (_wait <= 0)
                     {
 
-                        Debug.Log("Patrolling");
+                        //Debug.Log("Patrolling");
                         Patrol();
                     }
                     _wait--;
                 }
                 else
                 {
+                    //Debug.Log("walking");
                     _wait = Wait;
                     _state = State.walk;
                 }
             }
-
             if (_state != State.shoot)
             {
                 navigator.isStopped = false;
-                if (IsRanged)
-                    _wait = InitialDelay;
+                
                 //gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, true);
             }
             else if (IsRanged)
             {
-                //Debug.Log("Is looking");
-                transform.LookAt(target.transform);
-                SetWaypoint(target,false);
+                //Debug.Log("setting waypoiny to: " + target.transform.position);
+                //transform.LookAt(target.transform);
+                SetWaypoint(target);
                 navigator.isStopped = true;
             }
+
         }
         //Debug.Log(_state + " is the state, with the player in vision: " + _inVision + " also with the enemy being stopped: " + navigator.isStopped);
     }
 
-    public void SetWaypoint(GameObject waypoint, bool disturbance)
+    public void SetWaypoint(GameObject waypoint)
     {
         if (navigator == null)
         {
@@ -163,40 +183,46 @@ public class EnemyMovement : MonoBehaviour {
         }
         else
         {
-            //Debug.Log("Set Waypoint");
+            //if(waypoint)
+            //Debug.Log("Set Waypoint to: " + waypoint.transform.position);
             _waypoint = waypoint;
             //_state = State.patroling;
             if (navigator != null && navigator.isActiveAndEnabled)
             {
-                if (waypoint != null) {
-                    navigator.SetDestination(waypoint.transform.position);
+                if (_waypoint != null) {
+                    navigator.SetDestination(_waypoint.transform.position);
                 }
             }
-            
+
         }
     }
-    
+
 
     private void Patrol()
     {
-        //Debug.Log("Set patrol");
+        //Debug.Log("On patrol");
         //Debug.Log(navigator==null);
         if (navigator != null && navigator.isActiveAndEnabled)
         {
             //Debug.Log("SHIT WENT DOWN");
-            if (_waypoint != null) {
+            if (_waypoint != null)
+            {
+                //Debug.Log("set destination to: "+_waypoint.transform.position);
                 navigator.SetDestination(_waypoint.transform.position);
+                gameObject.GetComponent<EnemyScript>().OnCheckpoint(_waypoint, false);
             }
         }
-        gameObject.GetComponent<EnemyScript>().OnCheckpoint(_waypoint, false);
         //_state = State.patroling;
     }
 
     private void SetTragetDestinationToPPosition(Vector3 pos)
     {
         //Debug.Log("setting target location to go to is = " + pos);
-
+        _tempWaypoint.transform.position = pos;
         navigator.SetDestination(pos);
+        _waypoint=_tempWaypoint;
+        _lastKnownTargetPosition = pos;
+        gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position, false);
         /**
         if (gameObject.GetComponent<Rigidbody>().velocity.magnitude < Speed)
         {
@@ -207,23 +233,21 @@ public class EnemyMovement : MonoBehaviour {
         }
         /**/
     }
-    
+
     private void CheckVision()
     {
 
-        //Vector3 reltivePoint = transform.InverseTransformPoint(target.transform.position);
         Vector3 directionToTarget = transform.position - target.transform.position;
         float angle = Vector3.Angle(transform.forward, directionToTarget);
         if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
         {
-            //Debug.Log("target is in front of me with angle = " + angle);
-            //return;
             _inVision = true;
-
-            //Debug.Log(reltivePoint);
-            if (_distanceToTarget < MeleeDistance)//&& reltivePoint.z > -_vision && reltivePoint.z < _vision)
+            _targetPosSameY = target.transform.position;
+            _targetPosSameY.y = transform.position.y;
+            if (_distanceToTarget < MeleeDistance)
             {
                 StopMovement();
+                transform.LookAt(_targetPosSameY);
                 //Debug.Log("In melee range");
                 _state = State.knife;
                 //Debug.Log("About to attack (Melee)");
@@ -233,46 +257,36 @@ public class EnemyMovement : MonoBehaviour {
             RaycastHit hit = new RaycastHit();
             if (Physics.Linecast(transform.position, target.transform.position, out hit))
             {
-                //if (reltivePoint.z>-_vision && reltivePoint.z < _vision)
+                if (hit.transform.tag == "Player")
                 {
-                    if (hit.transform.tag == "Player")
-                    {
-                        _lastKnownTargetPosition = hit.transform.position;
-                        _state = State.shoot;
-                        //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
-                        //navigator.SetDestination(transform.position);
-                        //StopMovement();
-                    }
-                    else
-                    {
-                        _inVision = false;
-                        _lookWait = 0;
+                    SetLastPositionToTarget();
+                    _state = State.shoot;
+                    transform.LookAt(_targetPosSameY);
+                    gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position,true);
+                    //navigator.SetDestination(transform.position);
+                    //StopMovement();
+                }
+                else
+                {
+                    _inVision = false;
+                    _lookWait = 0;
 
-                        navigator.isStopped = false;
-                        if (_state == State.shoot)
-                        {
-                            gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position);
-                        }
-                        else
-                        {
-                            Debug.Log("after agro");
-                            //navigator.isStopped = true;
-                            gameObject.GetComponent<EnemyScript>().OnCheckpoint(target, false);
-                            //gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position);
-                        }
-                        //Debug.Log("no vision");
-                    }
+                    navigator.isStopped = false;
+                    _state = State.none;
+                    //Debug.Log("no vision");
                 }
             }
             else
             {
                 //if (hit.transform.tag == "Player")
                 //{
-                if (hit.transform != null)//&& reltivePoint.z > -_vision && reltivePoint.z < _vision)
+                if (hit.transform != null)
                 {
                     Debug.Log("not sure");
-                    _lastKnownTargetPosition = hit.transform.position;
+                    SetLastPositionToTarget();
                     _state = State.shoot;
+                    transform.LookAt(_targetPosSameY);
+                    gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position, true);
                 }
                 //gameObject.GetComponent<EnemyScript>().OnCheckpoint(gameObject, true);
                 //navigator.SetDestination(transform.position);
@@ -282,7 +296,6 @@ public class EnemyMovement : MonoBehaviour {
                 //    Debug.Log("no vision");
             }
         }
-        
     }
 
     private void StopMovement()
@@ -290,6 +303,8 @@ public class EnemyMovement : MonoBehaviour {
         //_state = State.knife;
         //Debug.Log("stopping");
         _lastKnownTargetPosition = transform.position;
+        gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(transform.position, false);
+        //navigator.isStopped = true;
         //navigator.SetDestination(transform.position);
     }
 
@@ -308,20 +323,18 @@ public class EnemyMovement : MonoBehaviour {
             //Debug.Log("should move");
             //gameObject.isStatic = false;
             //gameObject.GetComponent<Rigidbody>().constraints = _normalConstraints;
-
-            //Debug.Log("in vision: " + _inVision);
             SetTragetDestinationToPPosition(_lastKnownTargetPosition);
-            
-        }   
+        }
         if (_wait <= 0)
         {
-            
+            //Debug.Log("attacking");
             if (_state == State.shoot && IsRanged)
             {
-                if (target.GetComponent<CombatControls>().Health > 0) {
-                    Utils.ChangeGameObjectColor(gameObject, Color.red);
+                if (target.GetComponent<CombatControls>().Health > 0)
+                {
+                    Utils.ChangeGameObjectColorTo(gameObject, Color.red);
                     target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
-                    gameObject.GetComponent<AudioSource>().PlayOneShot(ShootSound,_volume);
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(ShootSound, _volume);
                     //Debug.Log("shoot shoot");
                 }
                 else
@@ -332,10 +345,11 @@ public class EnemyMovement : MonoBehaviour {
 
             if (_state == State.knife && !IsRanged)
             {
-                if (target.GetComponent<CombatControls>().Health > 0) {
-                    Utils.ChangeGameObjectColor(gameObject, Color.blue);
+                if (target.GetComponent<CombatControls>().Health > 0)
+                {
+                    Utils.ChangeGameObjectColorTo(gameObject, Color.blue);
                     target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
-                    gameObject.GetComponent<AudioSource>().PlayOneShot(KnifeSound,_volume);
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(KnifeSound, _volume);
                     //Debug.Log("Knify knify");
                     StopMovement();
                 }
@@ -346,7 +360,24 @@ public class EnemyMovement : MonoBehaviour {
             }
             _wait = Wait;
         }
+        //Debug.Log("wait=" + _wait);
         _wait--;
+    }
+
+    public void SetLastPositionToTarget()
+    {
+        //Debug.Log("setting last pos to target");
+        _lastKnownTargetPosition = target.transform.position;
+        _tempWaypoint.transform.position = target.transform.position;
+        if (_waypoint == null)
+        {
+            _waypoint = _tempWaypoint;
+        }
+        else
+        {
+            _waypoint = _tempWaypoint;
+        }
+        gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position, false);
     }
 
     public void GiveTarget(GameObject ptarget)
@@ -355,3 +386,5 @@ public class EnemyMovement : MonoBehaviour {
         target = ptarget;
     }
 }
+
+
