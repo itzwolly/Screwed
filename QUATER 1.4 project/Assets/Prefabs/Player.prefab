@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 124347899334945184}
   - component: {fileID: 81069206922571690}
   - component: {fileID: 114188004970579302}
+  - component: {fileID: 114795338497938154}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -482,6 +483,7 @@ GameObject:
   - component: {fileID: 114677579122440034}
   - component: {fileID: 143760032261407982}
   - component: {fileID: 114335103220306382}
+  - component: {fileID: 82269264627785856}
   m_Layer: 1
   m_Name: Player
   m_TagString: Player
@@ -1001,8 +1003,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.4, y: 1.5, z: -11.2}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: 7.36, y: 1.06, z: -3.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4779334595069844}
@@ -1012,7 +1014,7 @@ Transform:
   - {fileID: 4822726966069334}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 305.32, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.99998, z: 0}
 --- !u!4 &4954435746252336
 Transform:
   m_ObjectHideFlags: 1
@@ -1051,12 +1053,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294965757
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1082,7 +1084,7 @@ Camera:
   far clip plane: 1000
   field of view: 68
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 15
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1251,6 +1253,86 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619068457850646}
   m_Enabled: 1
+--- !u!82 &82269264627785856
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904222018087564}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 0
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &82888173385141656
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1388,6 +1470,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0466b2879bdf10746bb78c9fd52fb561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FootstepsClip: {fileID: 8300000, guid: 3a8adcdb6844c0d40ab3f35469ab2eb9, type: 3}
+  JumpClip: {fileID: 8300000, guid: 3a8adcdb6844c0d40ab3f35469ab2eb9, type: 3}
   _speedUnit: 5
   JumpVector: 6
   Sensitivity: 0.52
@@ -1422,6 +1506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2f8beb62b965942a41fa1ed5597c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KnifeSelectClip: {fileID: 8300000, guid: 12690b9090974964aadb003f7a468b44, type: 3}
+  GunSelectClip: {fileID: 8300000, guid: f11495c97da90674da0deaf7e0bd751e, type: 3}
   _weapons:
   - {fileID: 1312937431254352}
   - {fileID: 1127476663178162}
@@ -1437,12 +1523,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f496c5899dc754ea18a1e545e2bba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootClip: {fileID: 8300000, guid: 067a66667de3f7c42ae906fde6417c7f, type: 3}
+  KnifeClip: {fileID: 8300000, guid: f4bc94bb5258f0b43a22fac77b8b7da3, type: 3}
+  DeathClip: {fileID: 8300000, guid: 955c0b0814e8a1e4a98ea0b7cbbea505, type: 3}
+  WinClip: {fileID: 8300000, guid: 72ce5806fca33df43aa39fc15d1bca4a, type: 3}
+  HitClip: {fileID: 8300000, guid: 2f1af2e461a720f4ba4719f295b1b848, type: 3}
+  DryFireClip: {fileID: 8300000, guid: ce5b8659f2dd0ba47a9cd0d53bfb2ea3, type: 3}
+  EnemyGotHitBodyClip: {fileID: 8300000, guid: 4f2c96be8b6b4034a87e4b8136614c14, type: 3}
+  EnemyGotHitHeadClip: {fileID: 8300000, guid: d811bb82fd8228b4685aa762a174f631, type: 3}
+  BackstabClip: {fileID: 8300000, guid: d811bb82fd8228b4685aa762a174f631, type: 3}
   _statManager: {fileID: 0}
   _weaponHandler: {fileID: 114211386112779860}
   _distance: 3
   _angle: 35
   _camera: {fileID: 20179079148697356}
-  _ammoCount: 7
+  _ammoIncrease: 7
   _health: 4
   _maxShieldAmount: 100
   _minShieldAmount: 0
@@ -1468,19 +1563,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gunPickup: {fileID: 0}
+  GunPickupClip: {fileID: 8300000, guid: c612ba1218c014542981bc941e74aacc, type: 3}
 --- !u!114 &114366688855442248
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1723965114059502}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98d05a186c3bc4440bdcae699daf7a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Music: {fileID: 8300000, guid: aba78b7d23c2c1b4d80e8e9fcce7495b, type: 3}
-  _volume: 0
+  Music: {fileID: 8300000, guid: a7f5f2b242bc4574ab05e6407e183a9f, type: 3}
+  _volume: 100
 --- !u!114 &114677579122440034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1495,8 +1591,8 @@ MonoBehaviour:
   _mainCamera: {fileID: 20179079148697356}
   _hud: {fileID: 0}
   _resolutionDisplay: {fileID: 0}
-  _deathMessage: You are SCREWED
-  _winMessage: You have SCREWED them
+  _deathMessage: R to Restart
+  _winMessage: ALT+F4 TO EXIT
 --- !u!114 &114751767615438948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1510,6 +1606,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshairTexture: {fileID: 2800000, guid: e721eb19692224949bc1d7f4787c01b6, type: 3}
   crosshairScale: 2
+--- !u!114 &114795338497938154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619068457850646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: c7da424d235df1442a19db43839ab83e, type: 2}
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1

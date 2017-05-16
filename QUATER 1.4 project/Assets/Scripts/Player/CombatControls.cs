@@ -4,6 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CombatControls : MonoBehaviour {
+
+    public AudioClip ShootClip;
+    public AudioClip KnifeClip;
+    public AudioClip DeathClip;
+    public AudioClip WinClip;
+    public AudioClip HitClip;
+    public AudioClip DryFireClip;
+    public AudioClip EnemyGotHitBodyClip;
+    public AudioClip EnemyGotHitHeadClip;
+    public AudioClip BackstabClip;
+    private AudioSource audio;
+
     [SerializeField] private GameObject _statManager;
 
     [SerializeField] private WeaponHandler _weaponHandler;
@@ -11,7 +23,7 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private float _angle;
 
     [SerializeField] private Camera _camera;
-    [SerializeField] private int _ammoCount;
+    [SerializeField] private int _ammoIncrease;
     [SerializeField] private int _health;
 
     [SerializeField] private int _maxShieldAmount;
@@ -30,6 +42,7 @@ public class CombatControls : MonoBehaviour {
 
     //[SerializeField] private string[] _levelNames;
 
+    private int _ammoCount;
     private Animation _anim;
     private int _currentShieldAmmount;
     private bool _blocking;
@@ -76,9 +89,15 @@ public class CombatControls : MonoBehaviour {
     }
 
 
+    public void IncreaseAmmo()
+    {
+        _ammoCount += _ammoIncrease;
+    }
     // Use this for initialization
     void Start ()
     {
+       // audio = gameObject.AddComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
         _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
         /**
@@ -102,6 +121,8 @@ public class CombatControls : MonoBehaviour {
         Debug.Log(" Blockedshots: "+_blockedShots+" Totalkills: "+_totalKills);
         Debug.Log(" Secretsgathered: "+_secretsGathered);
         /**/
+        
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             //here it goes to in game menu
@@ -130,10 +151,16 @@ public class CombatControls : MonoBehaviour {
 
             if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
                 if (_ammoCount > 0) {
+                    audio.PlayOneShot(ShootClip);
                     RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
+                }
+                else
+                {
+                    audio.PlayOneShot(DryFireClip);
                 }
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
                 if (!_anim.isPlaying) {
+                    audio.PlayOneShot(KnifeClip);
                     _anim.Play("AttackEditable");
                     MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
                 }
@@ -170,8 +197,10 @@ public class CombatControls : MonoBehaviour {
         if (IsDead) {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
+            audio.PlayOneShot(DeathClip);
         } else if (HasWon()) {
             //Debug.Log(Utils.LatestLevel());
+            audio.PlayOneShot(WinClip);
             if (Utils.LatestLevel() == 2) {
                 SceneManager.LoadScene("level02");
             } else {
@@ -210,6 +239,7 @@ public class CombatControls : MonoBehaviour {
             if (pHit.collider.transform.name=="Enemy Head")
             {
                 //Debug.Log("You headshot you filthy animal");
+                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip);
                 _successfullShots++;
                 _successfullHeadshots++;
                 _comboCount++;
@@ -217,6 +247,7 @@ public class CombatControls : MonoBehaviour {
                 TakeDamage(pHit.transform, true);
             }
             else if (pHit.transform.tag == pTarget) {
+                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
                 _successfullShots++;
                 _comboCount++;
                 _comboWait = 0;
@@ -234,6 +265,7 @@ public class CombatControls : MonoBehaviour {
             if (pHit.collider.transform.name == "Enemy Head")
             {
                 //Debug.Log("You headshot you filthy animal");
+                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip);
                 _successfullShots++;
                 _successfullHeadshots++;
                 _comboCount++;
@@ -242,6 +274,7 @@ public class CombatControls : MonoBehaviour {
             }
             else if (pHit.transform.tag == pTarget)
             {
+                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
                 _successfullShots++;
                 _comboCount++;
                 _comboWait = 0;
@@ -315,28 +348,33 @@ public class CombatControls : MonoBehaviour {
                 {
                     Debug.Log("backstab");
                     behind = true;
+                    hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(BackstabClip);
+                    
                 }
 
-                    _successfullKnives++;
-                        if (pAoeType == WeaponAOEType.Single)
-                        {
-                            //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
-                            if (GetClosestEnemy(hitColliders, pRadius) != null)
-                            {
-                                //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
-                                _comboCount++;
-                                _comboWait = 0;
-                                TakeDamage(GetClosestEnemy(hitColliders, pRadius), behind);
-                                break;
-                            }
-                        }
-                        else if (pAoeType == WeaponAOEType.Multi)
-                        {
-                            _comboCount++;
-                            _comboWait = 0;
-                            //Debug.Log(hitColliders[i].name + " has been hit.");
-                            TakeDamage(hitColliders[i].transform, behind);
-                        }
+                _successfullKnives++;
+                if (pAoeType == WeaponAOEType.Single)
+                {
+                    //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
+                    if (GetClosestEnemy(hitColliders, pRadius) != null)
+                    {
+                       // Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
+                        _comboCount++;
+                        _comboWait = 0;
+                        hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
+                        //Debug.Log("get hit soundource is "+hitColliders[i].GetComponent<AudioSource>().name);
+                        TakeDamage(GetClosestEnemy(hitColliders, pRadius), behind);
+                        break;
+                    }
+                }
+                else if (pAoeType == WeaponAOEType.Multi)
+                {
+                    _comboCount++;
+                    _comboWait = 0;
+            //Debug.Log(hitColliders[i].name + " has been hit.");
+                    hitColliders[i].GetComponent<AudioSource>().PlayOneShot(EnemyGotHitBodyClip);
+                    TakeDamage(hitColliders[i].transform, behind);
+                }
                 
             }
             i++;
@@ -373,7 +411,7 @@ public class CombatControls : MonoBehaviour {
             _completedLevelWithoutDmg = false;
             _comboCount = 0;
             _comboWait = 0;
-
+            audio.PlayOneShot(HitClip);
             _health -= pAmount;
             if (_health == 3) {
                 _cracks[0].SetActive(true);
