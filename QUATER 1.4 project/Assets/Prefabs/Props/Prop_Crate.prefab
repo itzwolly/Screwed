@@ -21,8 +21,7 @@ GameObject:
   - component: {fileID: 4166864204501018}
   - component: {fileID: 33068914567265084}
   - component: {fileID: 23613365394597130}
-  - component: {fileID: 95839507862409948}
-  - component: {fileID: 64255371146034166}
+  - component: {fileID: 65987015347377874}
   m_Layer: 0
   m_Name: Prop_Crate
   m_TagString: Untagged
@@ -36,13 +35,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1935361625378908}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.784, y: 0.49, z: -5.87}
+  m_LocalRotation: {x: -0, y: -0.2588186, z: -0, w: 0.965926}
+  m_LocalPosition: {x: 4.125, y: 2.37, z: -7.139}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -30.000002, z: 0}
 --- !u!23 &23613365394597130
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -82,8 +81,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1935361625378908}
   m_Mesh: {fileID: 4300000, guid: 50908dfd8ab431f4d86f52bdf19112b1, type: 3}
---- !u!64 &64255371146034166
-MeshCollider:
+--- !u!65 &65987015347377874
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -92,24 +91,5 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 50908dfd8ab431f4d86f52bdf19112b1, type: 3}
---- !u!95 &95839507862409948
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1935361625378908}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 50908dfd8ab431f4d86f52bdf19112b1, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_Size: {x: 1.0575738, y: 1.039005, z: 1.0575738}
+  m_Center: {x: 0.00000008940697, y: 0.000000029802322, z: 0}
