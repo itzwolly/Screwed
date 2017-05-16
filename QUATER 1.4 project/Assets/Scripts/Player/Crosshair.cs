@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour {
     [SerializeField] private Texture2D crosshairTexture;
-    [SerializeField] private float crosshairScale = 1;
+    [SerializeField] private float crosshairScale;
+
 
     // Use this for initialization
     void Start () {
-		
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
