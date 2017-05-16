@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Testingenemyai.unity
+=======
+- path: Assets/Scenes/level05.unity
+>>>>>>> 5a4fa3eb924e0fd1fc6cebbc070c38157c8e2a5e
   isLoaded: 1
   isActive: 1

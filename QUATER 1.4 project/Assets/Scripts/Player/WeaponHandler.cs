@@ -16,6 +16,11 @@ public enum WeaponAOEType {
 }
 
 public class WeaponHandler : MonoBehaviour {
+
+    public AudioClip KnifeSelectClip;
+    public AudioClip GunSelectClip;
+    private AudioSource audio;
+
     private WeaponType _weaponType;
     private WeaponAOEType _weaponAOEType;
     [SerializeField] private GameObject[] _weapons;
@@ -38,6 +43,8 @@ public class WeaponHandler : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        audio = gameObject.GetComponent<AudioSource>();
+
         _weaponType = WeaponType.Melee;
         _weaponAOEType = WeaponAOEType.Single;
     }
@@ -47,6 +54,7 @@ public class WeaponHandler : MonoBehaviour {
 		if (Input.GetKeyUp("1")) {
             if (_hasGun) {
                 _weaponType = WeaponType.Ranged;
+                audio.PlayOneShot(GunSelectClip);
                 if (!_weapons[1].activeInHierarchy) {
                     _weapons[0].SetActive(false);
                     _weapons[1].SetActive(true);
@@ -54,6 +62,7 @@ public class WeaponHandler : MonoBehaviour {
             }
         } else if (Input.GetKeyUp("2")) {
             _weaponType = WeaponType.Melee;
+            audio.PlayOneShot(KnifeSelectClip);
             if (!_weapons[0].activeInHierarchy) {
                 _weapons[0].SetActive(true);
                 _weapons[1].SetActive(false);
@@ -83,7 +92,8 @@ public class WeaponHandler : MonoBehaviour {
     private void SwitchToNextWeapon() {
         if (_weaponType == WeaponType.Melee) {
 			if (_hasGun) {
-			    _weaponType = WeaponType.Ranged;
+                audio.PlayOneShot(GunSelectClip);
+                _weaponType = WeaponType.Ranged;
 				if (!_weapons[1].activeInHierarchy) {
 					_weapons[0].SetActive(false);
 					_weapons[1].SetActive(true);
@@ -91,6 +101,7 @@ public class WeaponHandler : MonoBehaviour {
 			}
         } else {
             _weaponType = WeaponType.Melee;
+            audio.PlayOneShot(KnifeSelectClip);
             if (!_weapons[0].activeInHierarchy) {
                 _weapons[0].SetActive(true);
                 _weapons[1].SetActive(false);
