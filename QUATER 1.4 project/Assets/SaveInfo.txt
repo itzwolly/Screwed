@@ -1,3 +1,3 @@
 musicaudio: 0
 effectaudio: 100
-onlevel: 1
+onlevel: 3

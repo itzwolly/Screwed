@@ -99,8 +99,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_LocalRotation: {x: -0, y: -0.9999674, z: -0, w: -0.008082494}
-  m_LocalPosition: {x: -12.043223, y: 0, z: -1.3875084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.438201, y: 0.5, z: -1.3478725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4404857394220228}
@@ -187,7 +187,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -308,13 +308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188c46c7cf3a61e4196e52a54508b610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LookAngle: 45
   enemyKilledText: {fileID: 0}
   Waypoints:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   MinDistanceToWaypoint: 3
-  StartOffset: 0
+  StartOffset: 1
   ChooseRandomWaypoint: 0
   AlertDistance: 20
   WaitTimeAtWaypoint: 100
@@ -322,6 +321,7 @@ MonoBehaviour:
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}
   _health: 4
+  _HitMarkerDisplay: {fileID: 0}
 --- !u!135 &135923999584545616
 SphereCollider:
   m_ObjectHideFlags: 1

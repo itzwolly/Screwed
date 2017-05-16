@@ -74,6 +74,10 @@ public class CombatControls : MonoBehaviour {
     public int MaxShieldAmount {
         get { return _maxShieldAmount; }
     }
+    public Animation Animation {
+        get { return _anim; }
+        set { _anim = value; }
+    }
 
 
     // Use this for initialization
@@ -130,10 +134,19 @@ public class CombatControls : MonoBehaviour {
 
             if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
                 if (_ammoCount > 0) {
-                    RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
+                    _anim.Stop("IdleEditable"); // stop idle animation
+                    if (!_anim.isPlaying) { // fail safe
+                        if (_anim["ShootEditable"].speed != 3.0f)
+                        _anim["ShootEditable"].speed = 3.0f;
+                        _anim.Play("ShootEditable"); // play shoot animation
+                        RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
+                    }
                 }
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
+                _anim.Stop("IdleEditable");
                 if (!_anim.isPlaying) {
+                    if (_anim["AttackEditable"].speed != 2.0f)
+                    _anim["AttackEditable"].speed = 2.0f;
                     _anim.Play("AttackEditable");
                     MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
                 }
@@ -193,14 +206,16 @@ public class CombatControls : MonoBehaviour {
             _comboWait++;
         }
 
-        if (_startTimer == true) {
-            _timer += Time.deltaTime;
-            if (_timer > 0.5) {
-                _startTimer = false;
-                _timer = 0;
-                Utils.ChangeGameObjectsColor(GameObject.FindGameObjectsWithTag("Enemy"), Color.red, new Color(1, 1, 1, 1));
-            }
-        }
+        //if (_startTimer == true) {
+        //    _timer += Time.fixedDeltaTime;
+        //    Debug.Log(_timer);
+        //    if (_timer > 0.5f) {
+        //        _startTimer = false;
+        //        Debug.Log("Revert back to regular color");
+        //        //Utils.ChangeGameObjectsColor(GameObject.FindGameObjectsWithTag("Enemy"), Color.red, new Color(1, 1, 1, 1));
+        //        _timer = 0;
+        //    }
+        //}
     }
 
     private void RangedDamage(Ray pOther, RaycastHit pHit, string pTarget) {
@@ -256,7 +271,8 @@ public class CombatControls : MonoBehaviour {
     }
 
     private void TakeDamage(Transform pTarget, bool headshot) {
-        Utils.ChangeGameObjectColorTo(pTarget.gameObject, Color.red);
+        //Debug.Log("Changing to red..");
+        //Utils.ChangeGameObjectColorTo(pTarget.gameObject, Color.red);
         pTarget.LookAt(gameObject.transform.position);
         if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
             pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
@@ -283,7 +299,7 @@ public class CombatControls : MonoBehaviour {
             _totalKills++;
             Destroy(pTarget.gameObject);
         }
-        _startTimer = true;
+        //_startTimer = true;
     }
 
     private void MeleeDamage(Vector3 pCenter, float pRadius, string pTarget, WeaponAOEType pAoeType) {
@@ -291,7 +307,6 @@ public class CombatControls : MonoBehaviour {
         Collider[] hitColliders = Physics.OverlapSphere(pCenter, pRadius);
         _totalKnives++;
         while (i < hitColliders.Length) {
-            
             if (hitColliders[i].transform.tag == pTarget) {
                 _successfullKnives++;
                 //Debug.Log(hitColliders[i].name + " is in range of attacks.");
@@ -301,14 +316,14 @@ public class CombatControls : MonoBehaviour {
                         //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
                         _comboCount++;
                         _comboWait = 0;
-                        TakeDamage(GetClosestEnemy(hitColliders, pRadius),false);
+                        TakeDamage(GetClosestEnemy(hitColliders, pRadius), false);
                         break;
                     }
                 } else if (pAoeType == WeaponAOEType.Multi) {
                     _comboCount++;
                     _comboWait = 0;
                     //Debug.Log(hitColliders[i].name + " has been hit.");
-                    TakeDamage(hitColliders[i].transform,false);
+                    TakeDamage(hitColliders[i].transform, false);
                 }
             }
             i++;
