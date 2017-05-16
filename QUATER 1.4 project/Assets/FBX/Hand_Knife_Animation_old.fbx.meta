@@ -1,0 +1,329 @@
+fileFormatVersion: 2
+guid: 33439c0e8f5a10e4db7f4c0fe1315230
+timeCreated: 1494928826
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Ball
+    100002: Finger_Base
+    100004: Finger_End
+    100006: Finger_Middle
+    100008: Hand
+    100010: Hand 1
+    100012: //RootNode
+    100014: Knife
+    100016: Middle_Finger_Base
+    100018: Middle_Finger_End
+    100020: Middle_Finger_M
+    100022: Root
+    100024: Small_Finger_Base
+    100026: Small_Finger_End
+    100028: Small_Finger_Middle
+    100030: Tumb_Base
+    100032: Tumb_End
+    100034: Tumb_Middle
+    100036: Weapon
+    100038: Wrist
+    400000: Ball
+    400002: Finger_Base
+    400004: Finger_End
+    400006: Finger_Middle
+    400008: Hand
+    400010: Hand 1
+    400012: //RootNode
+    400014: Knife
+    400016: Middle_Finger_Base
+    400018: Middle_Finger_End
+    400020: Middle_Finger_M
+    400022: Root
+    400024: Small_Finger_Base
+    400026: Small_Finger_End
+    400028: Small_Finger_Middle
+    400030: Tumb_Base
+    400032: Tumb_End
+    400034: Tumb_Middle
+    400036: Weapon
+    400038: Wrist
+    4300000: Hand
+    4300002: Knife
+    7400000: Attack
+    7400002: Idle
+    7400004: Switch
+    9500000: //RootNode
+    13700000: Hand
+    13700002: Knife
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hand
+        weight: 1
+      - path: Knife
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Ball
+        weight: 1
+      - path: Root/Ball/Wrist
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base/Finger_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base/Finger_Middle/Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base/Middle_Finger_M
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base/Middle_Finger_M/Middle_Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base/Small_Finger_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base/Small_Finger_Middle/Small_Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base/Tumb_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base/Tumb_Middle/Tumb_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Weapon
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 21
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hand
+        weight: 1
+      - path: Knife
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Ball
+        weight: 1
+      - path: Root/Ball/Wrist
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base/Finger_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base/Finger_Middle/Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base/Middle_Finger_M
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base/Middle_Finger_M/Middle_Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base/Small_Finger_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base/Small_Finger_Middle/Small_Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base/Tumb_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base/Tumb_Middle/Tumb_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Weapon
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Switch
+      takeName: Take 001
+      firstFrame: 100
+      lastFrame: 121
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hand
+        weight: 1
+      - path: Knife
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Ball
+        weight: 1
+      - path: Root/Ball/Wrist
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base/Finger_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Finger_Base/Finger_Middle/Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base/Middle_Finger_M
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Middle_Finger_Base/Middle_Finger_M/Middle_Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base/Small_Finger_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Small_Finger_Base/Small_Finger_Middle/Small_Finger_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base/Tumb_Middle
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Tumb_Base/Tumb_Middle/Tumb_End
+        weight: 1
+      - path: Root/Ball/Wrist/Hand 1/Weapon
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

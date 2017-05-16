@@ -29,9 +29,12 @@ public class EnemyScript : MonoBehaviour {
     private bool _lookedLeft;
     private bool _lookedRight;
     private bool _notSetLooks;
+
+    private bool _hasBeenHit;
+    [SerializeField] private GameObject _HitMarkerDisplay;
+
     private float _loseAttention;
     private bool _loosingAttention;
-
 
     public int Health
     {
@@ -40,6 +43,9 @@ public class EnemyScript : MonoBehaviour {
     public bool IsDead
     {
         get { return _health == 0; }
+    }
+    public bool HasBeenHit {
+        get { return _hasBeenHit; } 
     }
 
     // Use this for initialization
@@ -156,8 +162,6 @@ public class EnemyScript : MonoBehaviour {
         {
             Debug.Log(gameObject.name + " My position is: " + gameObject.transform.position + " and I am heading to: " + _currentWaypoint.transform.position);
         }
-
-
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         if(_currentWaypoint!=null)
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
@@ -183,7 +187,6 @@ public class EnemyScript : MonoBehaviour {
             //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
 
             OnCheckpoint(_currentWaypoint, false);
-
         }
         else
         {
@@ -243,7 +246,10 @@ public class EnemyScript : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if(enemyKilledTextAnimator!=null)
+        if (_HitMarkerDisplay != null) {
+            _HitMarkerDisplay.GetComponent<HitmarkerDisplay>().EnemyDestroyed = true;
+        }
+        if (enemyKilledTextAnimator!=null)
         enemyKilledTextAnimator.SetTrigger("EnemyKilled");
         if (Handler != null) {
             Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
@@ -252,15 +258,17 @@ public class EnemyScript : MonoBehaviour {
 
     public void DecreaseHealth(int pAmount)
     {
-        if (_health > 0)
-        {
+        if (_health > 0) {
             _health -= pAmount;
+            StartCoroutine(_HitMarkerDisplay.GetComponent<HitmarkerDisplay>().Wait(_HitMarkerDisplay.GetComponent<HitmarkerDisplay>().WaitInSeconds));
             if (_health < 0)
             {
                 _health = 0;
             }
         }
     }
+
+    
 }
 
 

@@ -8,10 +8,14 @@ public class ShieldDisplay : MonoBehaviour {
 
     [SerializeField] private GameObject _player;
     [SerializeField] private Image _image;
-    [SerializeField] private Image _blinkImage;
+    [SerializeField] private Image _shieldImage;
     [Range(0, 1)] [SerializeField] private float _threshold;
     [Range(0, 5)] [SerializeField] private float _timeBetweenBlinks;
     [SerializeField] private int _amountOfBlinks;
+
+
+    [SerializeField]
+    private Color _color;
 
     private CombatControls _combatControls;
     private Color _originalColor;
@@ -21,7 +25,7 @@ public class ShieldDisplay : MonoBehaviour {
 	void Start () {
         _combatControls = _player.GetComponent<CombatControls>();
         _originalColor = _image.color;
-        _blinkImage.gameObject.SetActive(false);
+        //_blinkImage.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -30,11 +34,14 @@ public class ShieldDisplay : MonoBehaviour {
 
         if (_image.fillAmount == 1) {
             if (!_blinkOnce) {
+                _shieldImage.gameObject.SetActive(false);
                 StartCoroutine(DoBlinks(_amountOfBlinks, _timeBetweenBlinks));
             }
         } else {
             _blinkOnce = false;
-            _blinkImage.gameObject.SetActive(false);
+            _shieldImage.gameObject.SetActive(true);
+            //_blinkImage.gameObject.SetActive(false);
+            _image.color = Color.white;
 
             if (_image.fillAmount < _threshold) {
                 _image.color = Color.red;
@@ -49,13 +56,17 @@ public class ShieldDisplay : MonoBehaviour {
 
         for (int i = 0; i < pNumBlinks * 2; i++) {
             if (_blinkOnce) {
-                _blinkImage.gameObject.SetActive(!_blinkImage.gameObject.activeSelf);
-
+                _image.color = (_image.color == Color.white ? _color : Color.white);
+                if (_image.color == _color) {
+                    _shieldImage.gameObject.SetActive(false);
+                } else {
+                    _shieldImage.gameObject.SetActive(true);
+                }
                 yield return new WaitForSeconds(pSeconds);
             }
             
         }
-        
-        _blinkImage.gameObject.SetActive(true);
+        _image.color = _color;
+        _shieldImage.gameObject.SetActive(false);
     }
 }

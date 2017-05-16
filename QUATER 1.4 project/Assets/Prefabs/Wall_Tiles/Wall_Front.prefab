@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33434930412195804}
   - component: {fileID: 23873692300526150}
   - component: {fileID: 64894943995848940}
-  - component: {fileID: 65080168315018416}
   m_Layer: 8
   m_Name: Wall_Front
   m_TagString: Untagged
@@ -66,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291599376017718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.36, y: 0, z: -10.36}
+  m_LocalPosition: {x: 3.64, y: -0, z: -18.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4498551469460878}
@@ -126,18 +125,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 080e0f0063830704aaa5c40fffb177ee, type: 3}
---- !u!65 &65080168315018416
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1291599376017718}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 5.176601, z: 0.5}
-  m_Center: {x: 0, y: 2.5822222, z: 0}
 --- !u!212 &212325069720722846
 SpriteRenderer:
   m_ObjectHideFlags: 1

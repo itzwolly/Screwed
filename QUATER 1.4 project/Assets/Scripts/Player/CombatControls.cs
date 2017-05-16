@@ -87,6 +87,10 @@ public class CombatControls : MonoBehaviour {
     public int MaxShieldAmount {
         get { return _maxShieldAmount; }
     }
+    public Animation Animation {
+        get { return _anim; }
+        set { _anim = value; }
+    }
 
 
     public void IncreaseAmmo()
@@ -151,15 +155,24 @@ public class CombatControls : MonoBehaviour {
 
             if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
                 if (_ammoCount > 0) {
-                    audio.PlayOneShot(ShootClip);
-                    RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
+                    _anim.Stop("IdleEditable"); // stop idle animation
+                    if (!_anim.isPlaying) { // fail safe
+                        if (_anim["ShootEditable"].speed != 3.0f)
+                        _anim["ShootEditable"].speed = 3.0f;
+						audio.PlayOneShot(ShootClip);
+                        _anim.Play("ShootEditable"); // play shoot animation
+                        RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
+                    }
                 }
                 else
                 {
                     audio.PlayOneShot(DryFireClip);
                 }
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
+                _anim.Stop("IdleEditable");
                 if (!_anim.isPlaying) {
+                    if (_anim["AttackEditable"].speed != 2.0f)
+                    _anim["AttackEditable"].speed = 2.0f;
                     audio.PlayOneShot(KnifeClip);
                     _anim.Play("AttackEditable");
                     MeleeDamage(transform.position, _distance, "Enemy", _weaponHandler.CurrentWeaponAOEType);
@@ -222,14 +235,16 @@ public class CombatControls : MonoBehaviour {
             _comboWait++;
         }
 
-        if (_startTimer == true) {
-            _timer += Time.deltaTime;
-            if (_timer > 0.5) {
-                _startTimer = false;
-                _timer = 0;
-                Utils.ChangeGameObjectsColor(GameObject.FindGameObjectsWithTag("Enemy"), Color.red, new Color(1, 1, 1, 1));
-            }
-        }
+        //if (_startTimer == true) {
+        //    _timer += Time.fixedDeltaTime;
+        //    Debug.Log(_timer);
+        //    if (_timer > 0.5f) {
+        //        _startTimer = false;
+        //        Debug.Log("Revert back to regular color");
+        //        //Utils.ChangeGameObjectsColor(GameObject.FindGameObjectsWithTag("Enemy"), Color.red, new Color(1, 1, 1, 1));
+        //        _timer = 0;
+        //    }
+        //}
     }
 
     private void RangedDamage(Ray pOther, RaycastHit pHit, string pTarget) {
@@ -289,7 +304,8 @@ public class CombatControls : MonoBehaviour {
     }
 
     private void TakeDamage(Transform pTarget, bool headshot) {
-        Utils.ChangeGameObjectColorTo(pTarget.gameObject, Color.red);
+        //Debug.Log("Changing to red..");
+        //Utils.ChangeGameObjectColorTo(pTarget.gameObject, Color.red);
         pTarget.LookAt(gameObject.transform.position);
         if (_weaponHandler.CurrentWeaponType == WeaponType.Melee)
         {
@@ -323,7 +339,7 @@ public class CombatControls : MonoBehaviour {
             _totalKills++;
             Destroy(pTarget.gameObject);
         }
-        _startTimer = true;
+        //_startTimer = true;
     }
 
     private void MeleeDamage(Vector3 pCenter, float pRadius, string pTarget, WeaponAOEType pAoeType) {
@@ -332,7 +348,6 @@ public class CombatControls : MonoBehaviour {
         _totalKnives++;
 
         while (i < hitColliders.Length) {
-            
             if (hitColliders[i].transform.tag == pTarget) {
                 //RaycastHit hit = new RaycastHit();
                 ////Debug.Log("before linecast "+pTarget + " | " + hitColliders[i].transform.name);

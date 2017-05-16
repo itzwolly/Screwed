@@ -639,6 +639,7 @@ MonoBehaviour:
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}
   _health: 3
+  _HitMarkerDisplay: {fileID: 0}
 --- !u!135 &135676248895954568
 SphereCollider:
   m_ObjectHideFlags: 1

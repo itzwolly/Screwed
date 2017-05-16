@@ -31,9 +31,9 @@ MonoBehaviour:
   antialiasing:
     m_Enabled: 1
     m_Settings:
-      method: 0
+      method: 1
       fxaaSettings:
-        preset: 2
+        preset: 3
       taaSettings:
         jitterSpread: 0.75
         sharpen: 0.3
@@ -121,11 +121,11 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 1.5
-        temperature: 2
+        temperature: 13
         tint: -1
         hueShift: -5
         saturation: 0.85
-        contrast: 0.98
+        contrast: 1.08
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
@@ -134,9 +134,9 @@ MonoBehaviour:
       colorWheels:
         mode: 1
         log:
-          slope: {r: 1, g: 0.8931664, b: 0.7928608, a: 0}
-          power: {r: 1, g: 0.89735824, b: 0.8623637, a: 0}
-          offset: {r: 1, g: 0.88840055, b: 0.7966471, a: 0}
+          slope: {r: 1, g: 0.74391127, b: 0.69371307, a: 0}
+          power: {r: 1, g: 0.8813356, b: 0.7220935, a: 0}
+          offset: {r: 1, g: 0.8423895, b: 0.67703915, a: 0}
         linear:
           lift: {r: 1, g: 1, b: 1, a: 0}
           gamma: {r: 1, g: 1, b: 1, a: 0}
@@ -299,7 +299,7 @@ MonoBehaviour:
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
       intensity: 0.415
-      smoothness: 0.143
+      smoothness: 0.275
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
