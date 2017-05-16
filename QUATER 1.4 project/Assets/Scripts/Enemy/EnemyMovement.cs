@@ -7,6 +7,9 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public AudioSource audio;
+    public AudioClip MovementClip;
+
     public bool IsRanged;
 
     public enum State
@@ -60,6 +63,7 @@ public class EnemyMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //Debug.Log("attacking source is "+audio.name);
         _tempWaypoint = new GameObject();
         _volume = Utils.EffectVolume();
         //Debug.Log("effect volume = "+_volume);
@@ -111,6 +115,7 @@ public class EnemyMovement : MonoBehaviour
             if (_inVision)
             {
                 //Debug.Log("looking");
+                
                 EnemyAttack();
                 if (_lookWait >= LookWait)
                 {
@@ -153,6 +158,11 @@ public class EnemyMovement : MonoBehaviour
                 else
                 {
                     //Debug.Log("walking");
+                    if (!audio.isPlaying)
+                    {
+                        //Debug.Log("Play footsteps");
+                        audio.PlayOneShot(MovementClip);
+                    }
                     _wait = Wait;
                     _state = State.walk;
                 }
@@ -244,21 +254,22 @@ public class EnemyMovement : MonoBehaviour
             _inVision = true;
             _targetPosSameY = target.transform.position;
             _targetPosSameY.y = transform.position.y;
-            if (_distanceToTarget < MeleeDistance)
-            {
-                StopMovement();
-                transform.LookAt(_targetPosSameY);
-                //Debug.Log("In melee range");
-                _state = State.knife;
-                //Debug.Log("About to attack (Melee)");
-                return;
-            }
+            
 
             RaycastHit hit = new RaycastHit();
             if (Physics.Linecast(transform.position, target.transform.position, out hit))
             {
                 if (hit.transform.tag == "Player")
                 {
+                    if (_distanceToTarget < MeleeDistance)
+                    {
+                        StopMovement();
+                        transform.LookAt(_targetPosSameY);
+                        //Debug.Log("In melee range");
+                        _state = State.knife;
+                        //Debug.Log("About to attack (Melee)");
+                        return;
+                    }
                     SetLastPositionToTarget();
                     _state = State.shoot;
                     transform.LookAt(_targetPosSameY);
@@ -282,6 +293,15 @@ public class EnemyMovement : MonoBehaviour
                 //{
                 if (hit.transform != null)
                 {
+                    if (_distanceToTarget < MeleeDistance)
+                    {
+                        StopMovement();
+                        transform.LookAt(_targetPosSameY);
+                        //Debug.Log("In melee range");
+                        _state = State.knife;
+                        //Debug.Log("About to attack (Melee)");
+                        return;
+                    }
                     Debug.Log("not sure");
                     SetLastPositionToTarget();
                     _state = State.shoot;
@@ -334,7 +354,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     Utils.ChangeGameObjectColorTo(gameObject, Color.red);
                     target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
-                    gameObject.GetComponent<AudioSource>().PlayOneShot(ShootSound, _volume);
+                    audio.PlayOneShot(ShootSound, _volume);
                     //Debug.Log("shoot shoot");
                 }
                 else
@@ -349,7 +369,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     Utils.ChangeGameObjectColorTo(gameObject, Color.blue);
                     target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
-                    gameObject.GetComponent<AudioSource>().PlayOneShot(KnifeSound, _volume);
+                    audio.PlayOneShot(KnifeSound, _volume);
                     //Debug.Log("Knify knify");
                     StopMovement();
                 }
@@ -378,6 +398,12 @@ public class EnemyMovement : MonoBehaviour
             _waypoint = _tempWaypoint;
         }
         gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position, false);
+    }
+
+    public void ChangeCurrentWaypoint(GameObject waypoint)
+    {
+        SetWaypoint(waypoint);
+       // _lastKnownTargetPosition = waypoint.transform.position;
     }
 
     public void GiveTarget(GameObject ptarget)

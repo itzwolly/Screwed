@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+    public AudioClip FootstepsClip;
+    public AudioClip JumpClip;
+    private AudioSource audio;
+
     public float _speedUnit;
     private Vector3 _speed;
     public int JumpVector;
@@ -11,11 +15,11 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 _velocity;
     public SectionPlacement godController;
     public float _gravity;
-
     private Vector3 _moveDirection = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
+        audio = gameObject.GetComponent<AudioSource>();
         _speed = new Vector3(_speedUnit, _speedUnit, _speedUnit);
     }
 	
@@ -100,6 +104,8 @@ public class PlayerMovement : MonoBehaviour {
         /**/
 
         /**/
+        
+
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {
@@ -109,9 +115,20 @@ public class PlayerMovement : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log("space");
+                audio.PlayOneShot(JumpClip);
                 _moveDirection.y += JumpVector;
             }
 
+           // Debug.Log(_moveDirection.magnitude);
+            if (_moveDirection.magnitude >= 0.5f)
+            {
+               // Debug.Log(audio.isPlaying);
+                if (!audio.isPlaying)
+                {
+                    //Debug.Log("Play footsteps");
+                    audio.PlayOneShot(FootstepsClip);
+                }
+            }
         }
         else
         {

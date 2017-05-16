@@ -17,6 +17,11 @@ public enum WeaponAOEType {
 
 [RequireComponent(typeof(CombatControls))]
 public class WeaponHandler : MonoBehaviour {
+
+    public AudioClip KnifeSelectClip;
+    public AudioClip GunSelectClip;
+    private AudioSource audio;
+
     private WeaponType _weaponType;
     private WeaponAOEType _weaponAOEType;
     [SerializeField] private GameObject[] _weapons;
@@ -40,6 +45,8 @@ public class WeaponHandler : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        audio = gameObject.GetComponent<AudioSource>();
+
         _weaponType = WeaponType.Melee;
         _weaponAOEType = WeaponAOEType.Single;
         _combatControls = GetComponent<CombatControls>();
@@ -54,6 +61,7 @@ public class WeaponHandler : MonoBehaviour {
 		if (Input.GetKeyUp("1")) {
             if (_hasGun) {
                 _combatControls.Animation = _weapons[1].GetComponent<Animation>();
+                audio.PlayOneShot(GunSelectClip);
                 if (!_weapons[1].activeInHierarchy) {
                     _weapons[0].SetActive(false);
                     _weapons[1].SetActive(true);
@@ -61,10 +69,11 @@ public class WeaponHandler : MonoBehaviour {
                 if (_weaponType == WeaponType.Melee) {
                     _combatControls.Animation.Play("SwitchEditable");
                 }
-                _weaponType = WeaponType.Ranged;
+				_weaponType = WeaponType.Ranged;
             }
         } else if (Input.GetKeyUp("2")) {
             _combatControls.Animation = _weapons[0].GetComponent<Animation>();
+            audio.PlayOneShot(KnifeSelectClip);
             if (!_weapons[0].activeInHierarchy) {
                 _weapons[0].SetActive(true);
                 _weapons[1].SetActive(false);
@@ -72,7 +81,7 @@ public class WeaponHandler : MonoBehaviour {
             if (_weaponType == WeaponType.Ranged) {
                 _combatControls.Animation.Play("SwitchEditable");
             }
-            _weaponType = WeaponType.Melee;
+			_weaponType = WeaponType.Melee;
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
@@ -99,6 +108,7 @@ public class WeaponHandler : MonoBehaviour {
         if (_weaponType == WeaponType.Melee) {
             if (_hasGun) {
                 _combatControls.Animation = _weapons[1].GetComponent<Animation>();
+				audio.PlayOneShot(GunSelectClip);
                 if (!_weapons[1].activeInHierarchy) {
                     _weapons[0].SetActive(false);
                     _weapons[1].SetActive(true);
@@ -110,6 +120,7 @@ public class WeaponHandler : MonoBehaviour {
             }
         } else { 
             _combatControls.Animation = _weapons[0].GetComponent<Animation>();
+			audio.PlayOneShot(KnifeSelectClip);
             if (!_weapons[0].activeInHierarchy) {
                 _weapons[0].SetActive(true);
                 _weapons[1].SetActive(false);
