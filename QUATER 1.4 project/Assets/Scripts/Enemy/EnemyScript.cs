@@ -113,9 +113,9 @@ public class EnemyScript : MonoBehaviour {
         //_right = gameObject.transform.localRotation;
         //_right.SetLookRotation(gameObject.transform.right);
 
-
         if (!_lookedLeft)
         {
+            _loseAttention = 0;
             //Debug.Log("looking left");
             gameObject.transform.Rotate(0, -1, 0);
             _left++;
@@ -126,6 +126,7 @@ public class EnemyScript : MonoBehaviour {
         else if (!_lookedRight)
         {
             //Debug.Log("looking right");
+            _loseAttention = 0;
             gameObject.transform.Rotate(0, 1, 0);
             _right++;
             //gameObject.transform.localRotation = Quaternion.Lerp(gameObject.transform.localRotation, _right, LookSpeed);

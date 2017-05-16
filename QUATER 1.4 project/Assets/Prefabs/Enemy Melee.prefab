@@ -159,8 +159,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682495703895688}
-  m_LocalRotation: {x: -0, y: -0.70136756, z: -0, w: -0.7127998}
-  m_LocalPosition: {x: 981, y: 0, z: -12.41}
+  m_LocalRotation: {x: -0, y: -0.9999674, z: -0, w: -0.008082494}
+  m_LocalPosition: {x: 975, y: 0.4, z: -1.3875084}
   m_LocalScale: {x: 1.0000012, y: 1, z: 1.0000012}
   m_Children:
   - {fileID: 4404857394220228}
@@ -628,10 +628,11 @@ MonoBehaviour:
   enemyKilledText: {fileID: 0}
   Waypoints:
   - {fileID: 0}
+  - {fileID: 0}
   MinDistanceToWaypoint: 1
   StartOffset: 0
   ChooseRandomWaypoint: 0
-  AlertDistance: 0
+  AlertDistance: 20
   WaitTimeAtWaypoint: 100
   Handler: {fileID: 0}
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
