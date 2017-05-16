@@ -317,26 +317,26 @@ public class CombatControls : MonoBehaviour {
                     behind = true;
                 }
 
-                    _successfullKnives++;
-                        if (pAoeType == WeaponAOEType.Single)
-                        {
-                            //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
-                            if (GetClosestEnemy(hitColliders, pRadius) != null)
-                            {
-                                //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
-                                _comboCount++;
-                                _comboWait = 0;
-                                TakeDamage(GetClosestEnemy(hitColliders, pRadius), behind);
-                                break;
-                            }
-                        }
-                        else if (pAoeType == WeaponAOEType.Multi)
-                        {
-                            _comboCount++;
-                            _comboWait = 0;
-                            //Debug.Log(hitColliders[i].name + " has been hit.");
-                            TakeDamage(hitColliders[i].transform, behind);
-                        }
+                _successfullKnives++;
+                if (pAoeType == WeaponAOEType.Single)
+                {
+                    //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
+                    if (GetClosestEnemy(hitColliders, pRadius) != null)
+                    {
+                        //Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
+                        _comboCount++;
+                        _comboWait = 0;
+                        TakeDamage(GetClosestEnemy(hitColliders, pRadius), behind);
+                        break;
+                    }
+                }
+                else if (pAoeType == WeaponAOEType.Multi)
+                {
+                    _comboCount++;
+                    _comboWait = 0;
+                    //Debug.Log(hitColliders[i].name + " has been hit.");
+                    TakeDamage(hitColliders[i].transform, behind);
+                }
                 
             }
             i++;
