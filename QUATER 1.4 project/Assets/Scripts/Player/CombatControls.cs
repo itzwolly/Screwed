@@ -260,6 +260,11 @@ public class CombatControls : MonoBehaviour {
         pTarget.LookAt(gameObject.transform.position);
         if (_weaponHandler.CurrentWeaponType == WeaponType.Melee)
         {
+            if(headshot)
+            {
+                pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]*2);
+            }
+            else
             pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
            
         } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {

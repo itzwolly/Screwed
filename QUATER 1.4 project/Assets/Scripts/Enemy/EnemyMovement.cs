@@ -245,21 +245,22 @@ public class EnemyMovement : MonoBehaviour
             _inVision = true;
             _targetPosSameY = target.transform.position;
             _targetPosSameY.y = transform.position.y;
-            if (_distanceToTarget < MeleeDistance)
-            {
-                StopMovement();
-                transform.LookAt(_targetPosSameY);
-                //Debug.Log("In melee range");
-                _state = State.knife;
-                //Debug.Log("About to attack (Melee)");
-                return;
-            }
+            
 
             RaycastHit hit = new RaycastHit();
             if (Physics.Linecast(transform.position, target.transform.position, out hit))
             {
                 if (hit.transform.tag == "Player")
                 {
+                    if (_distanceToTarget < MeleeDistance)
+                    {
+                        StopMovement();
+                        transform.LookAt(_targetPosSameY);
+                        //Debug.Log("In melee range");
+                        _state = State.knife;
+                        //Debug.Log("About to attack (Melee)");
+                        return;
+                    }
                     SetLastPositionToTarget();
                     _state = State.shoot;
                     transform.LookAt(_targetPosSameY);
@@ -283,6 +284,15 @@ public class EnemyMovement : MonoBehaviour
                 //{
                 if (hit.transform != null)
                 {
+                    if (_distanceToTarget < MeleeDistance)
+                    {
+                        StopMovement();
+                        transform.LookAt(_targetPosSameY);
+                        //Debug.Log("In melee range");
+                        _state = State.knife;
+                        //Debug.Log("About to attack (Melee)");
+                        return;
+                    }
                     Debug.Log("not sure");
                     SetLastPositionToTarget();
                     _state = State.shoot;
@@ -379,6 +389,12 @@ public class EnemyMovement : MonoBehaviour
             _waypoint = _tempWaypoint;
         }
         gameObject.GetComponent<EnemyScript>().SetDisturbedLocation(target.transform.position, false);
+    }
+
+    public void ChangeCurrentWaypoint(GameObject waypoint)
+    {
+        SetWaypoint(waypoint);
+       // _lastKnownTargetPosition = waypoint.transform.position;
     }
 
     public void GiveTarget(GameObject ptarget)
