@@ -31,7 +31,9 @@ public class EnemyScript : MonoBehaviour {
     private bool _notSetLooks;
     private float _loseAttention;
     private bool _loosingAttention;
+    private bool _hasBeenHit;
 
+    [SerializeField] private GameObject _HitMarkerDisplay;
 
     public int Health
     {
@@ -40,6 +42,9 @@ public class EnemyScript : MonoBehaviour {
     public bool IsDead
     {
         get { return _health == 0; }
+    }
+    public bool HasBeenHit {
+        get { return _hasBeenHit; } 
     }
 
     // Use this for initialization
@@ -64,10 +69,9 @@ public class EnemyScript : MonoBehaviour {
 
     public void OnCheckpoint(GameObject checkpoint, bool forPlayerSight)
     {
-        //Debug.Log("_ondisturbance = " + _onDisturbance);
-        if (_onDisturbance)
+        if(_onDisturbance)
         {
-            //Debug.Log("on disturbance");
+            Debug.Log("on disturbance");
             if (Look())
             {
                 Debug.Log("done looking "+gameObject.name);
@@ -153,8 +157,6 @@ public class EnemyScript : MonoBehaviour {
         {
             Debug.Log(gameObject.name + " My position is: " + gameObject.transform.position + " and I am heading to: " + _currentWaypoint.transform.position);
         }
-
-
         //Debug.Log("Current waypoint = "+_currentWaypoint);
         if(_currentWaypoint!=null)
         _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
@@ -164,7 +166,6 @@ public class EnemyScript : MonoBehaviour {
             //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
 
             OnCheckpoint(_currentWaypoint, false);
-
         }
         else
         {
@@ -190,12 +191,23 @@ public class EnemyScript : MonoBehaviour {
         }
     }
 
+    //public void SetDisturbedLocation(Vector3 pos, bool forEnemyDeath)
+    //{
+    //    _loosingAttention = true;
+    //    if (forEnemyDeath)
+    //    {
+    //        //Debug.Log("setdisturbance");
+    //    }
+    //    else
+    //    {
+    //        //Debug.Log("i am not on currentwaypoint");
+    //    }
+    //}
+
     public void SetDisturbedLocation(Vector3 pos, bool forEnemyDeath)
     {
-        _loosingAttention = true;
-        if (forEnemyDeath)
+        if(forEnemyDeath)
         {
-            //Debug.Log("setdisturbance");
             _onDisturbance = true;
         }
         DisturbWaypoint.transform.position = pos;
@@ -211,7 +223,10 @@ public class EnemyScript : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if(enemyKilledTextAnimator!=null)
+        if (_HitMarkerDisplay != null) {
+            _HitMarkerDisplay.GetComponent<HitmarkerDisplay>().EnemyDestroyed = true;
+        }
+        if (enemyKilledTextAnimator!=null)
         enemyKilledTextAnimator.SetTrigger("EnemyKilled");
         if (Handler != null) {
             Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
@@ -220,15 +235,19 @@ public class EnemyScript : MonoBehaviour {
 
     public void DecreaseHealth(int pAmount)
     {
-        if (_health > 0)
-        {
+        if (_health > 0) {
             _health -= pAmount;
+            if (_HitMarkerDisplay != null) {
+                StartCoroutine(_HitMarkerDisplay.GetComponent<HitmarkerDisplay>().Wait(_HitMarkerDisplay.GetComponent<HitmarkerDisplay>().WaitInSeconds));
+            }
             if (_health < 0)
             {
                 _health = 0;
             }
         }
     }
+
+    
 }
 
 

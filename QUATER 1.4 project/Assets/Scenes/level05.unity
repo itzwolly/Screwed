@@ -4105,6 +4105,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy Melee (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114190216235291574, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
   m_IsPrefabParent: 0
@@ -4215,16 +4220,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114956577032944350, guid: e7f9310c15768c040bb8afbf6dd6182e,
-        type: 2}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1958371874}
-    - target: {fileID: 114949019558340452, guid: e7f9310c15768c040bb8afbf6dd6182e,
-        type: 2}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1958371874}
     - target: {fileID: 114198337795631726, guid: e7f9310c15768c040bb8afbf6dd6182e,
         type: 2}
       propertyPath: EnemyHandler
@@ -4241,6 +4236,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1958371874}
     - target: {fileID: 114141893381323374, guid: e7f9310c15768c040bb8afbf6dd6182e,
+        type: 2}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1958371874}
+    - target: {fileID: 114949019558340452, guid: e7f9310c15768c040bb8afbf6dd6182e,
+        type: 2}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1958371874}
+    - target: {fileID: 114956577032944350, guid: e7f9310c15768c040bb8afbf6dd6182e,
         type: 2}
       propertyPath: _player
       value: 
@@ -8386,7 +8391,7 @@ Prefab:
     - target: {fileID: 114130849454351668, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
         type: 2}
       propertyPath: _meleeDamage
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114190216235291574, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
         type: 2}
@@ -8407,6 +8412,16 @@ Prefab:
         type: 2}
       propertyPath: enemyCount
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114190216235291574, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
+    - target: {fileID: 114130849454351668, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: _rangedDamage
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
@@ -20361,6 +20376,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy Ranged (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
   m_IsPrefabParent: 0
@@ -22880,6 +22900,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy Melee (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114190216235291574, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
   m_IsPrefabParent: 0
@@ -29898,6 +29923,11 @@ Prefab:
       propertyPath: Handler
       value: 
       objectReference: {fileID: 1723023416}
+    - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
   m_IsPrefabParent: 0
@@ -30236,6 +30266,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4786908676097914, guid: afdc04a5020edb9418ea7c204f50c3e6,
     type: 2}
   m_PrefabInternal: {fileID: 1398985646}
+--- !u!1 &1403399801 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1604946803095696, guid: e7f9310c15768c040bb8afbf6dd6182e,
+    type: 2}
+  m_PrefabInternal: {fileID: 168919430}
 --- !u!1001 &1404536915
 Prefab:
   m_ObjectHideFlags: 0
@@ -30481,6 +30516,11 @@ Prefab:
       propertyPath: enemyCount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114190216235291574, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
   m_IsPrefabParent: 0
@@ -31681,22 +31721,6 @@ Prefab:
       propertyPath: _cracks.Array.data[2]
       value: 
       objectReference: {fileID: 621595268}
-    - target: {fileID: 20224140754573912, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: m_AllowMSAA
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114366688855442248, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114795338497938154, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: profile
-      value: 
-      objectReference: {fileID: 11400000, guid: c7da424d235df1442a19db43839ab83e,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
   m_IsPrefabParent: 0
@@ -40387,6 +40411,11 @@ Prefab:
       propertyPath: Waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 1288826034}
+    - target: {fileID: 114190216235291574, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
   m_IsPrefabParent: 0
@@ -42840,6 +42869,11 @@ Prefab:
       propertyPath: Waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 1288826034}
+    - target: {fileID: 114190216235291574, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
   m_IsPrefabParent: 0
@@ -44654,6 +44688,11 @@ Prefab:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114190216235291574, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
   m_IsPrefabParent: 0
@@ -46094,6 +46133,11 @@ Prefab:
       propertyPath: AlertDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 114190216235291574, guid: 429008960fb0d8a44a678f303987bfa5,
+        type: 2}
+      propertyPath: _HitMarkerDisplay
+      value: 
+      objectReference: {fileID: 1403399801}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
   m_IsPrefabParent: 0

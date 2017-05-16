@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 musicaudio: 100
 effectaudio: 100
 onlevel: 1                                             
+=======
+musicaudio: 0
+effectaudio: 100
+onlevel: 3
+>>>>>>> feature/WollysChanges
