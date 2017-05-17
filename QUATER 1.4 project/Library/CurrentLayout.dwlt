@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 6326
+  controlID: 3232
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 436, y: 492}
   m_MaxSize: {x: 14006, y: 14042}
   vertical: 1
-  controlID: 6327
+  controlID: 3233
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -154,10 +154,10 @@ MonoBehaviour:
     y: 0
     width: 1360
     height: 564
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 402, y: 221}
+  m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 6328
+  controlID: 3234
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_MinSize: {x: 436, y: 271}
   m_MaxSize: {x: 14006, y: 10021}
   vertical: 0
-  controlID: 6051
+  controlID: 3104
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -413,9 +413,9 @@ MonoBehaviour:
     height: 543
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0a360000
-    m_LastClickedID: 13834
-    m_ExpandedIDs: 4ca1ffff44f6ffff4af6ffff38f8ffff000000000a360000
+    m_SelectedIDs: 1ec6ffff
+    m_LastClickedID: -14818
+    m_ExpandedIDs: 1ec6ffffe6f9ffff30faffffe2fbffff0000000096340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -575,19 +575,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/FBX
+    - Assets/FBX/Knife_anim
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/FBX
+  - Assets/FBX/Knife_anim
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Saxion\StudioXXI\QUATER 1.4 project
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 15.876707}
-    m_SelectedIDs: 122e0000
-    m_LastClickedID: 11794
-    m_ExpandedIDs: 00000000f02800006c2c0000f42c0000122e0000ba2e0000a62f000036300000ba310000ca32000000ca9a3bffffff7f
+    m_SelectedIDs: 56310000
+    m_LastClickedID: 12630
+    m_ExpandedIDs: 00000000ae260000922a0000242b00005c2c00000c2d0000022e00009a2e00002c3000005631000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -615,7 +615,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f02800006c2c0000f42c0000122e0000ba2e0000a62f000036300000ba310000ca32000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000ae260000922a0000242b00005c2c00000c2d0000022e00009a2e00002c3000005631000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

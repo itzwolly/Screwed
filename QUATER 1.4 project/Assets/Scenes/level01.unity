@@ -3462,7 +3462,7 @@ GameObject:
 Camera:
   m_PrefabParentObject: {fileID: 20179079148697356, guid: b1baad6043e1cd84e8160716e82f23c2,
     type: 2}
-  m_PrefabInternal: {fileID: 1549074310}
+  m_PrefabInternal: {fileID: 1568792697}
 --- !u!1001 &1325352048
 Prefab:
   m_ObjectHideFlags: 0
@@ -4016,7 +4016,7 @@ Transform:
   m_PrefabParentObject: {fileID: 4750352344804324, guid: 69ba8652f5d97064f91103f69f0061f7,
     type: 2}
   m_PrefabInternal: {fileID: 1539848540}
---- !u!1001 &1549074310
+--- !u!1001 &1568792697
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4055,21 +4055,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _hud
-      value: 
-      objectReference: {fileID: 350080283}
-    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _resolutionDisplay
-      value: 
-      objectReference: {fileID: 1325352052}
-    - target: {fileID: 114335103220306382, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _gunPickup
-      value: 
-      objectReference: {fileID: 440507071}
     - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
       propertyPath: _statManager
@@ -4090,40 +4075,24 @@ Prefab:
       propertyPath: _cracks.Array.data[2]
       value: 
       objectReference: {fileID: 1325352050}
-    - target: {fileID: 137787757058863282, guid: b1baad6043e1cd84e8160716e82f23c2,
+    - target: {fileID: 114335103220306382, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
-      propertyPath: m_AABB.m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 137787757058863282, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: m_AABB.m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 137787757058863282, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: m_AABB.m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 137787757058863282, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: m_AABB.m_Extent.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 137787757058863282, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: m_AABB.m_Extent.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 137787757058863282, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: m_AABB.m_Extent.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114611920108832952, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: profile
+      propertyPath: _gunPickup
       value: 
+      objectReference: {fileID: 440507071}
+    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _hud
+      value: 
+      objectReference: {fileID: 350080283}
+    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _resolutionDisplay
+      value: 
+      objectReference: {fileID: 1325352052}
+    - target: {fileID: 1205058617047002, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
+      propertyPath: m_Name
+      value: Hand_Knife_Animation New
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
@@ -5474,7 +5443,7 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 1904222018087564, guid: b1baad6043e1cd84e8160716e82f23c2,
     type: 2}
-  m_PrefabInternal: {fileID: 1549074310}
+  m_PrefabInternal: {fileID: 1568792697}
 --- !u!1001 &1977140088
 Prefab:
   m_ObjectHideFlags: 0
