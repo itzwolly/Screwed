@@ -285,6 +285,7 @@ public class Utils {
         int lastValue = GetValueAfterString(path, pString);
         string before = pString + " " + lastValue;
         string after = pString + " " + nextValue;
+        //Debug.Log(before + "|" + after);
         //Debug.Log("|" + before +"|"+ after + "|");
         ReplaceLineFromFile(path,after,before);
     }
