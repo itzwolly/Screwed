@@ -109,6 +109,7 @@ public class CombatControls : MonoBehaviour {
         _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
         _volume = Utils.EffectVolume() / 100;
+        Debug.Log(_volume);
         /**
         string allInfo = "";
         allInfo = " Timeinlevel: " + Utils.GetTimeInLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Completedlevelwithoutdmg: " + Utils.GetCompletedWithoutDmg("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
@@ -197,8 +198,11 @@ public class CombatControls : MonoBehaviour {
 
         if(Input.GetMouseButtonUp(1))
         {
-            Debug.Log("Stopped using");
-            audio.PlayOneShot(_stoppedUsingClip, _volume);
+            if (_blocking)
+            {
+                Debug.Log("Stopped using");
+                audio.PlayOneShot(_stoppedUsingClip, _volume);
+            }
             _blocking = false;
         }
         
