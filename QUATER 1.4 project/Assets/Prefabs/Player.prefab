@@ -1787,7 +1787,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1799,7 +1799,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1811,7 +1811,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!92 &92105753855939794
 Behaviour:
   m_ObjectHideFlags: 1
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   _decreaseAmount: 3
   _comboResetTime: 100
   _disableAfterDeath: []
-  _afterDeathBehaviour: {fileID: 0}
+  _afterDeathBehaviour: {fileID: 114865169249771298}
   _cracks:
   - {fileID: 0}
   - {fileID: 0}
@@ -2048,7 +2048,7 @@ MonoBehaviour:
   profile: {fileID: 0}
 --- !u!114 &114865169249771298
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
