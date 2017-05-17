@@ -161,7 +161,7 @@ public class EnemyMovement : MonoBehaviour
                     if (!audio.isPlaying)
                     {
                         //Debug.Log("Play footsteps");
-                        audio.PlayOneShot(MovementClip,_volume);
+                        audio.PlayOneShot(MovementClip,_volume/4);
                     }
                     _wait = Wait;
                     _state = State.walk;
