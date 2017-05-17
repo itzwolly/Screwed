@@ -79,6 +79,7 @@ public class WeaponHandler : MonoBehaviour {
             }
             if (_weaponType == WeaponType.Ranged) {
                 audio.PlayOneShot(KnifeSelectClip);
+                _combatControls.Animation["SwitchEditable"].speed = 3;
                 _combatControls.Animation.Play("SwitchEditable");
             }
             _weaponType = WeaponType.Melee;
@@ -126,6 +127,7 @@ public class WeaponHandler : MonoBehaviour {
             }
             if (_weaponType == WeaponType.Ranged) {
                 audio.PlayOneShot(KnifeSelectClip);
+                _combatControls.Animation["SwitchEditable"].speed = 3;
                 _combatControls.Animation.Play("SwitchEditable");
             }
             _weaponType = WeaponType.Melee;
