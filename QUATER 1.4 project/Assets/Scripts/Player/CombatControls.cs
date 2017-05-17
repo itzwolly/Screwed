@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class CombatControls : MonoBehaviour {
@@ -18,7 +19,6 @@ public class CombatControls : MonoBehaviour {
     public AudioClip BackstabClip;
     private AudioSource audio;
     private float _volume;
-
     [SerializeField] private GameObject _statManager;
 
     [SerializeField] private WeaponHandler _weaponHandler;
@@ -41,6 +41,8 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private ResolutionBehaviour _afterDeathBehaviour;
 
     [SerializeField] private GameObject[] _cracks;
+    [SerializeField] private float[] _fadeSecondsForCracks;
+    [Range(0, 1)] [SerializeField] private float[] _fadeAlphaForCracks;
 
     [SerializeField] private int[] _weaponDamage;
 
@@ -477,16 +479,28 @@ public class CombatControls : MonoBehaviour {
             _health -= pAmount;
             if (_health == 3) {
                 _cracks[0].SetActive(true);
+                StartCoroutine(FadeTo(_cracks[0].GetComponent<Image>(), _fadeAlphaForCracks[0], _fadeSecondsForCracks[0]));
             }
             if (_health == 2) {
                 _cracks[1].SetActive(true);
+                StartCoroutine(FadeTo(_cracks[1].GetComponent<Image>(), _fadeAlphaForCracks[1], _fadeSecondsForCracks[1]));
             }
             if (_health == 1) {
                 _cracks[2].SetActive(true);
+                StartCoroutine(FadeTo(_cracks[2].GetComponent<Image>(), _fadeAlphaForCracks[2], _fadeSecondsForCracks[2]));
             }
             if (_health < 0) {
                 _health = 0;
             }
+        }
+    }
+
+    IEnumerator FadeTo(Image pImage, float aValue, float aTime) {
+        float alpha = pImage.color.a;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime) {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+            pImage.color = newColor;
+            yield return null;
         }
     }
 
