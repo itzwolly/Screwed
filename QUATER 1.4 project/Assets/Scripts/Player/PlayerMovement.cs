@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     private AudioSource audio;
 
     private bool _jumped;
+    private float _volume;
     public float _speedUnit;
     private Vector3 _speed;
     public int JumpVector;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        _volume = Utils.EffectVolume() / 100f;
         _controller = GetComponent<CharacterController>();
         audio = gameObject.GetComponent<AudioSource>();
         _speed = new Vector3(_speedUnit, _speedUnit, _speedUnit);
@@ -62,7 +64,7 @@ public class PlayerMovement : MonoBehaviour {
             if (_jumped)
             {
                 //Debug.Log("space");
-                audio.PlayOneShot(JumpClip);
+                audio.PlayOneShot(JumpClip, _volume);
                 _moveDirection.y += JumpVector;
                 _jumped = false;
             }
@@ -74,7 +76,7 @@ public class PlayerMovement : MonoBehaviour {
                 if (!audio.isPlaying)
                 {
                     //Debug.Log("Play footsteps");
-                    audio.PlayOneShot(FootstepsClip);
+                    audio.PlayOneShot(FootstepsClip, _volume);
                 }
             }
         }

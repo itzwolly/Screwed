@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 124347899334945184}
   - component: {fileID: 81069206922571690}
   - component: {fileID: 114188004970579302}
-  - component: {fileID: 114865169249771298}
+  - component: {fileID: 114611920108832952}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1388,7 +1388,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000058114523}
-  m_LocalPosition: {x: 7.36, y: 1.06, z: -3.95}
+  m_LocalPosition: {x: 994, y: 1.06, z: -3.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4779334595069844}
@@ -1398,7 +1398,7 @@ Transform:
   - {fileID: 4822726966069334}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 305.32, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.99998, z: 0}
 --- !u!4 &4931937112558942
 Transform:
   m_ObjectHideFlags: 1
@@ -1530,12 +1530,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294965757
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1978,6 +1978,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f496c5899dc754ea18a1e545e2bba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chargingClip: {fileID: 8300000, guid: 28bc57b89372d5743a6eb2ee663e2774, type: 3}
+  _usingClip: {fileID: 8300000, guid: f480580e619f6f643827a68a02a5c533, type: 3}
+  _stoppedUsingClip: {fileID: 8300000, guid: 79d028432b60ea04eb4ca45f79f8b0be, type: 3}
   ShootClip: {fileID: 8300000, guid: 067a66667de3f7c42ae906fde6417c7f, type: 3}
   KnifeClip: {fileID: 8300000, guid: f4bc94bb5258f0b43a22fac77b8b7da3, type: 3}
   DeathClip: {fileID: 8300000, guid: 955c0b0814e8a1e4a98ea0b7cbbea505, type: 3}
@@ -2032,6 +2035,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Music: {fileID: 8300000, guid: aba78b7d23c2c1b4d80e8e9fcce7495b, type: 3}
   _volume: 0
+--- !u!114 &114611920108832952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619068457850646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: c7da424d235df1442a19db43839ab83e, type: 2}
 --- !u!114 &114677579122440034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2046,20 +2061,8 @@ MonoBehaviour:
   _mainCamera: {fileID: 20179079148697356}
   _hud: {fileID: 0}
   _resolutionDisplay: {fileID: 0}
-  _deathMessage: R TO RESTART
+  _deathMessage: R to Restart
   _winMessage: ALT+F4 TO EXIT
---- !u!114 &114865169249771298
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1619068457850646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profile: {fileID: 0}
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1

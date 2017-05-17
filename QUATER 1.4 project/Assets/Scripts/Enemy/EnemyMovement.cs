@@ -65,7 +65,7 @@ public class EnemyMovement : MonoBehaviour
     {
         //Debug.Log("attacking source is "+audio.name);
         _tempWaypoint = new GameObject();
-        _volume = Utils.EffectVolume();
+        _volume = Utils.EffectVolume() / 100f;
         //Debug.Log("effect volume = "+_volume);
         _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
@@ -161,7 +161,7 @@ public class EnemyMovement : MonoBehaviour
                     if (!audio.isPlaying)
                     {
                         //Debug.Log("Play footsteps");
-                        audio.PlayOneShot(MovementClip);
+                        audio.PlayOneShot(MovementClip,_volume);
                     }
                     _wait = Wait;
                     _state = State.walk;
