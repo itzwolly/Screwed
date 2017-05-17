@@ -125,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1798523352651884}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 2.1, z: 2.35}
+  m_LocalPosition: {x: -0, y: 2.1, z: 2.52}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0}
   m_Children: []
   m_Father: {fileID: 4888667735520532}
@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 1832455775287746}
   m_LocalRotation: {x: 0.00000013240823, y: -0.7071068, z: -0.7071068, w: -0.00000013240823}
   m_LocalPosition: {x: 0.044, y: 2.073, z: -0.097}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 0}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 0}
   m_Children: []
   m_Father: {fileID: 4888667735520532}
   m_RootOrder: 0
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audio: {fileID: 82592286120366406}
-  MovementClip: {fileID: 0}
+  MovementClip: {fileID: 8300000, guid: 8de9e56c53babfb4ca31a6e136c65f03, type: 3}
   IsRanged: 1
   ShootSound: {fileID: 8300000, guid: 511e6576e47cc594493e5d1400011c14, type: 3}
   KnifeSound: {fileID: 8300000, guid: 760951015331c0d40b5b9ad1e74255f8, type: 3}
