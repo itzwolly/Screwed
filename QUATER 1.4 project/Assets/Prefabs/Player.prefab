@@ -741,10 +741,10 @@ GameObject:
   - component: {fileID: 114102360266768328}
   - component: {fileID: 114211386112779860}
   - component: {fileID: 114319267502297498}
-  - component: {fileID: 114677579122440034}
   - component: {fileID: 143760032261407982}
   - component: {fileID: 114335103220306382}
   - component: {fileID: 82893225046373394}
+  - component: {fileID: 114865169249771298}
   m_Layer: 1
   m_Name: Player
   m_TagString: Player
@@ -1978,7 +1978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f496c5899dc754ea18a1e545e2bba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chargingClip: {fileID: 8300000, guid: 28bc57b89372d5743a6eb2ee663e2774, type: 3}
   _usingClip: {fileID: 8300000, guid: f480580e619f6f643827a68a02a5c533, type: 3}
   _stoppedUsingClip: {fileID: 8300000, guid: 79d028432b60ea04eb4ca45f79f8b0be, type: 3}
   ShootClip: {fileID: 8300000, guid: 067a66667de3f7c42ae906fde6417c7f, type: 3}
@@ -2003,7 +2002,7 @@ MonoBehaviour:
   _decreaseAmount: 3
   _comboResetTime: 100
   _disableAfterDeath: []
-  _afterDeathBehaviour: {fileID: 114677579122440034}
+  _afterDeathBehaviour: {fileID: 0}
   _cracks:
   - {fileID: 0}
   - {fileID: 0}
@@ -2046,14 +2045,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 20179079148697356}
-  _hud: {fileID: 0}
-  _resolutionDisplay: {fileID: 0}
-  _deathMessage: R TO RESTART
-  _winMessage: ALT+F4 TO EXIT
+  profile: {fileID: 0}
 --- !u!114 &114865169249771298
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
@@ -2062,7 +2057,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e3df6d89e5bc4458111c5151a45acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: c7da424d235df1442a19db43839ab83e, type: 2}
+  _mainCamera: {fileID: 0}
+  _hud: {fileID: 0}
+  _resolutionDisplay: {fileID: 0}
+  _deathMessage: 
+  _winMessage: 
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1
