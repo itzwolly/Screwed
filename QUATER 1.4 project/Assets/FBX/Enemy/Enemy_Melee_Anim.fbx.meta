@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: 0193d4a19f6412546a054047b8c690b4
+timeCreated: 1495012805
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Body_Box
+    100002: Botom_Box
+    100004: Cog_Back
+    100006: Cog_Small_Top_L
+    100008: Cog_Small_Top_R
+    100010: Head
+    100012: L_Arm
+    100014: L_Blade1
+    100016: L_Motor_Blade
+    100018: Main_Cog_Top
+    100020: //RootNode
+    100022: polySurface96
+    100024: R_Arm
+    100026: R_Blade1
+    100028: R_Motor_Blade
+    100030: Ratating_Tubes
+    100032: Rotation_Body
+    100034: Wheel_L
+    100036: Wheel_R
+    400000: Body_Box
+    400002: Botom_Box
+    400004: Cog_Back
+    400006: Cog_Small_Top_L
+    400008: Cog_Small_Top_R
+    400010: Head
+    400012: L_Arm
+    400014: L_Blade1
+    400016: L_Motor_Blade
+    400018: Main_Cog_Top
+    400020: //RootNode
+    400022: polySurface96
+    400024: R_Arm
+    400026: R_Blade1
+    400028: R_Motor_Blade
+    400030: Ratating_Tubes
+    400032: Rotation_Body
+    400034: Wheel_L
+    400036: Wheel_R
+    2300000: Body_Box
+    2300002: Botom_Box
+    2300004: Cog_Back
+    2300006: Cog_Small_Top_L
+    2300008: Cog_Small_Top_R
+    2300010: Head
+    2300012: L_Arm
+    2300014: L_Blade1
+    2300016: L_Motor_Blade
+    2300018: Main_Cog_Top
+    2300020: R_Arm
+    2300022: R_Blade1
+    2300024: R_Motor_Blade
+    2300026: Ratating_Tubes
+    2300028: Rotation_Body
+    2300030: Wheel_L
+    2300032: Wheel_R
+    3300000: Body_Box
+    3300002: Botom_Box
+    3300004: Cog_Back
+    3300006: Cog_Small_Top_L
+    3300008: Cog_Small_Top_R
+    3300010: Head
+    3300012: L_Arm
+    3300014: L_Blade1
+    3300016: L_Motor_Blade
+    3300018: Main_Cog_Top
+    3300020: R_Arm
+    3300022: R_Blade1
+    3300024: R_Motor_Blade
+    3300026: Ratating_Tubes
+    3300028: Rotation_Body
+    3300030: Wheel_L
+    3300032: Wheel_R
+    4300000: Cog_Back
+    4300002: Main_Cog_Top
+    4300004: Rotation_Body
+    4300006: Body_Box
+    4300008: Botom_Box
+    4300010: Wheel_R
+    4300012: Cog_Small_Top_L
+    4300014: Cog_Small_Top_R
+    4300016: Wheel_L
+    4300018: Head
+    4300020: Ratating_Tubes
+    4300022: L_Arm
+    4300024: L_Motor_Blade
+    4300026: L_Blade1
+    4300028: R_Arm
+    4300030: R_Motor_Blade
+    4300032: R_Blade1
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
