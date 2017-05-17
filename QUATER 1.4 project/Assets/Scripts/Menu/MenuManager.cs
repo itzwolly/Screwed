@@ -365,6 +365,7 @@ public class MenuManager : MonoBehaviour {
     }
     public void Default()
     {
+        changedValues = false;
         //playPanel.SetActive(!true);
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
@@ -389,7 +390,6 @@ public class MenuManager : MonoBehaviour {
 
     public void ResetSliders(GameObject button)
     {
-        changedValues = false;
         Debug.Log("resetsliders");
         button.GetComponent<SliderApply>().ResetSliders();
         Default();
@@ -404,7 +404,6 @@ public class MenuManager : MonoBehaviour {
 
     public void ApplyDefault(GameObject button)
     {
-        changedValues = false;
         Debug.Log("applydefault");
         button.GetComponent<SliderApply>().ApplySliders();
         Default();
