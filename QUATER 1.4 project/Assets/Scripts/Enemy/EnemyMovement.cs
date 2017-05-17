@@ -249,7 +249,7 @@ public class EnemyMovement : MonoBehaviour
 
         Vector3 directionToTarget = transform.position - target.transform.position;
         float angle = Vector3.Angle(transform.forward, directionToTarget);
-        if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
+        if (Mathf.Abs(angle) > 135 && Mathf.Abs(angle) < 225)
         {
             _inVision = true;
             _targetPosSameY = target.transform.position;

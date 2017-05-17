@@ -190,12 +190,14 @@ public class CombatControls : MonoBehaviour {
 
         if(Input.GetMouseButtonDown(1) && _currentShieldAmmount > _minShieldAmount)
         {
+            Debug.Log("Started using");
             audio.PlayOneShot(_usingClip, _volume);
             _blocking = true;
         }
 
         if(Input.GetMouseButtonUp(1))
         {
+            Debug.Log("Stopped using");
             audio.PlayOneShot(_stoppedUsingClip, _volume);
             _blocking = false;
         }
@@ -209,8 +211,11 @@ public class CombatControls : MonoBehaviour {
         }
         if(_currentShieldAmmount<=0 || _blocking==false)
         {
-            if(_blocking)
+            if (_blocking)
+            {
+                Debug.Log("Stopped using");
                 audio.PlayOneShot(_stoppedUsingClip, _volume);
+            }
             _blocking = false;
             if (_currentShieldAmmount < _maxShieldAmount)
             {
