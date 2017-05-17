@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class CombatControls : MonoBehaviour {
-
+    
+    [SerializeField] private AudioClip _usingClip;
+    [SerializeField] private AudioClip _stoppedUsingClip;
     public AudioClip ShootClip;
     public AudioClip KnifeClip;
     public AudioClip DeathClip;
@@ -16,6 +18,7 @@ public class CombatControls : MonoBehaviour {
     public AudioClip EnemyGotHitHeadClip;
     public AudioClip BackstabClip;
     private AudioSource audio;
+    private float _volume;
     [SerializeField] private GameObject _statManager;
 
     [SerializeField] private WeaponHandler _weaponHandler;
@@ -30,6 +33,7 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private int _minShieldAmount;
     [SerializeField] private int _increaseAmount;
     [SerializeField] private int _decreaseAmount;
+    private int _lastShieldAmmount;
     
     [SerializeField] private int _comboResetTime;
 
@@ -106,6 +110,8 @@ public class CombatControls : MonoBehaviour {
         audio = GetComponent<AudioSource>();
         _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
+        _volume = Utils.EffectVolume() / 100;
+        Debug.Log(_volume);
         /**
         string allInfo = "";
         allInfo = " Timeinlevel: " + Utils.GetTimeInLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Completedlevelwithoutdmg: " + Utils.GetCompletedWithoutDmg("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
@@ -162,14 +168,14 @@ public class CombatControls : MonoBehaviour {
                         if (_anim["ShootEditable"].speed != 3.0f) {
                             _anim["ShootEditable"].speed = 3.0f;
                         }
-                        audio.PlayOneShot(ShootClip);
+                        audio.PlayOneShot(ShootClip,_volume);
                         _anim.Play("ShootEditable"); // play shoot animation
                         RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
                     }
                 }
                 else
                 {
-                    audio.PlayOneShot(DryFireClip);
+                    audio.PlayOneShot(DryFireClip, _volume);
                 }
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
                 _anim.Stop("IdleEditable");
@@ -187,11 +193,18 @@ public class CombatControls : MonoBehaviour {
 
         if(Input.GetMouseButtonDown(1) && _currentShieldAmmount > _minShieldAmount)
         {
+            Debug.Log("Started using");
+            audio.PlayOneShot(_usingClip, _volume);
             _blocking = true;
         }
 
         if(Input.GetMouseButtonUp(1))
         {
+            if (_blocking)
+            {
+                Debug.Log("Stopped using");
+                audio.PlayOneShot(_stoppedUsingClip, _volume);
+            }
             _blocking = false;
         }
         
@@ -204,6 +217,11 @@ public class CombatControls : MonoBehaviour {
         }
         if(_currentShieldAmmount<=0 || _blocking==false)
         {
+            if (_blocking)
+            {
+                Debug.Log("Stopped using");
+                audio.PlayOneShot(_stoppedUsingClip, _volume);
+            }
             _blocking = false;
             if (_currentShieldAmmount < _maxShieldAmount)
             {
@@ -211,13 +229,40 @@ public class CombatControls : MonoBehaviour {
             }
         }
 
+        //if (_currentShieldAmmount <= _maxShieldAmount)
+        //{
+        //    //Debug.Log("Stopped using");
+        //    //audio.PlayOneShot(_stoppedUsingClip);
+        //    Debug.Log(((float)_currentShieldAmmount / MaxShieldAmount));
+        //    if (_currentShieldAmmount < _lastShieldAmmount)
+        //    {
+        //        if (!audio.isPlaying)
+        //        {
+        //            Debug.Log("Using");
+        //            audio.PlayOneShot(_usingClip,((float)_currentShieldAmmount/MaxShieldAmount));
+        //        }
+        //    }
+        //    else if (_currentShieldAmmount > _lastShieldAmmount)
+        //    {
+        //        if (!audio.isPlaying)
+        //        {
+        //            Debug.Log("Charging");
+        //            audio.PlayOneShot(_chargingClip, ((float)_currentShieldAmmount / MaxShieldAmount));
+        //        }
+        //    }
+        //}
+        
+
+
+
+        _lastShieldAmmount = _currentShieldAmmount;
         if (IsDead) {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
-            audio.PlayOneShot(DeathClip);
+            audio.PlayOneShot(DeathClip, _volume);
         } else if (HasWon()) {
             //Debug.Log(Utils.LatestLevel());
-            audio.PlayOneShot(WinClip);
+            audio.PlayOneShot(WinClip, _volume);
             if (Utils.LatestLevel() == 2) {
                 SceneManager.LoadScene("level02");
             } else {
@@ -258,7 +303,7 @@ public class CombatControls : MonoBehaviour {
             if (pHit.collider.transform.name=="Enemy Head")
             {
                 //Debug.Log("You headshot you filthy animal");
-                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip);
+                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip, _volume);
                 _successfullShots++;
                 _successfullHeadshots++;
                 _comboCount++;
@@ -266,7 +311,7 @@ public class CombatControls : MonoBehaviour {
                 TakeDamage(pHit.transform, true);
             }
             else if (pHit.transform.tag == pTarget) {
-                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
+                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip, _volume);
                 _successfullShots++;
                 _comboCount++;
                 _comboWait = 0;
@@ -284,7 +329,7 @@ public class CombatControls : MonoBehaviour {
             if (pHit.collider.transform.name == "Enemy Head")
             {
                 //Debug.Log("You headshot you filthy animal");
-                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip);
+                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip, _volume);
                 _successfullShots++;
                 _successfullHeadshots++;
                 _comboCount++;
@@ -293,7 +338,7 @@ public class CombatControls : MonoBehaviour {
             }
             else if (pHit.transform.tag == pTarget)
             {
-                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
+                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip, _volume);
                 _successfullShots++;
                 _comboCount++;
                 _comboWait = 0;
@@ -367,7 +412,7 @@ public class CombatControls : MonoBehaviour {
                 {
                     Debug.Log("backstab");
                     behind = true;
-                    hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(BackstabClip);
+                    hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(BackstabClip, _volume);
                     
                 }
 
@@ -380,7 +425,7 @@ public class CombatControls : MonoBehaviour {
                        // Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
                         _comboCount++;
                         _comboWait = 0;
-                        hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
+                        hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip, _volume);
                         //Debug.Log("get hit soundource is "+hitColliders[i].GetComponent<AudioSource>().name);
                         TakeDamage(GetClosestEnemy(hitColliders, pRadius), behind);
                         break;
@@ -391,7 +436,7 @@ public class CombatControls : MonoBehaviour {
                     _comboCount++;
                     _comboWait = 0;
                     //Debug.Log(hitColliders[i].name + " has been hit.");
-                    hitColliders[i].GetComponent<AudioSource>().PlayOneShot(EnemyGotHitBodyClip);
+                    hitColliders[i].GetComponent<AudioSource>().PlayOneShot(EnemyGotHitBodyClip, _volume);
                     TakeDamage(hitColliders[i].transform, behind);
                 }
                 

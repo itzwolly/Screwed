@@ -1,4 +1,8 @@
- Timeinlevel: 19 Completedlevelwithoutdmg: 1
+<<<<<<< HEAD
+ Timeinlevel: 1 Completedlevelwithoutdmg: 1
+=======
+ Timeinlevel: 0 Completedlevelwithoutdmg: 1
+>>>>>>> ec2122dcf1451e63be478ada3ff7f43da10f2c91
  Totalshots: 0 Successfullshots: 0 Successfullheadshots: 0 Headshotkills: 0 Totalrangedkills: 0
  Totalknives: 0 Successfullknives: 0 Knifekills: 0
  Blockedshots: 0 Totalkills: 0
