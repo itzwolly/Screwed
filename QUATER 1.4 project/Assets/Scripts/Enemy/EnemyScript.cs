@@ -118,6 +118,7 @@ public class EnemyScript : MonoBehaviour {
 
         if (!_lookedLeft)
         {
+            _loseAttention = 0;
             //Debug.Log("looking left");
             gameObject.transform.Rotate(0, -1, 0);
             _left++;
@@ -127,6 +128,7 @@ public class EnemyScript : MonoBehaviour {
         }
         else if (!_lookedRight)
         {
+            _loseAttention = 0;
             //Debug.Log("looking right");
             gameObject.transform.Rotate(0, 1, 0);
             _right++;
@@ -158,10 +160,27 @@ public class EnemyScript : MonoBehaviour {
             Debug.Log(gameObject.name + " My position is: " + gameObject.transform.position + " and I am heading to: " + _currentWaypoint.transform.position);
         }
         //Debug.Log("Current waypoint = "+_currentWaypoint);
-        if(_currentWaypoint!=null)
-        _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
-        //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
-        if (_distanceToWaypoint <= MinDistanceToWaypoint + 1.3f && !StartOffset)
+        if (_currentWaypoint != null)
+        {
+            _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
+        }
+        else
+        {
+            Debug.Log("null waypoint");
+            if (ChooseRandomWaypoint)
+            {
+                //Debug.Log("Next checkpoint random");
+                _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
+                gameObject.GetComponent<EnemyMovement>().ChangeCurrentWaypoint(_currentWaypoint);
+            }
+            else
+            {
+                //Debug.Log("Next checkpoint");
+                _currentWaypoint = Waypoints[(++_waypointIndex) % Waypoints.Count];
+                gameObject.GetComponent<EnemyMovement>().ChangeCurrentWaypoint(_currentWaypoint);
+            }
+        } //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
+        if (_distanceToWaypoint <= MinDistanceToWaypoint + 0.5f && !StartOffset)
         {
             //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
 
@@ -185,28 +204,28 @@ public class EnemyScript : MonoBehaviour {
                 _loosingAttention = false;
                 _loseAttention = 0;
                 _onDisturbance = false;
-                OnCheckpoint(_currentWaypoint, false);
+                if (ChooseRandomWaypoint)
+                {
+                    //Debug.Log("Next checkpoint random");
+                    _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
+                    gameObject.GetComponent<EnemyMovement>().ChangeCurrentWaypoint(_currentWaypoint);
+                }
+                else
+                {
+                    //Debug.Log("Next checkpoint");
+                    _currentWaypoint = Waypoints[(++_waypointIndex) % Waypoints.Count];
+                    gameObject.GetComponent<EnemyMovement>().ChangeCurrentWaypoint(_currentWaypoint);
+                }
             }
             _loseAttention+=Time.deltaTime;
         }
     }
-
-    //public void SetDisturbedLocation(Vector3 pos, bool forEnemyDeath)
-    //{
-    //    _loosingAttention = true;
-    //    if (forEnemyDeath)
-    //    {
-    //        //Debug.Log("setdisturbance");
-    //    }
-    //    else
-    //    {
-    //        //Debug.Log("i am not on currentwaypoint");
-    //    }
-    //}
+    
 
     public void SetDisturbedLocation(Vector3 pos, bool forEnemyDeath)
     {
-        if(forEnemyDeath)
+        _loosingAttention = true;
+        if (forEnemyDeath)
         {
             _onDisturbance = true;
         }
