@@ -29,6 +29,8 @@ public class BulletDisplay : MonoBehaviour
             if (_combatControls.AmmoCount == 0)
             {
                 _text.color = new Color(0.9f, 0, 0, 0.9f);
+            } else {
+                _text.color = _color;
             }
             else
             {

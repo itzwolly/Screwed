@@ -12,10 +12,10 @@ public class ImpactSounds : MonoBehaviour {
     }
 
 
-    public void PlayImpactSound(AudioClip sound)
+    public void PlayImpactSound(AudioClip sound,float volume)
     {
         Debug.Log("MAKING SOUND");
-        audio.PlayOneShot(sound);
+        audio.PlayOneShot(sound,volume);
     }
 
 }

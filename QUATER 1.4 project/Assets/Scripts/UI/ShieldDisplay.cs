@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ShieldDisplay : MonoBehaviour {
+[RequireComponent(typeof(AudioSource))]
+public class ShieldDisplay : MonoBehaviour
+{
 
     [SerializeField] private GameObject _player;
     [SerializeField] private Image _image;
