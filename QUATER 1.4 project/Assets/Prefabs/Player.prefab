@@ -1387,8 +1387,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000058114523}
-  m_LocalPosition: {x: 994, y: 1.06, z: -3.95}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.4, y: 1.5, z: -11.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4779334595069844}
@@ -1926,7 +1926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FootstepsClip: {fileID: 8300000, guid: 3a8adcdb6844c0d40ab3f35469ab2eb9, type: 3}
-  JumpClip: {fileID: 8300000, guid: 3a8adcdb6844c0d40ab3f35469ab2eb9, type: 3}
+  JumpClip: {fileID: 0}
   _speedUnit: 5
   JumpVector: 6
   Sensitivity: 0.52
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   _decreaseAmount: 3
   _comboResetTime: 100
   _disableAfterDeath: []
-  _afterDeathBehaviour: {fileID: 0}
+  _afterDeathBehaviour: {fileID: 114865169249771298}
   _cracks:
   - {fileID: 0}
   - {fileID: 0}
@@ -2016,6 +2016,14 @@ MonoBehaviour:
   - 0.125
   - 0.15
   _weaponDamage: 0200000001000000
+  _profile: {fileID: 11400000, guid: c7da424d235df1442a19db43839ab83e, type: 2}
+  _vignetteMode: 0
+  _vignetteColor: {r: 0, g: 1, b: 1, a: 0}
+  _vignetteCenter: {x: 0.5, y: 0.5}
+  _vignetteIntensity: 0.589
+  _vignetteSmoothness: 0.275
+  _vignetteRoundness: 1
+  _vignetteIsRounded: 0
 --- !u!114 &114335103220306382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2027,7 +2035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb993997e1752514b9e7a7538bf04f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gunPickup: {fileID: 1649715656962502, guid: 72e9db91c0323e34ea6327dd2e6fa7db, type: 2}
+  _gunPickup: {fileID: 0}
   GunPickupClip: {fileID: 8300000, guid: c612ba1218c014542981bc941e74aacc, type: 3}
 --- !u!114 &114366688855442248
 MonoBehaviour:
@@ -2053,10 +2061,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 0}
+  profile: {fileID: 11400000, guid: c7da424d235df1442a19db43839ab83e, type: 2}
 --- !u!114 &114865169249771298
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
@@ -2065,11 +2073,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e3df6d89e5bc4458111c5151a45acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 20179079148697356}
   _hud: {fileID: 0}
   _resolutionDisplay: {fileID: 0}
-  _deathMessage: 
-  _winMessage: 
+  _deathMessage: R TO RESTART
+  _winMessage: ALT + F4 TO CONTINUE
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1

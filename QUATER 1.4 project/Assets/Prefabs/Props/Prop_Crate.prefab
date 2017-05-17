@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33068914567265084}
   - component: {fileID: 23613365394597130}
   - component: {fileID: 65102263907216326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1935361625378908}
-  m_LocalRotation: {x: -0, y: 0.13052596, z: -0, w: 0.99144495}
-  m_LocalPosition: {x: 4.946, y: 0.52, z: -7.139}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.174, y: 1.53, z: 20.826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
