@@ -44,6 +44,7 @@ public class EnemyMovement : MonoBehaviour
     public bool _inVision;
 
     private List<GameObject> Waypoints;
+    private GameObject _startWaypoint;
 
     Vector3 _speed;
     Vector3 _rayDirection;
@@ -70,11 +71,19 @@ public class EnemyMovement : MonoBehaviour
         _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
-        Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
+        if(gameObject.GetComponent<EnemyScript>().Waypoints.Count==0)
+        {
+            Waypoints = new List<GameObject>();
+                _startWaypoint = new GameObject();
+                _startWaypoint.transform.position = gameObject.transform.position;
+                Waypoints.Add(_startWaypoint);
+        }
+        else
+        {
+            Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
+        }
         navigator = GetComponent<NavMeshAgent>();
         _speed = new Vector3(Speed * 3, Speed * 3, Speed * 3);
-        if (Waypoints.Count <= 1)
-            gameObject.GetComponent<EnemyScript>().StartOffset = true;
         _waypoint = Waypoints[0];
         if (!gameObject.GetComponent<EnemyScript>().StartOffset)
             Patrol();
@@ -383,6 +392,16 @@ public class EnemyMovement : MonoBehaviour
         //Debug.Log("wait=" + _wait);
         _wait--;
     }
+    //comebacktothis
+    IEnumerator TurnToward(GameObject pImage, int aValue, float aTime)
+    {
+        Quaternion alpha = pImage.transform.rotation;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        {
+            pImage.transform.Rotate(0, aValue, 0);
+            yield return null;
+        }
+    }
 
     public void SetLastPositionToTarget()
     {
@@ -404,6 +423,13 @@ public class EnemyMovement : MonoBehaviour
     {
         SetWaypoint(waypoint);
        // _lastKnownTargetPosition = waypoint.transform.position;
+    }
+
+    public void SetCurrentWaypointPos(Vector3 pos)
+    {
+        if(_tempWaypoint!=null)
+            _tempWaypoint.transform.position = pos;
+        SetWaypoint(_tempWaypoint);
     }
 
     public void GiveTarget(GameObject ptarget)

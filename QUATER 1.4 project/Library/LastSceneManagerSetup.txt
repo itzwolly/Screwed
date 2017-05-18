@@ -1,8 +1,12 @@
 sceneSetups:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - path: Assets/Scenes/level05.unity
 =======
 - path: Assets/Scenes/level01.unity
 >>>>>>> 0b6681146573a23683a05e49b1d33bdca222c716
+=======
+- path: Assets/Scenes/meplayhere.unity
+>>>>>>> 0cee890a1396633a13f3b5dca28e423246e6fbf4
   isLoaded: 1
   isActive: 1

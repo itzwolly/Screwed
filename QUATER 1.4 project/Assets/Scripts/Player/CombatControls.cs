@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PostProcessing;
@@ -398,9 +398,14 @@ public class CombatControls : MonoBehaviour {
                 Debug.Log(pTarget.name + " got hit!");
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
             }
-        } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
+           
+        } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged)
+        {
+            pTarget.GetComponent<EnemyMovement>().SetWaypoint(gameObject);
+            pTarget.GetComponent<EnemyScript>().SetDisturbedLocation(gameObject.transform.position, true);
+            //Debug.Log(gameObject.transform.position);
             if (headshot)
-                pTarget.GetComponent<EnemyScript>().DecreaseHealth(2 * _weaponDamage[1]);
+                pTarget.GetComponent<EnemyScript>().DecreaseHealth(2*_weaponDamage[1]);
             else
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[1]);
         }
