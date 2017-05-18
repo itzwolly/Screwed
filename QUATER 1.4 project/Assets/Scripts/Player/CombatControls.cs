@@ -555,7 +555,7 @@ public class CombatControls : MonoBehaviour {
     }
 
 
-    private bool HasWon() {
+    public bool HasWon() {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0) {
             return false;
         } else {
