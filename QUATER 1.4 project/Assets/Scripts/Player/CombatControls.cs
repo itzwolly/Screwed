@@ -47,6 +47,8 @@ public class CombatControls : MonoBehaviour {
 
     [SerializeField] private int[] _weaponDamage;
 
+    [SerializeField] private EnemyHandler _enemyHandler;
+
     [Space(10)]
     [Header("PostProcessing")]
     [SerializeField] private PostProcessingProfile _profile;
@@ -428,6 +430,7 @@ public class CombatControls : MonoBehaviour {
         //pTransform.GetComponent<EnemyMovement>().SetState(EnemyMovement.State.none);
         pTransform.GetComponent<EnemyMovement>().DisableAllControls = true;
         pAnimation.Play("DeathEditable");
+        pTransform.GetComponent<EnemyScript>().TriggerTextAndEnemy();
         yield return new WaitForSeconds(pAnimation["DeathEditable"].length + pTimeOnLastFrame);
         if (pTransform != null) {
             Destroy(pTransform.gameObject);
@@ -559,7 +562,8 @@ public class CombatControls : MonoBehaviour {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0) {
             return false;
         } else {
-            if (Input.GetKeyUp(KeyCode.E)) {
+            if (_enemyHandler.EnemiesLeft() == 0)
+            {
                 int _bool = 0;
                 if (_completedLevelWithoutDmg)
                     _bool = 1;
@@ -572,7 +576,8 @@ public class CombatControls : MonoBehaviour {
                 //Debug.Log(allInfo);
                 Utils.NextLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt", allInfo);
                 return true;
-            } else {
+            } else
+            {
                 return false;
             }
         }
