@@ -291,14 +291,14 @@ public class CombatControls : MonoBehaviour {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
             audio.PlayOneShot(DeathClip, _volume);
+            Cursor.lockState = CursorLockMode.None;
         } else if (HasWon()) {
             //Debug.Log(Utils.LatestLevel());
             audio.PlayOneShot(WinClip, _volume);
-            if (Utils.LatestLevel() == 2) {
-                SceneManager.LoadScene("level02");
-            } else {
-                _afterDeathBehaviour.DisableAfterWin();
-            }
+            _afterDeathBehaviour.DisableAfterWin();
+            Cursor.lockState = CursorLockMode.None;
+        } else {
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 

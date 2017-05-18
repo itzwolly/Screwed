@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[AddComponentMenu("Camera/Simple Smooth Mouse Look ")]
+//[AddComponentMenu("Camera/Simple Smooth Mouse Look ")]
 public class MouseLook : MonoBehaviour {
     Vector2 _mouseAbsolute;
     Vector2 _smoothMouse;
@@ -27,17 +27,14 @@ public class MouseLook : MonoBehaviour {
 
     void Update() {
         // Ensure the cursor is always locked when set
-        if (transform != null) {
-            if (transform.parent.GetComponent<CombatControls>().HasWon() || transform.parent.GetComponent<CombatControls>().IsDead) {
-                // The following is intentional, don't change.
-                // You can't change the cursor from locked to confined, so change it to none first.
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.lockState = CursorLockMode.Confined;
-            } else {
-                Cursor.lockState = lockCursor;
-            }
-        }
-        
+        //if (characterBody.GetComponent<CombatControls>().HasWon() || characterBody.GetComponent<CombatControls>().IsDead) {
+        //    Debug.Log("DEAD or LOSS happened.");
+        //    Cursor.lockState = CursorLockMode.None;
+        //    //Cursor.lockState = CursorLockMode.Confined;
+        //} else {
+        //    Cursor.lockState = lockCursor;
+        //}
+
 
         // Allow the script to clamp based on a desired target value.
         var targetOrientation = Quaternion.Euler(targetDirection);
