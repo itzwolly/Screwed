@@ -18784,6 +18784,12 @@ Prefab:
       propertyPath: _ammoIncrease
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _profile
+      value: 
+      objectReference: {fileID: 11400000, guid: c7da424d235df1442a19db43839ab83e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
   m_IsPrefabParent: 0

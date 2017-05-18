@@ -405,25 +405,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4750352344804324, guid: 69ba8652f5d97064f91103f69f0061f7,
     type: 2}
   m_PrefabInternal: {fileID: 72495176}
---- !u!1 &76775320 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1338638203511620, guid: 72e9db91c0323e34ea6327dd2e6fa7db,
-    type: 2}
-  m_PrefabInternal: {fileID: 912597501}
---- !u!64 &76775321
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 76775320}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 7cdba2754e80bea4bba0a83ee23caf0f, type: 3}
 --- !u!1001 &111854267
 Prefab:
   m_ObjectHideFlags: 0
@@ -1880,7 +1861,7 @@ Prefab:
     - target: {fileID: 114130849454351668, guid: 429008960fb0d8a44a678f303987bfa5,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1682495703895688, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
       propertyPath: m_Name
@@ -1921,6 +1902,10 @@ Prefab:
       propertyPath: MovementClip
       value: 
       objectReference: {fileID: 8300000, guid: 8de9e56c53babfb4ca31a6e136c65f03, type: 3}
+    - target: {fileID: 1682495703895688, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
   m_IsPrefabParent: 0
@@ -2750,6 +2735,15 @@ Prefab:
       propertyPath: MovementClip
       value: 
       objectReference: {fileID: 8300000, guid: 8de9e56c53babfb4ca31a6e136c65f03, type: 3}
+    - target: {fileID: 1682495703895688, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
   m_IsPrefabParent: 0
@@ -3473,7 +3467,7 @@ GameObject:
 Camera:
   m_PrefabParentObject: {fileID: 20179079148697356, guid: b1baad6043e1cd84e8160716e82f23c2,
     type: 2}
-  m_PrefabInternal: {fileID: 1549074310}
+  m_PrefabInternal: {fileID: 1568792697}
 --- !u!1001 &1325352048
 Prefab:
   m_ObjectHideFlags: 0
@@ -3884,6 +3878,15 @@ Prefab:
       propertyPath: MovementClip
       value: 
       objectReference: {fileID: 8300000, guid: 8de9e56c53babfb4ca31a6e136c65f03, type: 3}
+    - target: {fileID: 1682495703895688, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 429008960fb0d8a44a678f303987bfa5,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 429008960fb0d8a44a678f303987bfa5, type: 2}
   m_IsPrefabParent: 0
@@ -4023,7 +4026,7 @@ Transform:
   m_PrefabParentObject: {fileID: 4750352344804324, guid: 69ba8652f5d97064f91103f69f0061f7,
     type: 2}
   m_PrefabInternal: {fileID: 1539848540}
---- !u!1001 &1549074310
+--- !u!1001 &1568792697
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4062,6 +4065,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _hud
+      value: 
+      objectReference: {fileID: 350080283}
+    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _resolutionDisplay
+      value: 
+      objectReference: {fileID: 1325352052}
+    - target: {fileID: 114335103220306382, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _gunPickup
+      value: 
+      objectReference: {fileID: 440507071}
     - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
       propertyPath: _statManager
@@ -4082,94 +4100,25 @@ Prefab:
       propertyPath: _cracks.Array.data[2]
       value: 
       objectReference: {fileID: 1325352050}
-    - target: {fileID: 114677579122440034, guid: b1baad6043e1cd84e8160716e82f23c2,
+    - target: {fileID: 64320510804507852, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
-      propertyPath: _hud
-      value: 
-      objectReference: {fileID: 350080283}
-    - target: {fileID: 114677579122440034, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _resolutionDisplay
-      value: 
-      objectReference: {fileID: 1325352052}
-    - target: {fileID: 114335103220306382, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _gunPickup
-      value: 
-      objectReference: {fileID: 440507071}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: ShootClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 067a66667de3f7c42ae906fde6417c7f, type: 3}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: KnifeClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f4bc94bb5258f0b43a22fac77b8b7da3, type: 3}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: DeathClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 955c0b0814e8a1e4a98ea0b7cbbea505, type: 3}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: WinClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 72ce5806fca33df43aa39fc15d1bca4a, type: 3}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: HitClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2cb1275343d446c4d90e9e5e2fb940c2, type: 3}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: DryFireClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ce5b8659f2dd0ba47a9cd0d53bfb2ea3, type: 3}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: EnemyGotHitBodyClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4f2c96be8b6b4034a87e4b8136614c14, type: 3}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: EnemyGotHitHeadClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d811bb82fd8228b4685aa762a174f631, type: 3}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: BackstabClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4f2c96be8b6b4034a87e4b8136614c14, type: 3}
-    - target: {fileID: 1904222018087564, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
-      propertyPath: m_Name
-      value: Player
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114211386112779860, guid: b1baad6043e1cd84e8160716e82f23c2,
+    - target: {fileID: 64320510804507852, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
-      propertyPath: KnifeSelectClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 12690b9090974964aadb003f7a468b44, type: 3}
-    - target: {fileID: 114211386112779860, guid: b1baad6043e1cd84e8160716e82f23c2,
+      propertyPath: m_InflateMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611920108832952, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
-      propertyPath: GunSelectClip
+      propertyPath: profile
       value: 
-      objectReference: {fileID: 8300000, guid: f11495c97da90674da0deaf7e0bd751e, type: 3}
-    - target: {fileID: 114335103220306382, guid: b1baad6043e1cd84e8160716e82f23c2,
+      objectReference: {fileID: 0}
+    - target: {fileID: 114030406930228762, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
-      propertyPath: GunPickupClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c612ba1218c014542981bc941e74aacc, type: 3}
-    - target: {fileID: 114102360266768328, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: FootstepsClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3a8adcdb6844c0d40ab3f35469ab2eb9, type: 3}
-    - target: {fileID: 114102360266768328, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: JumpClip
-      value: 
+      propertyPath: crosshairScale
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
@@ -4931,6 +4880,15 @@ Prefab:
       propertyPath: MovementClip
       value: 
       objectReference: {fileID: 8300000, guid: 8de9e56c53babfb4ca31a6e136c65f03, type: 3}
+    - target: {fileID: 1682495703895688, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
   m_IsPrefabParent: 0
@@ -5142,6 +5100,15 @@ Prefab:
         type: 2}
       propertyPath: StartOffset
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682495703895688, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130849454351668, guid: 4ae3f1dd7252f4f41b456fd1a92cee26,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ae3f1dd7252f4f41b456fd1a92cee26, type: 2}
@@ -5504,7 +5471,7 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 1904222018087564, guid: b1baad6043e1cd84e8160716e82f23c2,
     type: 2}
-  m_PrefabInternal: {fileID: 1549074310}
+  m_PrefabInternal: {fileID: 1568792697}
 --- !u!1001 &1977140088
 Prefab:
   m_ObjectHideFlags: 0
