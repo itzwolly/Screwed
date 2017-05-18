@@ -745,6 +745,8 @@ GameObject:
   - component: {fileID: 114335103220306382}
   - component: {fileID: 82893225046373394}
   - component: {fileID: 114865169249771298}
+  - component: {fileID: 114075880929547554}
+  - component: {fileID: 114290934459328668}
   m_Layer: 1
   m_Name: Player
   m_TagString: Player
@@ -1388,7 +1390,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000058114523}
-  m_LocalPosition: {x: 994, y: 1.06, z: -3.95}
+  m_LocalPosition: {x: 7.36, y: 1.06, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4779334595069844}
@@ -1743,7 +1745,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1787,7 +1789,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1799,19 +1801,19 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!92 &92105753855939794
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1914,6 +1916,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshairTexture: {fileID: 2800000, guid: f717b03b39018984f82f85732423549b, type: 3}
   crosshairScale: 0.05
+--- !u!114 &114075880929547554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904222018087564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e91e234be5a4e14cbb1849c28f47328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalKillsText: {fileID: 0}
+  timeText: {fileID: 0}
+  knifeText: {fileID: 0}
+  shotsText: {fileID: 0}
+  headshotsText: {fileID: 0}
+  statsScreen: {fileID: 0}
+  mainCamera: {fileID: 1619068457850646}
 --- !u!114 &114102360266768328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1967,6 +1987,20 @@ MonoBehaviour:
   - {fileID: 1320603201067870}
   - {fileID: 1161225300705550}
   _hasGun: 0
+--- !u!114 &114290934459328668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904222018087564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a96a311d089584cab3dedfb6741142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1619068457850646}
+  introScreen1: {fileID: 0}
+  introScreen2: {fileID: 0}
 --- !u!114 &114319267502297498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1978,8 +2012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f496c5899dc754ea18a1e545e2bba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _usingClip: {fileID: 8300000, guid: f480580e619f6f643827a68a02a5c533, type: 3}
-  _stoppedUsingClip: {fileID: 8300000, guid: 79d028432b60ea04eb4ca45f79f8b0be, type: 3}
+  _usingClip: {fileID: 8300000, guid: 8a3a00f0d65da4a49a2ebc60f5ad4740, type: 3}
+  _stoppedUsingClip: {fileID: 8300000, guid: 86d5565637c56964088bd303a7e6d9e1, type: 3}
   ShootClip: {fileID: 8300000, guid: 067a66667de3f7c42ae906fde6417c7f, type: 3}
   KnifeClip: {fileID: 8300000, guid: f4bc94bb5258f0b43a22fac77b8b7da3, type: 3}
   DeathClip: {fileID: 8300000, guid: 955c0b0814e8a1e4a98ea0b7cbbea505, type: 3}
@@ -2002,7 +2036,7 @@ MonoBehaviour:
   _decreaseAmount: 3
   _comboResetTime: 100
   _disableAfterDeath: []
-  _afterDeathBehaviour: {fileID: 0}
+  _afterDeathBehaviour: {fileID: 114865169249771298}
   _cracks:
   - {fileID: 0}
   - {fileID: 0}
@@ -2035,7 +2069,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1723965114059502}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98d05a186c3bc4440bdcae699daf7a21, type: 3}
   m_Name: 
@@ -2053,10 +2087,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 0}
+  profile: {fileID: 11400000, guid: c7da424d235df1442a19db43839ab83e, type: 2}
 --- !u!114 &114865169249771298
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904222018087564}
@@ -2065,11 +2099,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e3df6d89e5bc4458111c5151a45acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 20179079148697356}
   _hud: {fileID: 0}
   _resolutionDisplay: {fileID: 0}
-  _deathMessage: 
-  _winMessage: 
+  _deathMessage: U DED
+  _winMessage: U WON YASSS
+  hudToDisable: {fileID: 0}
+  statsDisplayScript: {fileID: 114075880929547554}
 --- !u!124 &124347899334945184
 Behaviour:
   m_ObjectHideFlags: 1

@@ -13,7 +13,5 @@ public class Restart : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.R))
             Application.LoadLevel(scene);
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
     }
 }

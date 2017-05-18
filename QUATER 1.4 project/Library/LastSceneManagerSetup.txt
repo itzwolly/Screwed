@@ -1,1 +1,4 @@
-sceneSetups: []
+sceneSetups:
+- path: Assets/Scenes/level05.unity
+  isLoaded: 1
+  isActive: 1
