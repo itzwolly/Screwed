@@ -23,7 +23,7 @@ public class Utils {
     public static void ChangeGameObjectColorTo(GameObject pGameObject, Color pTo)
     {
        
-       pGameObject.transform.GetComponent<Renderer>().material.color = pTo;
+       //pGameObject.transform.GetComponent<Renderer>().material.color = pTo;
         
     }
 

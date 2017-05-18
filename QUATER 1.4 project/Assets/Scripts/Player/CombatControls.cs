@@ -60,7 +60,6 @@ public class CombatControls : MonoBehaviour {
     [Range(0, 1)] [SerializeField] private float _vignetteRoundness;
     [SerializeField] private bool _vignetteIsRounded;
 
-
     private VignetteModel.Mode _profileMode;
     private Color _profileColor;
     private Vector2 _profileCenter;
@@ -389,7 +388,6 @@ public class CombatControls : MonoBehaviour {
 
     private void TakeDamage(Transform pTarget, bool headshot) {
         //Debug.Log("Changing to red..");
-        //Utils.ChangeGameObjectColorTo(pTarget.gameObject, Color.red);
         pTarget.LookAt(gameObject.transform.position);
         if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
             if (headshot) {
@@ -415,9 +413,20 @@ public class CombatControls : MonoBehaviour {
                 //Debug.Log("Got Killed By headshot");
             }
             _totalKills++;
-            Destroy(pTarget.gameObject);
+            //pTarget.GetComponent<EnemyMovement>().Animation.Stop();
+            StartCoroutine(DestroyEnemy(pTarget, pTarget.GetComponent<EnemyMovement>().Animation, pTarget.GetComponent<EnemyMovement>().TimeOnLastFrame));
         }
         //_startTimer = true;
+    }
+
+    private IEnumerator DestroyEnemy(Transform pTransform, Animation pAnimation, float pTimeOnLastFrame) {
+        //pTransform.GetComponent<EnemyMovement>().SetState(EnemyMovement.State.none);
+        pTransform.GetComponent<EnemyMovement>().DisableAllControls = true;
+        pAnimation.Play("DeathEditable");
+        yield return new WaitForSeconds(pAnimation["DeathEditable"].length + pTimeOnLastFrame);
+        if (pTransform != null) {
+            Destroy(pTransform.gameObject);
+        }
     }
 
     private void MeleeDamage(Vector3 pCenter, float pRadius, string pTarget, WeaponAOEType pAoeType) {
@@ -481,9 +490,9 @@ public class CombatControls : MonoBehaviour {
                 float angle = Vector3.Angle(targetDir, transform.forward);
 
                 //Debug.Log("dist: " + dist + " | " + "pMinDist: " + pMinDist + " | " + "angle: " + angle + " | " + "_angle: " + _angle);
-                Debug.Log("OUT if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
+                //Debug.Log("OUT if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
                 if (dist < pMinDist && angle < _angle) {
-                    Debug.Log("IN if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
+                    //Debug.Log("IN if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
                     enemy = collider.transform;
                     pMinDist = dist;
                 }

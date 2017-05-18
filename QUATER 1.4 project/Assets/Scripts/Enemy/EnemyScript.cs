@@ -32,6 +32,7 @@ public class EnemyScript : MonoBehaviour {
     private float _loseAttention;
     private bool _loosingAttention;
     private bool _hasBeenHit;
+    private EnemyMovement _enemyMovement;
 
     [SerializeField] private GameObject _HitMarkerDisplay;
 
@@ -50,6 +51,7 @@ public class EnemyScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         enemyKilledTextAnimator = enemyKilledText.GetComponent<Animator>();
+        _enemyMovement = GetComponent<EnemyMovement>();
         //Debug.Log("first waypoint = "+Waypoints[0]);
         if (Waypoints.Count <= 1)
             StartOffset = true;
@@ -71,9 +73,13 @@ public class EnemyScript : MonoBehaviour {
     {
         if(_onDisturbance)
         {
+            //_state=looking
+            _enemyMovement.SetState(EnemyMovement.State.look);
             Debug.Log("on disturbance");
             if (Look())
             {
+                //_state=walking
+                _enemyMovement.SetState(EnemyMovement.State.walk);
                 Debug.Log("done looking "+gameObject.name);
                 _onDisturbance = false;
             }
@@ -183,11 +189,14 @@ public class EnemyScript : MonoBehaviour {
         if (_distanceToWaypoint <= MinDistanceToWaypoint + 0.5f && !StartOffset)
         {
             //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
-
+            //_state=looking
+            _enemyMovement.SetState(EnemyMovement.State.look);
             OnCheckpoint(_currentWaypoint, false);
         }
         else
         {
+            //_state=walking
+            _enemyMovement.SetState(EnemyMovement.State.walk);
             //Debug.Log("i am not on currentwaypoint");
         }
     }
@@ -245,10 +254,11 @@ public class EnemyScript : MonoBehaviour {
         if (_HitMarkerDisplay != null) {
             _HitMarkerDisplay.GetComponent<HitmarkerDisplay>().EnemyDestroyed = true;
         }
-        if (enemyKilledTextAnimator!=null)
-        enemyKilledTextAnimator.SetTrigger("EnemyKilled");
-        if (Handler != null) {
-            Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+        if (enemyKilledTextAnimator!=null) {
+            enemyKilledTextAnimator.SetTrigger("EnemyKilled");
+            if (Handler != null) {
+                Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+            }
         }
     }
 
