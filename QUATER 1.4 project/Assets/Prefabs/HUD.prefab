@@ -1759,7 +1759,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114680239673264254}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: GotoMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114541927016299786
@@ -1980,7 +1991,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: StartGame
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2701,6 +2712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dba1be6c8d70b24abbca60df8566e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitMarkerImage: {fileID: 114709283439693778}
+  _hitMarkerColor: {r: 1, g: 0, b: 0, a: 1}
   _waitInSeconds: 0.1
 --- !u!114 &114920696213010800
 MonoBehaviour:

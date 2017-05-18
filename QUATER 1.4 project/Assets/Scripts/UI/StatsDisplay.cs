@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StatsDisplay : MonoBehaviour {
+    public CursorLockMode lockCursor;
     public Text totalKillsText;
     public Text timeText;
     public Text knifeText;
@@ -16,7 +17,8 @@ public class StatsDisplay : MonoBehaviour {
     // Use this for initialization
     void Start () {
         state = false;
-	}
+        Cursor.lockState = lockCursor;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -50,7 +52,7 @@ public class StatsDisplay : MonoBehaviour {
         knifeText.text = Utils.GetSuccessfullKnives("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt").ToString();
         shotsText.text = Utils.GetSuccessfullShots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt").ToString();
         headshotsText.text = Utils.GetSuccessfullHeadshots("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt").ToString();
-
+        Cursor.lockState = CursorLockMode.Confined;
         state = !state;
     }
 }

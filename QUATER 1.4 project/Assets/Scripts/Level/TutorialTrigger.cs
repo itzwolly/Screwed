@@ -29,7 +29,7 @@ public class TutorialTrigger : MonoBehaviour {
     IEnumerator WaitForHint()
     {
         yield return new WaitForSeconds(10);
-        hintSprite.SetActive(!true);
+        //hintSprite.SetActive(!true);
         
     }
 }

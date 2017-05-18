@@ -240,7 +240,7 @@ public class MenuManager : MonoBehaviour {
         menu.SetActive(false);
         titleText.SetActive(!true);
         clicked = true;
-        scene = 1;
+        scene = 2;
         levelName.text = "Prologue";
     }
     public void Launch2()
@@ -277,7 +277,7 @@ public class MenuManager : MonoBehaviour {
         menu.SetActive(false);
         titleText.SetActive(!true);
         clicked = true;
-        scene = 1;
+        scene = 2;
     }
 
     public void Options()
