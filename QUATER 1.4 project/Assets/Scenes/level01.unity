@@ -4065,6 +4065,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _hud
+      value: 
+      objectReference: {fileID: 350080283}
+    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _resolutionDisplay
+      value: 
+      objectReference: {fileID: 1325352052}
+    - target: {fileID: 114335103220306382, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _gunPickup
+      value: 
+      objectReference: {fileID: 440507071}
     - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
       propertyPath: _statManager
@@ -4085,30 +4100,6 @@ Prefab:
       propertyPath: _cracks.Array.data[2]
       value: 
       objectReference: {fileID: 1325352050}
-    - target: {fileID: 114335103220306382, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _gunPickup
-      value: 
-      objectReference: {fileID: 440507071}
-    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _hud
-      value: 
-      objectReference: {fileID: 350080283}
-    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _resolutionDisplay
-      value: 
-      objectReference: {fileID: 1325352052}
-    - target: {fileID: 1205058617047002, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
-      propertyPath: m_Name
-      value: Hand_Knife_Animation New
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
-        type: 2}
-      propertyPath: _angle
-      value: 45
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
   m_IsPrefabParent: 0
@@ -4748,21 +4739,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114956577032944350, guid: e7f9310c15768c040bb8afbf6dd6182e,
+    - target: {fileID: 114198337795631726, guid: e7f9310c15768c040bb8afbf6dd6182e,
         type: 2}
-      propertyPath: _player
+      propertyPath: EnemyHandler
       value: 
-      objectReference: {fileID: 1958371874}
-    - target: {fileID: 114949019558340452, guid: e7f9310c15768c040bb8afbf6dd6182e,
-        type: 2}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1958371874}
-    - target: {fileID: 114141893381323374, guid: e7f9310c15768c040bb8afbf6dd6182e,
-        type: 2}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1958371874}
+      objectReference: {fileID: 1723023417}
     - target: {fileID: 114155163069274662, guid: e7f9310c15768c040bb8afbf6dd6182e,
         type: 2}
       propertyPath: _camera
@@ -4773,19 +4754,21 @@ Prefab:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1958371874}
-    - target: {fileID: 114198337795631726, guid: e7f9310c15768c040bb8afbf6dd6182e,
+    - target: {fileID: 114141893381323374, guid: e7f9310c15768c040bb8afbf6dd6182e,
         type: 2}
-      propertyPath: EnemyHandler
+      propertyPath: _player
       value: 
-      objectReference: {fileID: 1723023417}
-    - target: {fileID: 1645621070470900, guid: e7f9310c15768c040bb8afbf6dd6182e, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1444248929460686, guid: e7f9310c15768c040bb8afbf6dd6182e, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1958371874}
+    - target: {fileID: 114949019558340452, guid: e7f9310c15768c040bb8afbf6dd6182e,
+        type: 2}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1958371874}
+    - target: {fileID: 114956577032944350, guid: e7f9310c15768c040bb8afbf6dd6182e,
+        type: 2}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1958371874}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7f9310c15768c040bb8afbf6dd6182e, type: 2}
   m_IsPrefabParent: 0

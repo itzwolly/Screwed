@@ -796,7 +796,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _image: {fileID: 114961333207342826}
   _shieldImage: {fileID: 114792376549771746}
-  _threshold: 0.4
+  _threshold: 0.35
   _timeBetweenBlinks: 0.3
   _amountOfBlinks: 2
   _color: {r: 0.43529415, g: 0.7607844, b: 0.8470589, a: 1}
