@@ -394,9 +394,10 @@ public class CombatControls : MonoBehaviour {
         if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
             if (headshot) {
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0] * 2);
-            } else
+            } else {
+                Debug.Log(pTarget.name + " got hit!");
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
-
+            }
         } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
             if (headshot)
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(2 * _weaponDamage[1]);
@@ -445,7 +446,8 @@ public class CombatControls : MonoBehaviour {
 
                 _successfullKnives++;
                 if (pAoeType == WeaponAOEType.Single) {
-                    //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
+                    Debug.Log(hitColliders[i].transform.name + " | " + pRadius);
+                    //Debug.Log("Enemy equals null: " + (GetClosestEnemy(hitColliders, pRadius) == null));
                     if (GetClosestEnemy(hitColliders, pRadius) != null) {
                         // Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
                         _comboCount++;
@@ -479,8 +481,9 @@ public class CombatControls : MonoBehaviour {
                 float angle = Vector3.Angle(targetDir, transform.forward);
 
                 //Debug.Log("dist: " + dist + " | " + "pMinDist: " + pMinDist + " | " + "angle: " + angle + " | " + "_angle: " + _angle);
-
+                Debug.Log("OUT if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
                 if (dist < pMinDist && angle < _angle) {
+                    Debug.Log("IN if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
                     enemy = collider.transform;
                     pMinDist = dist;
                 }
