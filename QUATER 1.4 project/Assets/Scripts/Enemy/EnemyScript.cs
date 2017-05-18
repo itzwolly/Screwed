@@ -97,7 +97,7 @@ public class EnemyScript : MonoBehaviour {
                 gameObject.transform.rotation = _initialRotation;
             }
         }
-        Debug.Log("on checkpoint with disturbance = "+_onDisturbance);
+        //Debug.Log("on checkpoint with disturbance = "+_onDisturbance);
         if(_onDisturbance)
         {
             //_state=looking
@@ -260,7 +260,6 @@ public class EnemyScript : MonoBehaviour {
 
     public void SetDisturbedLocation(Vector3 pos, bool forEnemyDeath)
     {
-        Debug.Log("setting Disturbance");
         _loosingAttention = true;
         _loseAttention = 0;
         if (forEnemyDeath)
