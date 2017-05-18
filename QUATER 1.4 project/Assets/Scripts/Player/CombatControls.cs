@@ -365,8 +365,12 @@ public class CombatControls : MonoBehaviour {
             else
             pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
            
-        } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
-            if(headshot)
+        } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged)
+        {
+            pTarget.GetComponent<EnemyMovement>().SetWaypoint(gameObject);
+            pTarget.GetComponent<EnemyScript>().SetDisturbedLocation(gameObject.transform.position, true);
+            //Debug.Log(gameObject.transform.position);
+            if (headshot)
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(2*_weaponDamage[1]);
             else
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[1]);
