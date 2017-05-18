@@ -5254,6 +5254,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1904222018087564, guid: b1baad6043e1cd84e8160716e82f23c2,
         type: 2}
+    - target: {fileID: 114387480372894310, guid: d9d903a105d927f4fb579ffb82a001d1,
+        type: 2}
+      propertyPath: AlertDistance
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9d903a105d927f4fb579ffb82a001d1, type: 2}
   m_IsPrefabParent: 0
