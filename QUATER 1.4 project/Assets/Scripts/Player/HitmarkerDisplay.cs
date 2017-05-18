@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HitmarkerDisplay : MonoBehaviour {
 
+    [SerializeField] private Image _hitMarkerImage;
+    [SerializeField] private Color _hitMarkerColor;
     [SerializeField] private float _waitInSeconds;
     private bool _enemyDestroyed;
+    
 
     public float WaitInSeconds {
         get { return _waitInSeconds; }
@@ -13,6 +17,10 @@ public class HitmarkerDisplay : MonoBehaviour {
     public bool EnemyDestroyed {
         get { return _enemyDestroyed; }
         set { _enemyDestroyed = value; }
+    }
+
+    private void Start() {
+        _hitMarkerImage.color = _hitMarkerColor;
     }
 
     private void Update() {
