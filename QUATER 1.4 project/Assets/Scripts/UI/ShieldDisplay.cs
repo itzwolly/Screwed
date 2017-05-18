@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+
 [RequireComponent(typeof(AudioSource))]
 public class ShieldDisplay : MonoBehaviour
 {
@@ -22,8 +23,12 @@ public class ShieldDisplay : MonoBehaviour
     private Color _originalColor;
     private bool _blinkOnce;
 
-	// Use this for initialization
-	void Start () {
+    public float FillAmount {
+        get { return _image.fillAmount; }
+    }
+
+    // Use this for initialization
+    void Start () {
         _combatControls = _player.GetComponent<CombatControls>();
         _originalColor = _image.color;
         //_blinkImage.gameObject.SetActive(false);
