@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 32701ac0f7493124a8fd3a9727d27f05
-timeCreated: 1495105199
+guid: ad582b7bee4bd954f8edf1406d09af31
+timeCreated: 1495117792
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -11,37 +11,41 @@ ModelImporter:
     100006: Body
     100008: Down_Body
     100010: Head
-    100012: //RootNode
-    100014: Melee_Gun_L
-    100016: Melee_Gun_R
-    100018: melee_robot_mesh
-    100020: Top_big_cog
-    100022: Top_small_cog
-    100024: Top_spyky_cog
-    100026: Wheel_L
-    100028: Wheel_R
+    100012: Melee_Gun_L
+    100014: Melee_Gun_R
+    100016: //RootNode
+    100018: range_robot_mesh
+    100020: Spining_gun_L
+    100022: Spining_gun_R
+    100024: Top_big_cog
+    100026: Top_small_cog
+    100028: Top_spyky_cog
+    100030: Wheel_L
+    100032: Wheel_R
     400000: Arm_L1
     400002: Arm_R1
     400004: Back_Cog
     400006: Body
     400008: Down_Body
     400010: Head
-    400012: //RootNode
-    400014: Melee_Gun_L
-    400016: Melee_Gun_R
-    400018: melee_robot_mesh
-    400020: Top_big_cog
-    400022: Top_small_cog
-    400024: Top_spyky_cog
-    400026: Wheel_L
-    400028: Wheel_R
-    4300000: melee_robot_mesh
+    400012: Melee_Gun_L
+    400014: Melee_Gun_R
+    400016: //RootNode
+    400018: range_robot_mesh
+    400020: Spining_gun_L
+    400022: Spining_gun_R
+    400024: Top_big_cog
+    400026: Top_small_cog
+    400028: Top_spyky_cog
+    400030: Wheel_L
+    400032: Wheel_R
+    4300000: range_robot_mesh
     7400000: Idle
     7400002: Moving
     7400004: Attack
     7400006: Death
     9500000: //RootNode
-    13700000: melee_robot_mesh
+    13700000: range_robot_mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -108,7 +112,11 @@ ModelImporter:
         weight: 1
       - path: Melee_Gun_R
         weight: 1
-      - path: melee_robot_mesh
+      - path: range_robot_mesh
+        weight: 1
+      - path: Spining_gun_L
+        weight: 1
+      - path: Spining_gun_R
         weight: 1
       - path: Top_big_cog
         weight: 1
@@ -122,7 +130,7 @@ ModelImporter:
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     - serializedVersion: 16
       name: Moving
       takeName: Take 001
@@ -166,7 +174,11 @@ ModelImporter:
         weight: 1
       - path: Melee_Gun_R
         weight: 1
-      - path: melee_robot_mesh
+      - path: range_robot_mesh
+        weight: 1
+      - path: Spining_gun_L
+        weight: 1
+      - path: Spining_gun_R
         weight: 1
       - path: Top_big_cog
         weight: 1
@@ -180,7 +192,7 @@ ModelImporter:
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     - serializedVersion: 16
       name: Attack
       takeName: Take 001
@@ -224,7 +236,11 @@ ModelImporter:
         weight: 1
       - path: Melee_Gun_R
         weight: 1
-      - path: melee_robot_mesh
+      - path: range_robot_mesh
+        weight: 1
+      - path: Spining_gun_L
+        weight: 1
+      - path: Spining_gun_R
         weight: 1
       - path: Top_big_cog
         weight: 1
@@ -238,7 +254,7 @@ ModelImporter:
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     - serializedVersion: 16
       name: Death
       takeName: Take 001
@@ -282,7 +298,11 @@ ModelImporter:
         weight: 1
       - path: Melee_Gun_R
         weight: 1
-      - path: melee_robot_mesh
+      - path: range_robot_mesh
+        weight: 1
+      - path: Spining_gun_L
+        weight: 1
+      - path: Spining_gun_R
         weight: 1
       - path: Top_big_cog
         weight: 1
@@ -296,7 +316,7 @@ ModelImporter:
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []

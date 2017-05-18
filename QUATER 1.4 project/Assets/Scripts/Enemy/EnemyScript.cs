@@ -32,6 +32,7 @@ public class EnemyScript : MonoBehaviour {
     private float _loseAttention;
     private bool _loosingAttention;
     private bool _hasBeenHit;
+    private EnemyMovement _enemyMovement;
     private Quaternion _initialRotation;
     private GameObject _startWaypoint;
 
@@ -52,6 +53,7 @@ public class EnemyScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         enemyKilledTextAnimator = enemyKilledText.GetComponent<Animator>();
+        _enemyMovement = GetComponent<EnemyMovement>();
         //Debug.Log("first waypoint = "+Waypoints[0]);
         if (Waypoints.Count==0)
         {
@@ -97,9 +99,13 @@ public class EnemyScript : MonoBehaviour {
         Debug.Log("on checkpoint with disturbance = "+_onDisturbance);
         if(_onDisturbance)
         {
+            //_state=looking
+            _enemyMovement.SetState(EnemyMovement.State.look);
             Debug.Log("on disturbance");
             if (Look())
             {
+                //_state=walking
+                _enemyMovement.SetState(EnemyMovement.State.walk);
                 Debug.Log("done looking "+gameObject.name);
                 _onDisturbance = false;
             }
@@ -208,13 +214,16 @@ public class EnemyScript : MonoBehaviour {
         } //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
         if (_distanceToWaypoint <= MinDistanceToWaypoint + 0.8f)// && !StartOffset)
         {
-            //Debug.Log("OnCheckpoint with gameobject " + gameObject.name);
-
+            //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
+            //_state=looking
+            _enemyMovement.SetState(EnemyMovement.State.look);
             OnCheckpoint(_currentWaypoint, false);
         }
         else
         {
-            Debug.Log("i am not on currentwaypoint with distance = " + _distanceToWaypoint + ">"+MinDistanceToWaypoint+0.8f);
+            //_state=walking
+            _enemyMovement.SetState(EnemyMovement.State.walk);
+            //Debug.Log("i am not on currentwaypoint");
         }
     }
 
@@ -277,10 +286,11 @@ public class EnemyScript : MonoBehaviour {
         if (_HitMarkerDisplay != null) {
             _HitMarkerDisplay.GetComponent<HitmarkerDisplay>().EnemyDestroyed = true;
         }
-        if (enemyKilledTextAnimator!=null)
-        enemyKilledTextAnimator.SetTrigger("EnemyKilled");
-        if (Handler != null) {
-            Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+        if (enemyKilledTextAnimator!=null) {
+            enemyKilledTextAnimator.SetTrigger("EnemyKilled");
+            if (Handler != null) {
+                Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+            }
         }
     }
 
