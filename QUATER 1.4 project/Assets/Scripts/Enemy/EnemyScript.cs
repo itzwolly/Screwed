@@ -94,10 +94,10 @@ public class EnemyScript : MonoBehaviour {
                 gameObject.transform.rotation = _initialRotation;
             }
         }
-        Debug.Log("on checkpoint with disturbance = "+_onDisturbance);
+        //Debug.Log("on checkpoint with disturbance = "+_onDisturbance);
         if(_onDisturbance)
         {
-            Debug.Log("on disturbance");
+            //Debug.Log("on disturbance");
             if (Look())
             {
                 Debug.Log("done looking "+gameObject.name);
@@ -134,7 +134,7 @@ public class EnemyScript : MonoBehaviour {
 
     public bool Look()
     {
-        Debug.Log("looking");
+        //Debug.Log("looking");
        
             //_left = gameObject.transform.localRotation;
             //_left.SetLookRotation(-gameObject.transform.right);
@@ -214,7 +214,7 @@ public class EnemyScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("i am not on currentwaypoint with distance = " + _distanceToWaypoint + ">"+MinDistanceToWaypoint+0.8f);
+            //Debug.Log("i am not on currentwaypoint with distance = " + _distanceToWaypoint + ">"+MinDistanceToWaypoint+0.8f);
         }
     }
 
@@ -250,7 +250,7 @@ public class EnemyScript : MonoBehaviour {
 
     public void SetDisturbedLocation(Vector3 pos, bool forEnemyDeath)
     {
-        Debug.Log("setting Disturbance");
+        //Debug.Log("setting Disturbance");
         _loosingAttention = true;
         _loseAttention = 0;
         if (forEnemyDeath)
