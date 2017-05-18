@@ -280,6 +280,11 @@ public class MenuManager : MonoBehaviour {
         scene = 2;
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void Options()
     {
         if (comingFromOptions && changedValues) { Apply(); comingFromOptions = false; changedValues = false; }

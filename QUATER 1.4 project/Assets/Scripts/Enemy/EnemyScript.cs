@@ -36,6 +36,7 @@ public class EnemyScript : MonoBehaviour {
     private Quaternion _initialRotation;
     private GameObject _startWaypoint;
 
+    [SerializeField] private Image _marker;
     [SerializeField] private GameObject _HitMarkerDisplay;
 
     public int Health
@@ -286,9 +287,21 @@ public class EnemyScript : MonoBehaviour {
         if (_HitMarkerDisplay != null) {
             _HitMarkerDisplay.GetComponent<HitmarkerDisplay>().EnemyDestroyed = true;
         }
-        if (enemyKilledTextAnimator!=null) {
+        //if (enemyKilledTextAnimator!=null) {
+        //    enemyKilledTextAnimator.SetTrigger("EnemyKilled");
+        //    if (Handler != null) {
+        //        Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+        //    }
+        //}
+    }
+
+    public void TriggerTextAndEnemy()
+    {
+        if (enemyKilledTextAnimator != null)
+        {
             enemyKilledTextAnimator.SetTrigger("EnemyKilled");
-            if (Handler != null) {
+            if (Handler != null)
+            {
                 Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
             }
         }

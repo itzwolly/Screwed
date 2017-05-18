@@ -1429,8 +1429,8 @@ RectTransform:
   m_Father: {fileID: 137264847}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -4.899994, y: 0}
   m_SizeDelta: {x: 10.2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3155,7 +3155,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 2, y: 0}
   m_SizeDelta: {x: 13, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3223,7 +3223,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 2, y: 0}
   m_SizeDelta: {x: 13, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3338,6 +3338,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 366555684}
         m_MethodName: Default
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 366555684}
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4763,7 +4774,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 915c06b87369c634c8a600972d4a15ae, type: 3}
+    m_Font: {fileID: 12800000, guid: 543934fe08b84b841ae6408f7182b2dc, type: 3}
     m_FontSize: 14
     m_FontStyle: 1
     m_BestFit: 1
@@ -4775,7 +4786,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NAH, I'M GOOD
+  m_Text: YES
 --- !u!222 &851078004
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5511,8 +5522,8 @@ RectTransform:
   m_Father: {fileID: 197233458}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -4.899994, y: 0}
   m_SizeDelta: {x: 10.2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5748,9 +5759,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d982430dd03b2aa438888e93e8e88b7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad0fd078b03ce3947b9c43a4c5deadf7, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5895,7 +5906,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 915c06b87369c634c8a600972d4a15ae, type: 3}
+    m_Font: {fileID: 12800000, guid: 543934fe08b84b841ae6408f7182b2dc, type: 3}
     m_FontSize: 14
     m_FontStyle: 1
     m_BestFit: 1
@@ -10658,7 +10669,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 915c06b87369c634c8a600972d4a15ae, type: 3}
+    m_Font: {fileID: 12800000, guid: 543934fe08b84b841ae6408f7182b2dc, type: 3}
     m_FontSize: 14
     m_FontStyle: 1
     m_BestFit: 1
@@ -10670,7 +10681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: I GUESS I COULD STAY
+  m_Text: NO
 --- !u!222 &1841768993
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11162,7 +11173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1941283100
 Transform:
   m_ObjectHideFlags: 0
@@ -11193,7 +11204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1954161241
 RectTransform:
   m_ObjectHideFlags: 0

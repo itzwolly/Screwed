@@ -27,7 +27,20 @@ public class MouseLook : MonoBehaviour {
 
     void Update() {
         // Ensure the cursor is always locked when set
-        //Cursor.lockState = lockCursor;
+        if (transform != null)
+        {
+            if (transform.parent.GetComponent<CombatControls>().HasWon() || transform.parent.GetComponent<CombatControls>().IsDead)
+            {
+                // The following is intentional, don't change.
+                // You can't change the cursor from locked to confined, so change it to none first.
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                Cursor.lockState = lockCursor;
+            }
+        }
 
         // Allow the script to clamp based on a desired target value.
         var targetOrientation = Quaternion.Euler(targetDirection);

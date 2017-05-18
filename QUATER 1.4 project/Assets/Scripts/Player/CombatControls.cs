@@ -430,6 +430,7 @@ public class CombatControls : MonoBehaviour {
         //pTransform.GetComponent<EnemyMovement>().SetState(EnemyMovement.State.none);
         pTransform.GetComponent<EnemyMovement>().DisableAllControls = true;
         pAnimation.Play("DeathEditable");
+        pTransform.GetComponent<EnemyScript>().TriggerTextAndEnemy();
         yield return new WaitForSeconds(pAnimation["DeathEditable"].length + pTimeOnLastFrame);
         if (pTransform != null) {
             Destroy(pTransform.gameObject);
@@ -557,7 +558,7 @@ public class CombatControls : MonoBehaviour {
     }
 
 
-    private bool HasWon() {
+    public bool HasWon() {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0) {
             return false;
         } else {

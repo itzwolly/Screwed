@@ -38,6 +38,10 @@ public class SliderApply : MonoBehaviour {
 
     public void AddSlider(GameObject value)
     {
+        if (_sliders == null || _sliders.Count == 0)
+        {
+            _sliders = new List<GameObject>();
+        }
         _sliders.Add(value);
     }
 }

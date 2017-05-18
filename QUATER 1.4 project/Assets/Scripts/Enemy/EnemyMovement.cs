@@ -391,11 +391,11 @@ public class EnemyMovement : MonoBehaviour
                 {
                     _anim.Stop();
                     if (!_anim.isPlaying) {
+                        //StartCoroutine(GetHitRanged(_anim));
+
                         _anim.Play("AttackEditable");
-                        Utils.ChangeGameObjectColorTo(gameObject, Color.red);
                         target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
                         audio.PlayOneShot(ShootSound, _volume);
-                        //Debug.Log("shoot shoot");
                     }
                 }
                 else
@@ -410,11 +410,11 @@ public class EnemyMovement : MonoBehaviour
                 {
                     _anim.Stop();
                     if (!_anim.isPlaying) {
+                        //StartCoroutine(GetHitMelee(_anim));
+
                         _anim.Play("AttackEditable");
-                        Utils.ChangeGameObjectColorTo(gameObject, Color.blue);
                         target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
                         audio.PlayOneShot(KnifeSound, _volume);
-                        //Debug.Log("Knify knify");
                         StopMovement();
                     }
                 }
@@ -429,6 +429,30 @@ public class EnemyMovement : MonoBehaviour
         _wait--;
     }
     //comebacktothis
+
+    private IEnumerator GetHitRanged(Animation pAnimation)
+    {
+        pAnimation.Play("AttackEditable");
+        yield return new WaitForSeconds(pAnimation["AttackEditable"].length);
+        if (_distanceToTarget <= RangeDistance)
+        {
+            target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
+            audio.PlayOneShot(ShootSound, _volume);
+        }
+    }
+
+    private IEnumerator GetHitMelee(Animation pAnimation)
+    {
+        pAnimation.Play("AttackEditable");
+        yield return new WaitForSeconds(pAnimation["AttackEditable"].length);
+        if (_distanceToTarget <= MeleeDistance)
+        {
+            target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
+            audio.PlayOneShot(KnifeSound, _volume);
+            StopMovement();
+        }
+    }
+
     IEnumerator TurnToward(GameObject pImage, int aValue, float aTime)
     {
         Quaternion alpha = pImage.transform.rotation;

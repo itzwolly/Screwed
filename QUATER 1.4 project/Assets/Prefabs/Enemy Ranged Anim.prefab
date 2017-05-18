@@ -118,6 +118,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1346750838204760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4538544953004898}
+  - component: {fileID: 212847878976140676}
+  m_Layer: 0
+  m_Name: melee_icon (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1349016021332356
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +321,7 @@ GameObject:
   - component: {fileID: 195776966256626892}
   - component: {fileID: 114956613568450270}
   - component: {fileID: 114960970389828458}
+  - component: {fileID: 114090009872269190}
   m_Layer: 0
   m_Name: Enemy Ranged Anim
   m_TagString: Enemy
@@ -442,8 +459,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1845390279490720}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.362871, y: -2.2609597e-18, z: -0.41726702}
+  m_LocalRotation: {x: -0, y: 0.93900687, z: -0, w: -0.3438984}
+  m_LocalPosition: {x: 5.465929, y: 0, z: 27.305681}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4633091211265248}
@@ -467,6 +484,7 @@ Transform:
   - {fileID: 4475412166432036}
   - {fileID: 4806723117686972}
   - {fileID: 4604411190049752}
+  - {fileID: 4538544953004898}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -496,6 +514,19 @@ Transform:
   m_Father: {fileID: 4389861053975284}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4538544953004898
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346750838204760}
+  m_LocalRotation: {x: -0, y: 0.99986213, z: -0, w: -0.016610146}
+  m_LocalPosition: {x: 0, y: 2.277, z: 0}
+  m_LocalScale: {x: 0.50000024, y: 0.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4389861053975284}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 181.90298, z: 0}
 --- !u!4 &4604411190049752
 Transform:
   m_ObjectHideFlags: 1
@@ -620,7 +651,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1487228857260576}
   m_LocalRotation: {x: -0, y: 0.8619564, z: -0, w: -0.5069825}
-  m_LocalPosition: {x: 0.009148985, y: 1.4357147, z: 0.35216582}
+  m_LocalPosition: {x: -0.001, y: 1.4357147, z: 0.601}
   m_LocalScale: {x: 0.711431, y: 0.71143085, z: 0.71143115}
   m_Children: []
   m_Father: {fileID: 4389861053975284}
@@ -1056,6 +1087,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114090009872269190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845390279490720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715e6395c625c3a47996ca74bfc49857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _marker: {fileID: 212847878976140676}
 --- !u!114 &114184157708597452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1078,17 +1122,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2215f433bb6eabd4fbbabf603f49910e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 0}
+  audio: {fileID: 82420082133858770}
   MovementClip: {fileID: 8300000, guid: 8de9e56c53babfb4ca31a6e136c65f03, type: 3}
   IsRanged: 1
   ShootSound: {fileID: 8300000, guid: 511e6576e47cc594493e5d1400011c14, type: 3}
   KnifeSound: {fileID: 8300000, guid: 760951015331c0d40b5b9ad1e74255f8, type: 3}
   target: {fileID: 0}
   Speed: 2
-  Wait: 50
-  LookWait: 50
-  InitialDelay: 0
-  MeleeDistance: 3
+  Wait: 100
+  LookWait: 100
+  InitialDelay: 50
+  MeleeDistance: 2
   RangeDistance: 9
   _inVision: 0
   _rangedDamage: 1
@@ -1106,12 +1150,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LookAngle: 93
-  LooseAttentionSeconds: 5
+  LooseAttentionSeconds: 8
   enemyKilledText: {fileID: 0}
   Waypoints:
   - {fileID: 0}
   - {fileID: 0}
-  MinDistanceToWaypoint: 0
+  MinDistanceToWaypoint: 1
   StartOffset: 0
   ChooseRandomWaypoint: 0
   AlertDistance: 20
@@ -1119,7 +1163,8 @@ MonoBehaviour:
   Handler: {fileID: 0}
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}
-  _health: 4
+  _health: 5
+  _marker: {fileID: 0}
   _HitMarkerDisplay: {fileID: 0}
 --- !u!135 &135264050860974516
 SphereCollider:
@@ -1213,6 +1258,46 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!212 &212847878976140676
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346750838204760}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ac1ccd285cf068e4dbc61e699d63e422, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.93, y: 0.94}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
 --- !u!212 &212869472588203538
 SpriteRenderer:
   m_ObjectHideFlags: 1
