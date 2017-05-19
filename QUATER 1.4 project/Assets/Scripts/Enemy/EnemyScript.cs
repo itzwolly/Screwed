@@ -142,7 +142,7 @@ public class EnemyScript : MonoBehaviour {
 
     public bool Look()
     {
-        Debug.Log("looking");
+        //Debug.Log("looking");
        
             //_left = gameObject.transform.localRotation;
             //_left.SetLookRotation(-gameObject.transform.right);

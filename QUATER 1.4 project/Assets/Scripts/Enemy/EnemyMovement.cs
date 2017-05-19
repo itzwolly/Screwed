@@ -46,6 +46,7 @@ public class EnemyMovement : MonoBehaviour
 
     private List<GameObject> Waypoints;
     private GameObject _startWaypoint;
+    private GameObject _head;
 
     Vector3 _speed;
     Vector3 _rayDirection;
@@ -86,6 +87,13 @@ public class EnemyMovement : MonoBehaviour
         _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
+        foreach(Transform head in transform)
+        {
+            if(head.name=="Enemy Head")
+            {
+                _head = head.gameObject;
+            }
+        }
         if(gameObject.GetComponent<EnemyScript>().Waypoints.Count==0)
         {
             Waypoints = new List<GameObject>();
@@ -294,7 +302,7 @@ public class EnemyMovement : MonoBehaviour
             
 
             RaycastHit hit = new RaycastHit();
-            if (Physics.Linecast(transform.position, target.transform.position, out hit))
+            if (Physics.Linecast(_head.transform.position, target.transform.position, out hit))
             {
                 if (hit.transform.tag == "Player")
                 {

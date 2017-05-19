@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SliderValues : MonoBehaviour {
     public SliderApply Apply;
     public MenuManager MenuManager;
+    public PauseMenu PauseMenuManager;
     Slider _slider;
     bool _changedValues;
     float _savedValue;
@@ -24,7 +25,14 @@ public class SliderValues : MonoBehaviour {
         if (_slider.value != _savedValue)
         {
             //Debug.Log("changedValues - " + _changedValues);
-            MenuManager.ChangedValues();
+            if (MenuManager != null)
+            {
+                MenuManager.ChangedValues();
+            } else
+            {
+                PauseMenuManager.ChangedValues();
+            }
+            
             _savedValue = _slider.value;
         }
     }

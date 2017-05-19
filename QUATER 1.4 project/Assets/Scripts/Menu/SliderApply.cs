@@ -6,14 +6,16 @@ using UnityEngine.UI;
 public class SliderApply : MonoBehaviour {
     
     private List<GameObject> _sliders;
-	void Start () {
+	void Awake () {
         _sliders = new List<GameObject>();
 	}
 	
     public void ApplySliders()
     {
+        Debug.Log("apply "+_sliders.Count);
         foreach(GameObject slider in _sliders)
         {
+            Debug.Log("slider is called = "+slider.name);
             Utils.SetValueAfterString("Assets\\SaveInfo.txt", slider.name + ":", (int)(slider.GetComponent<Slider>().value * 100));
         }
     }
@@ -38,10 +40,7 @@ public class SliderApply : MonoBehaviour {
 
     public void AddSlider(GameObject value)
     {
-        if (_sliders == null || _sliders.Count == 0)
-        {
-            _sliders = new List<GameObject>();
-        }
         _sliders.Add(value);
+        Debug.Log(" added "+_sliders.Count);
     }
 }

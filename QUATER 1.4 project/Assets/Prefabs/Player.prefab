@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4853222730810626}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tumb_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4310449732660936}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Finger_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4175644380101728}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Small_Finger_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4883616118696288}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Middle_Finger_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4162694482235532}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Middle_Finger_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4529824600458934}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Finger_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4101318050201648}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tumb_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4819597593820008}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4231516525602118}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hand 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4601294874291500}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4942044781974720}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Small_Finger_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4722612226543486}
   - component: {fileID: 137483834090649614}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4344015590595952}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Finger_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 4922600676861520}
   - component: {fileID: 95718741362443738}
   - component: {fileID: 111995282573955372}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hand_Knife_Animation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4107320472146266}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Middle_Finger_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4954112681545162}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Small_Finger_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4675140884071530}
   - component: {fileID: 137091207538157774}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +704,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4801030352297944}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4019573781366724}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wrist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,8 +746,7 @@ GameObject:
   - component: {fileID: 82893225046373394}
   - component: {fileID: 114865169249771298}
   - component: {fileID: 114075880929547554}
-  - component: {fileID: 114284871960702058}
-  - component: {fileID: 114247401922995744}
+  - component: {fileID: 114113571884369490}
   m_Layer: 1
   m_Name: Player
   m_TagString: Player
@@ -763,7 +762,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4652918517213652}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tumb_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1934,16 +1933,6 @@ MonoBehaviour:
   knifeText: {fileID: 0}
   shotsText: {fileID: 0}
   headshotsText: {fileID: 0}
-  _blockedShots: {fileID: 0}
-  _completedWithoutDamageMarks:
-  - {fileID: 0}
-  - {fileID: 0}
-  _secretsGathered: {fileID: 0}
-  _successfulHeadshots: {fileID: 0}
-  _totalTimesKnifed: {fileID: 0}
-  _totalSuccessfulKnives: {fileID: 0}
-  _successfulShots: {fileID: 0}
-  _totalRangedKills: {fileID: 0}
   statsScreen: {fileID: 0}
   mainCamera: {fileID: 1619068457850646}
 --- !u!114 &114102360266768328
@@ -1964,6 +1953,19 @@ MonoBehaviour:
   Sensitivity: 0.52
   godController: {fileID: 0}
   _gravity: 20
+--- !u!114 &114113571884369490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904222018087564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e96751110e155429be679efccab219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 20179079148697356}
+  _secondsToFreeze: 2
 --- !u!114 &114188004970579302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1999,34 +2001,6 @@ MonoBehaviour:
   - {fileID: 1571315093857428}
   - {fileID: 1161225300705550}
   _hasGun: 0
---- !u!114 &114247401922995744
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904222018087564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c494c5f0f963fe4d8322d1c04edb269, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyVisionMarkers:
-  - {fileID: 0}
-  - {fileID: 0}
-  _enemyHandler: {fileID: 0}
---- !u!114 &114284871960702058
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904222018087564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19e96751110e155429be679efccab219, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _camera: {fileID: 20179079148697356}
-  _secondsToFreeze: 2
 --- !u!114 &114319267502297498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2049,6 +2023,7 @@ MonoBehaviour:
   EnemyGotHitBodyClip: {fileID: 8300000, guid: 4f2c96be8b6b4034a87e4b8136614c14, type: 3}
   EnemyGotHitHeadClip: {fileID: 8300000, guid: d811bb82fd8228b4685aa762a174f631, type: 3}
   BackstabClip: {fileID: 8300000, guid: 4f2c96be8b6b4034a87e4b8136614c14, type: 3}
+  pauseMenu: {fileID: 0}
   _statManager: {fileID: 0}
   _weaponHandler: {fileID: 114211386112779860}
   _distance: 3
@@ -2085,19 +2060,6 @@ MonoBehaviour:
   _vignetteSmoothness: 0.275
   _vignetteRoundness: 1
   _vignetteIsRounded: 0
-  _timeInLevel: 0
-  _successfullHeadshots: 0
-  _totalHeadshotKills: 0
-  _successfullShots: 0
-  _totalShots: 0
-  _totalRangedKills: 0
-  _totalKnives: 0
-  _successfullKnives: 0
-  _knifeKillNumber: 0
-  _completedLevelWithoutDmg: 1
-  _secretsGathered: 0
-  _blockedShots: 0
-  _totalKills: 0
 --- !u!114 &114335103220306382
 MonoBehaviour:
   m_ObjectHideFlags: 1

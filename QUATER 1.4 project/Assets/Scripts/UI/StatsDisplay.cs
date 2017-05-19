@@ -48,7 +48,7 @@ public class StatsDisplay : MonoBehaviour {
                 obj.GetComponent<EnemyMovement>().enabled = false;
             }
         }
-        else
+        if (!state)
         {
             Time.timeScale = 1.0f;
             mainCamera.GetComponent<MouseLook>().enabled = true;

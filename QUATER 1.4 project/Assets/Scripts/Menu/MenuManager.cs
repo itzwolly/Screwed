@@ -170,7 +170,7 @@ public class MenuManager : MonoBehaviour {
     }
     public void BGOptions()
     {
-        spriteRenderer.sprite = optionsSprite;
+        //spriteRenderer.sprite = optionsSprite;
         optionsText.SetActive(true);
     }
     public void BGCredits()
@@ -409,7 +409,7 @@ public class MenuManager : MonoBehaviour {
 
     public void ApplyDefault(GameObject button)
     {
-        Debug.Log("applydefault");
+        Debug.Log("applydefault with button = "+button.name);
         button.GetComponent<SliderApply>().ApplySliders();
         Default();
     }
