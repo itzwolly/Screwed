@@ -35,8 +35,7 @@ public class EnemyScript : MonoBehaviour {
     private EnemyMovement _enemyMovement;
     private Quaternion _initialRotation;
     private GameObject _startWaypoint;
-
-    [SerializeField] private Image _marker;
+    
     [SerializeField] private GameObject _HitMarkerDisplay;
 
     public int Health
@@ -101,14 +100,16 @@ public class EnemyScript : MonoBehaviour {
         if(_onDisturbance)
         {
             //_state=looking
-            _enemyMovement.SetState(EnemyMovement.State.look);
+            //_enemyMovement.SetState(EnemyMovement.State.look);
             Debug.Log("on disturbance");
             if (Look())
             {
                 //_state=walking
-                _enemyMovement.SetState(EnemyMovement.State.walk);
+                //_enemyMovement.SetState(EnemyMovement.State.walk);
                 Debug.Log("done looking "+gameObject.name);
                 _onDisturbance = false;
+            } else {
+                _enemyMovement.SetState(EnemyMovement.State.look);
             }
         }
         else
@@ -217,13 +218,13 @@ public class EnemyScript : MonoBehaviour {
         {
             //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
             //_state=looking
-            _enemyMovement.SetState(EnemyMovement.State.look);
+            //_enemyMovement.SetState(EnemyMovement.State.look);
             OnCheckpoint(_currentWaypoint, false);
         }
         else
         {
             //_state=walking
-            _enemyMovement.SetState(EnemyMovement.State.walk);
+            //_enemyMovement.SetState(EnemyMovement.State.walk);
             //Debug.Log("i am not on currentwaypoint");
         }
     }
