@@ -47,6 +47,8 @@ public class CombatControls : MonoBehaviour {
 
     [SerializeField] private int[] _weaponDamage;
 
+    [SerializeField] private EnemyHandler _enemyHandler;
+
     [Space(10)]
     [Header("PostProcessing")]
     [SerializeField] private PostProcessingProfile _profile;
@@ -59,7 +61,6 @@ public class CombatControls : MonoBehaviour {
     [Range(0, 1)] [SerializeField] private float _vignetteSmoothness;
     [Range(0, 1)] [SerializeField] private float _vignetteRoundness;
     [SerializeField] private bool _vignetteIsRounded;
-
 
     private VignetteModel.Mode _profileMode;
     private Color _profileColor;
@@ -290,14 +291,14 @@ public class CombatControls : MonoBehaviour {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
             audio.PlayOneShot(DeathClip, _volume);
+            Cursor.lockState = CursorLockMode.None;
         } else if (HasWon()) {
             //Debug.Log(Utils.LatestLevel());
             audio.PlayOneShot(WinClip, _volume);
-            if (Utils.LatestLevel() == 2) {
-                SceneManager.LoadScene("level02");
-            } else {
-                _afterDeathBehaviour.DisableAfterWin();
-            }
+            _afterDeathBehaviour.DisableAfterWin();
+            Cursor.lockState = CursorLockMode.None;
+        } else {
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
@@ -389,7 +390,6 @@ public class CombatControls : MonoBehaviour {
 
     private void TakeDamage(Transform pTarget, bool headshot) {
         //Debug.Log("Changing to red..");
-        //Utils.ChangeGameObjectColorTo(pTarget.gameObject, Color.red);
         pTarget.LookAt(gameObject.transform.position);
         if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
             if (headshot) {
@@ -420,9 +420,21 @@ public class CombatControls : MonoBehaviour {
                 //Debug.Log("Got Killed By headshot");
             }
             _totalKills++;
-            Destroy(pTarget.gameObject);
+            //pTarget.GetComponent<EnemyMovement>().Animation.Stop();
+            StartCoroutine(DestroyEnemy(pTarget, pTarget.GetComponent<EnemyMovement>().Animation, pTarget.GetComponent<EnemyMovement>().TimeOnLastFrame));
         }
         //_startTimer = true;
+    }
+
+    private IEnumerator DestroyEnemy(Transform pTransform, Animation pAnimation, float pTimeOnLastFrame) {
+        //pTransform.GetComponent<EnemyMovement>().SetState(EnemyMovement.State.none);
+        pTransform.GetComponent<EnemyMovement>().DisableAllControls = true;
+        pAnimation.Play("DeathEditable");
+        pTransform.GetComponent<EnemyScript>().TriggerTextAndEnemy();
+        yield return new WaitForSeconds(pAnimation["DeathEditable"].length + pTimeOnLastFrame);
+        if (pTransform != null) {
+            Destroy(pTransform.gameObject);
+        }
     }
 
     private void MeleeDamage(Vector3 pCenter, float pRadius, string pTarget, WeaponAOEType pAoeType) {
@@ -486,9 +498,9 @@ public class CombatControls : MonoBehaviour {
                 float angle = Vector3.Angle(targetDir, transform.forward);
 
                 //Debug.Log("dist: " + dist + " | " + "pMinDist: " + pMinDist + " | " + "angle: " + angle + " | " + "_angle: " + _angle);
-                Debug.Log("OUT if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
+                //Debug.Log("OUT if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
                 if (dist < pMinDist && angle < _angle) {
-                    Debug.Log("IN if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
+                    //Debug.Log("IN if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
                     enemy = collider.transform;
                     pMinDist = dist;
                 }
@@ -546,11 +558,12 @@ public class CombatControls : MonoBehaviour {
     }
 
 
-    private bool HasWon() {
+    public bool HasWon() {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0) {
             return false;
         } else {
-            if (Input.GetKeyUp(KeyCode.E)) {
+            if (_enemyHandler.EnemiesLeft() == 0)
+            {
                 int _bool = 0;
                 if (_completedLevelWithoutDmg)
                     _bool = 1;
@@ -563,7 +576,8 @@ public class CombatControls : MonoBehaviour {
                 //Debug.Log(allInfo);
                 Utils.NextLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt", allInfo);
                 return true;
-            } else {
+            } else
+            {
                 return false;
             }
         }

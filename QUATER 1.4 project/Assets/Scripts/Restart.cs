@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Restart : MonoBehaviour {
     public int scene;
+    public bool debug;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,9 +12,16 @@ public class Restart : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && debug)
             Application.LoadLevel(scene);
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+    }
+
+    public void RestartLevel()
+    {
+        Application.LoadLevel(3);
+    }
+    public void GotoMenu()
+    {
+        Application.LoadLevel(1);
     }
 }
