@@ -94,15 +94,15 @@ public class WeaponHandler : MonoBehaviour {
             SwitchToNextWeapon();
         }
 
-        if (Input.GetKeyUp(KeyCode.F)) {
-            if (_weaponType == WeaponType.Melee) {
-                if (_weaponAOEType == WeaponAOEType.Single) {
-                    _weaponAOEType = WeaponAOEType.Multi;
-                } else if (_weaponAOEType == WeaponAOEType.Multi) {
-                    _weaponAOEType = WeaponAOEType.Single;
-                }
-            }
-        }
+        //if (Input.GetKeyUp(KeyCode.F)) {
+        //    if (_weaponType == WeaponType.Melee) {
+        //        if (_weaponAOEType == WeaponAOEType.Single) {
+        //            _weaponAOEType = WeaponAOEType.Multi;
+        //        } else if (_weaponAOEType == WeaponAOEType.Multi) {
+        //            _weaponAOEType = WeaponAOEType.Single;
+        //        }
+        //    }
+        //}
 	}
 
     private void SwitchToNextWeapon() {
@@ -134,7 +134,7 @@ public class WeaponHandler : MonoBehaviour {
         }
     }
 
-    private void OnGUI() {
-        GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Current WeaponType: " + _weaponType + Environment.NewLine + "Current AOEType: " + _weaponAOEType);
-    }
+    //private void OnGUI() {
+    //    GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Current WeaponType: " + _weaponType + Environment.NewLine + "Current AOEType: " + _weaponAOEType);
+    //}
 }
