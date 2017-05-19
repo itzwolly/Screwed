@@ -282,6 +282,7 @@ public class Utils {
 
     public static void SetValueAfterString(string path, string pString, int nextValue)
     {
+        Debug.Log(pString);
         int lastValue = GetValueAfterString(path, pString);
         string before = pString + " " + lastValue;
         string after = pString + " " + nextValue;
