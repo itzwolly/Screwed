@@ -1933,6 +1933,15 @@ MonoBehaviour:
   knifeText: {fileID: 0}
   shotsText: {fileID: 0}
   headshotsText: {fileID: 0}
+  _blockedShots: {fileID: 0}
+  _completedWithoutDamageMarks:
+  - {fileID: 0}
+  _secretsGathered: {fileID: 0}
+  _successfulHeadshots: {fileID: 0}
+  _totalTimesKnifed: {fileID: 0}
+  _totalSuccessfulKnives: {fileID: 0}
+  _successfulShots: {fileID: 0}
+  _totalRangedKills: {fileID: 0}
   statsScreen: {fileID: 0}
   mainCamera: {fileID: 1619068457850646}
 --- !u!114 &114102360266768328
@@ -2060,6 +2069,19 @@ MonoBehaviour:
   _vignetteSmoothness: 0.275
   _vignetteRoundness: 1
   _vignetteIsRounded: 0
+  _timeInLevel: 0
+  _successfullHeadshots: 0
+  _totalHeadshotKills: 0
+  _successfullShots: 0
+  _totalShots: 0
+  _totalRangedKills: 0
+  _totalKnives: 0
+  _successfullKnives: 0
+  _knifeKillNumber: 0
+  _completedLevelWithoutDmg: 1
+  _secretsGathered: 0
+  _blockedShots: 0
+  _totalKills: 0
 --- !u!114 &114335103220306382
 MonoBehaviour:
   m_ObjectHideFlags: 1

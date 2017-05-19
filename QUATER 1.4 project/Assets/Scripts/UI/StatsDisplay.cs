@@ -75,13 +75,13 @@ public class StatsDisplay : MonoBehaviour {
         headshotsText.text = _combatControls._totalHeadshotKills.ToString();
 
         _blockedShots.text = _combatControls._blockedShots.ToString();
-        if (_combatControls._completedLevelWithoutDmg) {
-            _completedWithoutDamageMarks[0].gameObject.SetActive(true);
-            _completedWithoutDamageMarks[1].gameObject.SetActive(false);
-        } else {
-            _completedWithoutDamageMarks[1].gameObject.SetActive(true);
-            _completedWithoutDamageMarks[0].gameObject.SetActive(false);
-        }
+        //if (_combatControls._completedLevelWithoutDmg) {
+        //    _completedWithoutDamageMarks[0].gameObject.SetActive(true);
+        //    _completedWithoutDamageMarks[1].gameObject.SetActive(false);
+        //} else {
+        //    _completedWithoutDamageMarks[1].gameObject.SetActive(true);
+        //    _completedWithoutDamageMarks[0].gameObject.SetActive(false);
+        //}
         
         _secretsGathered.text = _combatControls._secretsGathered.ToString();
         _successfulHeadshots.text = _combatControls._successfullHeadshots.ToString();
@@ -91,7 +91,7 @@ public class StatsDisplay : MonoBehaviour {
         _successfulShots.text = _combatControls._successfullShots.ToString();
         _totalRangedKills.text = _combatControls._totalRangedKills.ToString();
 
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         state = !state;
     }
 }

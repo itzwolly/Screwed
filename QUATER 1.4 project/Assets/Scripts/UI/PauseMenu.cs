@@ -147,7 +147,7 @@ public class PauseMenu : MonoBehaviour {
             //}
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseMenu.SetActive(!state);
             hudToDisable.SetActive(state);
