@@ -19,6 +19,7 @@ public class CombatControls : MonoBehaviour {
     public AudioClip EnemyGotHitHeadClip;
     public AudioClip BackstabClip;
     private AudioSource audio;
+    public GameObject pauseMenu;
     private float _volume;
     [SerializeField] private GameObject _statManager;
 
@@ -297,7 +298,10 @@ public class CombatControls : MonoBehaviour {
             audio.PlayOneShot(WinClip, _volume);
             _afterDeathBehaviour.DisableAfterWin();
             Cursor.lockState = CursorLockMode.None;
-        } else {
+        } else if (pauseMenu.activeSelf) {
+            Cursor.lockState = CursorLockMode.None;
+        } else
+        {
             Cursor.lockState = CursorLockMode.Locked;
         }
     }

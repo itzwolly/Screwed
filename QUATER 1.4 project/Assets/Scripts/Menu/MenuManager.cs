@@ -170,7 +170,7 @@ public class MenuManager : MonoBehaviour {
     }
     public void BGOptions()
     {
-        spriteRenderer.sprite = optionsSprite;
+        //spriteRenderer.sprite = optionsSprite;
         optionsText.SetActive(true);
     }
     public void BGCredits()

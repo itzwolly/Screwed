@@ -6,11 +6,28 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Wall_Back
+    100004: Wall_Left
+    100006: Wall_Front
     400000: //RootNode
+    400002: Wall_Back
+    400004: Wall_Left
+    400006: Wall_Front
     2300000: //RootNode
+    2300002: Wall_Back
+    2300004: Wall_Left
+    2300006: Wall_Front
     3300000: //RootNode
+    3300002: Wall_Back
+    3300004: Wall_Left
+    3300006: Wall_Front
     4300000: Wall_Back
+    4300002: Wall_Left
+    4300004: Wall_Front
     6400000: //RootNode
+    6400002: Wall_Back
+    6400004: Wall_Left
+    6400006: Wall_Front
   materials:
     importMaterials: 1
     materialName: 0

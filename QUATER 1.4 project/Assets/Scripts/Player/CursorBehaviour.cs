@@ -12,10 +12,10 @@ public class CursorBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Cursor.lockState == CursorLockMode.None) {
-            if (Input.GetMouseButtonUp(0)) {
-                Cursor.lockState = _cursorLockMode;
-            }
-        }
+		//if (Cursor.lockState == CursorLockMode.None) {
+  //          if (Input.GetMouseButtonUp(0)) {
+  //              Cursor.lockState = _cursorLockMode;
+  //          }
+  //      }
 	}
 }

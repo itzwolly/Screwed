@@ -6,11 +6,28 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Angle_Back_Right
+    100004: Angle_Front_Left
+    100006: Angle_Front_Right
     400000: //RootNode
+    400002: Angle_Back_Right
+    400004: Angle_Front_Left
+    400006: Angle_Front_Right
     2300000: //RootNode
+    2300002: Angle_Back_Right
+    2300004: Angle_Front_Left
+    2300006: Angle_Front_Right
     3300000: //RootNode
+    3300002: Angle_Back_Right
+    3300004: Angle_Front_Left
+    3300006: Angle_Front_Right
     4300000: Angle_Back_Right
+    4300002: Angle_Front_Left
+    4300004: Angle_Front_Right
     6400000: //RootNode
+    6400002: Angle_Back_Right
+    6400004: Angle_Front_Left
+    6400006: Angle_Front_Right
   materials:
     importMaterials: 1
     materialName: 0
