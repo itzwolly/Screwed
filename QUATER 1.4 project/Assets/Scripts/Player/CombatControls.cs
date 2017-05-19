@@ -88,19 +88,33 @@ public class CombatControls : MonoBehaviour {
     private int _comboCount;
     private int _comboWait;
 
-    private float _timeInLevel = 0;
-    private int _successfullHeadshots = 0;
-    private int _totalHeadshotKills = 0;
-    private int _successfullShots = 0;
-    private int _totalShots = 0;
-    private int _totalRangedKills = 0;
-    private int _totalKnives = 0;
-    private int _successfullKnives = 0;
-    private int _knifeKillNumber = 0;
-    private bool _completedLevelWithoutDmg = true;
-    private int _secretsGathered = 0;
-    private int _blockedShots = 0;
-    private int _totalKills = 0;
+    [HideInInspector] public float _timeInLevel = 0;
+    [HideInInspector]
+    public int _successfullHeadshots = 0;
+    [HideInInspector]
+    public int _totalHeadshotKills = 0;
+    [HideInInspector]
+    public int _successfullShots = 0;
+    [HideInInspector]
+    public int _totalShots = 0;
+    [HideInInspector]
+    public int _totalRangedKills = 0;
+    [HideInInspector]
+    public int _totalKnives = 0;
+    [HideInInspector]
+    public int _successfullKnives = 0;
+    [HideInInspector]
+    public int _knifeKillNumber = 0;
+    [HideInInspector]
+    public bool _completedLevelWithoutDmg = true;
+    [HideInInspector]
+    public int _secretsGathered = 0;
+    [HideInInspector]
+    public int _blockedShots = 0;
+    [HideInInspector]
+    public int _totalKills = 0;
+
+
 
     public int AmmoCount
     {
@@ -434,6 +448,7 @@ public class CombatControls : MonoBehaviour {
         //pTransform.GetComponent<EnemyMovement>().SetState(EnemyMovement.State.none);
         pTransform.GetComponent<EnemyMovement>().DisableAllControls = true;
         pAnimation.Play("DeathEditable");
+        pTransform.gameObject.layer = 2;
         pTransform.GetComponent<EnemyScript>().TriggerTextAndEnemy();
         yield return new WaitForSeconds(pAnimation["DeathEditable"].length + pTimeOnLastFrame);
         if (pTransform != null) {

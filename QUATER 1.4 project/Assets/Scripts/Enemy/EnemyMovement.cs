@@ -131,7 +131,7 @@ public class EnemyMovement : MonoBehaviour
             GetComponent<EnemyScript>().enabled = false;
             return;
         }
-
+        
         if (_state == State.walk) {
             if (!_anim.isPlaying) {
                 _anim.Play("MovingEditable");
