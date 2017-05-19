@@ -448,6 +448,7 @@ public class CombatControls : MonoBehaviour {
         //pTransform.GetComponent<EnemyMovement>().SetState(EnemyMovement.State.none);
         pTransform.GetComponent<EnemyMovement>().DisableAllControls = true;
         pAnimation.Play("DeathEditable");
+        pTransform.gameObject.layer = 2;
         pTransform.GetComponent<EnemyScript>().TriggerTextAndEnemy();
         yield return new WaitForSeconds(pAnimation["DeathEditable"].length + pTimeOnLastFrame);
         if (pTransform != null) {
