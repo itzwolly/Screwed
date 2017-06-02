@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour {
     [Range(0,1)] 
     public float Sensitivity;
     private Vector3 _velocity;
-    public SectionPlacement godController;
     public float _gravity;
     private Vector3 _moveDirection = Vector3.zero;
     private CharacterController _controller;
