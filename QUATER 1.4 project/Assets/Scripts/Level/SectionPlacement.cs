@@ -18,12 +18,11 @@ public class SectionPlacement : MonoBehaviour {
         //_room.GetComponent<RoomScript>().godController = this;
         _room.transform.Translate(0,100,0);
         _player= GameObject.Instantiate(PlayerBrush);
-        _player.GetComponent<PlayerMovement>().godController = this;
         _player.transform.position = _room.transform.position;
         _player.transform.Translate(0,1,0);
         
     }
-	
+
 	public void AddRooms(Transform exit)
     {
         _enemyNumber+=3;

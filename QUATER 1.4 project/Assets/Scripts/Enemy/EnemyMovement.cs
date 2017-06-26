@@ -42,8 +42,11 @@ public class EnemyMovement : MonoBehaviour
     private int _lookWait;
     private float _distanceToTarget;
     public bool _inVision;
+    private Animation _anim;
 
     private List<GameObject> Waypoints;
+    private GameObject _startWaypoint;
+    private GameObject _head;
 
     Vector3 _speed;
     Vector3 _rayDirection;
@@ -54,27 +57,56 @@ public class EnemyMovement : MonoBehaviour
     //[SerializeField] private GameObject[] _weapons;
     [SerializeField] private int _rangedDamage;
     [SerializeField] private int _meleeDamage;
+    [SerializeField] private float _timeOnLastFrame;
 
+    private bool _disableAllControls;
+
+    public bool DisableAllControls {
+        get { return _disableAllControls; }
+        set { _disableAllControls = value; }
+    }
+    public Animation Animation {
+        get { return _anim; }
+    }
     public State CurrentState
     {
         get { return _state; }
+    }
+    public float TimeOnLastFrame {
+        get { return _timeOnLastFrame; }
     }
 
     // Use this for initialization
     void Start()
     {
         //Debug.Log("attacking source is "+audio.name);
+        _anim = GetComponent<Animation>();
         _tempWaypoint = new GameObject();
-        _volume = Utils.EffectVolume();
+        _volume = Utils.EffectVolume() / 100f;
         //Debug.Log("effect volume = "+_volume);
         _wait = InitialDelay;
         _stoppedConstraints = RigidbodyConstraints.FreezePosition;
         _normalConstraints = gameObject.GetComponent<Rigidbody>().constraints;
-        Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
+        foreach(Transform head in transform)
+        {
+            if(head.name=="Enemy Head")
+            {
+                _head = head.gameObject;
+            }
+        }
+        if(gameObject.GetComponent<EnemyScript>().Waypoints.Count==0)
+        {
+            Waypoints = new List<GameObject>();
+                _startWaypoint = new GameObject();
+                _startWaypoint.transform.position = gameObject.transform.position;
+                Waypoints.Add(_startWaypoint);
+        }
+        else
+        {
+            Waypoints = gameObject.GetComponent<EnemyScript>().Waypoints;
+        }
         navigator = GetComponent<NavMeshAgent>();
         _speed = new Vector3(Speed * 3, Speed * 3, Speed * 3);
-        if (Waypoints.Count <= 1)
-            gameObject.GetComponent<EnemyScript>().StartOffset = true;
         _waypoint = Waypoints[0];
         if (!gameObject.GetComponent<EnemyScript>().StartOffset)
             Patrol();
@@ -91,7 +123,22 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
+        //Debug.Log(_state);
+        if (_disableAllControls) {
+            _state = State.none;
+            GetComponent<NavMeshAgent>().enabled = false;
+            GetComponent<MeshCollider>().enabled = false;
+            GetComponent<EnemyScript>().enabled = false;
+            return;
+        }
+        
+        if (_state == State.walk) {
+            if (!_anim.isPlaying) {
+                _anim.Play("MovingEditable");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             Debug.Log(gameObject.name+" - My position is: " + gameObject.transform.position + " and I am heading to: " + _waypoint.transform.position + " with the last known target position at: " + _lastKnownTargetPosition);
         }
@@ -109,8 +156,6 @@ public class EnemyMovement : MonoBehaviour
             {
                 _inVision = false;
             }
-
-
 
             if (_inVision)
             {
@@ -161,7 +206,7 @@ public class EnemyMovement : MonoBehaviour
                     if (!audio.isPlaying)
                     {
                         //Debug.Log("Play footsteps");
-                        audio.PlayOneShot(MovementClip);
+                        audio.PlayOneShot(MovementClip,_volume/4);
                     }
                     _wait = Wait;
                     _state = State.walk;
@@ -249,7 +294,7 @@ public class EnemyMovement : MonoBehaviour
 
         Vector3 directionToTarget = transform.position - target.transform.position;
         float angle = Vector3.Angle(transform.forward, directionToTarget);
-        if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
+        if (Mathf.Abs(angle) > 125 && Mathf.Abs(angle) < 235)
         {
             _inVision = true;
             _targetPosSameY = target.transform.position;
@@ -257,7 +302,7 @@ public class EnemyMovement : MonoBehaviour
             
 
             RaycastHit hit = new RaycastHit();
-            if (Physics.Linecast(transform.position, target.transform.position, out hit))
+            if (Physics.Linecast(_head.transform.position, target.transform.position, out hit))
             {
                 if (hit.transform.tag == "Player")
                 {
@@ -352,10 +397,14 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (target.GetComponent<CombatControls>().Health > 0)
                 {
-                    Utils.ChangeGameObjectColorTo(gameObject, Color.red);
-                    target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
-                    audio.PlayOneShot(ShootSound, _volume);
-                    //Debug.Log("shoot shoot");
+                    _anim.Stop();
+                    if (!_anim.isPlaying) {
+                        //StartCoroutine(GetHitRanged(_anim));
+
+                        _anim.Play("AttackEditable");
+                        target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
+                        audio.PlayOneShot(ShootSound, _volume);
+                    }
                 }
                 else
                 {
@@ -367,11 +416,15 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (target.GetComponent<CombatControls>().Health > 0)
                 {
-                    Utils.ChangeGameObjectColorTo(gameObject, Color.blue);
-                    target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
-                    audio.PlayOneShot(KnifeSound, _volume);
-                    //Debug.Log("Knify knify");
-                    StopMovement();
+                    _anim.Stop();
+                    if (!_anim.isPlaying) {
+                        //StartCoroutine(GetHitMelee(_anim));
+
+                        _anim.Play("AttackEditable");
+                        target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
+                        audio.PlayOneShot(KnifeSound, _volume);
+                        StopMovement();
+                    }
                 }
                 else
                 {
@@ -382,6 +435,44 @@ public class EnemyMovement : MonoBehaviour
         }
         //Debug.Log("wait=" + _wait);
         _wait--;
+    }
+    //comebacktothis
+
+    private IEnumerator GetHitRanged(Animation pAnimation)
+    {
+        pAnimation.Play("AttackEditable");
+        yield return new WaitForSeconds(pAnimation["AttackEditable"].length);
+        if (_distanceToTarget <= RangeDistance)
+        {
+            target.GetComponent<CombatControls>().DecreaseHealth(_rangedDamage);
+            audio.PlayOneShot(ShootSound, _volume);
+        }
+    }
+
+    private IEnumerator GetHitMelee(Animation pAnimation)
+    {
+        pAnimation.Play("AttackEditable");
+        yield return new WaitForSeconds(pAnimation["AttackEditable"].length);
+        if (_distanceToTarget <= MeleeDistance)
+        {
+            target.GetComponent<CombatControls>().DecreaseHealth(_meleeDamage);
+            audio.PlayOneShot(KnifeSound, _volume);
+            StopMovement();
+        }
+    }
+
+    IEnumerator TurnToward(GameObject pImage, int aValue, float aTime)
+    {
+        Quaternion alpha = pImage.transform.rotation;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        {
+            pImage.transform.Rotate(0, aValue, 0);
+            yield return null;
+        }
+    }
+
+    public void SetState(State pState) {
+        _state = pState;
     }
 
     public void SetLastPositionToTarget()
@@ -404,6 +495,13 @@ public class EnemyMovement : MonoBehaviour
     {
         SetWaypoint(waypoint);
        // _lastKnownTargetPosition = waypoint.transform.position;
+    }
+
+    public void SetCurrentWaypointPos(Vector3 pos)
+    {
+        if(_tempWaypoint!=null)
+            _tempWaypoint.transform.position = pos;
+        SetWaypoint(_tempWaypoint);
     }
 
     public void GiveTarget(GameObject ptarget)

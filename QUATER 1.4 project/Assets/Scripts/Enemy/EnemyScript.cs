@@ -32,7 +32,10 @@ public class EnemyScript : MonoBehaviour {
     private float _loseAttention;
     private bool _loosingAttention;
     private bool _hasBeenHit;
-
+    private EnemyMovement _enemyMovement;
+    private Quaternion _initialRotation;
+    private GameObject _startWaypoint;
+    
     [SerializeField] private GameObject _HitMarkerDisplay;
 
     public int Health
@@ -50,9 +53,22 @@ public class EnemyScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         enemyKilledTextAnimator = enemyKilledText.GetComponent<Animator>();
+        _enemyMovement = GetComponent<EnemyMovement>();
         //Debug.Log("first waypoint = "+Waypoints[0]);
+        if (Waypoints.Count==0)
+        {
+            Waypoints = new List<GameObject>();
+            _startWaypoint = new GameObject();
+            _startWaypoint.transform.position = gameObject.transform.position;
+            Waypoints.Add(_startWaypoint);
+            
+        }
+
         if (Waypoints.Count <= 1)
+        {
             StartOffset = true;
+        }
+        
         _currentWaypoint = Waypoints[0];
         _waypointIndex = 0;
         if (!StartOffset)
@@ -65,17 +81,35 @@ public class EnemyScript : MonoBehaviour {
         {
             Handler.GetComponent<EnemyHandler>().AddToHandler(gameObject);
         }
+        if(StartOffset)
+        {
+            _initialRotation = gameObject.transform.rotation;
+        }
     }
 
     public void OnCheckpoint(GameObject checkpoint, bool forPlayerSight)
     {
+        if(StartOffset)
+        {
+            if(checkpoint==Waypoints[0])
+            {
+                gameObject.transform.rotation = _initialRotation;
+            }
+        }
+        //Debug.Log("on checkpoint with disturbance = "+_onDisturbance);
         if(_onDisturbance)
         {
+            //_state=looking
+            //_enemyMovement.SetState(EnemyMovement.State.look);
             Debug.Log("on disturbance");
             if (Look())
             {
+                //_state=walking
+                //_enemyMovement.SetState(EnemyMovement.State.walk);
                 Debug.Log("done looking "+gameObject.name);
                 _onDisturbance = false;
+            } else {
+                _enemyMovement.SetState(EnemyMovement.State.look);
             }
         }
         else
@@ -118,6 +152,7 @@ public class EnemyScript : MonoBehaviour {
 
         if (!_lookedLeft)
         {
+            _loseAttention = 0;
             //Debug.Log("looking left");
             gameObject.transform.Rotate(0, -1, 0);
             _left++;
@@ -127,6 +162,7 @@ public class EnemyScript : MonoBehaviour {
         }
         else if (!_lookedRight)
         {
+            _loseAttention = 0;
             //Debug.Log("looking right");
             gameObject.transform.Rotate(0, 1, 0);
             _right++;
@@ -158,17 +194,37 @@ public class EnemyScript : MonoBehaviour {
             Debug.Log(gameObject.name + " My position is: " + gameObject.transform.position + " and I am heading to: " + _currentWaypoint.transform.position);
         }
         //Debug.Log("Current waypoint = "+_currentWaypoint);
-        if(_currentWaypoint!=null)
-        _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
-        //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
-        if (_distanceToWaypoint <= MinDistanceToWaypoint + 1.3f && !StartOffset)
+        if (_currentWaypoint != null)
+        {
+            _distanceToWaypoint = (gameObject.transform.position - _currentWaypoint.transform.position).magnitude;
+        }
+        else
+        {
+            //Debug.Log("null waypoint "+Waypoints.Count);
+            if (ChooseRandomWaypoint)
+            {
+                //Debug.Log("Next checkpoint random");
+                _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
+                gameObject.GetComponent<EnemyMovement>().ChangeCurrentWaypoint(_currentWaypoint);
+            }
+            else
+            {
+                //Debug.Log("Next checkpoint");
+                _currentWaypoint = Waypoints[(++_waypointIndex) % Waypoints.Count];
+                gameObject.GetComponent<EnemyMovement>().ChangeCurrentWaypoint(_currentWaypoint);
+            }
+        } //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint ));
+        if (_distanceToWaypoint <= MinDistanceToWaypoint + 0.8f)// && !StartOffset)
         {
             //Debug.Log(_distanceToWaypoint + " with the stop at " + (MinDistanceToWaypoint + 0.5f));
-
+            //_state=looking
+            //_enemyMovement.SetState(EnemyMovement.State.look);
             OnCheckpoint(_currentWaypoint, false);
         }
         else
         {
+            //_state=walking
+            //_enemyMovement.SetState(EnemyMovement.State.walk);
             //Debug.Log("i am not on currentwaypoint");
         }
     }
@@ -181,37 +237,42 @@ public class EnemyScript : MonoBehaviour {
         {
             if (_loseAttention >= LooseAttentionSeconds)
             {
-                Debug.Log("LostAttention");
+                //Debug.Log(_currentWaypoint.transform.position+" || "+gameObject.transform.position);
                 _loosingAttention = false;
                 _loseAttention = 0;
                 _onDisturbance = false;
-                OnCheckpoint(_currentWaypoint, false);
+                if (ChooseRandomWaypoint)
+                {
+                    //Debug.Log("Next checkpoint random");
+                    _currentWaypoint = Waypoints[(int)Random.Range(0, Waypoints.Count)];
+                    gameObject.GetComponent<EnemyMovement>().ChangeCurrentWaypoint(_currentWaypoint);
+                }
+                else
+                {
+                    //Debug.Log("Next checkpoint");
+                    _currentWaypoint = Waypoints[(++_waypointIndex) % Waypoints.Count];
+                    gameObject.GetComponent<EnemyMovement>().ChangeCurrentWaypoint(_currentWaypoint);
+                }
             }
             _loseAttention+=Time.deltaTime;
         }
     }
-
-    //public void SetDisturbedLocation(Vector3 pos, bool forEnemyDeath)
-    //{
-    //    _loosingAttention = true;
-    //    if (forEnemyDeath)
-    //    {
-    //        //Debug.Log("setdisturbance");
-    //    }
-    //    else
-    //    {
-    //        //Debug.Log("i am not on currentwaypoint");
-    //    }
-    //}
+    
 
     public void SetDisturbedLocation(Vector3 pos, bool forEnemyDeath)
     {
-        if(forEnemyDeath)
+        _loosingAttention = true;
+        _loseAttention = 0;
+        if (forEnemyDeath)
         {
             _onDisturbance = true;
+            gameObject.GetComponent<EnemyMovement>().SetCurrentWaypointPos(pos);
         }
-        DisturbWaypoint.transform.position = pos;
-        _currentWaypoint = DisturbWaypoint;
+        //else
+        {
+            DisturbWaypoint.transform.position = pos;
+            _currentWaypoint = DisturbWaypoint;
+        }
         //_waypointIndex--;
     }
     
@@ -226,10 +287,23 @@ public class EnemyScript : MonoBehaviour {
         if (_HitMarkerDisplay != null) {
             _HitMarkerDisplay.GetComponent<HitmarkerDisplay>().EnemyDestroyed = true;
         }
-        if (enemyKilledTextAnimator!=null)
-        enemyKilledTextAnimator.SetTrigger("EnemyKilled");
-        if (Handler != null) {
-            Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+        //if (enemyKilledTextAnimator!=null) {
+        //    enemyKilledTextAnimator.SetTrigger("EnemyKilled");
+        //    if (Handler != null) {
+        //        Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+        //    }
+        //}
+    }
+
+    public void TriggerTextAndEnemy()
+    {
+        if (enemyKilledTextAnimator != null)
+        {
+            enemyKilledTextAnimator.SetTrigger("EnemyKilled");
+            if (Handler != null)
+            {
+                Handler.GetComponent<EnemyHandler>().AlertOthers(gameObject, AlertDistance);
+            }
         }
     }
 

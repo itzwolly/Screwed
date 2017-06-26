@@ -8,9 +8,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/steal_that_menu.unity
     guid: 3b7057ca54c1ae84f9df25fdee6c50c8
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/SplashScreen.unity
+    guid: 3286744f0d46c5f4386edc21f9062925
+  - enabled: 1
     path: Assets/Scenes/menu.unity
     guid: 4d2a4d73507eeb344b8d5ad3ca9326b2
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 3078da7a4b3063d4b828de7a89b46d58
+  - enabled: 1
     path: Assets/Scenes/level05.unity
     guid: 6cb42b80126533847b2d1aad09cd6c00
+  - enabled: 0
+    path: Assets/Scenes/level06.unity
+    guid: 17387096bf932714eb2959828fb45826

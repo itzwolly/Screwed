@@ -1,10 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class CombatControls : MonoBehaviour {
 
+    [SerializeField] private AudioClip _usingClip;
+    [SerializeField] private AudioClip _stoppedUsingClip;
     public AudioClip ShootClip;
     public AudioClip KnifeClip;
     public AudioClip DeathClip;
@@ -15,7 +19,8 @@ public class CombatControls : MonoBehaviour {
     public AudioClip EnemyGotHitHeadClip;
     public AudioClip BackstabClip;
     private AudioSource audio;
-
+    public GameObject pauseMenu;
+    private float _volume;
     [SerializeField] private GameObject _statManager;
 
     [SerializeField] private WeaponHandler _weaponHandler;
@@ -30,15 +35,43 @@ public class CombatControls : MonoBehaviour {
     [SerializeField] private int _minShieldAmount;
     [SerializeField] private int _increaseAmount;
     [SerializeField] private int _decreaseAmount;
-    
+    private int _lastShieldAmmount;
+
     [SerializeField] private int _comboResetTime;
 
     [SerializeField] private MonoBehaviour[] _disableAfterDeath;
     [SerializeField] private ResolutionBehaviour _afterDeathBehaviour;
 
     [SerializeField] private GameObject[] _cracks;
+    [SerializeField] private float[] _fadeSecondsForCracks;
+    [Range(0, 1)] [SerializeField] private float[] _fadeAlphaForCracks;
 
     [SerializeField] private int[] _weaponDamage;
+
+    [SerializeField] private EnemyHandler _enemyHandler;
+
+    [Space(10)]
+    [Header("PostProcessing")]
+    [SerializeField] private PostProcessingProfile _profile;
+    [Space(5)]
+    [Header("Vignette")]
+    [SerializeField] private VignetteModel.Mode _vignetteMode;
+    [SerializeField] private Color _vignetteColor;
+    [SerializeField] private Vector2 _vignetteCenter;
+    [Range(0, 1)] [SerializeField] private float _vignetteIntensity;
+    [Range(0, 1)] [SerializeField] private float _vignetteSmoothness;
+    [Range(0, 1)] [SerializeField] private float _vignetteRoundness;
+    [SerializeField] private bool _vignetteIsRounded;
+
+    private VignetteModel.Mode _profileMode;
+    private Color _profileColor;
+    private Vector2 _profileCenter;
+    private float _profileIntensity;
+    private float _profileSmoothness;
+    private float _profileRoundness;
+    private bool _profileIsRounded;
+
+    private VignetteModel.Settings _profileSettings;
 
     //[SerializeField] private string[] _levelNames;
 
@@ -55,55 +88,86 @@ public class CombatControls : MonoBehaviour {
     private int _comboCount;
     private int _comboWait;
 
-    private float _timeInLevel=0;
-    private int _successfullHeadshots = 0;
-    private int _totalHeadshotKills=0;
-    private int _successfullShots = 0;
-    private int _totalShots=0;
-    private int _totalRangedKills=0;
-    private int _totalKnives = 0;
-    private int _successfullKnives=0;
-    private int _knifeKillNumber=0;
-    private bool _completedLevelWithoutDmg=true;
-    private int _secretsGathered=0;
-    private int _blockedShots=0;
-    private int _totalKills = 0;
+    [HideInInspector] public float _timeInLevel = 0;
+    [HideInInspector]
+    public int _successfullHeadshots = 0;
+    [HideInInspector]
+    public int _totalHeadshotKills = 0;
+    [HideInInspector]
+    public int _successfullShots = 0;
+    [HideInInspector]
+    public int _totalShots = 0;
+    [HideInInspector]
+    public int _totalRangedKills = 0;
+    [HideInInspector]
+    public int _totalKnives = 0;
+    [HideInInspector]
+    public int _successfullKnives = 0;
+    [HideInInspector]
+    public int _knifeKillNumber = 0;
+    [HideInInspector]
+    public bool _completedLevelWithoutDmg = true;
+    [HideInInspector]
+    public int _secretsGathered = 0;
+    [HideInInspector]
+    public int _blockedShots = 0;
+    [HideInInspector]
+    public int _totalKills = 0;
 
-    public int AmmoCount {
+
+
+    public int AmmoCount
+    {
         get { return _ammoCount; }
     }
-    public WeaponHandler WeaponHandler {
+    public WeaponHandler WeaponHandler
+    {
         get { return _weaponHandler; }
     }
-    public int Health {
+    public int Health
+    {
         get { return _health; }
     }
-    public bool IsDead {
+    public bool IsDead
+    {
         get { return _health == 0; }
     }
-    public int ShieldAmount {
+    public int ShieldAmount
+    {
         get { return _currentShieldAmmount; }
     }
-    public int MaxShieldAmount {
+    public int MaxShieldAmount
+    {
         get { return _maxShieldAmount; }
     }
-    public Animation Animation {
+    public Animation Animation
+    {
         get { return _anim; }
         set { _anim = value; }
     }
 
 
-    public void IncreaseAmmo()
-    {
+    public void IncreaseAmmo() {
         _ammoCount += _ammoIncrease;
     }
     // Use this for initialization
-    void Start ()
-    {
-       // audio = gameObject.AddComponent<AudioSource>();
+    void Start() {
+        // audio = gameObject.AddComponent<AudioSource>();
         audio = GetComponent<AudioSource>();
         _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
+        _volume = Utils.EffectVolume() / 100;
+
+        _profileSettings = _profile.vignette.settings;
+        _profileMode = _profileSettings.mode;
+        _profileColor = _profileSettings.color;
+        _profileCenter = _profileSettings.center;
+        _profileIntensity = _profileSettings.intensity;
+        _profileSmoothness = _profileSettings.smoothness;
+        _profileRoundness = _profileSettings.roundness;
+        _profileIsRounded = _profileSettings.rounded;
+
+        Debug.Log(_volume);
         /**
         string allInfo = "";
         allInfo = " Timeinlevel: " + Utils.GetTimeInLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Completedlevelwithoutdmg: " + Utils.GetCompletedWithoutDmg("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
@@ -116,8 +180,7 @@ public class CombatControls : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
-    {
+    void Update() {
         /**
         Debug.Log(SceneManager.GetActiveScene().name +" Timeinlevel: "+(int)_timeInLevel + " Completedlevelwithoutdmg: "+_completedLevelWithoutDmg);
         Debug.Log(" Totalshots: "+_totalShots+" Successfullshots: "+_successfullShots+" Successfullheadshots: "+_successfullHeadshots+" Headshotkills: "+_totalHeadshotKills);
@@ -125,10 +188,9 @@ public class CombatControls : MonoBehaviour {
         Debug.Log(" Blockedshots: "+_blockedShots+" Totalkills: "+_totalKills);
         Debug.Log(" Secretsgathered: "+_secretsGathered);
         /**/
-        
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             //here it goes to in game menu
             int _bool = 0;
             if (_completedLevelWithoutDmg)
@@ -143,8 +205,7 @@ public class CombatControls : MonoBehaviour {
             Utils.SaveStats("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt", allInfo);
             _statManager.GetComponent<StatUpdater>().UpdateStats();
         }
-        if (Input.GetKeyDown(KeyCode.Slash))
-        {
+        if (Input.GetKeyDown(KeyCode.Slash)) {
             Utils.ResetLastLevel();
             //Debug.Log(Utils.GetLastNumberFromFile("Assets\\SaveInfo.txt"));
         }
@@ -160,14 +221,12 @@ public class CombatControls : MonoBehaviour {
                         if (_anim["ShootEditable"].speed != 3.0f) {
                             _anim["ShootEditable"].speed = 3.0f;
                         }
-                        audio.PlayOneShot(ShootClip);
+                        audio.PlayOneShot(ShootClip, _volume);
                         _anim.Play("ShootEditable"); // play shoot animation
                         RangedDamage(ray, _camera.transform.forward, hit, "Enemy");
                     }
-                }
-                else
-                {
-                    audio.PlayOneShot(DryFireClip);
+                } else {
+                    audio.PlayOneShot(DryFireClip, _volume);
                 }
             } else if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
                 _anim.Stop("IdleEditable");
@@ -183,54 +242,101 @@ public class CombatControls : MonoBehaviour {
         }
         //Debug.Log(_blocking + " with health = " + _health);
 
-        if(Input.GetMouseButtonDown(1) && _currentShieldAmmount > _minShieldAmount)
-        {
+        if (Input.GetMouseButtonDown(1) && _currentShieldAmmount > _minShieldAmount) {
+            Debug.Log("Started using");
+            audio.PlayOneShot(_usingClip, _volume);
             _blocking = true;
         }
 
-        if(Input.GetMouseButtonUp(1))
-        {
+        if (Input.GetMouseButtonUp(1)) {
+            if (_blocking) {
+                Debug.Log("Stopped using");
+                audio.PlayOneShot(_stoppedUsingClip, _volume);
+            }
             _blocking = false;
         }
-        
-        if (_blocking)
-        {
+
+        if (_blocking) {
             ///health stays the same here
             //Debug.Log("blocking");
             
+            ApplyVignette(_vignetteMode, _vignetteColor, _vignetteCenter, _vignetteIntensity, _vignetteSmoothness, _vignetteRoundness, _vignetteIsRounded);
             _currentShieldAmmount -= _decreaseAmount;
+        } else {
+            ApplyVignette(_profileMode, _profileColor, _profileCenter, _profileIntensity, _profileSmoothness, _profileRoundness, _profileIsRounded);
         }
-        if(_currentShieldAmmount<=0 || _blocking==false)
-        {
+
+        if (_currentShieldAmmount <= 0 || _blocking == false) {
+            if (_blocking) {
+                Debug.Log("Stopped using");
+                audio.PlayOneShot(_stoppedUsingClip, _volume);
+            }
             _blocking = false;
-            if (_currentShieldAmmount < _maxShieldAmount)
-            {
+
+            if (_currentShieldAmmount < _maxShieldAmount) {
                 _currentShieldAmmount += _increaseAmount;
             }
         }
 
+        //if (_currentShieldAmmount <= _maxShieldAmount)
+        //{
+        //    //Debug.Log("Stopped using");
+        //    //audio.PlayOneShot(_stoppedUsingClip);
+        //    Debug.Log(((float)_currentShieldAmmount / MaxShieldAmount));
+        //    if (_currentShieldAmmount < _lastShieldAmmount)
+        //    {
+        //        if (!audio.isPlaying)
+        //        {
+        //            Debug.Log("Using");
+        //            audio.PlayOneShot(_usingClip,((float)_currentShieldAmmount/MaxShieldAmount));
+        //        }
+        //    }
+        //    else if (_currentShieldAmmount > _lastShieldAmmount)
+        //    {
+        //        if (!audio.isPlaying)
+        //        {
+        //            Debug.Log("Charging");
+        //            audio.PlayOneShot(_chargingClip, ((float)_currentShieldAmmount / MaxShieldAmount));
+        //        }
+        //    }
+        //}
+
+        _lastShieldAmmount = _currentShieldAmmount;
         if (IsDead) {
             //gameObject.SetActive(false);
             _afterDeathBehaviour.DisableAfterDeath();
-            audio.PlayOneShot(DeathClip);
+            audio.PlayOneShot(DeathClip, _volume);
+            Cursor.lockState = CursorLockMode.None;
         } else if (HasWon()) {
             //Debug.Log(Utils.LatestLevel());
-            audio.PlayOneShot(WinClip);
-            if (Utils.LatestLevel() == 2) {
-                SceneManager.LoadScene("level02");
-            } else {
-                _afterDeathBehaviour.DisableAfterWin();
-            }
+            audio.PlayOneShot(WinClip, _volume);
+            _afterDeathBehaviour.DisableAfterWin();
+            Cursor.lockState = CursorLockMode.None;
+        } else if (pauseMenu.activeSelf) {
+            Cursor.lockState = CursorLockMode.None;
+        } else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    private void ApplyVignette(VignetteModel.Mode pMode, Color pColor, Vector2 pCenter, float pIntensity, float pSmoothness, float pRoundness, bool pIsRounded) {
+        _profileSettings.mode = pMode;
+        _profileSettings.color = pColor;
+        _profileSettings.center = pCenter;
+        _profileSettings.intensity = pIntensity;
+        _profileSettings.smoothness = _profileSmoothness;
+        _profileSettings.roundness = pRoundness;
+        _profileSettings.rounded = pIsRounded;
+
+        _profile.vignette.settings = _profileSettings;
     }
 
     private void FixedUpdate() {
         //Debug.Log(_comboCount); 
-        _timeInLevel+=Time.fixedDeltaTime;
-        if (_comboCount>0)
-        {
-            if(_comboWait>=_comboResetTime)
-            {
+        _timeInLevel += Time.fixedDeltaTime;
+        if (_comboCount > 0) {
+            if (_comboWait >= _comboResetTime) {
                 _comboCount = 0;
                 _comboWait = 0;
             }
@@ -253,50 +359,45 @@ public class CombatControls : MonoBehaviour {
         if (Physics.Raycast(pOther, out pHit)) {
             //Debug.Log(pHit.collider.transform.name + " was hit" + " with tag " + pHit.transform.tag);
             _totalShots++;
-            if (pHit.collider.transform.name=="Enemy Head")
-            {
+            if (pHit.collider.transform.name == "Enemy Head") {
                 //Debug.Log("You headshot you filthy animal");
-                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip);
+                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip, _volume);
                 _successfullShots++;
                 _successfullHeadshots++;
                 _comboCount++;
                 _comboWait = 0;
                 TakeDamage(pHit.transform, true);
-            }
-            else if (pHit.transform.tag == pTarget) {
-                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
+            } else if (pHit.transform.tag == pTarget) {
+                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip, _volume);
                 _successfullShots++;
                 _comboCount++;
                 _comboWait = 0;
                 //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
-                TakeDamage(pHit.transform,false);
+                TakeDamage(pHit.transform, false);
             }
         }
     }
 
     private void RangedDamage(Vector3 pFrom, Vector3 pTo, RaycastHit pHit, string pTarget) {
         DecreaseBulletCount();
-        if (Physics.Raycast(pFrom, pTo , out pHit)) {
+        if (Physics.Raycast(pFrom, pTo, out pHit)) {
             _totalShots++;
             //Debug.Log(pHit.collider.transform.name + " was hit" + " with tag " + pHit.transform.tag);
-            if (pHit.collider.transform.name == "Enemy Head")
-            {
+            if (pHit.collider.transform.name == "Enemy Head") {
                 //Debug.Log("You headshot you filthy animal");
-                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip);
+                pHit.collider.GetComponent<AudioSource>().PlayOneShot(EnemyGotHitHeadClip, _volume);
                 _successfullShots++;
                 _successfullHeadshots++;
                 _comboCount++;
                 _comboWait = 0;
                 TakeDamage(pHit.transform, true);
-            }
-            else if (pHit.transform.tag == pTarget)
-            {
-                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
+            } else if (pHit.transform.tag == pTarget) {
+                pHit.collider.GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip, _volume);
                 _successfullShots++;
                 _comboCount++;
                 _comboWait = 0;
                 //Debug.Log(pHit.transform.name + " has been hit using a ranged weapon");
-                TakeDamage(pHit.transform,false);
+                TakeDamage(pHit.transform, false);
             }
         }
     }
@@ -307,41 +408,52 @@ public class CombatControls : MonoBehaviour {
 
     private void TakeDamage(Transform pTarget, bool headshot) {
         //Debug.Log("Changing to red..");
-        //Utils.ChangeGameObjectColorTo(pTarget.gameObject, Color.red);
         pTarget.LookAt(gameObject.transform.position);
-        if (_weaponHandler.CurrentWeaponType == WeaponType.Melee)
-        {
-            if(headshot)
-            {
-                pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]*2);
+        if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
+            if (headshot) {
+                pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0] * 2);
+            } else {
+                Debug.Log(pTarget.name + " got hit!");
+                pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
             }
-            else
-            pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[0]);
            
-        } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged) {
-            if(headshot)
+        } else if (_weaponHandler.CurrentWeaponType == WeaponType.Ranged)
+        {
+            pTarget.GetComponent<EnemyMovement>().SetWaypoint(gameObject);
+            pTarget.GetComponent<EnemyScript>().SetDisturbedLocation(gameObject.transform.position, true);
+            //Debug.Log(gameObject.transform.position);
+            if (headshot)
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(2*_weaponDamage[1]);
             else
                 pTarget.GetComponent<EnemyScript>().DecreaseHealth(_weaponDamage[1]);
         }
         if (pTarget.GetComponent<EnemyScript>().IsDead) {
-            if (_weaponHandler.CurrentWeaponType == WeaponType.Melee)
-            {
+            if (_weaponHandler.CurrentWeaponType == WeaponType.Melee) {
                 _knifeKillNumber++;
-            }
-            else
-            {
+            } else {
                 _totalRangedKills++;
             }
-            if (headshot)
-            {
+            if (headshot) {
                 _totalHeadshotKills++;
                 //Debug.Log("Got Killed By headshot");
             }
             _totalKills++;
-            Destroy(pTarget.gameObject);
+            //pTarget.GetComponent<EnemyMovement>().Animation.Stop();
+            StartCoroutine(DestroyEnemy(pTarget, pTarget.GetComponent<EnemyMovement>().Animation, pTarget.GetComponent<EnemyMovement>().TimeOnLastFrame));
         }
         //_startTimer = true;
+    }
+
+    private IEnumerator DestroyEnemy(Transform pTransform, Animation pAnimation, float pTimeOnLastFrame) {
+        //pTransform.GetComponent<EnemyMovement>().SetState(EnemyMovement.State.none);
+        pTransform.GetComponent<EnemyMovement>().DisableAllControls = true;
+        pAnimation.Play("DeathEditable");
+        pTransform.gameObject.layer = 2;
+        pTransform.GetComponent<EnemyScript>().TriggerTextAndEnemy();
+        yield return new WaitForSeconds(pAnimation["DeathEditable"].length + pTimeOnLastFrame);
+        if (pTransform != null) {
+            Destroy(pTransform.gameObject);
+        }
     }
 
     private void MeleeDamage(Vector3 pCenter, float pRadius, string pTarget, WeaponAOEType pAoeType) {
@@ -359,40 +471,36 @@ public class CombatControls : MonoBehaviour {
                 //if (hit.transform.tag == pTarget)
                 //{
                 bool behind = false;
-                Vector3 directionToTarget =transform.position - hitColliders[i].transform.position;
+                Vector3 directionToTarget = transform.position - hitColliders[i].transform.position;
                 float angle = Vector3.Angle(hitColliders[i].transform.forward, directionToTarget);
-                if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
-                {
+                if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270) {
                     Debug.Log("backstab");
                     behind = true;
-                    hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(BackstabClip);
-                    
+                    hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(BackstabClip, _volume);
+
                 }
 
                 _successfullKnives++;
-                if (pAoeType == WeaponAOEType.Single)
-                {
-                    //Debug.Log((GetClosestEnemy(hitColliders, pRadius) == null) + ".");
-                    if (GetClosestEnemy(hitColliders, pRadius) != null)
-                    {
-                       // Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
+                if (pAoeType == WeaponAOEType.Single) {
+                    Debug.Log(hitColliders[i].transform.name + " | " + pRadius);
+                    //Debug.Log("Enemy equals null: " + (GetClosestEnemy(hitColliders, pRadius) == null));
+                    if (GetClosestEnemy(hitColliders, pRadius) != null) {
+                        // Debug.Log(GetClosestEnemy(hitColliders, pRadius) + " has been hit.");
                         _comboCount++;
                         _comboWait = 0;
-                        hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip);
+                        hitColliders[i].GetComponentInChildren<ImpactSounds>().PlayImpactSound(EnemyGotHitBodyClip, _volume);
                         //Debug.Log("get hit soundource is "+hitColliders[i].GetComponent<AudioSource>().name);
                         TakeDamage(GetClosestEnemy(hitColliders, pRadius), behind);
                         break;
                     }
-                }
-                else if (pAoeType == WeaponAOEType.Multi)
-                {
+                } else if (pAoeType == WeaponAOEType.Multi) {
                     _comboCount++;
                     _comboWait = 0;
                     //Debug.Log(hitColliders[i].name + " has been hit.");
-                    hitColliders[i].GetComponent<AudioSource>().PlayOneShot(EnemyGotHitBodyClip);
+                    hitColliders[i].GetComponent<AudioSource>().PlayOneShot(EnemyGotHitBodyClip, _volume);
                     TakeDamage(hitColliders[i].transform, behind);
                 }
-                
+
             }
             i++;
         }
@@ -409,8 +517,9 @@ public class CombatControls : MonoBehaviour {
                 float angle = Vector3.Angle(targetDir, transform.forward);
 
                 //Debug.Log("dist: " + dist + " | " + "pMinDist: " + pMinDist + " | " + "angle: " + angle + " | " + "_angle: " + _angle);
-
+                //Debug.Log("OUT if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
                 if (dist < pMinDist && angle < _angle) {
+                    //Debug.Log("IN if: " + collider.transform.name + " | " + "( " + dist + ", " + pMinDist + " )" + " | " + angle + ", " + _angle);
                     enemy = collider.transform;
                     pMinDist = dist;
                 }
@@ -420,11 +529,9 @@ public class CombatControls : MonoBehaviour {
     }
 
     public void DecreaseHealth(int pAmount) {
-        if(_blocking)
-        {
+        if (_blocking) {
             _blockedShots++;
-        }
-        else if (_health > 0) {
+        } else if (_health > 0) {
             _completedLevelWithoutDmg = false;
             _comboCount = 0;
             _comboWait = 0;
@@ -432,12 +539,15 @@ public class CombatControls : MonoBehaviour {
             _health -= pAmount;
             if (_health == 3) {
                 _cracks[0].SetActive(true);
+                StartCoroutine(FadeTo(_cracks[0].GetComponent<Image>(), _fadeAlphaForCracks[0], _fadeSecondsForCracks[0]));
             }
             if (_health == 2) {
                 _cracks[1].SetActive(true);
+                StartCoroutine(FadeTo(_cracks[1].GetComponent<Image>(), _fadeAlphaForCracks[1], _fadeSecondsForCracks[1]));
             }
             if (_health == 1) {
                 _cracks[2].SetActive(true);
+                StartCoroutine(FadeTo(_cracks[2].GetComponent<Image>(), _fadeAlphaForCracks[2], _fadeSecondsForCracks[2]));
             }
             if (_health < 0) {
                 _health = 0;
@@ -445,24 +555,48 @@ public class CombatControls : MonoBehaviour {
         }
     }
 
-    private bool HasWon() {
+    private IEnumerator FadeTo(Image pImage, float aValue, float aTime) {
+        float alpha = pImage.color.a;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime) {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+            pImage.color = newColor;
+            yield return null;
+        }
+    }
+
+    private void ApplyVignette() {
+        _profileSettings.mode = _vignetteMode;
+        _profileSettings.color = _vignetteColor;
+        _profileSettings.center = _vignetteCenter;
+        _profileSettings.intensity = _vignetteIntensity;
+        _profileSettings.smoothness = _vignetteSmoothness;
+        _profileSettings.roundness = _vignetteRoundness;
+        _profileSettings.rounded = _vignetteIsRounded;
+
+        _profile.vignette.settings = _profileSettings;
+    }
+
+
+    public bool HasWon() {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0) {
             return false;
         } else {
-            if (Input.GetKeyUp(KeyCode.E)) {
-                int _bool=0;
+            if (_enemyHandler.EnemiesLeft() == 0)
+            {
+                int _bool = 0;
                 if (_completedLevelWithoutDmg)
                     _bool = 1;
-                string allInfo="";
-                allInfo = " Timeinlevel: " + (int)_timeInLevel + " Completedlevelwithoutdmg: " + _bool + "\n" + 
+                string allInfo = "";
+                allInfo = " Timeinlevel: " + (int)_timeInLevel + " Completedlevelwithoutdmg: " + _bool + "\n" +
                     " Totalshots: " + _totalShots + " Successfullshots: " + _successfullShots + " Successfullheadshots: " + _successfullHeadshots + " Headshotkills: " + _totalHeadshotKills + " Totalrangedkills: " + _totalRangedKills + "\n" +
                     " Totalknives: " + _totalKnives + " Successfullknives: " + _successfullKnives + " Knifekills: " + _knifeKillNumber + "\n" +
-                    " Blockedshots: " + _blockedShots + " Totalkills: " + _totalKills+ "\n" +
+                    " Blockedshots: " + _blockedShots + " Totalkills: " + _totalKills + "\n" +
                     " Secretsgathered: " + _secretsGathered;
                 //Debug.Log(allInfo);
-                Utils.NextLevel("Assets\\Statistics\\"+SceneManager.GetActiveScene().name+".txt", allInfo);
+                Utils.NextLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt", allInfo);
                 return true;
-            } else {
+            } else
+            {
                 return false;
             }
         }

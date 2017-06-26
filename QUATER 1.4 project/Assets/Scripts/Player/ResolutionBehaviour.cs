@@ -11,6 +11,8 @@ public class ResolutionBehaviour : MonoBehaviour {
     [SerializeField] private string _deathMessage;
     [SerializeField] private string _winMessage;
 
+    public GameObject hudToDisable;
+    public StatsDisplay statsDisplayScript;
     // Use this for initialization
     void Start () {
 		
@@ -27,7 +29,9 @@ public class ResolutionBehaviour : MonoBehaviour {
             if (_hud.activeSelf) {
                 DisablePlayerScripts();
                 DisablePlayerCamera();
-                _hud.SetActive(false);
+                // _hud.SetActive(false);
+                statsDisplayScript.DisplayStats();
+                hudToDisable.SetActive(false);
                 SetResolutionText(_winMessage);
             }
         }
@@ -38,7 +42,9 @@ public class ResolutionBehaviour : MonoBehaviour {
             if (_hud.activeSelf) {
                 DisablePlayerScripts();
                 DisablePlayerCamera();
-                _hud.SetActive(false);
+                //_hud.SetActive(false);
+                hudToDisable.SetActive(false);
+                statsDisplayScript.DisplayStats();
                 SetResolutionText(_deathMessage);
             }
         }

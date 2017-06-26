@@ -23,7 +23,7 @@ public class Utils {
     public static void ChangeGameObjectColorTo(GameObject pGameObject, Color pTo)
     {
        
-       pGameObject.transform.GetComponent<Renderer>().material.color = pTo;
+       //pGameObject.transform.GetComponent<Renderer>().material.color = pTo;
         
     }
 
@@ -282,9 +282,11 @@ public class Utils {
 
     public static void SetValueAfterString(string path, string pString, int nextValue)
     {
+        Debug.Log(pString);
         int lastValue = GetValueAfterString(path, pString);
         string before = pString + " " + lastValue;
         string after = pString + " " + nextValue;
+        //Debug.Log(before + "|" + after);
         //Debug.Log("|" + before +"|"+ after + "|");
         ReplaceLineFromFile(path,after,before);
     }
