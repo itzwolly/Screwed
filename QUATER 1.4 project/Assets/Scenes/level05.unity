@@ -31726,6 +31726,21 @@ Prefab:
       propertyPath: _deathMessage
       value: R TO RESTART
       objectReference: {fileID: 0}
+    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _hitSplat
+      value: 
+      objectReference: {fileID: 100000, guid: 80cd87e5e66b84b35b29f75198eeda8b, type: 2}
+    - target: {fileID: 114319267502297498, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: _splashSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865169249771298, guid: b1baad6043e1cd84e8160716e82f23c2,
+        type: 2}
+      propertyPath: profile
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1baad6043e1cd84e8160716e82f23c2, type: 2}
   m_IsPrefabParent: 0
