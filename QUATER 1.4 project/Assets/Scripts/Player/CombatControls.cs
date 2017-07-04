@@ -18,6 +18,8 @@ public class CombatControls : MonoBehaviour {
     public AudioClip EnemyGotHitBodyClip;
     public AudioClip EnemyGotHitHeadClip;
     public AudioClip BackstabClip;
+    [SerializeField] private AudioClip _deathClip;
+
     private AudioSource audio;
     public GameObject pauseMenu;
     private float _volume;
@@ -47,8 +49,9 @@ public class CombatControls : MonoBehaviour {
     [Range(0, 1)] [SerializeField] private float[] _fadeAlphaForCracks;
 
     [SerializeField] private int[] _weaponDamage;
-
     [SerializeField] private EnemyHandler _enemyHandler;
+
+    
 
     [Space(10)]
     [Header("PostProcessing")]
@@ -450,6 +453,7 @@ public class CombatControls : MonoBehaviour {
         pAnimation.Play("DeathEditable");
         pTransform.gameObject.layer = 2;
         pTransform.GetComponent<EnemyScript>().TriggerTextAndEnemy();
+        audio.PlayOneShot(_deathClip, _volume);
         yield return new WaitForSeconds(pAnimation["DeathEditable"].length + pTimeOnLastFrame);
         if (pTransform != null) {
             Destroy(pTransform.gameObject);

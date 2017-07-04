@@ -19,6 +19,13 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 _moveDirection = Vector3.zero;
     private CharacterController _controller;
 
+    public AudioSource AudioSource {
+        get { return audio; }
+    }
+    public float Volume {
+        get { return _volume; }
+    }
+
     // Use this for initialization
     void Start ()
     {

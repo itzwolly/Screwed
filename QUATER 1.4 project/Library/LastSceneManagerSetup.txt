@@ -1,4 +1,8 @@
 sceneSetups:
-- path: Assets/Scenes/playeher.unity
+<<<<<<< HEAD
+- path: Assets/Scenes/level05.unity
+=======
+- path: Assets/Scenes/menu.unity
+>>>>>>> 813955859d380efbb218c188a9209d7fa83d8a21
   isLoaded: 1
   isActive: 1
