@@ -1155,16 +1155,17 @@ MonoBehaviour:
   enemyKilledText: {fileID: 0}
   Waypoints:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   MinDistanceToWaypoint: 0
   StartOffset: 0
   ChooseRandomWaypoint: 0
-  AlertDistance: 15
+  AlertDistance: 20
   WaitTimeAtWaypoint: 100
   Handler: {fileID: 0}
   DisturbWaypoint: {fileID: 1854943992388366, guid: d781ad1b3bda8f147826193dee82b47f,
     type: 2}
   _health: 5
-  _marker: {fileID: 0}
   _HitMarkerDisplay: {fileID: 0}
 --- !u!114 &114742861461732532
 MonoBehaviour:

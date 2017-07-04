@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/playeher.unity
+- path: Assets/Scenes/level05.unity
   isLoaded: 1
   isActive: 1
