@@ -28,6 +28,13 @@ public class PlayerMovement : MonoBehaviour {
         _speed = new Vector3(_speedUnit, _speedUnit, _speedUnit);
     }
 
+    public float Volume
+    {
+        get
+        {
+            return _volume;
+        }
+    }
 
     // Update is called once per frame
     private void Update () {
