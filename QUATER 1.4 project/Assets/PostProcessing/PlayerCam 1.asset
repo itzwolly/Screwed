@@ -29,7 +29,7 @@ MonoBehaviour:
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       method: 1
       fxaaSettings:
@@ -40,7 +40,7 @@ MonoBehaviour:
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       intensity: 1
       radius: 0.3
@@ -77,9 +77,9 @@ MonoBehaviour:
       useCameraFov: 0
       kernelSize: 1
   motionBlur:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      shutterAngle: 300
+      shutterAngle: 125
       sampleCount: 8
       frameBlending: 0
   eyeAdaptation:
@@ -120,23 +120,23 @@ MonoBehaviour:
         neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
-        postExposure: 0.5
-        temperature: 5
-        tint: -1
-        hueShift: -5
-        saturation: 0.8
-        contrast: 1.41
+        postExposure: 1
+        temperature: 36
+        tint: -3
+        hueShift: -16
+        saturation: 0.66
+        contrast: 0.85
       channelMixer:
-        red: {x: 0.93, y: 0, z: 0}
+        red: {x: 0.65, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
         blue: {x: 0, y: 0, z: 1}
         currentEditingChannel: 0
       colorWheels:
         mode: 1
         log:
-          slope: {r: 1, g: 0.99118483, b: 0.9872752, a: 0}
-          power: {r: 0.9926426, g: 0.9618269, b: 1, a: 0}
-          offset: {r: 1, g: 0.99114573, b: 0.94281006, a: 0}
+          slope: {r: 1, g: 0.87099564, b: 0.8671526, a: 0.37627128}
+          power: {r: 1, g: 0.9237809, b: 0.7603878, a: 0.050847456}
+          offset: {r: 1, g: 0.86595875, b: 0.7748811, a: -0.10395589}
         linear:
           lift: {r: 1, g: 1, b: 1, a: 0}
           gamma: {r: 1, g: 1, b: 1, a: 0}
@@ -281,25 +281,25 @@ MonoBehaviour:
       lut: {fileID: 0}
       contribution: 1
   chromaticAberration:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.089
+      intensity: 0.387
   grain:
     m_Enabled: 1
     m_Settings:
       colored: 0
-      intensity: 0
+      intensity: 0.025
       size: 3
       luminanceContribution: 0.8
   vignette:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.415
-      smoothness: 0.084
+      intensity: 0.297
+      smoothness: 0.269
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
