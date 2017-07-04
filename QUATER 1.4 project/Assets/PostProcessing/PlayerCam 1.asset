@@ -127,14 +127,14 @@ MonoBehaviour:
         saturation: 0.66
         contrast: 0.85
       channelMixer:
-        red: {x: 0.95, y: 0, z: 0}
+        red: {x: 0.65, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
         blue: {x: 0, y: 0, z: 1}
         currentEditingChannel: 0
       colorWheels:
         mode: 1
         log:
-          slope: {r: 1, g: 0.97050184, b: 0.6416763, a: 0.37627128}
+          slope: {r: 1, g: 0.87099564, b: 0.8671526, a: 0.37627128}
           power: {r: 1, g: 0.9237809, b: 0.7603878, a: 0.050847456}
           offset: {r: 1, g: 0.86595875, b: 0.7748811, a: -0.10395589}
         linear:
@@ -281,7 +281,7 @@ MonoBehaviour:
       lut: {fileID: 0}
       contribution: 1
   chromaticAberration:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       spectralTexture: {fileID: 0}
       intensity: 0.387
@@ -299,7 +299,7 @@ MonoBehaviour:
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
       intensity: 0.297
-      smoothness: 0.521
+      smoothness: 0.269
       roundness: 1
       mask: {fileID: 0}
       opacity: 1

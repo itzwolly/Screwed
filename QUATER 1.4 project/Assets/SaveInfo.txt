@@ -1,4 +1,4 @@
 musicaudio: 0
-effectaudio: 100
+effectaudio: 52
 invertedcontrols: 0
 onlevel: 1                                             
