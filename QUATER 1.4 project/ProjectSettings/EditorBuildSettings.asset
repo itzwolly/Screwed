@@ -17,12 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Intro.unity
     guid: 3078da7a4b3063d4b828de7a89b46d58
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/level05.unity
     guid: 6cb42b80126533847b2d1aad09cd6c00
   - enabled: 0
     path: Assets/Scenes/level06.unity
     guid: 17387096bf932714eb2959828fb45826
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/playeher.unity
     guid: c6c15e546791f84489ed47975e05f2ba

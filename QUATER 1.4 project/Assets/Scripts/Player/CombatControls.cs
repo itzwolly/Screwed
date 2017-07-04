@@ -159,7 +159,8 @@ public class CombatControls : MonoBehaviour {
         audio = GetComponent<AudioSource>();
         _anim = _weaponHandler.Weapons[0].GetComponent<Animation>();
         _level = Utils.LatestLevel();
-        _volume = Utils.EffectVolume() / 100;
+        _volume = Utils.EffectVolume() / 100f;
+        Debug.Log(_volume);
 
         _profileSettings = _profile.vignette.settings;
         _profileMode = _profileSettings.mode;
