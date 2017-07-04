@@ -264,7 +264,7 @@ public class Utils {
         StreamReader reader = new StreamReader(path);
         string[] file = reader.ReadToEnd().Split('\n', '\r', ' ');
         int latestNumber = 0;
-        for (int i = 0; i < file.Length; i++)
+        for (int i = 0; i < file.Length-1; i++)
         {
             if (string.Compare(file[i], pString) == 0)
             {
@@ -282,7 +282,7 @@ public class Utils {
 
     public static void SetValueAfterString(string path, string pString, int nextValue)
     {
-        Debug.Log(pString);
+        //Debug.Log(pString);
         int lastValue = GetValueAfterString(path, pString);
         string before = pString + " " + lastValue;
         string after = pString + " " + nextValue;

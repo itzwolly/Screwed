@@ -6,6 +6,7 @@ public class EnemyHandler : MonoBehaviour
 {
     private List<GameObject> Enemies = new List<GameObject>();
     // Use this for initialization
+    int _enemiesThatSee;
 
     public void AddToHandler(GameObject enem)
     {
@@ -26,6 +27,16 @@ public class EnemyHandler : MonoBehaviour
                 obj.GetComponent<EnemyScript>().SetDisturbedLocation(enem.transform.position,true);
             }
         }
+    }
+    
+    public void ISee()
+    {
+        _enemiesThatSee++;
+    }
+
+    public void IDontSee()
+    {
+        _enemiesThatSee--;
     }
 
     public int EnemiesLeft()

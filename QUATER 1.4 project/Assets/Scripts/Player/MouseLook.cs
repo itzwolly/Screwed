@@ -25,6 +25,7 @@ public class MouseLook : MonoBehaviour {
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
     }
 
+    float recoil = 0;
     void Update() {
         // Ensure the cursor is always locked when set
         //if (characterBody.GetComponent<CombatControls>().HasWon() || characterBody.GetComponent<CombatControls>().IsDead) {
@@ -65,7 +66,7 @@ public class MouseLook : MonoBehaviour {
             _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
 
         transform.localRotation *= targetOrientation;
-
+        
         // If there's a character body that acts as a parent to the camera
         if (characterBody) {
             var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, characterBody.transform.up);

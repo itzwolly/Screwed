@@ -167,7 +167,7 @@ public class CombatControls : MonoBehaviour {
         _profileRoundness = _profileSettings.roundness;
         _profileIsRounded = _profileSettings.rounded;
 
-        Debug.Log(_volume);
+        //Debug.Log(_volume);
         /**
         string allInfo = "";
         allInfo = " Timeinlevel: " + Utils.GetTimeInLevel("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + " Completedlevelwithoutdmg: " + Utils.GetCompletedWithoutDmg("Assets\\Statistics\\" + SceneManager.GetActiveScene().name + ".txt") + "\n" +
@@ -463,13 +463,6 @@ public class CombatControls : MonoBehaviour {
 
         while (i < hitColliders.Length) {
             if (hitColliders[i].transform.tag == pTarget) {
-                //RaycastHit hit = new RaycastHit();
-                ////Debug.Log("before linecast "+pTarget + " | " + hitColliders[i].transform.name);
-                //if (Physics.Linecast(gameObject.transform.position, hitColliders[i].transform.position, out hit))
-                //{
-                //Debug.Log(pTarget + " | " + hit.transform.name);
-                //if (hit.transform.tag == pTarget)
-                //{
                 bool behind = false;
                 Vector3 directionToTarget = transform.position - hitColliders[i].transform.position;
                 float angle = Vector3.Angle(hitColliders[i].transform.forward, directionToTarget);

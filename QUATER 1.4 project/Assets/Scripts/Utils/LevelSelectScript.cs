@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelSelectScript : MonoBehaviour {
 
-    public List<GameObject> Buttons = new List<GameObject>();
+    private List<GameObject> Buttons = new List<GameObject>();
     private int _level;
     private int _wait;
 	// Use this for initialization
@@ -43,7 +43,7 @@ public class LevelSelectScript : MonoBehaviour {
             if (i < _level)
             {
 
-                Debug.Log("unlocking");
+                //Debug.Log("unlocking");
                 Buttons[i].GetComponent<ButtonScript>().Unlock();
             }
             else

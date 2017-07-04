@@ -52,6 +52,46 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))//because controller is grounded act weird alternating between true and false
         {
             _jumped = true;
+            /**/
+            //remove this for same jump as before
+            Vector3 forleft, forright, backleft, backright,center;
+            forleft = transform.position;
+            forleft.z += transform.GetComponent<Renderer>().bounds.size.z / 2;
+            forleft.x -= transform.GetComponent<Renderer>().bounds.size.x / 2;
+            forright = transform.position;
+            forright.z += transform.GetComponent<Renderer>().bounds.size.z / 2;
+            forright.x += transform.GetComponent<Renderer>().bounds.size.x / 2;
+            backleft = transform.position;
+            backleft.z -= transform.GetComponent<Renderer>().bounds.size.z / 2;
+            backleft.x -= transform.GetComponent<Renderer>().bounds.size.x / 2;
+            backright = transform.position;
+            backright.z -= transform.GetComponent<Renderer>().bounds.size.z / 2;
+            backright.x += transform.GetComponent<Renderer>().bounds.size.x / 2;
+
+            center = transform.position;
+            Ray[] rayorigins = {
+                new Ray(forleft,-transform.up),
+                new Ray(forright,-transform.up),
+                new Ray(backleft,-transform.up),
+                new Ray(backleft,-transform.up),
+                new Ray(center,-transform.up)
+            };
+            RaycastHit hit;
+            bool ground = false;
+            for(int i=0;i<rayorigins.Length;i++)
+            {
+                if(Physics.Raycast(rayorigins[i],out hit,1))
+                {
+                    ground = true;
+                    break;
+                }
+
+            }
+            if(!ground)
+            {
+                _jumped = false;
+            }
+            /**/
         }
 
         if (_controller.isGrounded)
@@ -60,13 +100,6 @@ public class PlayerMovement : MonoBehaviour {
             _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             _moveDirection = transform.TransformDirection(_moveDirection);
             _moveDirection *= _speedUnit;
-            if (_jumped)
-            {
-                //Debug.Log("space");
-                audio.PlayOneShot(JumpClip, _volume);
-                _moveDirection.y += JumpVector;
-                _jumped = false;
-            }
 
             // Debug.Log(_moveDirection.magnitude);
             if (_moveDirection.magnitude >= 0.5f)
@@ -83,6 +116,13 @@ public class PlayerMovement : MonoBehaviour {
         {
             //Debug.Log("not grounded");
             _moveDirection.y -= _gravity * Time.deltaTime;
+        }
+        if (_jumped)
+        {
+            //Debug.Log("space");
+            audio.PlayOneShot(JumpClip, _volume);
+            _moveDirection.y += JumpVector;
+            _jumped = false;
         }
         _controller.Move(_moveDirection * Time.deltaTime);
         transform.Rotate(0, Input.GetAxis("Mouse X") * (1 + Sensitivity), 0);

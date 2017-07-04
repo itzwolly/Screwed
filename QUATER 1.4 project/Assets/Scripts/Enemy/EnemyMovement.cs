@@ -23,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
         knife
     };
     private Vector3 _targetPosSameY;
+    public AudioClip AlertSound;
     public AudioClip ShootSound;
     public AudioClip KnifeSound;
     private float _volume;
@@ -42,6 +43,7 @@ public class EnemyMovement : MonoBehaviour
     private int _lookWait;
     private float _distanceToTarget;
     public bool _inVision;
+    private bool _prevVision;
     private Animation _anim;
 
     private List<GameObject> Waypoints;
@@ -147,14 +149,24 @@ public class EnemyMovement : MonoBehaviour
         {
             //Debug.Log(_state +" with target in vision: "+_inVision);
             _distanceToTarget = (target.transform.position - gameObject.transform.position).magnitude;
+            
             if (_distanceToTarget < RangeDistance)
             {
                 Utils.ChangeGameObjectColorTo(gameObject, Color.white);
                 CheckVision();
+                if(!_prevVision && _inVision)
+                {
+                    gameObject.GetComponent<EnemyScript>().Handler.GetComponent<EnemyHandler>().ISee();
+                    audio.PlayOneShot(AlertSound, _volume);
+                }
             }
             else
             {
                 _inVision = false;
+            }
+            if (_prevVision && !_inVision)
+            {
+                gameObject.GetComponent<EnemyScript>().Handler.GetComponent<EnemyHandler>().IDontSee();
             }
 
             if (_inVision)
@@ -294,6 +306,7 @@ public class EnemyMovement : MonoBehaviour
 
         Vector3 directionToTarget = transform.position - target.transform.position;
         float angle = Vector3.Angle(transform.forward, directionToTarget);
+        _prevVision = _inVision;
         if (Mathf.Abs(angle) > 125 && Mathf.Abs(angle) < 235)
         {
             _inVision = true;

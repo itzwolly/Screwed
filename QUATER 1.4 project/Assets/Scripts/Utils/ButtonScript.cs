@@ -5,7 +5,6 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour {
 
     // Use this for initialization
-    public GameObject LevelSelect;
     public GameObject UnlockedBrush;
     public GameObject LockedBrush;
 
